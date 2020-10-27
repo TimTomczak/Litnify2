@@ -12,9 +12,21 @@ class AusleiheController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $id = null, $action = null)
     {
-        //
+        switch ($action) {
+            case 'edit':
+                return $this->edit(Ausleihe::getById($id));
+            break;
+            case 'update':
+                return $this->update($id);
+            break;
+            case 'delete':
+                return $this->destroy($id);
+            break;
+            default:
+                return $this->show($id);
+            }
     }
 
     /**
