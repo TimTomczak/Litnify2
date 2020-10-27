@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="suche">Suche</a>
+                    <a class="nav-link" href="/search">Suche</a>
                 </li>
             </ul>
 
@@ -19,22 +19,18 @@
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-user">&nbsp;</i>{{ __('Login') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user">&nbsp;</i>{{ __('Login') }}</a>
                     </li>
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
+
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Hallo {{ ucfirst(Auth::user()->name) }} <span class="caret"></span>
+                            Hallo {{ ucfirst(Auth::user()->vorname) }} <span class="caret"></span>
 
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('voyager.profile') }}">
+                            <a class="dropdown-item" href="/user/profile">
                                 {{ __('Profile') }}
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}">
