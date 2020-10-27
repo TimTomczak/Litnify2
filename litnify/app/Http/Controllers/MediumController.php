@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Literaturart;
 use App\Models\Medium;
 use App\Util\Display;
 use App\Util\Names;
@@ -19,7 +20,12 @@ class MediumController extends Controller
      */
     public function index()
     {
+        $medien = Medium::orderBy('id','DESC')->limit(10)->get(); //Die letzten 100 Medien
+        $mappedMedien=$this->mapForeignKeyReferences($medien);
 
+        return view('Medienverwaltung.index',[
+            'medien' => $mappedMedien
+        ]);
     }
 
     /**
@@ -49,6 +55,13 @@ class MediumController extends Controller
      */
     public function show(Medium $medium)
     {
+        $medColl= collect(new Medium());
+        $medColl->add($medium);
+        $mappedMedien=$this->mapForeignKeyReferences($medColl);
+
+        return view('Medienverwaltung.show',[
+            'medium' => $medium
+        ]);
     }
 
     /**
