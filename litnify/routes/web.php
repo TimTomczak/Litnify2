@@ -35,11 +35,9 @@ Route::get('user/{id}', function ($id) {})->where('id', '[0-9]+');
 
 // Medium
 //Route::get('medium/{id}/{action}', function ($id, $action) {})->where(['id' => '[0-9]+', 'action' => '[a-z]+']);
-Route::resource('medienverwaltung', \App\Http\Controllers\MediumController::class)->only([
-    'index'
-]);
+Route::get('medienverwaltung', [App\Http\Controllers\MediumController::class, 'index'])->name('medienverwaltung.index');
 Route::resource('medienverwaltung/medium', \App\Http\Controllers\MediumController::class)->only([
-    'show', 'edit', 'create', 'store'
+    'show', 'edit', 'create', 'update'
 ])->where(array('medium' => '[0-9]+'));
 
 // Ausleihe

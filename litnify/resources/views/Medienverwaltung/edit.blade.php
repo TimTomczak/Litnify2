@@ -2,7 +2,8 @@
 @section('content')
     <div class="container-fluid">
         <div class="card p-4 bg-light">
-            <form action="{{route('medium.store')}}" method="POST">
+            <form action="{{route('medium.update',$medium->id)}}" method="POST">
+                @method('PUT')
                 @csrf
 
                 <div class="form-group">
@@ -175,6 +176,25 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="zeitschrift_id">Zeitschrift</label>
+                    <select class="form-control" name="zeitschrift_id" id="zeitschrift_id">
+                        @foreach(App\Models\Zeitschrift::all() as $zeitschrift)
+                            @if($medium->zeitschrift_id==$zeitschrift->name)
+                                <option value="{{$zeitschrift->name}}" selected>{{$zeitschrift->name}} [{{$zeitschrift->shortcut}}]</option>
+                            @else
+                                <option value="{{$zeitschrift->name}}">{{$zeitschrift->name}} [{{$zeitschrift->shortcut}}]</option>
+                            @endif
+                        @endforeach
+                    </select>
+{{--                    <input type="text"--}}
+{{--                           class="form-control @error('zeitschrift_id') border-danger @enderror" name="zeitschrift_id" id="zeitschrift_id" aria-describedby="helpId"--}}
+{{--                           value="{{$medium->zeitschrift_id}}">--}}
+                    @error('zeitschrift_id')
+                    <div class="invalid-feedback">Zeitschrift nicht korrekt.</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="schriftenreihe">Schriftenreihe</label>
                     <input type="text"
                            class="form-control @error('schriftenreihe') border-danger @enderror" name="schriftenreihe" id="schriftenreihe"
@@ -205,8 +225,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="standort">Standort</label>
-                    <select class="form-control" id="standort">
+                    <label for="raum_id">Standort</label>
+                    <select class="form-control" name="raum_id" id="raum_id">
                         @foreach(App\Models\Raum::all()->pluck('raum') as $raum)
                             @if($medium->raum_id==$raum)
                                 <option selected>{{$raum}}</option>
@@ -219,7 +239,7 @@
 {{--                    <input type="text"--}}
 {{--                           class="form-control @error('standort') border-danger @enderror" name="standort" id="standort"--}}
 {{--                           value="{{$medium->standort}}">--}}
-                    @error('standort')
+                    @error('raum_id')
                     <div class="invalid-feedback">standort nicht korrekt.</div>
                     @enderror
                 </div>
@@ -233,7 +253,9 @@
                     <div class="invalid-feedback">bemerkungen nicht korrekt.</div>
                     @enderror
                 </div>
-
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-primary">Änderung bestätigen</button>
+                </div>
             </form>
         </div>
     </div>
