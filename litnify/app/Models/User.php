@@ -41,4 +41,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function medium(){
+        return $this->belongsToMany(Medium::class, 'merkliste');
+    }
+
+    public function berechtigungsrolle(){
+        return $this->belongsTo(Berechtigungsrolle::class, );
+    }
+    // Für Berechtigungsrolle des jeweiligen Users:  $user->berechtigungsrolle->berechtigungsrolle
+
+
+    public function ausleihe(){
+        return $this->belongsToMany(Medium::class, 'ausleihen');
+    }
 }

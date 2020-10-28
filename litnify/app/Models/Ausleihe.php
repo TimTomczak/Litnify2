@@ -9,4 +9,10 @@ class Ausleihe extends Model
 {
     protected $table='ausleihen';
 
+    public static function getById($id){
+
+
+
+    }
+
 }

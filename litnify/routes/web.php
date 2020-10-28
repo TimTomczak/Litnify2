@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes([
-    //'register' => false, // Registration Routes...
+    'register' => false, // Registration Routes...
     'reset' => false, // Password Reset Routes...
     'verify' => false, // Email Verification Routes...
 ]);
@@ -43,7 +43,7 @@ Route::resource('medium', \App\Http\Controllers\MediumController::class)->only([
 ])->where(array('medium' => '[0-9]+'));
 
 // Ausleihe
-
+Route::get('ausleihe/{id?}/{action?}', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihe');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
