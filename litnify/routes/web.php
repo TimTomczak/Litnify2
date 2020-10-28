@@ -38,8 +38,8 @@ Route::get('user/{id}', function ($id) {})->where('id', '[0-9]+');
 Route::resource('medienverwaltung', \App\Http\Controllers\MediumController::class)->only([
     'index'
 ]);
-Route::resource('medium', \App\Http\Controllers\MediumController::class)->only([
-    'show', 'create'
+Route::resource('medienverwaltung/medium', \App\Http\Controllers\MediumController::class)->only([
+    'show', 'edit', 'create', 'store'
 ])->where(array('medium' => '[0-9]+'));
 
 // Ausleihe

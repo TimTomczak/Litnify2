@@ -68,11 +68,16 @@ class MediumController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Medium  $medium
-     * @return \Illuminate\Http\Response
      */
     public function edit(Medium $medium)
     {
         //
+        $medColl= collect(new Medium());
+        $medColl->add($medium);
+        $medium_mapped=$this->mapForeignKeyReferences($medColl)->first();
+        return view('Medienverwaltung.edit',[
+            'medium' => $medium_mapped,
+        ]);
     }
 
     /**
