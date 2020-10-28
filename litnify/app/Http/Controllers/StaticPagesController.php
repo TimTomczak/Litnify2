@@ -8,29 +8,20 @@ class StaticPagesController extends Controller
 {
     public function index(Request $request, $name, $action = 'view'){
 
-        if($action == 'edit'){
-            $this->edit($name);
+       if($action == 'edit'){
+           // Permission check
+           // WYSIWYG Editor
+
+           return view($name);
+
         }
         else{
-            $this->view($name);
+            return view($name);
         }
 
     }
 
-    public function view($name){
 
-        return view($name);
-
-    }
-
-    public function edit($name){
-
-        // Permission check
-        // WYSIWYG Editor
-
-        dd('edit');
-
-    }
 
 
 }

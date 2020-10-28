@@ -11,8 +11,22 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/search">Suche</a>
+                    <a class="nav-link" href="{{ route('suche') }}"><i class="fa fa-search"></i> Suche</a>
                 </li>
+
+            @auth
+
+            @endauth
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/oeffnungszeiten"><i class="fa fa-clock"></i> Öffnungszeiten</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/faq"><i class="fa fa-question-circle"></i> Hilfe & FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/faq"><i class="fa fa-phone"></i> Kontakt</a>
+                </li>
+
             </ul>
 
             <ul class="navbar-nav ml-auto">
@@ -25,13 +39,17 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Hallo {{ ucfirst(Auth::user()->vorname) }} <span class="caret"></span>
-
+                            <i class="fa fa-user">&nbsp;</i> Hallo {{ ucfirst(Auth::user()->vorname) }} <span class="caret"></span>
                         </a>
-
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/user/profile">
-                                {{ __('Profile') }}
+                            <a class="dropdown-item" href="{{ route('account') }}">
+                                {{ __('Profil') }}
+                            </a>
+                            <a class="dropdown-item" href="{{ route('merkliste') }}">
+                                Meine Merkliste
+                            </a>
+                            <a class="dropdown-item" href="{{ route('ausleihen') }}">
+                                Meine Ausleihen
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}">
                                 {{ __('Logout') }}

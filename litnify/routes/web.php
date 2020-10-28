@@ -25,13 +25,17 @@ Route::get('/', function () {
 
 // * S t a t i c P a g e  s * //
 Route::get('/pages/{name}/{action?}', [App\Http\Controllers\StaticPagesController::class, 'index'])->name('static-pages');
-Route::get('/search/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('search');
+Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
 Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout');
 
 // * M o d e l s * //
 // User
-Route::get('/user', [UserController::class, 'index']);
-Route::get('user/{id}', function ($id) {})->where('id', '[0-9]+');
+Route::get('/account/{action?}', [App\Http\Controllers\UserController::class, 'showUser'])->name('account');
+//Route::resource('user', 'App\Http\Controllers\UserController');
+Route::get('/account/ausleihen', [App\Http\Controllers\AusleiheController::class, 'showUser'])->name('ausleihen');
+Route::get('/account/merkliste', [App\Http\Controllers\MerklisteController::class, 'showUser'])->name('merkliste');
+
+
 
 // Medium
 Route::get('medium/{id}/{action}', function ($id, $action) {})->where(['id' => '[0-9]+', 'action' => '[a-z]+']);

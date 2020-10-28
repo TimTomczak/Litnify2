@@ -14,7 +14,7 @@
     </style>
 
     <!-- Header -->
-    <header class="bg-dark py-5 mb-5">
+    <header class="bg-dark py-5">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-lg-12 text-center text-wrap text-light">
@@ -23,7 +23,7 @@
 
                     <h1 class="brand">Litnify</h1>
                     <h2>Das Suchportal der Meteorologiebibliothek</h2>
-                    <form action="search" method="get">
+                    <form action="suche" method="get">
                         <div class="form-row">
                             <div class="col-12 col-md-9 mb-2 mb-md-0">
                                 <div class="input-group">
@@ -32,16 +32,13 @@
                                     </div>
                                     <input type="text" name="q" class="form-control form-control-lg" placeholder="Titel, Autor, DOI, ISBN ..."/>
                                 </div>
+                                <a href="suche?extend=true"><i class="fa fa-external-link-alt"></i> Erweiterte Suche</a>
                             </div>
                             <div class="col-12 col-md-3">
-
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">Suchen!</button>
                             </div>
                         </div>
                     </form>
-
-
-
                 </div>
             </div>
         </div>

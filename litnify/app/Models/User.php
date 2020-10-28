@@ -20,7 +20,7 @@ class User extends Authenticatable
         'nachname',
         'vorname',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -47,7 +47,8 @@ class User extends Authenticatable
     }
 
     public function berechtigungsrolle(){
-        return $this->belongsTo(Berechtigungsrolle::class, );
+        return $this->belongsTo(Berechtigungsrolle::class );
+
     }
     // Für Berechtigungsrolle des jeweiligen Users:  $user->berechtigungsrolle->berechtigungsrolle
 
