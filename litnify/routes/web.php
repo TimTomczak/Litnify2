@@ -30,10 +30,10 @@ Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->
 
 // * M o d e l s * //
 // User
-Route::get('/account/{action?}', [App\Http\Controllers\UserController::class, 'showUser'])->name('account');
+Route::get('/account/{action?}', [App\Http\Controllers\UserController::class, 'showUser'])->name('account')->middleware('auth');
 //Route::resource('user', 'App\Http\Controllers\UserController');
-Route::get('/account/ausleihen', [App\Http\Controllers\AusleiheController::class, 'showUser'])->name('ausleihen');
-Route::get('/account/merkliste', [App\Http\Controllers\MerklisteController::class, 'showUser'])->name('merkliste');
+Route::get('/account/ausleihen', [App\Http\Controllers\AusleiheController::class, 'showUser'])->name('ausleihen')->middleware('auth');
+Route::get('/account/merkliste', [App\Http\Controllers\MerklisteController::class, 'showUser'])->name('merkliste')->middleware('auth');
 
 
 
