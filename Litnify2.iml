@@ -8,9 +8,14 @@
       <sourceFolder url="file://$MODULE_DIR$/litnify/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/litnify/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/asm89/stack-cors" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/barryvdh/laravel-ide-helper" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/dnoegel/php-xdg-base-dir" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/event-manager" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/inflector" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/instantiator" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/lexer" />
@@ -28,8 +33,10 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/guzzlehttp/promises" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/guzzlehttp/psr7" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/hamcrest/hamcrest-php" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/justinrainbow/json-schema" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/laravel/framework" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/laravel/tinker" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/laravel/ui" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/league/commonmark" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/league/flysystem" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/league/mime-type-detection" />
@@ -63,6 +70,7 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/ralouphie/getallheaders" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/ramsey/collection" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/ramsey/uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/react/promise" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/scrivo/highlight.php" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/sebastian/cli-parser" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/sebastian/code-unit" />
@@ -80,6 +88,8 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/sebastian/resource-operations" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/sebastian/type" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/seld/jsonlint" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/seld/phar-utils" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/swiftmailer/swiftmailer" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/css-selector" />
@@ -87,6 +97,7 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/error-handler" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/event-dispatcher-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/filesystem" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/finder" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/http-client-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/http-foundation" />

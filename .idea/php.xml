@@ -108,6 +108,17 @@
       <path value="$PROJECT_DIR$/litnify/vendor/phpunit/php-invoker" />
       <path value="$PROJECT_DIR$/litnify/vendor/sebastian/lines-of-code" />
       <path value="$PROJECT_DIR$/litnify/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/litnify/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/litnify/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/litnify/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/litnify/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/litnify/vendor/seld/jsonlint" />
+      <path value="$PROJECT_DIR$/litnify/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/litnify/vendor/barryvdh/reflection-docblock" />
+      <path value="$PROJECT_DIR$/litnify/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/litnify/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/litnify/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/litnify/vendor/react/promise" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

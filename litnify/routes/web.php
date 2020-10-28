@@ -30,11 +30,18 @@ Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->
 
 // * M o d e l s * //
 // User
-Route::get('/user', [UserController::class, 'index']);
+//Route::get('/user', [UserController::class, 'index']);
 Route::get('user/{id}', function ($id) {})->where('id', '[0-9]+');
 
 // Medium
-Route::get('medium/{id}/{action}', function ($id, $action) {})->where(['id' => '[0-9]+', 'action' => '[a-z]+']);
+//Route::get('medium/{id}/{action}', function ($id, $action) {})->where(['id' => '[0-9]+', 'action' => '[a-z]+']);
+Route::resource('medienverwaltung', \App\Http\Controllers\MediumController::class)->only([
+    'index'
+]);
+Route::resource('medium', \App\Http\Controllers\MediumController::class)->only([
+    'show', 'create'
+])->where(array('medium' => '[0-9]+'));
+
 // Ausleihe
 
 
