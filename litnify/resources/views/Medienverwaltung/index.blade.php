@@ -2,7 +2,12 @@
 
 @section('content')
     <div class="container mt-5">
-        <table class="table table-responsive table-bordered table-striped">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Admin-Dashboard</a></li>
+            <li class="breadcrumb-item active">Medienverwaltung</li>
+        </ol>
+        <a href="{{route('medium.create','')}}"><button type="submit" class="btn btn-primary">Neues Medium erstellen</button></a>
+        <table class="table table-responsive table-hover table-bordered table-striped text-nowrap">
             <thead>
             <tr>
                 @foreach($medien->first()->toArray() as $key=>$val)
@@ -14,11 +19,21 @@
             @foreach($medien->toArray() as $med)
             <tr>
                 @foreach($med as $key=>$val)
-                    @if($key === 'hauptsachtitel')
-                        <td><a href="{{route('medium.show',$med['id'])}}">{{$val}}</a></td>
+                    @if($key == 'hauptsachtitel')
+                       <td class="text-wrap"><a href="{{route('medium.show',$med['id'])}}">{{$val}}</a></td>
                     @else
-                        <td>{{$val}}</td>
+                        @if($key == 'autoren')
+                            <td>
+                                @foreach(explode(';',$val) as $autor)
+                                    {{$autor}}<br>
+                                @endforeach
+                            </td>
+                        @else
+                            <td>{{$val}}</td>
+                        @endif
                     @endif
+
+
                 @endforeach
             </tr>
             @endforeach

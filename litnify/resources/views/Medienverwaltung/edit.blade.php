@@ -1,6 +1,14 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Admin-Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{route('medienverwaltung.index')}}">Medienverwaltung</a></li>
+                <li class="breadcrumb-item"><a href="{{route('medium.show', $medium->id)}}">Medium anzeigen</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Medium bearbeiten</li>
+            </ol>
+        </nav>
         <div class="card p-4 bg-light">
             <form action="{{route('medium.update',$medium->id)}}" method="POST">
                 @method('PUT')
@@ -39,6 +47,7 @@
                 </div>
 
                 <div class="form-group">
+                    {{--TODO mehrere Autoren hinzufügen--}}
                     <label for="autoren">Autoren</label>
                     @foreach(explode(';',$medium->autoren) as $aut)
                     <div class="row">
@@ -177,6 +186,7 @@
 
                 <div class="form-group">
                     <label for="zeitschrift_id">Zeitschrift</label>
+                    {{--TODO mit Datalist austauschen--}}
                     <select class="form-control" name="zeitschrift_id" id="zeitschrift_id">
                         @foreach(App\Models\Zeitschrift::all() as $zeitschrift)
                             @if($medium->zeitschrift_id==$zeitschrift->name)

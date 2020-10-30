@@ -6,12 +6,12 @@ use App\Models\Literaturart;
 use App\Models\Medium;
 use App\Models\Raum;
 use App\Models\Zeitschrift;
-use App\Util\Display;
-use App\Util\Names;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use function React\Promise\reduce;
 
 class MediumController extends Controller
 {
@@ -22,9 +22,8 @@ class MediumController extends Controller
      */
     public function index()
     {
-        $medien = Medium::orderBy('id','DESC')->limit(10)->get(); //Die letzten 100 Medien
+        $medien = Medium::orderBy('id','DESC')->where('released',0)->where('deleted',0)->limit(10)->get(); //Die letzten 100 Medien
         $mappedMedien=$this->mapForeignKeyReferences2String($medien);
-
         return view('Medienverwaltung.index',[
             'medien' => $mappedMedien
         ]);
@@ -34,10 +33,13 @@ class MediumController extends Controller
      * Show the form for creating a new resource.
      *
      */
-    public function create()
+    public function create(Literaturart $literaturart)
     {
         //
-
+        return view('medienverwaltung.create',[
+            'literaturart' => $literaturart->literaturart,
+            'nextMediumId' => $this->getNextAutoincrement('medien')
+        ]);
     }
 
     /**
@@ -46,7 +48,11 @@ class MediumController extends Controller
      */
     public function store(Request $request)
     {
-
+        $this->mapAuthorsFromRequest($request);
+        $this->mapForeignKeyReferences2Id($request);
+        $validatedAttributes=$this->validateAttributes();
+        $med= Medium::create($validatedAttributes);
+        return redirect(route('medium.show',$med->id));
 
 //        $validatedAttributes=$this->validateAttributes();
 //        dd($validatedAttributes);
@@ -108,16 +114,17 @@ class MediumController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Medium  $medium
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Medium $medium)
     {
         //
+        $medium->update(['deleted'=>1]); //TODO delete
+        return redirect(route('medium.show',$medium->id));
     }
 
 
     /**
-     * Nimmt ein Request für ein Medium aus medium.edit, entfernt daraus nachnamen, vornamen und et_al, fügt diese
+     * Nimmt ein Requ   est für ein Medium aus medium.edit, entfernt daraus nachnamen, vornamen und et_al, fügt diese
      * zu einem String zusammen und speichert diesen als 'autoren' in das Request-Objekt
      *
      * @param Request $request
@@ -128,6 +135,8 @@ class MediumController extends Controller
         $i=0;
         $autorenCounter=0;
         $authors = array(); // Autoren-Array initialisieren
+        $nachname=null;
+        $vorname=null;
         foreach($request->request as $key=>$val){
             if (strpos($key,'nachname')!==false){
                 $nachname = $val;
@@ -142,8 +151,13 @@ class MediumController extends Controller
                 $request->request->remove('et_al');
                 break;
             }
+            if ($i>0 && $nachname==null && $vorname==null){
+                break;
+            }
             if ($i>0 && $i%2==0){ //Bei jedem zewiten Durchlauf einen Autor zusammensetzen und zum Array hinzufügen
                 array_push($authors,$nachname.', '.$vorname);
+                $nachname=null;
+                $vorname=null;
                 $request->request->remove('nachname'.$autorenCounter);
                 $request->request->remove('vorname'.$autorenCounter);
                 $autorenCounter+=1;
@@ -227,7 +241,7 @@ class MediumController extends Controller
 
     private function validateAttributes(){
         $validatedAttributes = request()->validate([
-            'id' => 'required',
+            'id' => 'required|integer',
             'literaturart_id' => 'integer|min:1|max:5',
             'signatur' => '',
             'autoren' => '',

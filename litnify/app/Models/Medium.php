@@ -31,6 +31,7 @@ class Medium extends Model
         'institut' ,
         'raum_id' ,
         'bemerkungen' ,
+        'deleted'
     ];
 
     protected $table='medien';
