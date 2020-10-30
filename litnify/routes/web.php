@@ -23,8 +23,6 @@ Route::get('/', function () {
     return view('start');
 });
 
-// * S t a t i c P a g e  s * //
-Route::get('/pages/{name}/{action?}', [App\Http\Controllers\StaticPagesController::class, 'index'])->name('static-pages');
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
 Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout');
 
@@ -46,4 +44,6 @@ Route::get('ausleihe/{id?}/{action?}', [App\Http\Controllers\AusleiheController:
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+// * S t a t i c P a g e  s * //
+Route::get('/{page}', App\Http\Controllers\StaticPagesController::class)->name('page');
 

@@ -18,13 +18,13 @@
 
             @endauth
                 <li class="nav-item">
-                    <a class="nav-link" href="/pages/oeffnungszeiten"><i class="fa fa-clock"></i> Öffnungszeiten</a>
+                    <a class="nav-link" href="{{ route('page', 'oeffnungszeiten') }}"><i class="fa fa-clock"></i> Öffnungszeiten</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pages/faq"><i class="fa fa-question-circle"></i> Hilfe & FAQ</a>
+                    <a class="nav-link" href="{{ route('page', 'faq') }}"><i class="fa fa-question-circle"></i> Hilfe & FAQ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pages/faq"><i class="fa fa-phone"></i> Kontakt</a>
+                    <a class="nav-link" href="{{ route('page', 'kontakt') }}"><i class="fa fa-phone"></i> Kontakt</a>
                 </li>
 
             </ul>
