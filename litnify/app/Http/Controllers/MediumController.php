@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use function React\Promise\reduce;
 
@@ -22,7 +23,10 @@ class MediumController extends Controller
      */
     public function index()
     {
-        $medien = Medium::orderBy('id','DESC')->where('released',0)->where('deleted',0)->limit(10)->get(); //Die letzten 100 Medien
+        $medien = Medium::orderBy('id','DESC')
+            ->where('released',1)
+            ->where('deleted',0)
+            ->limit(100)->get(); //Die letzten 100 Medien
         $mappedMedien=$this->mapForeignKeyReferences2String($medien);
         return view('Medienverwaltung.index',[
             'medien' => $mappedMedien
@@ -35,7 +39,13 @@ class MediumController extends Controller
      */
     public function create(Literaturart $literaturart)
     {
-        //
+        // Falls Zeitschrift falsch
+//        $zeitschrift_old=Zeitschrift::find(old('zeitschrift_id'));
+//        if ($zeitschrift_old!=null){
+//            $zeitschrift_old->get();
+//        }
+
+
         return view('medienverwaltung.create',[
             'literaturart' => $literaturart->literaturart,
             'nextMediumId' => $this->getNextAutoincrement('medien')
@@ -48,20 +58,19 @@ class MediumController extends Controller
      */
     public function store(Request $request)
     {
-        $this->mapAuthorsFromRequest($request);
-        $this->mapForeignKeyReferences2Id($request);
+        //Die zu ersetzenden Fremdschlüssel erst validieren
+        $request->validate([
+            'literaturart_id' => ['string',Rule::in(Literaturart::all()->pluck('literaturart'))],
+            'zeitschrift_id' => ['nullable',Rule::in(Zeitschrift::all()->pluck('name'))],
+            'raum_id'=>['nullable', Rule::in(Raum::all()->pluck('raum'))]
+        ]);
+
+        $this->mapAuthorsFromRequest($request); //Autoren zu einem einzigen 'autoren'-String zusammenfügen
+        $this->mapForeignKeyReferences2Id($request); // Fremdschlüssel mit IDs austauschen
         $validatedAttributes=$this->validateAttributes();
         $med= Medium::create($validatedAttributes);
         return redirect(route('medium.show',$med->id));
-
-//        $validatedAttributes=$this->validateAttributes();
-//        dd($validatedAttributes);
-//        Medium::create($validatedAttributes);
-//        return redirect('/Medium/'.$validatedAttributes['id']);
     }
-
-
-
 
     /**
      * Display the specified resource.
@@ -69,9 +78,9 @@ class MediumController extends Controller
      */
     public function show(Medium $medium)
     {
-        $medColl= collect(new Medium());
+        $medColl= collect(new Medium()); //Collection für mapForeignKeyReferences2String() erstellen
         $medColl->add($medium);
-        $mappedMedien=$this->mapForeignKeyReferences2String($medColl);
+        $this->mapForeignKeyReferences2String($medColl);
 
         return view('Medienverwaltung.show',[
             'medium' => $medium
@@ -130,7 +139,7 @@ class MediumController extends Controller
      * @param Request $request
      * @return Request
      */
-    private function mapAuthorsFromRequest(Request $request){
+    protected function mapAuthorsFromRequest(Request $request){
         // Autoren aus request zu einem String zusammenfügen und einzelne Vor- und Nachnamen aus Request entfernen
         $i=0;
         $autorenCounter=0;
@@ -176,7 +185,7 @@ class MediumController extends Controller
      * @param Request $request
      * @return Request
      */
-    private function mapForeignKeyReferences2Id(Request $request){
+    protected function mapForeignKeyReferences2Id(Request $request){
         if ($request->request->get('literaturart_id')!=null){
             $literaturart = Literaturart::whereLiteraturart($request->request->get('literaturart_id'))->firstOrFail()->id;
 //        $request->request->remove('literaturart_id');
@@ -201,7 +210,7 @@ class MediumController extends Controller
      * @param $medien
      * @return mixed
      */
-    private function mapForeignKeyReferences2String($medien){
+    protected function mapForeignKeyReferences2String($medien){
         $mappedLiteraturart = $this->mapLiteraturart($medien);
         $mappedRaum = $this->mapRaum($mappedLiteraturart);
         $mappedZeitschrift = $this->mapZeitschrift($mappedRaum);
@@ -209,7 +218,7 @@ class MediumController extends Controller
         return $mappedZeitschrift;
     }
 
-    private function mapLiteraturart($medien){
+    protected function mapLiteraturart($medien){
         $mapped = $medien->map(function($item){
             if ($item->literaturart_id!=null){
                 $item->literaturart_id=Literaturart::find($item->literaturart_id)->literaturart;
@@ -219,7 +228,7 @@ class MediumController extends Controller
         return $mapped;
     }
 
-    private function mapRaum($medien){
+    protected function mapRaum($medien){
         $mapped = $medien->map(function($item){
             if ($item->raum_id!=null){
                 $item->raum_id=Raum::find($item->raum_id)->raum;
@@ -229,7 +238,7 @@ class MediumController extends Controller
         return $mapped;
     }
 
-    private function mapZeitschrift($medien){
+    protected function mapZeitschrift($medien){
         $mapped = $medien->map(function($item){
             if ($item->zeitschrift_id!=null){
                 $item->zeitschrift_id=\App\Models\Zeitschrift::find($item->zeitschrift_id)->name;
@@ -239,31 +248,31 @@ class MediumController extends Controller
         return $mapped;
     }
 
-    private function validateAttributes(){
+    protected function validateAttributes(){
         $validatedAttributes = request()->validate([
             'id' => 'required|integer',
             'literaturart_id' => 'integer|min:1|max:5',
-            'signatur' => '',
-            'autoren' => '',
+            'signatur' => 'nullable|string',
+            'autoren' => 'nullable|string',
             'hauptsachtitel' => 'required',
-            'untertitel' => '',
-            'enthalten_in' => '',
-            'erscheinungsort' => '',
-            'jahr' => 'required|max:6',
-            'verlag' => '',
-            'isbn' => '',
-            'issn' => '',
-            'doi' => '',
+            'untertitel' => 'nullable|string',
+            'enthalten_in' => 'nullable|string',
+            'erscheinungsort' => 'nullable|string',
+            'jahr' => 'string|required|max:6',
+            'verlag' => 'nullable|string',
+            'isbn' => 'nullable|string',
+            'issn' => 'nullable|string',
+            'doi' => 'nullable|string',
 //            'inventarnummer' => '',
-            'auflage' => '',
-            'herausgeber' => '',
-            'schriftenreihe' => '',
-            'zeitschrift_id' => 'integer',
-            'band' => '',
-            'seite' => '',
-            'institut' => '',
-            'raum_id' => 'integer|min:0|max:4',
-            'bemerkungen' => '',
+            'auflage' => 'nullable|string',
+            'herausgeber' => 'nullable|string',
+            'schriftenreihe' => 'nullable|string',
+            'zeitschrift_id' => 'nullable|integer',
+            'band' => 'nullable|string',
+            'seite' => 'nullable|string',
+            'institut' => 'nullable|string',
+            'raum_id' => 'nullable|integer|min:0|max:4',
+            'bemerkungen' => 'nullable|string',
         ]);
         return $validatedAttributes;
     }

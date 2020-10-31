@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Admin-Dashboard</a></li>
             <li class="breadcrumb-item active">Medienverwaltung</li>
