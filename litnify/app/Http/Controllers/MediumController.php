@@ -78,6 +78,10 @@ class MediumController extends Controller
      */
     public function show(Medium $medium)
     {
+        /* //TODO Wenn nicht authorisiert: Nicht feiegebene Medien nicht anzeigen
+        if ($medium->released != 1){
+            return abort(403, 'Das Medium ist nicht freigegeben.');
+        }*/
         $medColl= collect(new Medium()); //Collection für mapForeignKeyReferences2String() erstellen
         $medColl->add($medium);
         $this->mapForeignKeyReferences2String($medColl);
@@ -94,7 +98,6 @@ class MediumController extends Controller
      */
     public function edit(Medium $medium)
     {
-        //
         $medColl= collect(new Medium());
         $medColl->add($medium);
         $medium_mapped=$this->mapForeignKeyReferences2String($medColl)->first();
@@ -127,7 +130,7 @@ class MediumController extends Controller
     public function destroy(Medium $medium)
     {
         //
-        $medium->update(['deleted'=>1]); //TODO delete
+        $medium->update(['deleted'=>1]);
         return redirect(route('medium.show',$medium->id));
     }
 

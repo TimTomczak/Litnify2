@@ -41,6 +41,10 @@ Route::resource('medienverwaltung/medium', \App\Http\Controllers\MediumControlle
     'edit', 'create', 'store', 'update', 'destroy'
 ])->where(array('medium' => '[0-9]+'));
 Route::get('medienverwaltung/medium/create/{literaturart}', [App\Http\Controllers\MediumController::class, 'create'])->name('medium.create');
+// FreigabeController
+Route::get('medienverwaltung/freigabe', [App\Http\Controllers\FreigabeController::class, 'index'])->name('freigabe.index');
+Route::put('medienverwaltung/{medium}/freigabe', [App\Http\Controllers\FreigabeController::class, 'update'])->name('freigabe.update');
+
 
 // Ausleihe
 Route::get('ausleihe/{id?}/{action?}', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihe');
