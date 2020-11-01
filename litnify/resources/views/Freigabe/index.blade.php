@@ -12,38 +12,40 @@
             <thead>
             <tr>
                 <th>Aktionen</th>
-                @foreach($medien->first()->toArray() as $key=>$val)
+                @foreach($medien->first()->attributesToArray() as $key=>$val)
                     <th>{{$key}}</th>
                 @endforeach
             </tr>
             </thead>
             <tbody>
-            @foreach($medien->toArray() as $med)
+            @foreach($medien as $med)
                 <tr>
                     <td>{{--Aktionen--}}
-                        <form action="{{route('freigabe.update',$med['id'])}}" method="POST">
+                        <form action="{{route('freigabe.update',$med->id)}}" method="POST">
                             @csrf
                             @method('PUT')
                             <button class="btn btn-success"><i class="fa fa-share"></i></button>
                         </form>
 
                     </td>
-                    @foreach($med as $key=>$val)
-                        @if($key == 'hauptsachtitel')
+                    @foreach($med->attributesToArray() as $key=>$val)
+                        @switch($key)
+                            @case('hauptsachtitel')
                             <td class="text-wrap"><a href="{{route('medium.show',$med['id'])}}">{{$val}}</a></td>
-                        @else
-                            @if($key == 'autoren')
-                                <td>
-                                    @foreach(explode(';',$val) as $autor)
-                                        {{$autor}}<br>
-                                    @endforeach
-                                </td>
-                            @else
-                                <td>{{$val}}</td>
-                            @endif
-                        @endif
+                            @break
 
+                            @case('autoren')
+                            <td>
+                                @foreach(explode(';',$val) as $autor)
+                                    {{$autor}}<br>
+                                @endforeach
+                            </td>
+                            @break
 
+                            @default
+                            <td>{{$val}}</td>
+
+                        @endswitch
                     @endforeach
                 </tr>
             @endforeach

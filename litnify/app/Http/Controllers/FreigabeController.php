@@ -13,10 +13,11 @@ class FreigabeController extends MediumController
      */
     public function index()
     {
-        $medien = Medium::orderBy('id','DESC')
+        $medien=Medium::with('literaturart','zeitschrift','raum')
+            ->orderBy('id','DESC')
             ->where('released',0)
             ->where('deleted',0)
-            ->limit(100)->get(); //Die letzten 100 Medien
+            ->limit(100)->get();
         $mappedMedien=$this->mapForeignKeyReferences2String($medien);
         return view('Freigabe.index',[
             'medien' => $mappedMedien

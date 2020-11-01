@@ -23,10 +23,11 @@ class MediumController extends Controller
      */
     public function index()
     {
-        $medien = Medium::orderBy('id','DESC')
+        $medien=Medium::with('literaturart','zeitschrift','raum')
+            ->orderBy('id','DESC')
             ->where('released',1)
             ->where('deleted',0)
-            ->limit(100)->get(); //Die letzten 100 Medien
+            ->limit(100)->get();
         $mappedMedien=$this->mapForeignKeyReferences2String($medien);
         return view('Medienverwaltung.index',[
             'medien' => $mappedMedien
@@ -222,9 +223,11 @@ class MediumController extends Controller
     }
 
     protected function mapLiteraturart($medien){
+
         $mapped = $medien->map(function($item){
             if ($item->literaturart_id!=null){
-                $item->literaturart_id=Literaturart::find($item->literaturart_id)->literaturart;
+//                $item->literaturart_id=Literaturart::find($item->literaturart_id)->literaturart;
+                $item->literaturart_id=$item->literaturart->literaturart;
             }
             return $item;
         });
@@ -234,7 +237,8 @@ class MediumController extends Controller
     protected function mapRaum($medien){
         $mapped = $medien->map(function($item){
             if ($item->raum_id!=null){
-                $item->raum_id=Raum::find($item->raum_id)->raum;
+//                $item->raum_id=Raum::find($item->raum_id)->raum;
+                $item->raum_id=$item->raum->raum;
             }
             return $item;
         });
@@ -244,7 +248,8 @@ class MediumController extends Controller
     protected function mapZeitschrift($medien){
         $mapped = $medien->map(function($item){
             if ($item->zeitschrift_id!=null){
-                $item->zeitschrift_id=\App\Models\Zeitschrift::find($item->zeitschrift_id)->name;
+//                $item->zeitschrift_id=\App\Models\Zeitschrift::find($item->zeitschrift_id)->name;
+                $item->zeitschrift_id=$item->zeitschrift->name;
             }
             return $item;
         });

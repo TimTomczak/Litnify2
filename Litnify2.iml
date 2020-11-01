@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/litnify/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/litnify/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/asm89/stack-cors" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/barryvdh/laravel-debugbar" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/barryvdh/laravel-ide-helper" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/brick/math" />
@@ -40,6 +41,7 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/league/commonmark" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/league/flysystem" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/league/mime-type-detection" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/maximebf/debugbar" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/mockery/mockery" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/myclabs/deep-copy" />
@@ -93,6 +95,7 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/swiftmailer/swiftmailer" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/css-selector" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/debug" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/deprecation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/error-handler" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/event-dispatcher" />
