@@ -10,7 +10,7 @@
             </ol>
         </nav>
         <div class="card p-4 bg-light">
-            <form action="{{route('medium.update',$medium->id)}}" method="POST">
+            <form action="{{route('medium.update',$medium->id)}}" method="POST" id="form">
                 @method('PUT')
                 @csrf
 
@@ -21,7 +21,7 @@
                            value="{{$medium->id}}"
                            readonly>
                     @error('id')
-                    <div class="invalid-feedback">ID nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">ID nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -32,7 +32,7 @@
                            value="{{$medium->literaturart_id}}"
                            readonly>
                     @error('literaturart_id')
-                    <div class="invalid-feedback">Literaturart nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">Literaturart nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -42,36 +42,11 @@
                            class="form-control @error('signatur') border-danger @enderror" name="signatur" id="signatur"
                            value="{{$medium->signatur}}">
                     @error('signatur')
-                    <div class="invalid-feedback">signatur nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">signatur nicht korrekt.</div>
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    {{--TODO mehrere Autoren hinzufügen--}}
-                    <label for="autoren">Autoren</label>
-                    @foreach(explode(';',$medium->autoren) as $aut)
-                    <div class="row">
-                        @if($aut == 'et al.')
-                            <div class="col">
-                                <label for="et_al">Et al.</label>
-                                <input type="text"
-                                       class="form-control @error('autoren') border-danger @enderror" name="et_al" id="et_al" value="{{$aut}}">
-                            </div>
-                        @else
-                            <div class="col">
-                                <label for="nachname{{$loop->index}}">Nachname</label>
-                                <input type="text"
-                                       class="form-control @error('autoren') border-danger @enderror" name="nachname{{$loop->index}}" id="nachname{{$loop->index}}" value="{{explode(',',$aut)[0]}}">
-                            </div>
-                            <div class="col">
-                                <label for="vorname{{$loop->index}}">Vorname</label>
-                                <input type="text"
-                                       class="form-control @error('autoren') border-danger @enderror" name="vorname{{$loop->index}}" id="vorname{{$loop->index}}" value="{{explode(',',$aut)[1]}}">
-                            </div>
-                        @endif
-                    </div>
-                    @endforeach
-                </div>
+                <livewire:autoren-component :medium="$medium" />
 
                 <div class="form-group">
                     <label for="hauptsachtitel">Hauptsachtitel</label>
@@ -80,7 +55,7 @@
                         {{$medium->hauptsachtitel}}
                     </textarea>
                     @error('hauptsachtitel')
-                    <div class="invalid-feedback">hauptsachtitel nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">hauptsachtitel nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -90,7 +65,7 @@
                            class="form-control @error('untertitel') border-danger @enderror" name="untertitel" id="untertitel"
                            value="{{$medium->untertitel}}">
                     @error('untertitel')
-                    <div class="invalid-feedback">untertitel nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">untertitel nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -100,7 +75,7 @@
                            class="form-control @error('enthalten_in') border-danger @enderror" name="enthalten_in" id="enthalten_in" aria-describedby="helpId"
                            value="{{$medium->enthalten_in}}">
                     @error('enthalten_in')
-                    <div class="invalid-feedback">enthalten_in nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">enthalten_in nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -110,7 +85,7 @@
                            class="form-control @error('erscheinungsort') border-danger @enderror" name="erscheinungsort" id="erscheinungsort"
                            value="{{$medium->erscheinungsort}}">
                     @error('erscheinungsort')
-                    <div class="invalid-feedback">erscheinungsort nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">erscheinungsort nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -120,7 +95,7 @@
                            class="form-control @error('jahr') border-danger @enderror" name="jahr" id="jahr"
                            value="{{$medium->jahr}}">
                     @error('jahr')
-                    <div class="invalid-feedback">jahr nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">jahr nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -130,7 +105,7 @@
                            class="form-control @error('verlag') border-danger @enderror" name="verlag" id="verlag"
                            value="{{$medium->verlag}}">
                     @error('verlag')
-                    <div class="invalid-feedback">verlag nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">verlag nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -140,7 +115,7 @@
                            class="form-control @error('isbn') border-danger @enderror" name="isbn" id="isbn"
                            value="{{$medium->isbn}}">
                     @error('isbn')
-                    <div class="invalid-feedback">isbn nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">isbn nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -150,19 +125,46 @@
                            class="form-control @error('issn') border-danger @enderror" name="issn" id="issn"
                            value="{{$medium->issn}}">
                     @error('issn')
-                    <div class="invalid-feedback">issn nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">issn nicht korrekt.</div>
                     @enderror
                 </div>
 
-                <div class="form-group">
+                <label for="inventarnummern ">Inventarnummern</label>
+                <button id="inventarnummern" type="button" class="btn btn-outline-secondary btn-block mb-3" data-toggle="modal" data-target="#modelId">Inventarnummern</button>
+
+                <!-- Modal -->
+
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Inventarnummern</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <livewire:inventarnummern-component :medium="$medium" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fenster schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{--<div class="form-group">
                     <label for="inventarnummer">Inventarnummer</label>
                     <input type="text"
                            class="form-control @error('inventarnummer') border-danger @enderror" name="inventarnummer" id="inventarnummer"
                            value="{{$medium->inventarnummer}}">
                     @error('inventarnummer')
-                    <div class="invalid-feedback">inventarnummer nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">inventarnummer nicht korrekt.</div>
                     @enderror
-                </div>
+                </div>--}}
 
                 <div class="form-group">
                     <label for="auflage">Auflage</label>
@@ -170,7 +172,7 @@
                            class="form-control @error('auflage') border-danger @enderror" name="auflage" id="auflage"
                            value="{{$medium->auflage}}">
                     @error('auflage')
-                    <div class="invalid-feedback">auflage nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">auflage nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -180,7 +182,7 @@
                            class="form-control @error('herausgeber') border-danger @enderror" name="herausgeber" id="herausgeber"
                            value="{{$medium->herausgeber}}">
                     @error('herausgeber')
-                    <div class="invalid-feedback">herausgeber nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">herausgeber nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -200,7 +202,7 @@
 {{--                           class="form-control @error('zeitschrift_id') border-danger @enderror" name="zeitschrift_id" id="zeitschrift_id" aria-describedby="helpId"--}}
 {{--                           value="{{$medium->zeitschrift_id}}">--}}
                     @error('zeitschrift_id')
-                    <div class="invalid-feedback">Zeitschrift nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">Zeitschrift nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -210,7 +212,7 @@
                            class="form-control @error('schriftenreihe') border-danger @enderror" name="schriftenreihe" id="schriftenreihe"
                            value="{{$medium->schriftenreihe}}">
                     @error('schriftenreihe')
-                    <div class="invalid-feedback">schriftenreihe nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">schriftenreihe nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -220,7 +222,7 @@
                            class="form-control @error('band') border-danger @enderror" name="band" id="band"
                            value="{{$medium->band}}">
                     @error('band')
-                    <div class="invalid-feedback">band nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">band nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -230,7 +232,7 @@
                            class="form-control @error('seite') border-danger @enderror" name="seite" id="seite"
                            value="{{$medium->seite}}">
                     @error('seite')
-                    <div class="invalid-feedback">seite nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">seite nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -250,7 +252,7 @@
 {{--                           class="form-control @error('standort') border-danger @enderror" name="standort" id="standort"--}}
 {{--                           value="{{$medium->standort}}">--}}
                     @error('raum_id')
-                    <div class="invalid-feedback">standort nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">standort nicht korrekt.</div>
                     @enderror
                 </div>
 
@@ -260,11 +262,11 @@
                            class="form-control @error('bemerkungen') border-danger @enderror" name="bemerkungen" id="bemerkungen"
                            value="{{$medium->bemerkungen}}">
                     @error('bemerkungen')
-                    <div class="invalid-feedback">bemerkungen nicht korrekt.</div>
+                    <div class="invalid-feedback d-block">bemerkungen nicht korrekt.</div>
                     @enderror
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-primary">Änderung bestätigen</button>
+                    <button form="form" type="submit" class="btn btn-primary">Änderung bestätigen</button>
                 </div>
             </form>
         </div>

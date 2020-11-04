@@ -3,7 +3,7 @@
 <head>
 
     @include('layouts.header')
-
+    @livewireStyles
 </head>
 <body>
 <div id="app">
@@ -13,7 +13,7 @@
     <main class="py-2">
         @yield('content')
     </main>
-
+    @livewireScripts
 
 </div>
 @include('layouts.footer')

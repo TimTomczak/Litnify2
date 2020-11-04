@@ -22,7 +22,7 @@
 
         <table class="table table-striped table-bordered">
             <tbody>
-            @foreach($medium->toArray() as $key=>$val)
+            @foreach($medium->attributestoArray() as $key=>$val)
             <tr>
                 <td><b>{{$key}}</b></td>
                 <td>{{$val}}</td>

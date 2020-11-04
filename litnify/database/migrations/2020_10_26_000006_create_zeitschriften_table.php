@@ -17,6 +17,7 @@ class CreateZeitschriftenTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('shortcut');
+            $table->tinyInteger('deleted')->default(0);
             $table->timestamps();
         });
     }

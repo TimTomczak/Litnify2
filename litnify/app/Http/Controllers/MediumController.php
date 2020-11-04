@@ -116,6 +116,7 @@ class MediumController extends Controller
     public function update(Request $request, Medium $medium)
     {
         //
+        /*TODO Offset-Fehler, wenn keine autoren vorhanden sind*/
         $this->mapAuthorsFromRequest($request);
         $this->mapForeignKeyReferences2Id($request);
         $validatedAttributes=$this->validateAttributes();

@@ -41,6 +41,7 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/league/commonmark" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/league/flysystem" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/league/mime-type-detection" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/livewire/livewire" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/maximebf/debugbar" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/mockery/mockery" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/monolog/monolog" />

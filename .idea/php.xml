@@ -122,6 +122,7 @@
       <path value="$PROJECT_DIR$/litnify/vendor/barryvdh/laravel-debugbar" />
       <path value="$PROJECT_DIR$/litnify/vendor/maximebf/debugbar" />
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/litnify/vendor/livewire/livewire" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

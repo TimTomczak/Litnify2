@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function getNextAutoincrement(string $tableName){
+    public static function getNextAutoincrement(string $tableName){
         $statement = DB::select("SHOW TABLE STATUS LIKE '".env('DB_TABLE_PREFIX', 'laravel').$tableName."'");
         if (empty($statement)){
             throw new Exception('Tabelle "'.env('DB_TABLE_PREFIX', 'laravel').$tableName.'" nicht vorhanden.');
