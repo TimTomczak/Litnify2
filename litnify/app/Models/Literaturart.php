@@ -12,4 +12,10 @@ class Literaturart extends Model
     public function medium(){
         return $this->hasMany(Medium::class, 'literaturart');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'literaturart';
+    }
+
 }

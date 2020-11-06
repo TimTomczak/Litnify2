@@ -10,54 +10,48 @@ class ZeitschriftController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('Zeitschriftenverwaltung.index',[
+            'zeitschriften' => Zeitschrift::all()
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('zeitschriftenverwaltung.create',[
+            'nextId' => $this->getNextAutoincrement('zeitschriften')
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Zeitschrift  $zeitschrift
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Zeitschrift $zeitschrift)
-    {
-        //
+        $zeitschrift = Zeitschrift::create($this->validateAttributes());
+        $zeitschrift->save();
+        return redirect(route('zeitschriftenverwaltung.index'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Zeitschrift  $zeitschrift
-     * @return \Illuminate\Http\Response
      */
     public function edit(Zeitschrift $zeitschrift)
     {
-        //
+        return view('Zeitschriftenverwaltung.edit',[
+            'zeitschrift' => $zeitschrift
+        ]);
     }
 
     /**
@@ -65,11 +59,11 @@ class ZeitschriftController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Zeitschrift  $zeitschrift
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Zeitschrift $zeitschrift)
     {
-        //
+        $zeitschrift->update($this->validateAttributes());
+        return redirect(route('zeitschrift.edit',$zeitschrift->id));
     }
 
     /**
@@ -80,6 +74,16 @@ class ZeitschriftController extends Controller
      */
     public function destroy(Zeitschrift $zeitschrift)
     {
-        //
+        // TODO Zeitschriften löschen
+        echo 'Löschen noch nicht implementiert. Dauerhaft löschen, oder nur "inaktivieren" ?';
+    }
+
+    public function validateAttributes(){
+        $validatedAttributes = request()->validate([
+            'id' => 'required|integer',
+            'name' => 'required|string',
+            'shortcut' => 'required|string'
+        ]);
+        return $validatedAttributes;
     }
 }

@@ -3,7 +3,7 @@
 <head>
 
     @include('layouts.header')
-
+    @livewireStyles
 </head>
 <body>
 <div id="app">
@@ -13,7 +13,7 @@
     <main class="" style="margin-top:66px; background-color: #ffffff; min-height: 80vh;" >
         @yield('content')
     </main>
-
+    @livewireScripts
 
 </div>
 @include('layouts.footer')

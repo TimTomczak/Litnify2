@@ -38,12 +38,12 @@ class CreateMedienTable extends Migration
             $table->foreignId('raum_id')->nullable()->references('id')->on('raeume'); //"Standort"
             $table->text('bemerkungen')->nullable();
 
-            $table->tinyInteger('released')->nullable();
+            $table->tinyInteger('released')->nullable()->default(0);
 //            $table->timestamp('veroeffentlicht')->nullable(); //ehemals released
             $table->tinyInteger('old')->nullable(); //TODO: noch benötigt ?
 //            $table->foreignId('journale')->nullable()->references('id')->on('journale');
             $table->string('bibtexkuerzel')->nullable(); //TODO: noch benötigt ?
-            $table->tinyInteger('deleted')->nullable();
+            $table->tinyInteger('deleted')->nullable()->default(0);
 //            $table->timestamp('geloescht')->nullable(); //ehemals: deleted
 
             $table->timestamps();
