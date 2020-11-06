@@ -41,7 +41,8 @@ Route::resource('medienverwaltung/medium', \App\Http\Controllers\MediumControlle
     'edit', 'create', 'store', 'update', 'destroy'
 ])->where(array('medium' => '[0-9]+'));
 Route::get('medienverwaltung/medium/create/{literaturart}', [App\Http\Controllers\MediumController::class, 'create'])->name('medium.create');
-// FreigabeController
+
+// Freigabe
 Route::get('medienverwaltung/freigabe', [App\Http\Controllers\FreigabeController::class, 'index'])->name('freigabe.index');
 Route::put('medienverwaltung/{medium}/freigabe', [App\Http\Controllers\FreigabeController::class, 'update'])->name('freigabe.update')->where(array('medium' => '[0-9]+'));
 
@@ -50,6 +51,8 @@ Route::get('medienverwaltung/zeitschriften', [App\Http\Controllers\ZeitschriftCo
 Route::resource('medienverwaltung/zeitschrift', \App\Http\Controllers\ZeitschriftController::class)->only([
     'edit', 'create', 'store', 'update', 'destroy'
 ])->where(array('zeitschrift' => '[0-9]+'));
+//Inventarliste
+// Inventarliste wird über die Lifewire Component verwaltet. Siehe: \App\Http\Livewire\InventarnummernComponent::class
 
 // Ausleihe
 Route::get('ausleihe/{id?}/{action?}', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihe');

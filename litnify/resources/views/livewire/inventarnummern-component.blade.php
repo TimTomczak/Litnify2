@@ -16,7 +16,7 @@
         <div wire:loading.remove>
             <form >
                 @foreach($inventarliste as $invlst)
-                    <label for="inventarnummer{{$loop->index}}">Inventarnummer {{$loop->index}}</label>
+                    <label for="inventarnummer{{$loop->index}}">Inventarnummer</label>
                     <div class="form-group input-group">
                         <input type="text"
                                class="form-control @error('inventarnummer'.$loop->index) border-danger @enderror"

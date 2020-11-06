@@ -13,7 +13,7 @@
                         </div>
                     @else
                         <div class="col">
-                            <label for="nachname{{$loop->index}}">Nachname {{$loop->index}} </label>
+                            <label for="nachname{{$loop->index}}">Nachname</label>
                             <input type="text"
                                    class="form-control @error('autoren') border-danger @enderror" name="nachname{{$loop->index}}" id="nachname{{$loop->index}}" value="{{explode(',',$aut)[0]}}">
                         </div>
@@ -37,7 +37,7 @@
         @foreach($inputs as $key => $val)
             <div class="row">
                 <div class="col">
-                    <label for="nachname{{$val}}">Nachname {{$val}}</label>
+                    <label for="nachname{{$val}}">Nachname</label>
                     <input type="text"
                            class="form-control @error('autoren') border-danger @enderror" name="nachname{{$val}}" id="nachname{{$val}}">
                 </div>
