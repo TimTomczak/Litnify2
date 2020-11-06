@@ -10,7 +10,7 @@ class Zeitschrift extends Model
     protected $table='zeitschriften';
 
     protected $fillable=[
-        'id', 'name', 'shortcut'
+        'id', 'name', 'shortcut', 'deleted'
     ];
 
     public function medium(){

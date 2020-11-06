@@ -83,13 +83,18 @@ class MediumController extends Controller
         if ($medium->released != 1){
             return abort(403, 'Das Medium ist nicht freigegeben.');
         }*/
-        $medColl= collect(new Medium()); //Collection für mapForeignKeyReferences2String() erstellen
-        $medColl->add($medium);
-        $this->mapForeignKeyReferences2String($medColl);
+        if ($medium->deleted==1){
+            abort('403','Medium wurde gelöscht');
+        }
+        else{
+            $medColl= collect(new Medium()); //Collection für mapForeignKeyReferences2String() erstellen
+            $medColl->add($medium);
+            $this->mapForeignKeyReferences2String($medColl);
 
-        return view('Medienverwaltung.show',[
-            'medium' => $medium
-        ]);
+            return view('Medienverwaltung.show',[
+                'medium' => $medium
+            ]);
+        }
     }
 
     /**

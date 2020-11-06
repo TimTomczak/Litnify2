@@ -49,9 +49,15 @@ class ZeitschriftController extends Controller
      */
     public function edit(Zeitschrift $zeitschrift)
     {
-        return view('Zeitschriftenverwaltung.edit',[
-            'zeitschrift' => $zeitschrift
-        ]);
+        if ($zeitschrift->deleted==1){
+            abort('403','Zeitschrift wurde gelöscht');
+        }
+        else{
+            return view('Zeitschriftenverwaltung.edit',[
+                'zeitschrift' => $zeitschrift
+            ]);
+        }
+
     }
 
     /**
@@ -70,12 +76,11 @@ class ZeitschriftController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Zeitschrift  $zeitschrift
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Zeitschrift $zeitschrift)
     {
-        // TODO Zeitschriften löschen
-        echo 'Löschen noch nicht implementiert. Dauerhaft löschen, oder nur "inaktivieren" ?';
+        $zeitschrift->update(['deleted'=>1]);
+        return redirect(route('zeitschriftenverwaltung.index',$zeitschrift->id));
     }
 
     public function validateAttributes(){

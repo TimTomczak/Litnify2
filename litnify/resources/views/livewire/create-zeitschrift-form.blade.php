@@ -11,7 +11,6 @@
         </button>
     @else
 
-        <button wire:click.prevent="add({{$i}})">add name</button>
         <form wire:submit.prevent="submitForm" action="{{route('zeitschrift.store')}}" method="POST">
             @csrf
 
@@ -23,17 +22,14 @@
                 <div class="invalid-feedback d-block">{{$message}}</div>
                 @enderror
             </div>
-            @foreach($inputs as $key=>$val)
-                <div class="form-group">
-                    <label for="name">Name {{$val}}</label>
-                    <input wire:model.defer="name.{{$val}}" type="text"
-                           class="form-control @error('name'.$val) border-danger @enderror" name="name.{{$val}}" id="name.{{$val}}" value="{{old('name'.$val)}}">
-                    @error('name'.$val)
-                    <div class="invalid-feedback d-block">{{$message}}</div>
-                    @enderror
-                </div>
-                <button wire:click.prevent="remove({{$key}})">remove name</button>
-            @endforeach
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input wire:model.defer="name" type="text"
+                       class="form-control @error('name') border-danger @enderror" name="name" id="name" value="{{old('name')}}">
+                @error('name')
+                <div class="invalid-feedback d-block">{{$message}}</div>
+                @enderror
+            </div>
             {{--<livewire:zeitschrift-name-input />--}}
             <div class="form-group">
                 <label for="shortcut">Kürzel (shortcut)</label>
