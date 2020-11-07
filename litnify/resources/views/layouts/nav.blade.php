@@ -1,9 +1,5 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="btn btn-light btn-lg border" id="sidebar-toggle" type="button"
-            onclick='$("#sidebar-toggle").click($("#wrapper").toggleClass("toggled"));'>
-        <i class="fa fa-bars"></i>
-    </button>
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{asset('https://litnify.meteo.uni-bonn.de/webapp/img/litnify.png')}}" alt="Logo" style="width:40px;">

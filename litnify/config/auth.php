@@ -39,7 +39,7 @@ return [
         'web' => [
             'driver' => 'session',
             //'provider' => 'users',
-            'provider' => 'ldap', // Changed to 'ldap'
+            'provider' => 'users', // Changed to 'ldap'
         ],
 
         'api' => [

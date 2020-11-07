@@ -22,7 +22,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers, ListensForLdapBindFailure;
+    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -40,7 +40,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->listenForLdapBindFailure();
+
 
     }
 
