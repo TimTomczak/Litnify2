@@ -21,7 +21,7 @@ Auth::routes([
 
 Route::get('/', function () {
     return view('start');
-});
+})->name('start');
 
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
 Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout');
@@ -49,7 +49,7 @@ Route::get('medienverwaltung/freigabe', [App\Http\Controllers\FreigabeController
 Route::put('medienverwaltung/{medium}/freigabe', [App\Http\Controllers\FreigabeController::class, 'update'])->name('freigabe.update')->where(array('medium' => '[0-9]+'));
 
 //Zeitschriften
-Route::get('medienverwaltung/zeitschriften', [App\Http\Controllers\ZeitschriftController::class, 'index'])->name('zeitschriftenverwaltung.index');
+Route::get('medienverwaltung/zeitschriften', [App\Http\Controllers\ZeitschriftController::class, 'index'])->name('zeitschriften.index');
 Route::resource('medienverwaltung/zeitschrift', \App\Http\Controllers\ZeitschriftController::class)->only([
     'edit', 'create', 'store', 'update', 'destroy'
 ])->where(array('zeitschrift' => '[0-9]+'));
