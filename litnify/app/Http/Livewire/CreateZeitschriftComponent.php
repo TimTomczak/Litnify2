@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Zeitschrift;
 use Livewire\Component;
 
-class CreateZeitschriftForm extends Component
+class CreateZeitschriftComponent extends Component
 {
     public $zeitschrift_id;
     public $name;
@@ -25,7 +25,7 @@ class CreateZeitschriftForm extends Component
 
     public function render()
     {
-        return view('livewire.create-zeitschrift-form',[
+        return view('livewire.create-zeitschrift-component',[
             'nextId' => Controller::getNextAutoincrement('zeitschriften')
         ]);
     }

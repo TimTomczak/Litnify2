@@ -10,27 +10,27 @@
         </nav>
         <div class="card p-4 bg-light">
             @if($literaturart=='') {{-- Wenn noch keine Literaturart ausgewählt ist --}}
-                <div class="form-group">
-                    <label for="literaturart_id">Literaturart</label>
-                    <select class="form-control" name="literaturart_id" id="literaturart_id">
-                        <option></option>
-                        @foreach(App\Models\Literaturart::all()->pluck('literaturart') as $litart)
-                            <option>{{$litart}}</option>
-                        @endforeach
-                    </select>
-                    @error('literaturart_id')
-                    <div class="invalid-feedback d-block">{{$message}}</div>
-                    @enderror
-                </div>
-                <a id="litart_link" class="btn btn-info" style="display: none">Literaturart auswählen</a>
-                <script>
-                    /* Macht Erstellt einen Link für die Literaturart */
-                    $('select').on('change', function(e){
-                        $val= $(this).find("option:selected").val();
-                        $('#litart_link').attr('href','/medienverwaltung/medium/create/'+$val)
-                        $('#litart_link').show();
-                    });
-                </script>
+            <div class="form-group">
+                <label for="literaturart_id">Literaturart</label>
+                <select  class="form-control" name="literaturart_id" id="literaturart_id">
+                    <option></option>
+                    @foreach($literaturarten as $litart)
+                        <option>{{$litart}}</option>
+                    @endforeach
+                </select>
+                @error('literaturart_id')
+                <div class="invalid-feedback d-block">{{$message}}</div>
+                @enderror
+            </div>
+            <a id="litart_link" class="btn btn-info" style="display: none">Literaturart auswählen</a>
+            <script>
+                /* Macht Erstellt einen Link für die Literaturart */
+                $('select').on('change', function(e){
+                    $val= $(this).find("option:selected").val();
+                    $('#litart_link').attr('href','/medienverwaltung/medium/create/'+$val)
+                    $('#litart_link').show();
+                });
+            </script>
             @else
                 <form action="{{route('medium.store')}}" method="POST">
                     @csrf
@@ -77,31 +77,30 @@
                         </div>
                     @endif
 
-                    <div class="form-group">
-                        {{--TODO mehrere Autoren hinzufügen--}}
+                    {{-- TODO alte Autoren übergeben--}}
+                    <livewire:autoren-component :autorenOld="old('autoren')"/>
+                    {{--<div class="form-group">
+                        --}}{{--TODO mehrere Autoren hinzufügen--}}{{--
                         <label for="autoren">Autoren</label>
                         <div class="row">
-                                <div class="col">
-                                    <label for="nachname0">Nachname</label>
-                                    <input type="text"
-                                           class="form-control @error('autoren') border-danger @enderror" name="nachname0" id="nachname0" value="{{old('nachname0')}}">
-                                </div>
-                                <div class="col">
-                                    <label for="vorname0">Vorname</label>
-                                    <input type="text"
-                                           class="form-control @error('autoren') border-danger @enderror" name="vorname0" id="vorname0" value="{{old('vorname0')}}">
-                                </div>
+                            <div class="col">
+                                <label for="nachname0">Nachname</label>
+                                <input type="text"
+                                       class="form-control @error('autoren') border-danger @enderror" name="nachname0" id="nachname0" value="{{old('nachname0')}}">
+                            </div>
+                            <div class="col">
+                                <label for="vorname0">Vorname</label>
+                                <input type="text"
+                                       class="form-control @error('autoren') border-danger @enderror" name="vorname0" id="vorname0" value="{{old('vorname0')}}">
+                            </div>
                         </div>
-                    </div>
+                    </div>--}}
 
                     <div class="form-group">
                         <label for="hauptsachtitel">Hauptsachtitel</label>
                         <textarea type="text"
                                   class="form-control @error('hauptsachtitel') border-danger @enderror" name="hauptsachtitel" id="hauptsachtitel"
-                                  placeholder="">
-                                {{old('hauptsachtitel')}}
-
-                        </textarea>
+                                  placeholder="">{{old('hauptsachtitel')}}</textarea>
                         @error('hauptsachtitel')
                         <div class="invalid-feedback d-block">{{$message}}</div>
                         @enderror
@@ -342,11 +341,9 @@
 
                     <div class="form-group">
                         <label for="bemerkungen">Bemerkungen</label>
-                        <input type="text"
-                               class="form-control @error('bemerkungen') border-danger @enderror" name="bemerkungen" id="bemerkungen"
-                               placeholder=""
-                               value="{{old('bemerkungen')}}"
-                        >
+                        <textarea type="text"
+                                  class="form-control @error('bemerkungen') border-danger @enderror" name="bemerkungen"
+                                  id="bemerkungen">{{old('bemerkungen')}}</textarea>
                         @error('bemerkungen')
                         <div class="invalid-feedback d-block">{{$message}}</div>
                         @enderror

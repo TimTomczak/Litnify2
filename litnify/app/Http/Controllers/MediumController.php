@@ -68,6 +68,7 @@ class MediumController extends Controller
 
         $this->mapAuthorsFromRequest($request); //Autoren zu einem einzigen 'autoren'-String zusammenfügen
         $this->mapForeignKeyReferences2Id($request); // Fremdschlüssel mit IDs austauschen
+        $request->flashOnly('autoren');
         $validatedAttributes=$this->validateAttributes();
         $med= Medium::create($validatedAttributes);
         return redirect(route('medium.show',$med->id));
@@ -138,7 +139,7 @@ class MediumController extends Controller
     {
         //
         $medium->update(['deleted'=>1]);
-        return redirect(route('medium.show',$medium->id));
+        return redirect(route('medienverwaltung.index'));
     }
 
 
