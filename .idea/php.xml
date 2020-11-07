@@ -99,7 +99,6 @@
       <path value="$PROJECT_DIR$/litnify/vendor/phpspec/prophecy" />
       <path value="$PROJECT_DIR$/litnify/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/litnify/vendor/phar-io/manifest" />
-      <path value="$PROJECT_DIR$/litnify/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/litnify/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/litnify/vendor/psr/http-client" />
       <path value="$PROJECT_DIR$/litnify/vendor/graham-campbell/result-type" />
@@ -123,9 +122,10 @@
       <path value="$PROJECT_DIR$/litnify/vendor/maximebf/debugbar" />
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/debug" />
       <path value="$PROJECT_DIR$/litnify/vendor/livewire/livewire" />
+      <path value="$PROJECT_DIR$/litnify/vendor/phar-io/version" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/litnify/vendor/autoload.php" />
