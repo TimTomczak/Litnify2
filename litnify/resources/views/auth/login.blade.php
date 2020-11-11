@@ -8,6 +8,20 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+
+
+                    <div class="alert alert-info">
+                        <strong>Folgende Accounts sind momentan vorhanden:</strong>
+                        <br>
+                        <ul>
+                            <li>Datenbank-User: test@test.de | Passwort: password</li>
+                            <li>LDAP-User: newton@ldap.forumsys.com | Passwort: password</li>
+                        </ul>
+                        Weitere LDAP Accounts: <a href="https://www.forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server/" target="_blank">Link</a>
+                    </div>
+
+
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
