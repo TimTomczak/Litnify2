@@ -2,6 +2,6 @@
 
 @section('content')
 
-    Kontakt
+    Impressum
 
 @endsection

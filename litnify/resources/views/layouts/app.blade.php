@@ -10,7 +10,7 @@
 
     @include('layouts.nav')
 
-    <main class="" style="margin-top:66px; background-color: #ffffff; min-height: 80vh;" >
+    <main class="" style="background-color: #ffffff; min-height: 80vh;" >
         @yield('content')
     </main>
     @livewireScripts
