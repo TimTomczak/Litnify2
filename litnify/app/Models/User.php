@@ -61,9 +61,10 @@ class User extends Authenticatable implements LdapAuthenticatable
     }
     // Für Berechtigungsrolle des jeweiligen Users:  $user->berechtigungsrolle->berechtigungsrolle
 
-
+    //withPivot sind die Spalten, die in der Ausleihe-Tabelle zusätzlich existieren
     public function ausleihe(){
-        return $this->belongsToMany(Medium::class, 'ausleihen');
+        return $this->belongsToMany(Medium::class, 'ausleihen')
+            ->withPivot(['id','inventarnummer','Ausleihdatum','RueckgabeSoll','RueckgabeIst','Verlaengerungen']);
     }
 
     public function getLdapDomainColumn()
