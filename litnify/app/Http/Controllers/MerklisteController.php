@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Merkliste;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MerklisteController extends Controller
@@ -47,6 +48,19 @@ class MerklisteController extends Controller
     public function show(Merkliste $merkliste)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     * show-Methode für den Admin-Bereich
+     *
+     * @param  \App\Models\Merkliste  $merkliste
+     */
+    public function showMerkliste(User $user)
+    {
+        return view('Ausleihverwaltung.showMerkliste',[
+            'merkliste' => $user->medium,
+        ]);
     }
 
     /**

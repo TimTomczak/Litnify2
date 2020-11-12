@@ -13,8 +13,6 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/directorytree/ldaprecord" />
-      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/directorytree/ldaprecord-laravel" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/dnoegel/php-xdg-base-dir" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/dbal" />

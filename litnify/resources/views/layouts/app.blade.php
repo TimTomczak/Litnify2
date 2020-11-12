@@ -9,7 +9,7 @@
 
     {{--@include('layouts.nav')--}}
 
-    <div class="d-flex" id="wrapper">
+    <div class="d-flex toggled" id="wrapper">
         @include('layouts.sidebar')
         <div id="content-wrapper">
             @include('layouts.nav')

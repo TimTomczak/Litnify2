@@ -3,30 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ausleihe;
+use App\Models\Merkliste;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AusleiheController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $id = null, $action = null)
+    public function index()
     {
-        switch ($action) {
-            case 'edit':
-                return $this->edit(Ausleihe::getById($id));
-            break;
-            case 'update':
-                return $this->update($id);
-            break;
-            case 'delete':
-                return $this->destroy($id);
-            break;
-            default:
-                return $this->show($id);
-            }
+//        $ausleihen = Ausleihe::with([
+//            'user'=> function($usr){
+//                $usr->groupBy('id');
+//            },
+//            'medium'
+//        ]);
+        $merk = Merkliste::with('user', 'medium')->groupBy('user_id')->get();
+        return view('Ausleihverwaltung.index',[
+            'merklisten' => $merk,
+        ]);
+
     }
 
     /**

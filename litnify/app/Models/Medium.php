@@ -61,4 +61,26 @@ class Medium extends Model
     public function inventarliste(){
         return $this->belongsToMany(Inventarliste::class, 'inventarliste_medium');
     }
+
+    public function isAusleihbar(){
+        $medienAufInventarliste=$this->inventarliste->all();
+        foreach ($medienAufInventarliste as $medOnInv){ //alle Inventarnummern des Mediums überprüfen
+
+            if ($medOnInv->ausleihbar==1){ //ist das Medium ausleihbar ?
+                // dann prüfe, ob die Inventarnummer bereits ausgeliehen ist
+                $invAusgeliehen=Ausleihe::whereInventarnummer($medOnInv->inventarnummer);
+                if ($invAusgeliehen==null){ // TODO == null oder empty oder so ?
+                    //Wenn nicht in Ausleihen -> ausleihbar
+                    return true;
+                }
+                else{
+                    //prüfen, ob Inventarnummer in Ausleihen noch nicht zurückgegeben wurde
+                    // TODO alle iterieren und auf RueckgabeIst==null prüfen
+                }
+
+
+            }
+
+        }
+    }
 }
