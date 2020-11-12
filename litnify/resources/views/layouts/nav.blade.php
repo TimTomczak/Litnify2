@@ -1,5 +1,9 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="btn btn-light btn-lg border" id="sidebar-toggle" type="button"
+            onclick='$("#sidebar-toggle").click($("#wrapper").toggleClass("toggled"));'>
+        <i class="fa fa-bars"></i>
+    </button>
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{asset('https://litnify.meteo.uni-bonn.de/webapp/img/litnify.png')}}" alt="Logo" style="width:40px;">
@@ -14,9 +18,6 @@
                     <a class="nav-link" href="{{ route('suche') }}"><i class="fa fa-search"></i> Suche</a>
                 </li>
 
-            @auth
-
-            @endauth
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('page', 'oeffnungszeiten') }}"><i class="fa fa-clock"></i> Öffnungszeiten</a>
                 </li>
@@ -35,6 +36,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user">&nbsp;</i>{{ __('Login') }}</a>
                     </li>
+
 
                 @else
                     <li class="nav-item dropdown">
@@ -62,7 +64,8 @@
                     </li>
                     @endguest
 
-            </ul>
+
+          </ul>
         </div>
     </div>
 </nav>

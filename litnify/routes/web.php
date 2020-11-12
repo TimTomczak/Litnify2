@@ -23,7 +23,7 @@ Auth::routes([
 
 Route::get('/', function () {
     return view('start');
-});
+})->name('start');
 
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
 //Route::get('/login', [App\Http\Controllers\LoginController::class])->name('login');

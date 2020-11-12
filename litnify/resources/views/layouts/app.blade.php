@@ -6,31 +6,24 @@
     @livewireStyles
 </head>
 <body>
-<div id="app">
 
-    @include('layouts.nav')
-    @if (isset($alert))
-        <div class="container">
-            <div class="alert alert-{{$alert[0]}}">
-                {{ $alert[1] }}
-            </div>
-        </div>
-    @elseif(session('alert'))
-        <div class="container">
-            <div class="alert alert-{{session('alert')[0]}}">
-                {{ session('alert')[1] }}
-            </div>
-        </div>
-    @endif
+    {{--@include('layouts.nav')--}}
 
-    <main class="" style="background-color: #ffffff; min-height: 80vh;" >
+    <div class="d-flex" id="wrapper">
+        @include('layouts.sidebar')
+        <div id="content-wrapper">
+            @include('layouts.nav')
+            <main class="" style="/*margin-top:66px; */background-color: #ffffff; min-height: 80vh;">
+                @yield('content')
+            </main>
+
+            @include('layouts.footer')
+        </div>
+    </div>
+
+    {{--<main class="" style="margin-top:66px; background-color: #ffffff; min-height: 80vh;" >
         @yield('content')
-    </main>
+    </main>--}}
     @livewireScripts
-
-</div>
-@include('layouts.footer')
-
-
 </body>
 </html>
