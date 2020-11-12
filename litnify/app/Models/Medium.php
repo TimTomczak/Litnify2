@@ -42,7 +42,8 @@ class Medium extends Model
     }
 
     public function ausleihe(){
-        return $this->belongsToMany(User::class, 'ausleihen');
+        return $this->belongsToMany(User::class, 'ausleihen')
+            ->withPivot(['id','inventarnummer','Ausleihdatum','RueckgabeSoll','RueckgabeIst','Verlaengerungen']);
     }
 
     public function raum(){

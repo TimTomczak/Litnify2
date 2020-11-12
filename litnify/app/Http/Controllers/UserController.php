@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berechtigungsrolle;
+use App\Models\Merkliste;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\User;
@@ -18,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        dd('tttt');
+
     }
 
     /**
@@ -87,12 +88,30 @@ class UserController extends Controller
         //
     }
 
-    public function showUser(Request $request){
 
-        $user = (\Auth::user());
-        $rolle = (Berechtigungsrolle::all()->where('id', '=', $user['id']))[1]['berechtigungsrolle'];
-        return View('user/userprofile')->with(compact('user','rolle'));
 
+    public function showProfil(){
+        $user = Auth::user();
+        $rolle = (Berechtigungsrolle::all()->where('id', '=', $user->berechtigungsrolle_id));
+        return view('user/profil', array('user' => $user, 'rolle' => $rolle));
     }
+
+    public function showMerkliste(){
+        $user = Auth::user();
+
+
+        $merkliste = Merkliste::all()->where('user_id', '=', $user->id);
+        return view('user/merkliste', array('user' => $user, 'merkliste' => $merkliste));
+    }
+
+    public function showAusleihen(){
+        $user = Auth::user();
+        $merkliste = Merkliste::all()->where('user_id', '=', $user->id);
+        return view('user/ausleihen', array('user' => $user, 'merkliste' => $merkliste));
+    }
+
+
+
+
 
 }

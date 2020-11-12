@@ -18,9 +18,6 @@
                     <a class="nav-link" href="{{ route('suche') }}"><i class="fa fa-search"></i> Suche</a>
                 </li>
 
-{{--            @auth--}}
-
-{{--            @endauth--}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('page', 'oeffnungszeiten') }}"><i class="fa fa-clock"></i> Öffnungszeiten</a>
                 </li>
@@ -33,36 +30,42 @@
 
             </ul>
 
-{{--            <ul class="navbar-nav ml-auto">--}}
-{{--                <!-- Authentication Links -->--}}
-{{--                @guest--}}
-{{--                    <li class="nav-item">--}}
-{{--                        <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user">&nbsp;</i>{{ __('Login') }}</a>--}}
-{{--                    </li>--}}
+            <ul class="navbar-nav ml-auto">
+                <!-- Authentication Links -->
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user">&nbsp;</i>{{ __('Login') }}</a>
+                    </li>
 
-{{--                @else--}}
-{{--                    <li class="nav-item dropdown">--}}
-{{--                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-{{--                            <i class="fa fa-user">&nbsp;</i> Hallo {{ ucfirst(Auth::user()->vorname) }} <span class="caret"></span>--}}
-{{--                        </a>--}}
-{{--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
-{{--                            <a class="dropdown-item" href="{{ route('account') }}">--}}
-{{--                                {{ __('Profil') }}--}}
-{{--                            </a>--}}
-{{--                            <a class="dropdown-item" href="{{ route('merkliste') }}">--}}
-{{--                                Meine Merkliste--}}
-{{--                            </a>--}}
-{{--                            <a class="dropdown-item" href="{{ route('ausleihen') }}">--}}
-{{--                                Meine Ausleihen--}}
-{{--                            </a>--}}
-{{--                            <a class="dropdown-item" href="{{ route('logout') }}">--}}
-{{--                                {{ __('Logout') }}--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
-{{--                    @endguest--}}
 
-{{--            </ul>--}}
+                @else
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <button type="button" class="btn btn-outline-primary">
+                                {{ ucfirst(Auth::user()->vorname) . " " . ucfirst(Auth::user()->nachname) }}
+                            </button>
+
+
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('profil') }}">
+                                {{ __('Profil') }}
+                            </a>
+                            <a class="dropdown-item" href="{{ route('merkliste') }}">
+                                Merkliste
+                            </a>
+                            <a class="dropdown-item" href="{{ route('ausleihen') }}">
+                                Ausleihen
+                            </a>
+                            <a class="dropdown-item" href="{{ route('logout') }}">
+                                {{ __('Logout') }}
+                            </a>
+                        </div>
+                    </li>
+                    @endguest
+
+
+          </ul>
         </div>
     </div>
 </nav>

@@ -30,7 +30,7 @@ class MediumController extends Controller
             ->limit(100)->get();
         $mappedMedien=$this->mapForeignKeyReferences2String($medien);
         return view('Medienverwaltung.index',[
-            'medien' => $mappedMedien
+            'medien' => $mappedMedien,
         ]);
     }
 
@@ -48,6 +48,7 @@ class MediumController extends Controller
 
 
         return view('medienverwaltung.create',[
+            'literaturarten' => Literaturart::all()->pluck('literaturart'),
             'literaturart' => $literaturart->literaturart,
             'nextMediumId' => $this->getNextAutoincrement('medien')
         ]);
@@ -68,9 +69,10 @@ class MediumController extends Controller
 
         $this->mapAuthorsFromRequest($request); //Autoren zu einem einzigen 'autoren'-String zusammenfügen
         $this->mapForeignKeyReferences2Id($request); // Fremdschlüssel mit IDs austauschen
+        $request->flashOnly('autoren'); //Für die Übergabe an die Livewire Autoren-Component die Autoren flashen
         $validatedAttributes=$this->validateAttributes();
         $med= Medium::create($validatedAttributes);
-        return redirect(route('medium.show',$med->id));
+        return redirect(route('medium.show',$med->id))->with('alert',['success','Medium "'.$med->hauptsachtitel.'" erfolgreich erstellt.']);
     }
 
     /**
@@ -79,7 +81,7 @@ class MediumController extends Controller
      */
     public function show(Medium $medium)
     {
-        /* //TODO Wenn nicht authorisiert: Nicht feiegebene Medien nicht anzeigen
+        /* //TODO Wenn nicht autorisiert: Nicht feiegebene Medien nicht anzeigen
         if ($medium->released != 1){
             return abort(403, 'Das Medium ist nicht freigegeben.');
         }*/
@@ -109,6 +111,7 @@ class MediumController extends Controller
         $medium_mapped=$this->mapForeignKeyReferences2String($medColl)->first();
         return view('Medienverwaltung.edit',[
             'medium' => $medium_mapped,
+            'literaturart' => $medium_mapped->literaturart_id
         ]);
     }
 
@@ -121,7 +124,6 @@ class MediumController extends Controller
     public function update(Request $request, Medium $medium)
     {
         //
-        /*TODO Offset-Fehler, wenn keine autoren vorhanden sind*/
         $this->mapAuthorsFromRequest($request);
         $this->mapForeignKeyReferences2Id($request);
         $validatedAttributes=$this->validateAttributes();
@@ -138,7 +140,7 @@ class MediumController extends Controller
     {
         //
         $medium->update(['deleted'=>1]);
-        return redirect(route('medium.show',$medium->id));
+        return redirect(route('medienverwaltung.index'));
     }
 
 
@@ -277,7 +279,6 @@ class MediumController extends Controller
             'isbn' => 'nullable|string',
             'issn' => 'nullable|string',
             'doi' => 'nullable|string',
-//            'inventarnummer' => '',
             'auflage' => 'nullable|string',
             'herausgeber' => 'nullable|string',
             'schriftenreihe' => 'nullable|string',

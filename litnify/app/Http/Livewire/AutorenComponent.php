@@ -13,7 +13,9 @@ class AutorenComponent extends Component
     public $inputs=[];
     public $message;
     public $autoren;
+    public $autorenOld; //wird bei edit übergeben, falls bei Validierung Fehler auftreten
     public $autorRemoved=false;
+    public bool $et_al=false;
 
     protected $listeners = [
         'refresh' => '$refresh',
@@ -38,15 +40,21 @@ class AutorenComponent extends Component
         $this->emit('refresh');
     }
 
-    /*TODO Et_Al hinzufügbar machen*/
     public function render()
     {
-        if ($this->autorRemoved==false){
-            $this->autoren=explode(';',$this->medium->autoren);
-        }
+        if (isset($this->medium)){
+            if ($this->autorRemoved==false){
+                $this->autoren=explode(';',$this->medium->autoren);
+            }
 
-        if ($this->i<count( $this->autoren) ){
-            $this->i+=count( $this->autoren)-1;
+            if ($this->i<count( $this->autoren) ){
+                $this->i+=count( $this->autoren)-1;
+            }
+        }
+        else{
+            if(isset($this->autorenOld)){
+                $this->autoren=explode(';',$this->autorenOld);
+            }
         }
         return view('livewire.autoren-component',[
         ]);

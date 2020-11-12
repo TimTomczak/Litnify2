@@ -7,14 +7,12 @@
 </head>
 <body>
 
-
     {{--@include('layouts.nav')--}}
 
     <div class="d-flex" id="wrapper">
         @include('layouts.sidebar')
         <div id="content-wrapper">
             @include('layouts.nav')
-
             <main class="" style="/*margin-top:66px; */background-color: #ffffff; min-height: 80vh;">
                 @yield('content')
             </main>

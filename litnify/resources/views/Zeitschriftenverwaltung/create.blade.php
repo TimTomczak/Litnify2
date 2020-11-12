@@ -3,7 +3,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <livewire:create-zeitschrift-form />
+                <livewire:create-zeitschrift-component />
             </div>
 
         </div>

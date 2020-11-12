@@ -10,27 +10,27 @@
         </nav>
         <div class="card p-4 bg-light">
             @if($literaturart=='') {{-- Wenn noch keine Literaturart ausgewählt ist --}}
-                <div class="form-group">
-                    <label for="literaturart_id">Literaturart</label>
-                    <select class="form-control" name="literaturart_id" id="literaturart_id">
-                        <option></option>
-                        @foreach(App\Models\Literaturart::all()->pluck('literaturart') as $litart)
-                            <option>{{$litart}}</option>
-                        @endforeach
-                    </select>
-                    @error('literaturart_id')
-                    <div class="invalid-feedback d-block">{{$message}}</div>
-                    @enderror
-                </div>
-                <a id="litart_link" class="btn btn-info" style="display: none">Literaturart auswählen</a>
-                <script>
-                    /* Macht Erstellt einen Link für die Literaturart */
-                    $('select').on('change', function(e){
-                        $val= $(this).find("option:selected").val();
-                        $('#litart_link').attr('href','/medienverwaltung/medium/create/'+$val)
-                        $('#litart_link').show();
-                    });
-                </script>
+            <div class="form-group">
+                <label for="literaturart_id">Literaturart</label>
+                <select  class="form-control" name="literaturart_id" id="literaturart_id">
+                    <option></option>
+                    @foreach($literaturarten as $litart)
+                        <option>{{$litart}}</option>
+                    @endforeach
+                </select>
+                @error('literaturart_id')
+                <div class="invalid-feedback d-block">{{$message}}</div>
+                @enderror
+            </div>
+            <a id="litart_link" class="btn btn-info" style="display: none">Literaturart auswählen</a>
+            <script>
+                /* Macht Erstellt einen Link für die Literaturart */
+                $('select').on('change', function(e){
+                    $val= $(this).find("option:selected").val();
+                    $('#litart_link').attr('href','/medienverwaltung/medium/create/'+$val)
+                    $('#litart_link').show();
+                });
+            </script>
             @else
                 <form action="{{route('medium.store')}}" method="POST">
                     @csrf
@@ -63,6 +63,7 @@
                         <div class="invalid-feedback d-block">{{$message}}</div>
                         @enderror
                     </div>
+
                     @if($literaturart=='Buch'xor'Graue Literatur'xor'Unselbstständiges Werk')
                         <div class="form-group">
                             <label for="signatur">Signatur</label>
@@ -77,31 +78,13 @@
                         </div>
                     @endif
 
-                    <div class="form-group">
-                        {{--TODO mehrere Autoren hinzufügen--}}
-                        <label for="autoren">Autoren</label>
-                        <div class="row">
-                                <div class="col">
-                                    <label for="nachname0">Nachname</label>
-                                    <input type="text"
-                                           class="form-control @error('autoren') border-danger @enderror" name="nachname0" id="nachname0" value="{{old('nachname0')}}">
-                                </div>
-                                <div class="col">
-                                    <label for="vorname0">Vorname</label>
-                                    <input type="text"
-                                           class="form-control @error('autoren') border-danger @enderror" name="vorname0" id="vorname0" value="{{old('vorname0')}}">
-                                </div>
-                        </div>
-                    </div>
+                    <livewire:autoren-component :autorenOld="old('autoren')"/>
 
                     <div class="form-group">
                         <label for="hauptsachtitel">Hauptsachtitel</label>
                         <textarea type="text"
                                   class="form-control @error('hauptsachtitel') border-danger @enderror" name="hauptsachtitel" id="hauptsachtitel"
-                                  placeholder="">
-                                {{old('hauptsachtitel')}}
-
-                        </textarea>
+                                  placeholder="">{{old('hauptsachtitel')}}</textarea>
                         @error('hauptsachtitel')
                         <div class="invalid-feedback d-block">{{$message}}</div>
                         @enderror
@@ -214,17 +197,31 @@
                     @endif
 
                     @if($literaturart=='Buch'xor'Graue Literatur'xor'Unselbstständiges Werk')
-                        <div class="form-group">
-                            <label for="inventarnummer">Inventarnummer</label>
-                            <input type="text"
-                                   class="form-control @error('inventarnummer') border-danger @enderror" name="inventarnummer" id="inventarnummer"
-                                   placeholder="ÄNDERN"
-                                   value="{{old('inventarnummer')}}"
-                                   readonly
-                            >
-                            @error('inventarnummer')
-                            <div class="invalid-feedback d-block">{{$message}}</div>
-                            @enderror
+                        <label for="inventarnummern ">Inventarnummern</label>
+                        <button id="inventarnummern" type="button" class="btn btn-outline-secondary btn-block mb-3" data-toggle="modal" data-target="#modelId">Inventarnummern</button>
+
+                        <!-- Modal -->
+
+                        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Inventarnummern</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <livewire:inventarnummern-component :medium="$medium" />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fenster schließen</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @endif
 
@@ -260,7 +257,7 @@
                     @if($literaturart=='Artikel')
                         <div class="form-group">
                             <label for="zeitschrift_id">Zeitschrift</label>
-                            {{--TODO mit Datalist austauschen--}}
+                            {{--TODO mit Datalist austauschen ??--}}
                             <select class="form-control @error('zeitschrift_id') border-danger @enderror" name="zeitschrift_id" id="zeitschrift_id">
                                 <option></option>
                                 @foreach(App\Models\Zeitschrift::all() as $zeitschrift)
@@ -342,11 +339,9 @@
 
                     <div class="form-group">
                         <label for="bemerkungen">Bemerkungen</label>
-                        <input type="text"
-                               class="form-control @error('bemerkungen') border-danger @enderror" name="bemerkungen" id="bemerkungen"
-                               placeholder=""
-                               value="{{old('bemerkungen')}}"
-                        >
+                        <textarea type="text"
+                                  class="form-control @error('bemerkungen') border-danger @enderror" name="bemerkungen"
+                                  id="bemerkungen">{{old('bemerkungen')}}</textarea>
                         @error('bemerkungen')
                         <div class="invalid-feedback d-block">{{$message}}</div>
                         @enderror
