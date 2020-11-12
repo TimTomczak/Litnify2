@@ -76,16 +76,11 @@ return [
                 'sync_attributes' => \App\Ldap\LdapAttributeHandler::class,
             ],
         ],
-        /*
-        'ldap' => [
-            'driver' => 'ldap',
-            'model' => LdapRecord\Models\OpenLDAP\User::class,
-        ],
-        */
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+         ],
     ],
 
     /*

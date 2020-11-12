@@ -17043,3 +17043,7 @@ div.content {
   }
 }
 
+.display-4 a:hover {
+  text-decoration: none !important;
+}
+

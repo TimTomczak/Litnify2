@@ -2,44 +2,42 @@
 
 @section('content')
 
-        <div class="container d-flex justify-content-center">
-            <div class="row">
-                <div class="col">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Login</span>
-                        </div>
-                        <input type="text" class="form-control" value="{{ $user['uid'] }}" disabled>
-                    </div>
-
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Nachname</span>
-                        </div>
-                        <input type="text" class="form-control" value="{{ $user['nachname'] }}" disabled>
-                    </div>
-
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Vorname</span>
-                        </div>
-                        <input type="text" class="form-control" value="{{ $user['vorname'] }}" disabled>
-                    </div>
-
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Email</span>
-                        </div>
-                        <input type="text" class="form-control" value="{{ $user['email'] }}" disabled>
-                    </div>
+    @foreach ($merkliste as $item)
+        <p>{{ ($item->hauptsachtitel) }}</p>
+    @endforeach
 
 
-
-
-                </div>
-
-            </div>
-
+    {{--
+    "id" => 43127
+    "literaturart_id" => 1
+    "signatur" => ""
+    "autoren" => "Hense"
+    "hauptsachtitel" => "Recent fluctuat. of troposph. temp. and water vapour content in the tropics."
+    "untertitel" => ""
+    "enthalten_in" => null
+    "erscheinungsort" => ""
+    "jahr" => "1988"
+    "verlag" => ""
+    "isbn" => ""
+    "issn" => ""
+    "doi" => null
+    "inventarnummer" => null
+    "auflage" => ""
+    "herausgeber" => ""
+    "schriftenreihe" => ""
+    "zeitschrift_id" => 48
+    "band" => "38"
+    "seite" => "215"
+    "institut" => ""
+    "raum_id" => 0
+    "bemerkungen" => ""
+    "released" => 1
+    "old" => 1
+    "bibtexkuerzel" => ""
+    "deleted" => 0
+    "created_at" => null
+    "updated_at" => null
+    --}}
 
 @endsection
 

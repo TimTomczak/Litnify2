@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes([
     'register' => true, // Registration Routes...
-    'reset' => false, // Password Reset Routes...
-    'verify' => false, // Email Verification Routes...
+    'reset' => true, // Password Reset Routes...
+    'verify' => true, // Email Verification Routes...
 ]);
 
 Route::get('/', function () {
@@ -26,12 +26,12 @@ Route::get('/', function () {
 })->name('start');
 
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
-//Route::get('/login', [App\Http\Controllers\LoginController::class])->name('login');
 Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout');
 
 // * M o d e l s * //
-// User
+// User-Backend
 //Route::resource('user', 'App\Http\Controllers\UserController');
+Route::permanentRedirect('/user', '/user/profil');
 Route::get('/user/profil', [App\Http\Controllers\UserController::class, 'showProfil'])->name('profil')->middleware('auth');
 Route::get('/user/ausleihen', [App\Http\Controllers\UserController::class, 'showAusleihen'])->name('ausleihen')->middleware('auth');
 Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'showMerkliste'])->name('merkliste')->middleware('auth');
@@ -52,7 +52,7 @@ Route::get('medienverwaltung/freigabe', [App\Http\Controllers\FreigabeController
 Route::put('medienverwaltung/{medium}/freigabe', [App\Http\Controllers\FreigabeController::class, 'update'])->name('freigabe.update')->where(array('medium' => '[0-9]+'));
 
 //Zeitschriften
-Route::get('medienverwaltung/zeitschriften', [App\Http\Controllers\ZeitschriftController::class, 'index'])->name('zeitschriftenverwaltung.index');
+Route::get('medienverwaltung/zeitschriften', [App\Http\Controllers\ZeitschriftController::class, 'index'])->name('zeitschriften.index');
 Route::resource('medienverwaltung/zeitschrift', ZeitschriftController::class)->only([
     'edit', 'create', 'store', 'update', 'destroy'
 ])->where(array('zeitschrift' => '[0-9]+'));
@@ -63,7 +63,17 @@ Route::resource('medienverwaltung/zeitschrift', ZeitschriftController::class)->o
 Route::get('ausleihe/{id?}/{action?}', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihe');
 
 
+// * A d m i n P a g e  s * //
+Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
+    //Route::get('users', 'App\Http\Controllers\Admin\UserController');
+    //Route::get('medium', 'App\Http\Controllers\Admin\MediumController');
+    //Route::get('system', 'App\Http\Controllers\Admin\SystemController');
+
+});
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin/nutzerverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.user');
 
 
 // * S t a t i c P a g e  s * //

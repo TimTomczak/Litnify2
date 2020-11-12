@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ausleihe;
 use App\Models\Berechtigungsrolle;
 use App\Models\Merkliste;
 use Illuminate\Auth\EloquentUserProvider;
@@ -9,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -19,7 +21,8 @@ class UserController extends Controller
      */
     public function index()
     {
-
+        $users = \App\Models\User::all();
+        return view('admin.nutzerverwaltung.index', ['users' => $users]);
     }
 
     /**
@@ -29,7 +32,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
+
     }
 
     /**
@@ -88,30 +92,15 @@ class UserController extends Controller
         //
     }
 
-
-
     public function showProfil(){
-        $user = Auth::user();
-        $rolle = (Berechtigungsrolle::all()->where('id', '=', $user->berechtigungsrolle_id));
-        return view('user/profil', array('user' => $user, 'rolle' => $rolle));
+        return view('user/profil', array('user' => Auth::user()));
     }
 
     public function showMerkliste(){
-        $user = Auth::user();
-
-
-        $merkliste = Merkliste::all()->where('user_id', '=', $user->id);
-        return view('user/merkliste', array('user' => $user, 'merkliste' => $merkliste));
+        return view('user/merkliste', array('user' => Auth::user(), 'merkliste' => (Auth::user())->medium));
     }
 
     public function showAusleihen(){
-        $user = Auth::user();
-        $merkliste = Merkliste::all()->where('user_id', '=', $user->id);
-        return view('user/ausleihen', array('user' => $user, 'merkliste' => $merkliste));
+        return view('user/ausleihen', array('user' => Auth::user(), 'ausleihe' => Auth::user()->ausleihe));
     }
-
-
-
-
-
 }

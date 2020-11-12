@@ -1,9 +1,15 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="btn btn-light btn-lg border" id="sidebar-toggle" type="button"
-            onclick='$("#sidebar-toggle").click($("#wrapper").toggleClass("toggled"));'>
-        <i class="fa fa-bars"></i>
-    </button>
+
+    @auth
+        @if ( auth()->user()->berechtigungsrolle_id > 1)
+            <button class="btn btn-light btn-lg border" id="sidebar-toggle" type="button"
+                    onclick='$("#sidebar-toggle").click($("#wrapper").toggleClass("toggled"));'>ADMIN
+                <i class="fa fa-bars"></i>
+            </button>
+        @endif
+    @endauth
+
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{asset('https://litnify.meteo.uni-bonn.de/webapp/img/litnify.png')}}" alt="Logo" style="width:40px;">
@@ -15,37 +21,33 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('suche') }}"><i class="fa fa-search"></i> Suche</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('page', 'oeffnungszeiten') }}"><i class="fa fa-clock"></i> Öffnungszeiten</a>
+                    <a class="nav-link" href="{{ route('suche') }}"><i class="fa fa-search"></i> SUCHE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('page', 'faq') }}"><i class="fa fa-question-circle"></i> Hilfe & FAQ</a>
+                    <a class="nav-link" href="{{ route('page', 'oeffnungszeiten') }}"><i class="fa fa-clock-o"></i> ÖFFNUNGSZEITEN</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('page', 'kontakt') }}"><i class="fa fa-phone"></i> Kontakt</a>
+                    <a class="nav-link" href="{{ route('page', 'faq') }}"><i class="fa fa-question-circle"></i> FAQ</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('page', 'kontakt') }}"><i class="fa fa-phone"></i> KONTAKT</a>
+                </li>
             </ul>
 
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user">&nbsp;</i>{{ __('Login') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user">&nbsp;</i>{{ __('LOGIN') }}</a>
                     </li>
-
-
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <button type="button" class="btn btn-outline-primary">
                                 {{ ucfirst(Auth::user()->vorname) . " " . ucfirst(Auth::user()->nachname) }}
+
+                                <img src="https://eu.ui-avatars.com/api/?name={{Auth::user()->vorname .'+'. Auth::user()->nachname}}&size=24" alt="Admin" class="rounded-circle">
                             </button>
-
-
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('profil') }}">
@@ -63,9 +65,7 @@
                         </div>
                     </li>
                     @endguest
-
-
-          </ul>
+            </ul>
         </div>
     </div>
 </nav>

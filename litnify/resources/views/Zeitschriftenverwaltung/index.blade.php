@@ -1,4 +1,6 @@
 @extends('layouts.app')
+
+
 @section('content')
     <div class="container">
         <a class="btn btn-primary" href="{{route('zeitschrift.create')}}">Neue Zeitschrift erstellen</a>
@@ -32,5 +34,15 @@
             @endforeach
             </tbody>
         </table>
+
+        {{-- Pagination --}}
+        <div >
+            {!! $zeitschriften->links() !!}
+        </div>
+
+
     </div>
+
+
+
 @endsection
