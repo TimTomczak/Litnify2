@@ -39,17 +39,21 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <i class="fa fa-user">&nbsp;</i> Hallo {{ ucfirst(Auth::user()->vorname) }} <span class="caret"></span>
+                            <button type="button" class="btn btn-outline-primary">
+                                {{ ucfirst(Auth::user()->vorname) . " " . ucfirst(Auth::user()->nachname) }}
+                            </button>
+
+
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('account') }}">
+                            <a class="dropdown-item" href="{{ route('profil') }}">
                                 {{ __('Profil') }}
                             </a>
                             <a class="dropdown-item" href="{{ route('merkliste') }}">
-                                Meine Merkliste
+                                Merkliste
                             </a>
                             <a class="dropdown-item" href="{{ route('ausleihen') }}">
-                                Meine Ausleihen
+                                Ausleihen
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}">
                                 {{ __('Logout') }}

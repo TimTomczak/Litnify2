@@ -123,6 +123,9 @@
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/debug" />
       <path value="$PROJECT_DIR$/litnify/vendor/livewire/livewire" />
       <path value="$PROJECT_DIR$/litnify/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/litnify/vendor/directorytree/ldaprecord" />
+      <path value="$PROJECT_DIR$/litnify/vendor/directorytree/ldaprecord-laravel" />
+      <path value="$PROJECT_DIR$/litnify/vendor/tightenco/collect" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

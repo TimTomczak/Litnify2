@@ -117,6 +117,7 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/translation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/theseer/tokenizer" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/tightenco/collect" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/tijsverkoyen/css-to-inline-styles" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/voku/portable-ascii" />
