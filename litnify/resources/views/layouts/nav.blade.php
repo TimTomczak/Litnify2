@@ -43,10 +43,9 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <button type="button" class="btn btn-outline-primary">
+                            <button type="button" class="btn btn-primary">
                                 {{ ucfirst(Auth::user()->vorname) . " " . ucfirst(Auth::user()->nachname) }}
-
-                                <img src="https://eu.ui-avatars.com/api/?name={{Auth::user()->vorname .'+'. Auth::user()->nachname}}&size=24" alt="Admin" class="rounded-circle">
+                                <img src="https://eu.ui-avatars.com/api/?name={{Auth::user()->vorname .'+'. Auth::user()->nachname}}&size=22" alt="Admin" class="rounded-circle">
                             </button>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

@@ -25,12 +25,12 @@
                             <td>{{ $user->nachname }}</td>
                             <td>{{ $user->vorname }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->berechtigungsrolle_id }}</td>
+                            <td>{{ $user->berechtigungsrolle->berechtigungsrolle }}</td>
                             <td>{{ $user->created_at }}</td>
                             <td>
-                                <button class="btn btn-primary" title="VIEW"><i class="fa fa-search"></i></button>
-                                <button class="btn btn-info" title="EDIT"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger" title="DELETE"><i class="fa fa-minus-circle"></i></button>
+                                <button class="btn btn-primary btn-sm" title="VIEW"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-success btn-sm" title="EDIT"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-danger btn-sm" title="DELETE"><i class="fa fa-minus-circle"></i></button>
                             </td>
 
                         </tr>

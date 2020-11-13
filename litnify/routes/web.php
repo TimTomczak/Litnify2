@@ -32,6 +32,7 @@ Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->
 // User-Backend
 //Route::resource('user', 'App\Http\Controllers\UserController');
 Route::permanentRedirect('/user', '/user/profil');
+Route::permanentRedirect('/password', '/user/profil');
 Route::get('/user/profil', [App\Http\Controllers\UserController::class, 'showProfil'])->name('profil')->middleware('auth');
 Route::get('/user/ausleihen', [App\Http\Controllers\UserController::class, 'showAusleihen'])->name('ausleihen')->middleware('auth');
 Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'showMerkliste'])->name('merkliste')->middleware('auth');
@@ -65,6 +66,13 @@ Route::get('ausleihe/{id?}/{action?}', [App\Http\Controllers\AusleiheController:
 
 // * A d m i n P a g e  s * //
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
+
+    Route::get('nutzerverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.nutzerverwaltung');
+    Route::get('ausleihverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.ausleihverwaltung');
+    Route::get('systemverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.systemverwaltung');
+    Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\UserController::class, 'index'])->name('admin.systemverwaltung.auswertungen');
+    Route::get('systemverwaltung/contenteditor', [App\Http\Controllers\UserController::class, 'index'])->name('admin.systemverwaltung.contenteditor');
+
     //Route::get('users', 'App\Http\Controllers\Admin\UserController');
     //Route::get('medium', 'App\Http\Controllers\Admin\MediumController');
     //Route::get('system', 'App\Http\Controllers\Admin\SystemController');
@@ -73,7 +81,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/admin/nutzerverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.user');
+
 
 
 // * S t a t i c P a g e  s * //
