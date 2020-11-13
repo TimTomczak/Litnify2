@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-
+    @yield('javascript.header')
     @include('layouts.header')
     @livewireStyles
 </head>
@@ -26,5 +26,6 @@
     </div>
 
     @livewireScripts
+    @yield('javascript.footer')
 </body>
 </html>

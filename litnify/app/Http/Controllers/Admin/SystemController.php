@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Seiten;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -34,4 +35,30 @@ class SystemController extends Controller
         return view('admin.systemverwaltung.logs', compact('date', 'data'));
 
     }
+
+
+    public function contentEditor(Request $request){
+
+        $selection = $request->seite;
+        $content = false;
+        if($selection != null){
+            $content = Seiten::getByTitle($selection);
+        }
+        $seiten = ['faq', 'kontakt', 'oeffnungszeiten','impressum'];
+
+        return view('admin.systemverwaltung.contenteditor', compact(['seiten', 'content', 'selection']));
+
+    }
+
+    public function contentEditorUpdate(Request $request){
+
+        $validatedAttributes = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            ]);
+        Seiten::create($validatedAttributes);
+
+        return redirect(route('admin.systemverwaltung.contenteditor'));
+    }
+
 }
