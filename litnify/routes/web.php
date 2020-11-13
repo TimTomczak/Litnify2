@@ -69,9 +69,10 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
 
     Route::get('nutzerverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.nutzerverwaltung');
     Route::get('ausleihverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.ausleihverwaltung');
-    Route::get('systemverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.systemverwaltung');
-    Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\UserController::class, 'index'])->name('admin.systemverwaltung.auswertungen');
-    Route::get('systemverwaltung/contenteditor', [App\Http\Controllers\UserController::class, 'index'])->name('admin.systemverwaltung.contenteditor');
+    Route::get('systemverwaltung', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung');
+    Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung.auswertungen');
+    Route::get('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung.contenteditor');
+    Route::get('systemverwaltung/logs', [App\Http\Controllers\Admin\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs');
 
     //Route::get('users', 'App\Http\Controllers\Admin\UserController');
     //Route::get('medium', 'App\Http\Controllers\Admin\MediumController');

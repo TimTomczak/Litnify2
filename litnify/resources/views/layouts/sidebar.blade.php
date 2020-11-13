@@ -26,6 +26,8 @@
             <i class="fa fa-bar-chart"></i> Auswertungen</a>
         <a href="{{route('admin.systemverwaltung.contenteditor')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('*/systemverwaltung/contenteditor')}} indented ">
             <i class="fa fa-pencil-square-o"></i> Inhaltseditor</a>
+        <a href="{{route('admin.systemverwaltung.logs')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('*/systemverwaltung/logs')}} indented ">
+            <i class="fa fa-pencil-square-o"></i> Logfiles</a>
 
     </div>
 </div>
