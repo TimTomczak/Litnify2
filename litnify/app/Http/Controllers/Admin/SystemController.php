@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Log;
 class SystemController extends Controller
 {
     public function index(){
-        Log::info('Logging funktioniert');
+        return view('admin.systemverwaltung.index');
+    }
+
+    public function auswertungen(){
+        return view('admin.systemverwaltung.auswertungen');
     }
 
 

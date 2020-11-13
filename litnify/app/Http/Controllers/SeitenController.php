@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Seiten;
 use Illuminate\Http\Request;
 
 class SeitenController extends Controller
@@ -9,7 +10,10 @@ class SeitenController extends Controller
 
     public function __invoke()
     {
-        return view('pages.' . request()->segment(1));
+        $url = request()->segment(1);
+        $content = Seiten::getByTitle($url);
+
+        return view('layouts.staticpages', array('content' => $content));
     }
 
 
