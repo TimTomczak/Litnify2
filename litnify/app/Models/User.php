@@ -2,14 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+use LdapRecord\Laravel\Auth\LdapAuthenticatable;
+use LdapRecord\Laravel\Auth\AuthenticatesWithLdap;
+use LdapRecord\Laravel\Auth\HasLdapUser;
+
+
+class User extends Authenticatable implements LdapAuthenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, AuthenticatesWithLdap, HasLdapUser, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -42,6 +47,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $attributes = [
+        // Standardberechtigung für alle neuen User
+        'berechtigungsrolle_id' => '1',
+
+    ];
+
     public function medium(){
         return $this->belongsToMany(Medium::class, 'merkliste');
     }
@@ -52,8 +63,43 @@ class User extends Authenticatable
     }
     // Für Berechtigungsrolle des jeweiligen Users:  $user->berechtigungsrolle->berechtigungsrolle
 
-
+    //withPivot sind die Spalten, die in der Ausleihe-Tabelle zusätzlich existieren
     public function ausleihe(){
-        return $this->belongsToMany(Medium::class, 'ausleihen');
+        return $this->belongsToMany(Medium::class, 'ausleihen')
+            ->withPivot(['id','inventarnummer','Ausleihdatum','RueckgabeSoll','RueckgabeIst','Verlaengerungen']);
+    }
+
+    public function getLdapDomainColumn()
+    {
+        return 'domain';
+    }
+
+    public function getLdapGuidColumn()
+    {
+        return 'guid';
+    }
+
+
+
+    public function getLdapDomain()
+    {
+        // TODO: Implement getLdapDomain() method.
+    }
+
+    public function setLdapDomain($domain)
+    {
+        // TODO: Implement setLdapDomain() method.
+    }
+
+
+
+    public function getLdapGuid()
+    {
+        // TODO: Implement getLdapGuid() method.
+    }
+
+    public function setLdapGuid($guid)
+    {
+        // TODO: Implement setLdapGuid() method.
     }
 }

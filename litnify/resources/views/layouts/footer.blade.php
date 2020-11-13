@@ -11,7 +11,7 @@
             @php
                 echo (date("Y"));
             @endphp
-            | <a href="/pages/impressum">Impressum</a>
+            | <a href="{{ url('/impressum') }}">Impressum</a>
         </p>
     </div>
     <!-- /.container -->

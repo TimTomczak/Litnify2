@@ -9,17 +9,30 @@ class Medium extends Model
 {
     protected $fillable = [
         'id',
-        'signatur',
-        'herausgeber',
-        'jahr',
-        'hauptsachtitel',
-        'untertitel',
-        'institut',
-        'erscheinungsort',
-        'schriftenreihe',
-        'band',
-        'bemerkungen',
-        'seite',
+        'literaturart_id' ,
+        'signatur' ,
+        'autoren' ,
+        'hauptsachtitel' ,
+        'untertitel' ,
+        'enthalten_in' ,
+        'erscheinungsort' ,
+        'jahr' ,
+        'verlag' ,
+        'isbn' ,
+        'issn' ,
+        'doi' ,
+//            'inventarnummer' ,
+        'auflage' ,
+        'herausgeber' ,
+        'schriftenreihe' ,
+        'zeitschrift_id' ,
+        'band' ,
+        'seite' ,
+        'institut' ,
+        'raum_id' ,
+        'bemerkungen' ,
+        'deleted',
+        'released'
     ];
 
     protected $table='medien';
@@ -29,7 +42,8 @@ class Medium extends Model
     }
 
     public function ausleihe(){
-        return $this->belongsToMany(User::class, 'ausleihen');
+        return $this->belongsToMany(User::class, 'ausleihen')
+            ->withPivot(['id','inventarnummer','Ausleihdatum','RueckgabeSoll','RueckgabeIst','Verlaengerungen']);
     }
 
     public function raum(){

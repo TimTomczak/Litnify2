@@ -99,7 +99,6 @@
       <path value="$PROJECT_DIR$/litnify/vendor/phpspec/prophecy" />
       <path value="$PROJECT_DIR$/litnify/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/litnify/vendor/phar-io/manifest" />
-      <path value="$PROJECT_DIR$/litnify/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/litnify/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/litnify/vendor/psr/http-client" />
       <path value="$PROJECT_DIR$/litnify/vendor/graham-campbell/result-type" />
@@ -109,9 +108,27 @@
       <path value="$PROJECT_DIR$/litnify/vendor/sebastian/lines-of-code" />
       <path value="$PROJECT_DIR$/litnify/vendor/sebastian/complexity" />
       <path value="$PROJECT_DIR$/litnify/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/litnify/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/litnify/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/litnify/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/litnify/vendor/seld/jsonlint" />
+      <path value="$PROJECT_DIR$/litnify/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/litnify/vendor/barryvdh/reflection-docblock" />
+      <path value="$PROJECT_DIR$/litnify/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/litnify/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/litnify/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/litnify/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/litnify/vendor/barryvdh/laravel-debugbar" />
+      <path value="$PROJECT_DIR$/litnify/vendor/maximebf/debugbar" />
+      <path value="$PROJECT_DIR$/litnify/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/litnify/vendor/livewire/livewire" />
+      <path value="$PROJECT_DIR$/litnify/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/litnify/vendor/directorytree/ldaprecord" />
+      <path value="$PROJECT_DIR$/litnify/vendor/directorytree/ldaprecord-laravel" />
+      <path value="$PROJECT_DIR$/litnify/vendor/tightenco/collect" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/litnify/vendor/autoload.php" />

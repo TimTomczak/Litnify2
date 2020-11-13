@@ -9,6 +9,10 @@ class Zeitschrift extends Model
 {
     protected $table='zeitschriften';
 
+    protected $fillable=[
+        'id', 'name', 'shortcut', 'deleted'
+    ];
+
     public function medium(){
         return $this->hasMany(Medium::class);
     }

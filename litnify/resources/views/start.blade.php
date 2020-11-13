@@ -32,7 +32,7 @@
                                     </div>
                                     <input type="text" name="q" class="form-control form-control-lg" placeholder="Titel, Autor, DOI, ISBN ..."/>
                                 </div>
-                                <a href="suche?extend=true"><i class="fa fa-external-link-alt"></i> Erweiterte Suche</a>
+                                <!-- <a href="suche?extend=true"><i class="fa fa-external-link-alt"></i> Erweiterte Suche</a> -->
                             </div>
                             <div class="col-12 col-md-3">
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">Suchen!</button>

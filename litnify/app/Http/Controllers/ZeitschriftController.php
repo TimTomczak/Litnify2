@@ -10,54 +10,54 @@ class ZeitschriftController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('Zeitschriftenverwaltung.index',[
+            'zeitschriften' => Zeitschrift::paginate(10)
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('zeitschriftenverwaltung.create',[
+            'nextId' => $this->getNextAutoincrement('zeitschriften')
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Zeitschrift  $zeitschrift
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Zeitschrift $zeitschrift)
-    {
-        //
+        $zeitschrift = Zeitschrift::create($this->validateAttributes());
+        $zeitschrift->save();
+        return redirect(route('zeitschriftenverwaltung.index'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Zeitschrift  $zeitschrift
-     * @return \Illuminate\Http\Response
      */
     public function edit(Zeitschrift $zeitschrift)
     {
-        //
+        if ($zeitschrift->deleted==1){
+            abort('403','Zeitschrift wurde gelöscht');
+        }
+        else{
+            return view('Zeitschriftenverwaltung.edit',[
+                'zeitschrift' => $zeitschrift
+            ]);
+        }
+
     }
 
     /**
@@ -65,21 +65,30 @@ class ZeitschriftController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Zeitschrift  $zeitschrift
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Zeitschrift $zeitschrift)
     {
-        //
+        $zeitschrift->update($this->validateAttributes());
+        return redirect(route('zeitschrift.edit',$zeitschrift->id));
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Zeitschrift  $zeitschrift
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Zeitschrift $zeitschrift)
     {
-        //
+        $zeitschrift->update(['deleted'=>1]);
+        return redirect(route('zeitschriftenverwaltung.index',$zeitschrift->id));
+    }
+
+    public function validateAttributes(){
+        $validatedAttributes = request()->validate([
+            'id' => 'required|integer',
+            'name' => 'required|string',
+            'shortcut' => 'required|string'
+        ]);
+        return $validatedAttributes;
     }
 }

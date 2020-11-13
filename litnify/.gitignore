@@ -11,3 +11,4 @@ npm-debug.log
 yarn-error.log
 .idea
 .idea/php.xml
+/_ide_helper.php

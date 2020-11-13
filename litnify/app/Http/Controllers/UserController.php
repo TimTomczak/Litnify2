@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ausleihe;
 use App\Models\Berechtigungsrolle;
+use App\Models\Merkliste;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -18,7 +21,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        dd('tttt');
+        $users = \App\Models\User::all();
+        return view('admin.nutzerverwaltung.index', ['users' => $users]);
     }
 
     /**
@@ -28,7 +32,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
+
     }
 
     /**
@@ -87,12 +92,15 @@ class UserController extends Controller
         //
     }
 
-    public function showUser(Request $request){
-
-        $user = (\Auth::user());
-        $rolle = (Berechtigungsrolle::all()->where('id', '=', $user['id']))[1]['berechtigungsrolle'];
-        return View('user/userprofile')->with(compact('user','rolle'));
-
+    public function showProfil(){
+        return view('user/profil', array('user' => Auth::user()));
     }
 
+    public function showMerkliste(){
+        return view('user/merkliste', array('user' => Auth::user(), 'merkliste' => (Auth::user())->medium));
+    }
+
+    public function showAusleihen(){
+        return view('user/ausleihen', array('user' => Auth::user(), 'ausleihe' => Auth::user()->ausleihe));
+    }
 }
