@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ausleihe;
 use App\Models\Merkliste;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class AusleiheController extends Controller
+class MerklistenverleihController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +14,10 @@ class AusleiheController extends Controller
      */
     public function index()
     {
-//        $ausleihen = Ausleihe::with([
-//            'user'=> function($usr){
-//                $usr->groupBy('id');
-//            },
-//            'medium'
-//        ]);
-
-
+        $merk = Merkliste::with('user', 'medium')->groupBy('user_id')->get();
+        return view('Merklistenverleih.index',[
+            'merklisten' => $merk,
+        ]);
     }
 
     /**
@@ -47,23 +42,24 @@ class AusleiheController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Ausleihe  $ausleihe
-     * @return \Illuminate\Http\Response
+     *  Zeigt die Merklsite des jeweils ausgewählten Benutzers in der Ausleihverwaltung
      */
-    public function show(Ausleihe $ausleihe)
+    public function show(User $user)
     {
-        //
+        $medienAufMerkliste = $user->merkliste;
+        return view('Merklistenverleih.show',[
+            'merkliste' => $medienAufMerkliste,
+            'user' => $user
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ausleihe  $ausleihe
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ausleihe $ausleihe)
+    public function edit($id)
     {
         //
     }
@@ -72,10 +68,10 @@ class AusleiheController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ausleihe  $ausleihe
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ausleihe $ausleihe)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -83,10 +79,10 @@ class AusleiheController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ausleihe  $ausleihe
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ausleihe $ausleihe)
+    public function destroy($id)
     {
         //
     }

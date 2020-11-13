@@ -58,9 +58,7 @@ class MerklisteController extends Controller
      */
     public function showMerkliste(User $user)
     {
-        return view('Ausleihverwaltung.showMerkliste',[
-            'merkliste' => $user->medium,
-        ]);
+
     }
 
     /**

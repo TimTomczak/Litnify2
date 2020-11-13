@@ -61,8 +61,8 @@ Route::resource('medienverwaltung/zeitschrift', ZeitschriftController::class)->o
 
 // Ausleihe
 //Route::get('ausleihe/{id?}/{action?}', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihe');
-Route::get('ausleihverwaltung', [App\Http\Controllers\AusleiheController::class, 'index'])->name('Ausleihverwaltung.index');
-Route::get('ausleihverwaltung/{user}/merkliste', [App\Http\Controllers\MerklisteController::class, 'showMerkliste'])->name('ausleiheMerklisten.show');
+Route::get('ausleihverwaltung/merklisten', [App\Http\Controllers\MerklistenverleihController::class, 'index'])->name('merklistenverleih.index');
+Route::get('ausleihverwaltung/{user}/merkliste', [App\Http\Controllers\MerklistenverleihController::class, 'show'])->name('merklistenverleih.show');
 //Route::resource('ausleihverwaltung/ausleihe', AusleiheController::class)->only([
 //    'edit', 'create', 'store', 'update', 'destroy'
 //])->where(array('ausleihe' => '[0-9]+'));
