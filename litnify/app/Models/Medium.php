@@ -87,6 +87,19 @@ class Medium extends Model
     }
 
     public function getInventarnummernAusleihbar(){
-        //TODO ausleihbare Inventarnummern
+        $inventarnummernAusleihbar = collect();
+        $inventarliste = $this->inventarliste->where('ausleihbar',1)->all();
+        foreach ($inventarliste as $mediumAufInventarliste){
+            $mediumAusgeliehen = Ausleihe::whereMediumId($mediumAufInventarliste->medium_id)
+                ->where('inventarnummer',$mediumAufInventarliste->inventarnummer)
+                ->where('RueckgabeIst',null)->get();
+            if ($mediumAusgeliehen->isEmpty()){
+                $inventarnummernAusleihbar->push($mediumAufInventarliste->inventarnummer);
+            }
+            else{
+                continue;
+            }
+        }
+        return $inventarnummernAusleihbar;
     }
 }
