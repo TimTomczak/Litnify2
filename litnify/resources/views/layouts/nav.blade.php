@@ -12,7 +12,7 @@
 
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{asset('https://litnify.meteo.uni-bonn.de/webapp/img/litnify.png')}}" alt="Logo" style="width:40px;">
+            <img src="{{asset('storage/images/litnify.png')}}" alt="Logo" style="width:40px;">
             {{ config('app.name', 'Laravel') }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
