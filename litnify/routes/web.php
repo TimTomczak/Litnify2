@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AusleiheController;
 use App\Http\Controllers\MediumController;
 use App\Http\Controllers\ZeitschriftController;
 use Illuminate\Support\Facades\Auth;
@@ -61,8 +62,14 @@ Route::resource('medienverwaltung/zeitschrift', ZeitschriftController::class)->o
 
 // Ausleihe
 //Route::get('ausleihe/{id?}/{action?}', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihe');
+Route::get('ausleihverwaltung', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihverwaltung.index');
+
+// TODO: Ausleihe -> Direktverleih
+
+// Ausleihe -> Merklistenverleih
 Route::get('ausleihverwaltung/merklisten', [App\Http\Controllers\MerklistenverleihController::class, 'index'])->name('merklistenverleih.index');
-Route::get('ausleihverwaltung/{user}/merkliste', [App\Http\Controllers\MerklistenverleihController::class, 'show'])->name('merklistenverleih.show');
+Route::get('ausleihverwaltung/{user}/merkliste', [App\Http\Controllers\MerklistenverleihController::class, 'show'])->where(array('user' => '[0-9]+'))->name('merklistenverleih.show');
+Route::post('ausleihverwaltung/ausleihe/{user}/{medium}', [App\Http\Controllers\AusleiheController::class, 'store'])->where(array('user' => '[0-9]+', 'medium' => '[0-9]+'))->name('ausleihe.store');
 //Route::resource('ausleihverwaltung/ausleihe', AusleiheController::class)->only([
 //    'edit', 'create', 'store', 'update', 'destroy'
 //])->where(array('ausleihe' => '[0-9]+'));

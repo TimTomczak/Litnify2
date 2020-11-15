@@ -9,6 +9,14 @@ class Ausleihe extends Model
 {
     protected $table='ausleihen';
 
+    protected $fillable=[
+        'medium_id' ,
+        'user_id' ,
+        'inventarnummer',
+        'Ausleihdatum' ,
+        'RueckgabeSoll'
+    ];
+
     public function medium(){
         return $this->belongsTo(Medium::class);
     }

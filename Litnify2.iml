@@ -121,5 +121,7 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/webmozart/assert" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="daterangepicker" level="application" />
+    <orderEntry type="library" name="moment" level="application" />
   </component>
 </module>

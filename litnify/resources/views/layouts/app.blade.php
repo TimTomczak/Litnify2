@@ -25,5 +25,6 @@
         @yield('content')
     </main>--}}
     @livewireScripts
+    @yield('scripts')
 </body>
 </html>
