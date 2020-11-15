@@ -15,7 +15,7 @@ class MerklistenverleihController extends Controller
     public function index()
     {
         $merk = Merkliste::with('user', 'medium')->groupBy('user_id')->get();
-        return view('Merklistenverleih.index',[
+        return view('Ausleihverwaltung/Merklistenverleih.index',[
             'merklisten' => $merk,
         ]);
     }
@@ -26,7 +26,7 @@ class MerklistenverleihController extends Controller
     public function show(User $user)
     {
         $medienAufMerkliste = $user->merkliste;
-        return view('Merklistenverleih.show',[
+        return view('Ausleihverwaltung/Merklistenverleih.show',[
             'merkliste' => $medienAufMerkliste,
             'user' => $user,
             'ausleihdauerDefault' => 28 /*TODO Ausleihdauer aus parameter übergeben*/

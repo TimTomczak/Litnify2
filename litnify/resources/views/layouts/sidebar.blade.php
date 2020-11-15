@@ -3,9 +3,12 @@
     <div class="sidebar-heading">*Überschrift*</div>
     <div class="list-group " >
         <a href="{{route('start')}}" class="list-group-item list-group-item-action {{request()->path()==='/' ? 'active' : 'bg-light'}}"><i class="fa fa-home"></i> Startseite</a>
+        <a href="{{route('ausleihverwaltung.index')}}" class="list-group-item list-group-item-action {{request()->path()==='ausleihverwaltung' ? 'active' : 'bg-light'}}"><i class="fa fa-calendar-plus-o"></i> Ausleihverwaltung</a>
+        <a href="{{route('merklistenverleih.index')}}" class="list-group-item list-group-item-action indented {{request()->path()==='ausleihverwaltung/merklistenverleih' ? 'active' : 'bg-light'}}"><i class="fa fa-list-alt"></i> Merklistenverleih</a>
+        <a href="{{route('direktverleih.index')}}" class="list-group-item list-group-item-action indented {{request()->path()==='ausleihverwaltung/direktverleih' ? 'active' : 'bg-light'}}"><i class="fa fa-id-card-o"></i> Direktverleih</a>
         <a href="{{route('medienverwaltung.index')}}" class="list-group-item list-group-item-action {{request()->path()==='medienverwaltung' ? 'active' : 'bg-light'}}"><i class="fa fa-book"></i> Medienverwaltung</a>
         <a href="{{route('medium.create','')}}" class="list-group-item list-group-item-action {{request()->is('medienverwaltung/medium/create*') ? 'active' : 'bg-light'}} indented "><i class="fa fa-plus"></i> Medium erstellen</a>
-        <a href="{{route('zeitschriften.index')}}" class="list-group-item list-group-item-action {{request()->path()==='medienverwaltung/zeitschriften' ? 'active' : 'bg-light'}} indented"><i class="fa fa-leanpub"></i> Zeitschriften</a>
+        <a href="{{route('zeitschriften.index')}}" class="list-group-item list-group-item-action {{request()->path()==='medienverwaltung/zeitschriften' ? 'active' : 'bg-light'}}"><i class="fa fa-leanpub"></i> Zeitschriftenverwaltung</a>
         <a href="{{route('zeitschrift.create')}}" class="list-group-item list-group-item-action {{request()->path()==='medienverwaltung/zeitschrift/create' ? 'active' : 'bg-light'}} indented "><i class="fa fa-plus"></i> Zeitschrift erstellen</a>
     </div>
 </div>

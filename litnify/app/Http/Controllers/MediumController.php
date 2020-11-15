@@ -23,7 +23,7 @@ class MediumController extends Controller
      */
     public function index()
     {
-        $medien=Medium::with('literaturart','zeitschrift','raum')
+        $medien=Medium::with('literaturart','zeitschrift','raum','inventarliste')
             ->orderBy('id','DESC')
             ->where('released',1)
             ->where('deleted',0)

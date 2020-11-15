@@ -22,8 +22,18 @@
             <tbody>
             @foreach($medium->attributestoArray() as $key=>$val)
             <tr>
-                <td><b>{{$key}}</b></td>
-                <td>{{$val}}</td>
+                @switch($key)
+                    @case('inventarnummer')
+                        <td><b>{{$key}}</b></td>
+                        <td>{{$medium->inventarliste}}</td>
+                    @break
+
+                    @default
+                    <td><b>{{$key}}</b></td>
+                    <td>{{$val}}</td>
+
+                @endswitch
+
             </tr>
             @endforeach
             </tbody>

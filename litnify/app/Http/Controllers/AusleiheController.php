@@ -52,18 +52,25 @@ class AusleiheController extends Controller
             'RueckgabeSoll' => date("Y-m-d",strtotime($ausleihzeitraumSplit[1]))
         ]);
         Ausleihe::create($this->validateAttributes($request));
-        return redirect(route('merklistenverleih.show',$user))->with(['message'=>'Verleih des Mediums "'.$medium->hauptsachtitel.'" mit der Inventarnummer ['.$request->request->get('inventarnummer').'] erfolgreich.']);
+        /*TODO anderer redirect */
+        return redirect(route('ausleihe.show',$user))->with([
+            'message'=>'Verleih des Mediums "'.$medium->hauptsachtitel.'" mit der Inventarnummer ['.$request->request->get('inventarnummer').'] erfolgreich.',
+            'alertType' => 'success'
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Ausleihe  $ausleihe
-     * @return \Illuminate\Http\Response
      */
-    public function show(Ausleihe $ausleihe)
+    public function show(User $user)
     {
-        //
+        return view('Ausleihverwaltung.show',[
+            'ausleihenAktiv' => Ausleihe::whereUserId($user->id)->whereNull('RueckgabeIst')->get(),
+            'ausleihenBeendet' => Ausleihe::whereUserId($user->id)->whereNotNull('RueckgabeIst')->get(),
+            'user' => $user,
+        ]);
     }
 
     /**

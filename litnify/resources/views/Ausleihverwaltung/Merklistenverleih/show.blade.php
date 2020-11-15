@@ -1,12 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        @if($errors->any())
-            <div class="alert alert-danger">FEHLER !</div>
-        @enderror
-        @if(session('message'))
-            <div class="alert alert-success">{{session('message')}}</div>
-        @endif
         <div class="card text-center bg-light">
             <div class="card-body">
                 <h5 class="card-title">Merkliste von:</h5>
