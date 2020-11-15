@@ -53,7 +53,7 @@ class Medium extends Model
     }
 
     public function zeitschrift(){
-        return $this->belongsTo(Zeitschrift::class, );
+        return $this->belongsTo(Zeitschrift::class);
     }
 
     public function literaturart(){

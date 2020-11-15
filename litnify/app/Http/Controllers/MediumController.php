@@ -18,8 +18,6 @@ class MediumController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     *
      */
     public function index()
     {
@@ -28,25 +26,17 @@ class MediumController extends Controller
             ->where('released',1)
             ->where('deleted',0)
             ->limit(100)->get();
-        $mappedMedien=$this->mapForeignKeyReferences2String($medien);
+//        $mappedMedien=$this->mapForeignKeyReferences2String($medien);
         return view('Medienverwaltung.index',[
-            'medien' => $mappedMedien,
+            'medien' => $medien,
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
      */
     public function create(Literaturart $literaturart)
     {
-        // Falls Zeitschrift falsch
-//        $zeitschrift_old=Zeitschrift::find(old('zeitschrift_id'));
-//        if ($zeitschrift_old!=null){
-//            $zeitschrift_old->get();
-//        }
-
-
         return view('medienverwaltung.create',[
             'literaturarten' => Literaturart::all()->pluck('literaturart'),
             'literaturart' => $literaturart->literaturart,
@@ -56,7 +46,6 @@ class MediumController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
      */
     public function store(Request $request)
     {
@@ -68,7 +57,11 @@ class MediumController extends Controller
         ]);
 
         $this->mapAuthorsFromRequest($request); //Autoren zu einem einzigen 'autoren'-String zusammenfügen
-        $this->mapForeignKeyReferences2Id($request); // Fremdschlüssel mit IDs austauschen
+        $request->merge([
+            'literaturart_id' => Literaturart::whereLiteraturart($request->get('literaturart_id'))->first()->id,
+            'zeitschrift_id' => Zeitschrift::whereName($request->get('zeitschrift_id'))->first()->id,
+            'raum_id' => Raum::whereRaum($request->get('raum_id'))->first()->id,
+        ]);
         $request->flashOnly('autoren'); //Für die Übergabe an die Livewire Autoren-Component die Autoren flashen
         $validatedAttributes=$this->validateAttributes();
         $med= Medium::create($validatedAttributes);
@@ -77,7 +70,6 @@ class MediumController extends Controller
 
     /**
      * Display the specified resource.
-     *
      */
     public function show(Medium $medium)
     {
@@ -89,9 +81,9 @@ class MediumController extends Controller
             abort('403','Medium wurde gelöscht');
         }
         else{
-            $medColl= collect(new Medium()); //Collection für mapForeignKeyReferences2String() erstellen
-            $medColl->add($medium);
-            $this->mapForeignKeyReferences2String($medColl);
+            $medium->literaturart_id=$medium->literaturart->literaturart;
+            $medium->zeitschrift_id=$medium->zeitschrift->name;
+            $medium->raum_id=$medium->raum->raum;
 
             return view('Medienverwaltung.show',[
                 'medium' => $medium,
@@ -107,12 +99,13 @@ class MediumController extends Controller
      */
     public function edit(Medium $medium)
     {
-        $medColl= collect(new Medium());
-        $medColl->add($medium);
-        $medium_mapped=$this->mapForeignKeyReferences2String($medColl)->first();
+        $medium->literaturart_id=$medium->literaturart->literaturart;
+        $medium->zeitschrift_id=$medium->zeitschrift->name;
+        $medium->raum_id=$medium->raum->raum;
+
         return view('Medienverwaltung.edit',[
-            'medium' => $medium_mapped,
-            'literaturart' => $medium_mapped->literaturart_id
+            'medium' => $medium,
+            'literaturart' => $medium->literaturart_id
         ]);
     }
 
@@ -126,7 +119,11 @@ class MediumController extends Controller
     {
         //
         $this->mapAuthorsFromRequest($request);
-        $this->mapForeignKeyReferences2Id($request);
+        $request->merge([
+            'literaturart_id' => Literaturart::whereLiteraturart($request->get('literaturart_id'))->first()->id,
+            'zeitschrift_id' => Zeitschrift::whereName($request->get('zeitschrift_id'))->first()->id,
+            'raum_id' => Raum::whereRaum($request->get('raum_id'))->first()->id,
+        ]);
         $validatedAttributes=$this->validateAttributes();
         $medium->update($validatedAttributes);
         return redirect(route('medium.show',$medium->id));
@@ -139,11 +136,37 @@ class MediumController extends Controller
      */
     public function destroy(Medium $medium)
     {
-        //
         $medium->update(['deleted'=>1]);
         return redirect(route('medienverwaltung.index'));
     }
 
+    protected function validateAttributes(){
+        $validatedAttributes = request()->validate([
+            'id' => 'required|integer',
+            'literaturart_id' => 'integer|min:1|max:5',
+            'signatur' => 'nullable|string',
+            'autoren' => 'nullable|string',
+            'hauptsachtitel' => 'required',
+            'untertitel' => 'nullable|string',
+            'enthalten_in' => 'nullable|string',
+            'erscheinungsort' => 'nullable|string',
+            'jahr' => 'string|required|max:6',
+            'verlag' => 'nullable|string',
+            'isbn' => 'nullable|string',
+            'issn' => 'nullable|string',
+            'doi' => 'nullable|string',
+            'auflage' => 'nullable|string',
+            'herausgeber' => 'nullable|string',
+            'schriftenreihe' => 'nullable|string',
+            'zeitschrift_id' => 'nullable|integer',
+            'band' => 'nullable|string',
+            'seite' => 'nullable|string',
+            'institut' => 'nullable|string',
+            'raum_id' => 'nullable|integer|min:0|max:4',
+            'bemerkungen' => 'nullable|string',
+        ]);
+        return $validatedAttributes;
+    }
 
     /**
      * Nimmt ein Requ   est für ein Medium aus medium.edit, entfernt daraus nachnamen, vornamen und et_al, fügt diese
@@ -189,107 +212,5 @@ class MediumController extends Controller
 
         $request->request->add(['autoren'=>$autoren]);
         return $request;
-    }
-
-    /**
-     * Nimmt ein Request Objekt eines Mediums und ersetzt die jeweiligen Strings von Literaturart, Raum und Zeitschrift
-     * mit den entsprechenden IDs in deren Tabellen, um die Fremdnschlüssel zu erhalten
-     *
-     * @param Request $request
-     * @return Request
-     */
-    protected function mapForeignKeyReferences2Id(Request $request){
-        if ($request->request->get('literaturart_id')!=null){
-            $literaturart = Literaturart::whereLiteraturart($request->request->get('literaturart_id'))->firstOrFail()->id;
-//        $request->request->remove('literaturart_id');
-            $request->request->add(['literaturart_id'=>$literaturart]);
-        }
-        if ($request->request->get('raum_id') != null){
-            $raum = Raum::whereRaum($request->request->get('raum_id'))->firstOrFail()->id;
-            $request->request->add(['raum_id'=>$raum]);
-        }
-        if ($request->request->get('zeitschrift_id') != null){
-            $zeitschrift = Zeitschrift::whereName($request->request->get('zeitschrift_id'))->firstOrFail()->id;
-            $request->request->add(['zeitschrift_id'=>$zeitschrift]);
-        }
-
-        return $request;
-    }
-
-    /**
-     * Nimmmt eine Collection von Medien und ersetzt in jedem Medium-Objekt die Fremdschlüssel-IDs mit den
-     * entsprechenden Strings, damit später nicht die IDs, sondern Strings ausgegeben werden
-     *
-     * @param $medien
-     * @return mixed
-     */
-    protected function mapForeignKeyReferences2String($medien){
-        $mappedLiteraturart = $this->mapLiteraturart($medien);
-        $mappedRaum = $this->mapRaum($mappedLiteraturart);
-        $mappedZeitschrift = $this->mapZeitschrift($mappedRaum);
-
-        return $mappedZeitschrift;
-    }
-
-    protected function mapLiteraturart($medien){
-
-        $mapped = $medien->map(function($item){
-            if ($item->literaturart_id!=null){
-//                $item->literaturart_id=Literaturart::find($item->literaturart_id)->literaturart;
-                $item->literaturart_id=$item->literaturart->literaturart;
-            }
-            return $item;
-        });
-        return $mapped;
-    }
-
-    protected function mapRaum($medien){
-        $mapped = $medien->map(function($item){
-            if ($item->raum_id!=null){
-//                $item->raum_id=Raum::find($item->raum_id)->raum;
-                $item->raum_id=$item->raum->raum;
-            }
-            return $item;
-        });
-        return $mapped;
-    }
-
-    protected function mapZeitschrift($medien){
-        $mapped = $medien->map(function($item){
-            if ($item->zeitschrift_id!=null){
-//                $item->zeitschrift_id=\App\Models\Zeitschrift::find($item->zeitschrift_id)->name;
-                $item->zeitschrift_id=$item->zeitschrift->name;
-            }
-            return $item;
-        });
-        return $mapped;
-    }
-
-    protected function validateAttributes(){
-        $validatedAttributes = request()->validate([
-            'id' => 'required|integer',
-            'literaturart_id' => 'integer|min:1|max:5',
-            'signatur' => 'nullable|string',
-            'autoren' => 'nullable|string',
-            'hauptsachtitel' => 'required',
-            'untertitel' => 'nullable|string',
-            'enthalten_in' => 'nullable|string',
-            'erscheinungsort' => 'nullable|string',
-            'jahr' => 'string|required|max:6',
-            'verlag' => 'nullable|string',
-            'isbn' => 'nullable|string',
-            'issn' => 'nullable|string',
-            'doi' => 'nullable|string',
-            'auflage' => 'nullable|string',
-            'herausgeber' => 'nullable|string',
-            'schriftenreihe' => 'nullable|string',
-            'zeitschrift_id' => 'nullable|integer',
-            'band' => 'nullable|string',
-            'seite' => 'nullable|string',
-            'institut' => 'nullable|string',
-            'raum_id' => 'nullable|integer|min:0|max:4',
-            'bemerkungen' => 'nullable|string',
-        ]);
-        return $validatedAttributes;
     }
 }

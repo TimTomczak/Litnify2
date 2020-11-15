@@ -347,7 +347,7 @@
                         @enderror
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-primary">Änderung bestätigen</button>
+                        <button class="btn btn-primary">Erstellen</button>
                     </div>
                 </form>
             @endif

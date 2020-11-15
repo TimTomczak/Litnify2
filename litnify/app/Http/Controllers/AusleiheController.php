@@ -52,7 +52,6 @@ class AusleiheController extends Controller
             'RueckgabeSoll' => date("Y-m-d",strtotime($ausleihzeitraumSplit[1]))
         ]);
         Ausleihe::create($this->validateAttributes($request));
-        /*TODO anderer redirect */
         return redirect(route('ausleihe.show',$user))->with([
             'message'=>'Verleih des Mediums "'.$medium->hauptsachtitel.'" mit der Inventarnummer ['.$request->request->get('inventarnummer').'] erfolgreich.',
             'alertType' => 'success'
