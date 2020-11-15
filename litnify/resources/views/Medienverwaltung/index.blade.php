@@ -24,7 +24,7 @@
                     @foreach($med->attributesToArray() as $key=>$val)
                         @switch($key)
                             @case('hauptsachtitel')
-                                <td class="text-wrap"><a href="{{route('medium.show',$med['id'])}}">{{$val}}</a></td>
+                                <td class="text-wrap"><a class="render-medium-modal" data-id="{{$med->id}}">{{$val}}</a></td>
                             @break
 
                             @case('autoren')
@@ -48,4 +48,5 @@
             </table>
         @endif
     </div>
+    @include('Medienverwaltung.mediumModal')
 @endsection

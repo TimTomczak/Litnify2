@@ -94,7 +94,8 @@ class MediumController extends Controller
             $this->mapForeignKeyReferences2String($medColl);
 
             return view('Medienverwaltung.show',[
-                'medium' => $medium
+                'medium' => $medium,
+                'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar()
             ]);
         }
     }

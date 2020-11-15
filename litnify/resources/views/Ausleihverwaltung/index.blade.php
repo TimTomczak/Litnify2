@@ -16,7 +16,7 @@
                 @foreach($aus->attributesToArray() as $key=>$val)
                     @switch($key)
                         @case('medium_id')
-                        <td><a href="{{route('medium.show',$val)}}">{{$val}}</a></td>
+                        <td><a class="render-medium-modal" data-id="{{$aus->medium_id}}">{{$val}}</a></td>
                         @break
 
                         @case('user_id')
@@ -49,7 +49,8 @@
                     @foreach($aus->attributesToArray() as $key=>$val)
                         @switch($key)
                             @case('medium_id')
-                            <td><a href="{{route('medium.show',$val)}}">{{$val}}</a></td>
+                            <td>{{--<a data-toggle="modal" href="{{route('medium.show',$val)}}" data-target="#modal">Click me</a>--}}
+                                <a class="render-medium-modal" data-id="{{$aus->medium_id}}">{{$val}}</a></td>
                             @break
 
                             @case('user_id')
@@ -66,4 +67,5 @@
             </tbody>
         </table>
     </div>
+    @include('Medienverwaltung.mediumModal')
 @endsection
