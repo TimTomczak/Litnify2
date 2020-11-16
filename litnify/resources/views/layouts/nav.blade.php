@@ -3,9 +3,8 @@
 
     @auth
         @if ( auth()->user()->berechtigungsrolle_id > 1)
-            <button class="btn btn-light btn-lg border" id="sidebar-toggle" type="button"
-                    onclick='$("#sidebar-toggle").click($("#wrapper").toggleClass("toggled"));'>ADMIN
-                <i class="fa fa-bars"></i>
+            <button class="btn btn-light btn-lg border" id="sidebar-toggle" type="button">
+                ADMIN <i class="fa fa-bars"></i>
             </button>
         @endif
     @endauth

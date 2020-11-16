@@ -6,7 +6,7 @@
         header {
             height: 86vh;
             min-height: 500px;
-            background-image: url('https://litnify.meteo.uni-bonn.de/webapp/img/background.png');
+            background-image: url('{{asset('storage/images/background.png')}}');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;

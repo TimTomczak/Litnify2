@@ -7,8 +7,11 @@
 </head>
 <body>
 
-    <div class="d-flex toggled" id="wrapper">
-        @include('layouts.sidebar')
+    <div class="d-flex" id="wrapper">
+    {{-- <div class="d-flex toggled" id="wrapper"> --}}
+        @auth
+            @include('layouts.sidebar')
+        @endauth
         <div id="content-wrapper">
             @include('layouts.nav')
             <main class="" style="/*margin-top:66px; */background-color: #ffffff; min-height: 80vh;">
@@ -26,7 +29,6 @@
                     @yield('content')
                 </div>
             </main>
-
             @include('layouts.footer')
         </div>
     </div>
