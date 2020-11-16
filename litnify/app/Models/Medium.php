@@ -61,7 +61,7 @@ class Medium extends Model
     }
 
     public function inventarliste(){
-        return $this->belongsToMany(Inventarliste::class, 'inventarliste_medium');
+        return $this->belongsToMany(Inventarliste::class, 'inventarliste_medium')->withTimestamps();
     }
 
     public function isAusleihbar(){

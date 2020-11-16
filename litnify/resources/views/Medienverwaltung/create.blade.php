@@ -32,7 +32,7 @@
                 });
             </script>
             @else
-                <form action="{{route('medium.store')}}" method="POST">
+                <form id="createMediumForm" action="{{route('medium.store')}}" method="POST">
                     @csrf
 
                     <div class="form-group">
@@ -214,7 +214,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="container-fluid">
-                                            <livewire:inventarnummern-component :medium="$medium" />
+                                            <livewire:inventarnummern-component :medium="new \App\Models\Medium()" />
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -347,7 +347,7 @@
                         @enderror
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-primary">Erstellen</button>
+                        <button type="submit" form="createMediumForm" class="btn btn-primary" onclick="$('#inventarnummernForm').submit()">Erstellen</button>
                     </div>
                 </form>
             @endif

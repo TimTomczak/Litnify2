@@ -18,6 +18,6 @@ class Inventarliste extends Model
     ];
 
     public function medium(){
-        return $this->belongsToMany(Medium::class, 'inventarliste_medium');
+        return $this->belongsToMany(Medium::class, 'inventarliste_medium')->withTimestamps();
     }
 }

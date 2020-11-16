@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventarliste;
 use App\Models\Literaturart;
 use App\Models\Medium;
 use App\Models\Raum;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use function React\Promise\reduce;
@@ -57,14 +59,13 @@ class MediumController extends Controller
         ]);
 
         $this->mapAuthorsFromRequest($request); //Autoren zu einem einzigen 'autoren'-String zusammenfügen
-        $request->merge([
-            'literaturart_id' => Literaturart::whereLiteraturart($request->get('literaturart_id'))->first()->id,
-            'zeitschrift_id' => Zeitschrift::whereName($request->get('zeitschrift_id'))->first()->id,
-            'raum_id' => Raum::whereRaum($request->get('raum_id'))->first()->id,
-        ]);
+        $request=$this->stringToForeignId($request);
+
         $request->flashOnly('autoren'); //Für die Übergabe an die Livewire Autoren-Component die Autoren flashen
         $validatedAttributes=$this->validateAttributes();
+
         $med= Medium::create($validatedAttributes);
+        $this->storeInventarnummer($request);
         return redirect(route('medium.show',$med->id))->with('alert',['success','Medium "'.$med->hauptsachtitel.'" erfolgreich erstellt.']);
     }
 
@@ -81,9 +82,10 @@ class MediumController extends Controller
             abort('403','Medium wurde gelöscht');
         }
         else{
-            $medium->literaturart_id=$medium->literaturart->literaturart;
-            $medium->zeitschrift_id=$medium->zeitschrift->name;
-            $medium->raum_id=$medium->raum->raum;
+            $medium = $this->foreignIdToString($medium);
+//            $medium->literaturart_id=$medium->literaturart->literaturart;
+//            $medium->zeitschrift_id=$medium->zeitschrift->name;
+//            $medium->raum_id=$medium->raum->raum;
 
             return view('Medienverwaltung.show',[
                 'medium' => $medium,
@@ -99,9 +101,10 @@ class MediumController extends Controller
      */
     public function edit(Medium $medium)
     {
-        $medium->literaturart_id=$medium->literaturart->literaturart;
-        $medium->zeitschrift_id=$medium->zeitschrift->name;
-        $medium->raum_id=$medium->raum->raum;
+        $medium = $this->foreignIdToString($medium);
+//        $medium->literaturart_id=$medium->literaturart->literaturart;
+//        $medium->zeitschrift_id=$medium->zeitschrift->name;
+//        $medium->raum_id=$medium->raum->raum;
 
         return view('Medienverwaltung.edit',[
             'medium' => $medium,
@@ -119,11 +122,12 @@ class MediumController extends Controller
     {
         //
         $this->mapAuthorsFromRequest($request);
-        $request->merge([
-            'literaturart_id' => Literaturart::whereLiteraturart($request->get('literaturart_id'))->first()->id,
-            'zeitschrift_id' => Zeitschrift::whereName($request->get('zeitschrift_id'))->first()->id,
-            'raum_id' => Raum::whereRaum($request->get('raum_id'))->first()->id,
-        ]);
+        $request=$this->stringToForeignId($request);
+//        $request->merge([
+//            'literaturart_id' => Literaturart::whereLiteraturart($request->get('literaturart_id'))->first()->id,
+//            'zeitschrift_id' => Zeitschrift::whereName($request->get('zeitschrift_id'))->first()->id,
+//            'raum_id' => Raum::whereRaum($request->get('raum_id'))->first()->id,
+//        ]);
         $validatedAttributes=$this->validateAttributes();
         $medium->update($validatedAttributes);
         return redirect(route('medium.show',$medium->id));
@@ -166,6 +170,79 @@ class MediumController extends Controller
             'bemerkungen' => 'nullable|string',
         ]);
         return $validatedAttributes;
+    }
+
+    private function stringToForeignId(Request $request){
+        return $request->merge([
+            'literaturart_id' => Literaturart::whereLiteraturart($request->get('literaturart_id'))->first()->id,
+            'zeitschrift_id' => $request->get('zeitschrift_id')==null ?
+                $request->get('zeitschrift_id') :
+                Zeitschrift::whereName($request->get('zeitschrift_id'))->first()->id,
+            'raum_id' => $request->get('raum_id')==null ?
+                Raum::whereRaum('')->first()->id :
+                Raum::whereRaum($request->get('raum_id'))->first()->id,
+        ]);
+    }
+
+    private function foreignIdToString(Medium $medium){
+        $medium->literaturart_id=$medium->literaturart->literaturart;
+        $medium->zeitschrift_id=$medium->zeitschrift==null ? '' : $medium->zeitschrift->name;
+        $medium->raum_id=$medium->raum==null ? '' : $medium->raum->raum;
+        return $medium;
+    }
+
+    private function storeInventarnummer(Request $request){
+        $inventarnummern=collect($request->toArray())->filter(function($value,$key){
+            if (strpos($key,'inventarnummer_')!==false || strpos($key,'isb_')!==false || strpos($key,'ausleihbar_')!==false){
+                return [$key=>$value];
+            }
+        });
+
+        $nummern=[];
+        foreach ($inventarnummern as $key => $val){
+            if (strpos($key,'inventarnummer_')!==false){
+                array_push($nummern,explode('_',$key)[1]);
+            }
+        }
+
+        $inventarnummern=$inventarnummern->toArray();
+        foreach ($nummern as $num){
+            foreach ($inventarnummern as $key => $val){
+                if ($key=='inventarnummer_'.$num){
+                    $inventarnummer=$val;
+                }
+
+                if ($key=='ausleihbar_'.$num){
+                    $ausleihbar= $val=='on' ? 1 : 0;
+                }
+
+                if ($key=='isb_'.$num){
+                    $isb= $val=='on' ? 1 : 0;
+                }
+            }
+            $ausleihbar = !isset($ausleihbar) ? 0 : $ausleihbar;
+            $isb = !isset($isb) ? 0 : $isb;
+            if ($isb==1){
+                $ausleihbar=1;
+            }
+            $attributes = [
+                'medium_id' => $medium_id=$request->get('id'),
+                'inventarnummer' => $inventarnummer,
+                'isb' => $isb,
+                'ausleihbar' => $ausleihbar,
+            ];
+            $validatedAttributes= Validator::validate($attributes,[
+                'medium_id' => 'required|integer',
+                'inventarnummer' => 'required|string',
+                'isb' => 'nullable|integer',
+                'ausleihbar' => 'nullable|integer',
+            ]);
+            $inv=Inventarliste::create($validatedAttributes);
+            $inv->medium()->attach($medium_id);
+
+            $ausleihbar=null;
+            $isb=null;
+        }
     }
 
     /**
