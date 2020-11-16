@@ -44,20 +44,4 @@
         </div>
     </header>
 
-@section('scripts')
-    $(function () {
-    $('#popover-info').popover({
-    html: true,
-    title: ' Infos zur Suche <a href="#" class="close" data-dismiss="alert">&times;</a>',
-    content: '<div><p>- Intuitive Suche <br>-> Je mehr Suchbegriffe, desto präziser das Suchergebnis</p> <hr><p>- Jahresintervallbegrenzung: <br>Bspw. 1990 - 2010</p><hr><p>- Filtern nach mehreren Literaturarten möglich:</p><div class="row ml-3 mt-n3"><p>- Buch:</p>&nbsp;<p>@Buch</p></div><div class="row ml-3 mt-n3"><p>- Artikel:</p>&nbsp;<p>@Artikel</p></div><div class="row ml-3 mt-n3"><p>- Unselbst. Werk:</p>&nbsp;<p>@Reihe</p></div><div class="row ml-3 mt-n3"><p>- Graue Literatur:</p>&nbsp;<p>@GrauLit</p></div><div class="row ml-3 mt-n3"><p>- Daten:</p>&nbsp;<p>@Daten</p></div><hr><p>- Befehle für Suche nach ISBN/ISSN: <br>isbn: / issn: </p><hr></div>',
-    trigger: 'focus'
-    // template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body alert alert-danger"></div></div>'
-    })
-    });
-    $(document).on("click", ".popover .close" , function(){
-    $(this).parents(".popover").popover('hide');
-    });
-@stop
-
-
 @endsection
