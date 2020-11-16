@@ -4,14 +4,14 @@
     <div class="list-group " >
         <a href="{{route('start')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('/') }}">
             <i class="fa fa-home"></i> Startseite</a>
-        <a href="{{route('medienverwaltung.index')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('/admin/medienverwaltung') }}">
+        <a href="{{route('medienverwaltung.index')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('*/medienverwaltung') }}">
             <i class="fa fa-book"></i> Medienverwaltung</a>
-        <a href="{{route('medium.create','')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('medienverwaltung/medium/create*')}} indented ">
+        <a href="{{route('medium.create','')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('*/medienverwaltung/medium/create*')}} indented ">
             <i class="fa fa-plus"></i> Medium erstellen</a>
-        <a href="{{route('zeitschriften.index')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('medienverwaltung/zeitschriften')}} indented">
-            <i class="fa fa-leanpub"></i> Zeitschriften</a>
-        <a href="{{route('zeitschrift.create')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('medienverwaltung/zeitschrift/create*')}} indented ">
-            </i> Zeitschrift erstellen</a>
+        <a href="{{route('zeitschriften.index')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('*/zeitschriftenverwaltung')}}">
+            <i class="fa fa-leanpub"></i> Zeitschriftenverwaltung</a>
+        <a href="{{route('zeitschrift.create')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('*/zeitschriftenverwaltung/zeitschrift/create*')}} indented ">
+            <i class="fa fa-plus"></i> Zeitschrift erstellen</a>
 
 
         <a href="{{route('admin.nutzerverwaltung')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('*/nutzerverwaltung') }}">
@@ -19,6 +19,10 @@
 
         <a href="{{route('admin.ausleihverwaltung')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('*/ausleihverwaltung') }}">
             <i class="fa fa-retweet"></i> Ausleihverwaltung</a>
+        <a href="{{route('merklistenverleih.index')}}" class="list-group-item list-group-item-action indented {{ Helper::sidebar_active('*/ausleihverwaltung/merklistenverleih') }}">
+            <i class="fa fa-list-alt"></i> Merklistenverleih</a>
+        <a href="{{route('direktverleih.index')}}" class="list-group-item list-group-item-action indented {{ Helper::sidebar_active('*/ausleihverwaltung/direktverleih') }}">
+            <i class="fa fa-address-card-o"></i> Direktverleih</a>
 
         <a href="{{route('admin.systemverwaltung')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('*/systemverwaltung') }}">
             <i class="fa fa-cogs"></i> Systemverwaltung</a>
