@@ -31,7 +31,7 @@
                             <div class="col-md-6">
                                 <input id="email" type="text"
                                        class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                       name="email" value="{{ old('email') }}" required autofocus autocomplete="mail">
+                                       name="email" value="{{ old('email') }}" required autofocus autocomplete="email">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

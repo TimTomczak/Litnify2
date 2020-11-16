@@ -12,6 +12,8 @@ yarn-error.log
 .idea
 .idea/php.xml
 /_ide_helper.php
+/bootstrap/cache/
+/.env
 /bootstrap/cache/packages.php
 /bootstrap/cache/services.php
 /storage/medien.index

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AusleiheController;
 use App\Http\Controllers\MediumController;
 use App\Http\Controllers\ZeitschriftController;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes([
     'register' => true, // Registration Routes...
-    'reset' => false, // Password Reset Routes...
-    'verify' => false, // Email Verification Routes...
+    'reset' => true, // Password Reset Routes...
+    'verify' => true, // Email Verification Routes...
 ]);
 
 Route::get('/', function () {
@@ -32,9 +31,11 @@ Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->
 
 // * M o d e l s * //
 /***********************************/
-/*             User                */
+/*           User-Backend          */
 /***********************************/
 //Route::resource('user', 'App\Http\Controllers\UserController');
+Route::permanentRedirect('/user', '/user/profil');
+Route::permanentRedirect('/password', '/user/profil');
 Route::get('/user/profil', [App\Http\Controllers\UserController::class, 'showProfil'])->name('profil')->middleware('auth');
 Route::get('/user/ausleihen', [App\Http\Controllers\UserController::class, 'showAusleihen'])->name('ausleihen')->middleware('auth');
 Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'showMerkliste'])->name('merkliste')->middleware('auth');
@@ -75,6 +76,24 @@ Route::get('ausleihverwaltung/direktverleih/create', [App\Http\Controllers\Direk
 /*  Merklistenverleih   */
 Route::get('ausleihverwaltung/merklistenverleih', [App\Http\Controllers\MerklistenverleihController::class, 'index'])->name('merklistenverleih.index');
 Route::get('ausleihverwaltung/merklistenverleih/{user}', [App\Http\Controllers\MerklistenverleihController::class, 'show'])->where(array('user' => '[0-9]+'))->name('merklistenverleih.show');
+
+// * A d m i n P a g e  s * //
+Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
+
+    Route::get('nutzerverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.nutzerverwaltung');
+    Route::get('ausleihverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.ausleihverwaltung');
+    Route::get('systemverwaltung', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung');
+    Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\Admin\SystemController::class, 'auswertungen'])->name('admin.systemverwaltung.auswertungen');
+    Route::get('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditor'])->name('admin.systemverwaltung.contenteditor');
+    Route::post('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditorUpdate']);
+    Route::get('systemverwaltung/logs', [App\Http\Controllers\Admin\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs');
+
+    //Route::get('users', 'App\Http\Controllers\Admin\UserController');
+    //Route::get('medium', 'App\Http\Controllers\Admin\MediumController');
+    //Route::get('system', 'App\Http\Controllers\Admin\SystemController');
+
+});
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -14,7 +14,7 @@ class ZeitschriftController extends Controller
     public function index()
     {
         return view('Zeitschriftenverwaltung.index',[
-            'zeitschriften' => Zeitschrift::all()
+            'zeitschriften' => Zeitschrift::paginate(10)
         ]);
     }
 

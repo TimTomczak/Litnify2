@@ -1,13 +1,11 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-
+    @yield('javascript.header')
     @include('layouts.header')
     @livewireStyles
 </head>
 <body>
-
-    {{--@include('layouts.nav')--}}
 
     <div class="d-flex toggled" id="wrapper">
         @include('layouts.sidebar')
@@ -15,23 +13,24 @@
             @include('layouts.nav')
             <main class="" style="/*margin-top:66px; */background-color: #ffffff; min-height: 80vh;">
                 {{--Benachrichtigung--}}
-                @if($errors->any())
-                    <div class="alert alert-danger">FEHLER !</div>
+                <div class="container-fluid">
+                    @if(!(request()->is('/')))
+                        @include('layouts.breadcrumbs')
+                    @endif
+                    @if($errors->any())
+                        <div class="alert alert-danger">FEHLER !</div>
                     @enderror
-                @if(session('message'))
-                    <div class="alert alert-{{session('alertType')}}">{{session('message')}}</div>
-                @endif
-
-                @yield('content')
+                    @if(session('message'))
+                        <div class="alert alert-{{session('alertType')}}">{{session('message')}}</div>
+                    @endif
+                    @yield('content')
+                </div>
             </main>
 
             @include('layouts.footer')
         </div>
     </div>
 
-    {{--<main class="" style="margin-top:66px; background-color: #ffffff; min-height: 80vh;" >
-        @yield('content')
-    </main>--}}
     @livewireScripts
     @yield('scripts')
     <script>
@@ -48,5 +47,6 @@
             }
         });
     </script>
+    @yield('javascript.footer')
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,7 +14,7 @@ use LdapRecord\Laravel\Auth\HasLdapUser;
 
 class User extends Authenticatable implements LdapAuthenticatable
 {
-    use HasFactory, Notifiable, AuthenticatesWithLdap, HasLdapUser;
+    use HasFactory, Notifiable, AuthenticatesWithLdap, HasLdapUser, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -47,6 +48,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     ];
 
     protected $attributes = [
+        // Standardberechtigung für alle neuen User
         'berechtigungsrolle_id' => '1',
 
     ];
