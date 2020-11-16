@@ -99,5 +99,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // * S t a t i c P a g e  s * //
-Route::get('/{page}', App\Http\Controllers\StaticPagesController::class)->name('page');
+Route::get('/{page}', App\Http\Controllers\SeitenController::class)->name('page');
+
 

@@ -64,7 +64,7 @@
         @endif
     </div>
 @endsection
-@section('scripts')
+@section('javascript.footer')
     <script>
         $( document ).on( "mousemove", function( event ) {
             if (event.pageX<5){

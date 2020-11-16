@@ -18,7 +18,7 @@
         </div>
     </div>
 </div>
-@section('scripts')
+@section('javascript.footer')
     <script>
         $(".render-medium-modal").click(function( event) {
             var $mediumId = $(this).data('id');

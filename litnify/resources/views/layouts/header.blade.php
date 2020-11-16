@@ -46,4 +46,4 @@
 <link rel="manifest" href="/site.webmanifest">
 <link href="{{ asset('css/body-wrapper.css') }}" rel="stylesheet">
 
-@yield('head')
+

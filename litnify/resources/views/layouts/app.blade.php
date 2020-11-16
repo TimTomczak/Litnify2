@@ -34,7 +34,6 @@
     </div>
 
     @livewireScripts
-    @yield('scripts')
     <script>
         $( document ).on( "mousemove", function( event ) {
             if (event.pageX<5){
