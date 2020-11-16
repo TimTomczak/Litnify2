@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TableBuilder;
 use App\Models\Inventarliste;
 use App\Models\Literaturart;
 use App\Models\Medium;
@@ -27,10 +28,11 @@ class MediumController extends Controller
             ->orderBy('id','DESC')
             ->where('released',1)
             ->where('deleted',0)
-            ->limit(100)->get();
+            ->paginate(10);
 //        $mappedMedien=$this->mapForeignKeyReferences2String($medien);
         return view('Medienverwaltung.index',[
             'medien' => $medien,
+            'tableBuilder' => TableBuilder::$medienverwaltungIndex,
         ]);
     }
 

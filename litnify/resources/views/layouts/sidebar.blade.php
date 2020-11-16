@@ -17,7 +17,7 @@
         <a href="{{route('admin.nutzerverwaltung')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('*/nutzerverwaltung') }}">
             <i class="fa fa-user"></i> Nutzerverwaltung</a>
 
-        <a href="{{route('admin.ausleihverwaltung')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('*/ausleihverwaltung') }}">
+        <a href="{{route('ausleihverwaltung.index')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('*/ausleihverwaltung') }}">
             <i class="fa fa-retweet"></i> Ausleihverwaltung</a>
         <a href="{{route('merklistenverleih.index')}}" class="list-group-item list-group-item-action indented {{ Helper::sidebar_active('*/ausleihverwaltung/merklistenverleih') }}">
             <i class="fa fa-list-alt"></i> Merklistenverleih</a>

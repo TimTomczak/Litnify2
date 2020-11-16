@@ -5,28 +5,37 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-
                 <table class="table table-hover">
                     <thead>
+
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nachname</th>
-                        <th scope="col">Vorname</th>
-                        <th scope="col">E-Mail</th>
-                        <th scope="col">Rolle</th>
-                        <th scope="col">Erstellt</th>
-                        <th scope="col">Aktionen</th>
+                        @foreach($tableBuilder as $key=>$val)
+                            <th scope="col">{{$val}}</th>
+                        @endforeach
+                        <th>Aktionen</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <th scope="row">{{ $user->id }}</th>
-                            <td>{{ $user->nachname }}</td>
-                            <td>{{ $user->vorname }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->berechtigungsrolle->berechtigungsrolle }}</td>
-                            <td>{{ $user->created_at }}</td>
+                            @foreach($tableBuilder as $key=>$val)
+                                @switch($key)
+                                    @case('id')
+                                    <td scope="row">{{$user->attributesToArray()[$key]}}</td>
+                                    @break
+
+                                    @case('berechtigungsrolle_id')
+                                    <td>{{$user->berechtigungsrolle->berechtigungsrolle}}</td>
+                                    @break
+
+                                    @case('created_at')
+                                    <td>{{$user->attributesToArray()[$key]!=null ? $user->created_at->format('d.m.Y  G:i') : ''}}</td>
+                                    @break
+
+                                    @default
+                                    <td>{{$user->attributesToArray()[$key]}}</td>
+                                @endswitch
+                            @endforeach
                             <td>
                                 <button class="btn btn-primary btn-sm" title="VIEW"><i class="fa fa-search"></i></button>
                                 <button class="btn btn-success btn-sm" title="EDIT"><i class="fa fa-edit"></i></button>

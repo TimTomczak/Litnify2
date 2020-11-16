@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TableBuilder;
 use App\Models\Zeitschrift;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class ZeitschriftController extends Controller
     public function index()
     {
         return view('Zeitschriftenverwaltung.index',[
-            'zeitschriften' => Zeitschrift::paginate(10)
+            'zeitschriften' => Zeitschrift::paginate(10),
+            'tableBuilder' => TableBuilder::$zeitschrifenverwaltungIndex,
         ]);
     }
 

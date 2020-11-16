@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TableBuilder;
 use App\Models\Ausleihe;
 use App\Models\Medium;
 use App\Models\Merkliste;
@@ -11,6 +12,16 @@ use Illuminate\Support\Facades\DB;
 
 class AusleiheController extends Controller
 {
+    private function dbTimestampToGermanDate($ausleihen)
+    {
+        foreach ($ausleihen as $ausleihe) {
+            $ausleihe->RueckgabeSoll = $ausleihe->RueckgabeSoll != null&& $ausleihe->RueckgabeSoll!='0000-00-00' ? date("d.m.Y", strtotime($ausleihe->RueckgabeSoll)) : $ausleihe->RueckgabeSoll;
+            $ausleihe->Ausleihdatum = $ausleihe->Ausleihdatum != null && $ausleihe->Ausleihdatum!='0000-00-00' ? date("d.m.Y", strtotime($ausleihe->Ausleihdatum)) : $ausleihe->Ausleihdatum;
+            $ausleihe->RueckgabeIst = $ausleihe->RueckgabeIst != null && $ausleihe->RueckgabeIst!='0000-00-00' ? date("d.m.Y", strtotime($ausleihe->RueckgabeIst)) : $ausleihe->RueckgabeIst;
+        }
+        return $ausleihen;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +29,14 @@ class AusleiheController extends Controller
     public function index()
     {
         $ausleihenAktiv = Ausleihe::with('medium','user')->where('RueckgabeIst',null)->get();
+        $ausleihenAktiv = $this->dbTimestampToGermanDate($ausleihenAktiv);
         $ausleihenBeendet = Ausleihe::with('medium','user')->whereNotNull('RueckgabeIst')->get();
+        $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
         return view('Ausleihverwaltung.index',[
             'ausleihenAktiv' => $ausleihenAktiv,
-            'ausleihenBeendet' => $ausleihenBeendet
+            'ausleihenBeendet' => $ausleihenBeendet,
+            'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
+            'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
         ]);
     }
 
@@ -65,9 +80,14 @@ class AusleiheController extends Controller
      */
     public function show(User $user)
     {
+        $ausleihenAktiv = Ausleihe::whereUserId($user->id)->whereNull('RueckgabeIst')->get();
+        $ausleihenAktiv = $this->dbTimestampToGermanDate($ausleihenAktiv);
+        $ausleihenBeendet = Ausleihe::whereUserId($user->id)->whereNotNull('RueckgabeIst')->get();
+        $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
+
         return view('Ausleihverwaltung.show',[
-            'ausleihenAktiv' => Ausleihe::whereUserId($user->id)->whereNull('RueckgabeIst')->get(),
-            'ausleihenBeendet' => Ausleihe::whereUserId($user->id)->whereNotNull('RueckgabeIst')->get(),
+            'ausleihenAktiv' => $ausleihenAktiv,
+            'ausleihenBeendet' => $ausleihenBeendet,
             'user' => $user,
         ]);
     }

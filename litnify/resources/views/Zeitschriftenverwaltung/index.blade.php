@@ -3,12 +3,11 @@
 
 @section('content')
     <div class="container">
-        <a class="btn btn-primary" href="{{route('zeitschrift.create')}}">Neue Zeitschrift erstellen</a>
-        <table class="table table-bordered table-responsive table-striped">
+        <table class="table table-bordered table-responsive-lg table-striped">
             <thead>
             <tr>
-                @foreach($zeitschriften->first()->attributestoArray() as $key => $val)
-                    <th>{{$key}}</th>
+                @foreach($tableBuilder as $key=>$val)
+                    <th>{{$val}}</th>
                 @endforeach
                 <th>Aktionen</th>
             </tr>
@@ -16,17 +15,18 @@
             <tbody>
             @foreach($zeitschriften as $zeitschrift)
             <tr>
-                @foreach($zeitschrift->attributestoArray() as $key => $val)
-                    <td>{{$val}}</td>
+
+                @foreach($tableBuilder as $key=>$val)
+                    <td>{{$zeitschrift->attributesToArray()[$key]}}</td>
                 @endforeach
                 <td>{{--Aktionen--}}
                     <div class="d-flex justify-content-around">
-                        <a class="btn btn-primary" href="{{route('zeitschrift.edit',$zeitschrift->id)}}"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-primary btn-sm" href="{{route('zeitschrift.edit',$zeitschrift->id)}}"><i class="fa fa-edit"></i></a>
                         <form action="{{route('zeitschrift.destroy',$zeitschrift->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit" class="btn btn-danger">Löschen</button>
+                            <button type="submit" class="btn btn-sm btn-danger">Löschen</button>
                         </form>
                     </div>
                 </td>
@@ -36,8 +36,9 @@
         </table>
 
         {{-- Pagination --}}
-        <div >
-            {!! $zeitschriften->links() !!}
+        <div class="d-flex justify-content-between">
+            {{ $zeitschriften->links() }}
+            <a href="{{route('zeitschrift.create')}}"><button class="btn btn-primary">Neue Zeitschrift erstellen</button></a>
         </div>
 
 

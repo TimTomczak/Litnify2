@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TableBuilder;
 use App\Models\Ausleihe;
 use App\Models\Berechtigungsrolle;
 use App\Models\Merkliste;
@@ -22,7 +23,10 @@ class UserController extends Controller
     public function index()
     {
         $users = \App\Models\User::all();
-        return view('admin.nutzerverwaltung.index', ['users' => $users]);
+        return view('admin.nutzerverwaltung.index', [
+            'users' => $users,
+            'tableBuilder' => TableBuilder::$nutzerverwaltungIndex,
+        ]);
     }
 
     /**
