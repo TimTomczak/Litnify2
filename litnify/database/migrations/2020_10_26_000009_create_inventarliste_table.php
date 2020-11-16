@@ -17,8 +17,8 @@ class CreateInventarlisteTable extends Migration
             $table->id();
             $table->bigInteger('medium_id');
             $table->string('inventarnummer');
-            $table->tinyInteger('isb');
-            $table->tinyInteger('ausleihbar');
+            $table->tinyInteger('isb')->default(0);
+            $table->tinyInteger('ausleihbar')->default(0);
             $table->tinyInteger('deleted')->default(0);
             $table->timestamps();
             $table->unique(['medium_id','inventarnummer']);

@@ -23,8 +23,20 @@
                 <tr>
                     @foreach($med->attributesToArray() as $key=>$val)
                         @switch($key)
+                            @case('literaturart_id')
+                                <td>{{$med->literaturart->literaturart}}</td>
+                            @break
+
+                            @case('zeitschrift_id')
+                                <td>{{$med->zeitschrift!=null ? $med->zeitschrift->name : ''}}</td>
+                            @break
+
+                            @case('raum_id')
+                                <td>{{$med->raum!=null ? $med->raum->raum : ''}}</td>
+                            @break
+
                             @case('hauptsachtitel')
-                                <td class="text-wrap"><a href="{{route('medium.show',$med['id'])}}">{{$val}}</a></td>
+                                <td class="text-wrap"><a class="render-medium-modal" data-id="{{$med->id}}">{{$val}}</a></td>
                             @break
 
                             @case('autoren')
@@ -48,4 +60,5 @@
             </table>
         @endif
     </div>
+    @include('Medienverwaltung.mediumModal')
 @endsection

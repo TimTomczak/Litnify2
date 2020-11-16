@@ -7,14 +7,16 @@
             </button>
         </div>
         <button wire:click.prevent="$set('message',null)" type="button" class="btn btn-primary">
-            Weitere Inventarnummer hinzufügen erstellen
+            Weitere Inventarnummer hinzufügen
         </button>
     @else
         @if($errors->any())
             <p class="alert alert-danger">FEHLER {{$errors}}</p>
         @endif
         <div wire:loading.remove>
-            <form >
+            @if($medium->id!=null)
+            <form>
+                @endif
                 @foreach($inventarliste as $invlst)
                     <label for="inventarnummer{{$loop->index}}">Inventarnummer</label>
                     <div class="form-group input-group">
@@ -67,8 +69,10 @@
                             </div>
                         </div>
                 @endforeach
-                <div class="d-flex justify-content-end"><button wire:click.prevent="save" type="button" class="btn btn-primary">Speichern</button></div>
+                @if($medium->id!=null)
+                    <div class="d-flex justify-content-end"><button wire:click.prevent="save" type="button" class="btn btn-primary">Speichern</button></div>
             </form>
+            @endif
         </div>
     <div wire:loading class="spinner-border text-dark" style="width: 3rem; height: 3rem;" role="status"></div>
     @endif

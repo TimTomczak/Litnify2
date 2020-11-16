@@ -9,10 +9,20 @@ class Ausleihe extends Model
 {
     protected $table='ausleihen';
 
-    public static function getById($id){
+    protected $fillable=[
+        'medium_id' ,
+        'user_id' ,
+        'inventarnummer',
+        'Ausleihdatum' ,
+        'RueckgabeSoll'
+    ];
 
+    public function medium(){
+        return $this->belongsTo(Medium::class);
+    }
 
-
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
 }

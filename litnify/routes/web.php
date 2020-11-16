@@ -26,10 +26,13 @@ Route::get('/', function () {
 })->name('start');
 
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
+//Route::get('/login', [App\Http\Controllers\LoginController::class])->name('login');
 Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout');
 
 // * M o d e l s * //
-// User-Backend
+/***********************************/
+/*           User-Backend          */
+/***********************************/
 //Route::resource('user', 'App\Http\Controllers\UserController');
 Route::permanentRedirect('/user', '/user/profil');
 Route::permanentRedirect('/password', '/user/profil');
@@ -37,10 +40,9 @@ Route::get('/user/profil', [App\Http\Controllers\UserController::class, 'showPro
 Route::get('/user/ausleihen', [App\Http\Controllers\UserController::class, 'showAusleihen'])->name('ausleihen')->middleware('auth');
 Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'showMerkliste'])->name('merkliste')->middleware('auth');
 
-
-
-// Medienverwaltung
-//Route::get('medium/{id}/{action}', function ($id, $action) {})->where(['id' => '[0-9]+', 'action' => '[a-z]+']);
+/***********************************/
+/*        Medienverwaltung         */
+/***********************************/
 Route::get('medienverwaltung', [App\Http\Controllers\MediumController::class, 'index'])->name('medienverwaltung.index');
 Route::get('medium/{medium}', [App\Http\Controllers\MediumController::class, 'show'])->name('medium.show')->where(array('medium' => '[0-9]+'));;
 Route::resource('medienverwaltung/medium', MediumController::class)->only([
@@ -48,21 +50,32 @@ Route::resource('medienverwaltung/medium', MediumController::class)->only([
 ])->where(array('medium' => '[0-9]+'));
 Route::get('medienverwaltung/medium/create/{literaturart}', [App\Http\Controllers\MediumController::class, 'create'])->name('medium.create');
 
-// Freigabe
+/*  Freigabe    */
 Route::get('medienverwaltung/freigabe', [App\Http\Controllers\FreigabeController::class, 'index'])->name('freigabe.index');
 Route::put('medienverwaltung/{medium}/freigabe', [App\Http\Controllers\FreigabeController::class, 'update'])->name('freigabe.update')->where(array('medium' => '[0-9]+'));
 
-//Zeitschriften
+/*  Zeitschriftenverwaltung */
 Route::get('medienverwaltung/zeitschriften', [App\Http\Controllers\ZeitschriftController::class, 'index'])->name('zeitschriften.index');
 Route::resource('medienverwaltung/zeitschrift', ZeitschriftController::class)->only([
     'edit', 'create', 'store', 'update', 'destroy'
 ])->where(array('zeitschrift' => '[0-9]+'));
-//Inventarliste
-// Inventarliste wird über die Lifewire Component verwaltet. Siehe: \App\Http\Livewire\InventarnummernComponent::class
+/*  Inventarliste   */
+/*   Inventarliste wird über die Lifewire Component verwaltet. Siehe: \App\Http\Livewire\InventarnummernComponent::class    */
 
-// Ausleihe
-Route::get('ausleihe/{id?}/{action?}', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihe');
+/***********************************/
+/*        Ausleihverwaltung        */
+/***********************************/
+Route::get('ausleihverwaltung', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihverwaltung.index');
+Route::post('ausleihverwaltung/ausleihe/{user}/{medium}', [App\Http\Controllers\AusleiheController::class, 'store'])->where(array('user' => '[0-9]+', 'medium' => '[0-9]+'))->name('ausleihe.store');
+Route::get('ausleihverwaltung/ausleihen/{user}', [App\Http\Controllers\AusleiheController::class, 'show'])->where(array('user' => '[0-9]+'))->name('ausleihe.show');
 
+/*  Direktverleih   */
+Route::get('ausleihverwaltung/direktverleih', [App\Http\Controllers\DirektverleihController::class, 'index'])->name('direktverleih.index');
+Route::get('ausleihverwaltung/direktverleih/create', [App\Http\Controllers\DirektverleihController::class, 'create'])->name('direktverleih.create');
+
+/*  Merklistenverleih   */
+Route::get('ausleihverwaltung/merklistenverleih', [App\Http\Controllers\MerklistenverleihController::class, 'index'])->name('merklistenverleih.index');
+Route::get('ausleihverwaltung/merklistenverleih/{user}', [App\Http\Controllers\MerklistenverleihController::class, 'show'])->where(array('user' => '[0-9]+'))->name('merklistenverleih.show');
 
 // * A d m i n P a g e  s * //
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
@@ -85,7 +98,6 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
 // * S t a t i c P a g e  s * //
-Route::get('/{page}', App\Http\Controllers\SeitenController::class)->name('page');
+Route::get('/{page}', App\Http\Controllers\StaticPagesController::class)->name('page');
 

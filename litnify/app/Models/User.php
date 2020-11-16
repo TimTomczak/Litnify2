@@ -53,8 +53,9 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     ];
 
-    public function medium(){
-        return $this->belongsToMany(Medium::class, 'merkliste');
+    public function merkliste(){
+        return $this->belongsToMany(Medium::class, 'merkliste')
+            ->withPivot('created_at');
     }
 
     public function berechtigungsrolle(){

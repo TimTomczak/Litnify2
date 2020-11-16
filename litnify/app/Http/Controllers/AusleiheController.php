@@ -3,30 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ausleihe;
+use App\Models\Medium;
+use App\Models\Merkliste;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AusleiheController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $id = null, $action = null)
+    public function index()
     {
-        switch ($action) {
-            case 'edit':
-                return $this->edit(Ausleihe::getById($id));
-            break;
-            case 'update':
-                return $this->update($id);
-            break;
-            case 'delete':
-                return $this->destroy($id);
-            break;
-            default:
-                return $this->show($id);
-            }
+        $ausleihenAktiv = Ausleihe::with('medium','user')->where('RueckgabeIst',null)->get();
+        $ausleihenBeendet = Ausleihe::with('medium','user')->whereNotNull('RueckgabeIst')->get();
+        return view('Ausleihverwaltung.index',[
+            'ausleihenAktiv' => $ausleihenAktiv,
+            'ausleihenBeendet' => $ausleihenBeendet
+        ]);
     }
 
     /**
@@ -43,22 +39,37 @@ class AusleiheController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user,  Medium $medium)
     {
-        //
+        $ausleihzeitraum = $request->get('ausleihzeitraum');
+        $ausleihzeitraumSplit = explode(' - ',$ausleihzeitraum);
+
+        $request->request->add([
+            'medium_id' => $medium->id,
+            'user_id' => $user->id,
+            'Ausleihdatum' => date("Y-m-d",strtotime($ausleihzeitraumSplit[0])),
+            'RueckgabeSoll' => date("Y-m-d",strtotime($ausleihzeitraumSplit[1]))
+        ]);
+        Ausleihe::create($this->validateAttributes($request));
+        return redirect(route('ausleihe.show',$user))->with([
+            'message'=>'Verleih des Mediums "'.$medium->hauptsachtitel.'" mit der Inventarnummer ['.$request->request->get('inventarnummer').'] erfolgreich.',
+            'alertType' => 'success'
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Ausleihe  $ausleihe
-     * @return \Illuminate\Http\Response
      */
-    public function show(Ausleihe $ausleihe)
+    public function show(User $user)
     {
-        //
+        return view('Ausleihverwaltung.show',[
+            'ausleihenAktiv' => Ausleihe::whereUserId($user->id)->whereNull('RueckgabeIst')->get(),
+            'ausleihenBeendet' => Ausleihe::whereUserId($user->id)->whereNotNull('RueckgabeIst')->get(),
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -93,5 +104,16 @@ class AusleiheController extends Controller
     public function destroy(Ausleihe $ausleihe)
     {
         //
+    }
+
+    private function validateAttributes(Request $request){
+//        dd(request());
+        return request()->validate([
+            'medium_id' => 'required|integer',
+            'user_id' => 'required|integer',
+            'inventarnummer' => 'required|string',
+            'Ausleihdatum' => 'required|date',
+            'RueckgabeSoll' => 'required|date'
+        ]);
     }
 }

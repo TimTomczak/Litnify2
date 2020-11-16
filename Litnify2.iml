@@ -13,8 +13,6 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/directorytree/ldaprecord" />
-      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/directorytree/ldaprecord-laravel" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/dnoegel/php-xdg-base-dir" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/dbal" />
@@ -71,7 +69,6 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/ralouphie/getallheaders" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/ramsey/collection" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/ramsey/uuid" />
-      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/scrivo/highlight.php" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/sebastian/cli-parser" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/sebastian/code-unit" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/sebastian/code-unit-reverse-lookup" />
@@ -124,5 +121,7 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/webmozart/assert" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="daterangepicker" level="application" />
+    <orderEntry type="library" name="moment" level="application" />
   </component>
 </module>

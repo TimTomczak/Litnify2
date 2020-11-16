@@ -16,14 +16,12 @@
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/event-dispatcher-contracts" />
       <path value="$PROJECT_DIR$/litnify/vendor/vlucas/phpdotenv" />
-      <path value="$PROJECT_DIR$/litnify/vendor/symfony/css-selector" />
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/mime" />
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/http-client-contracts" />
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/http-foundation" />
       <path value="$PROJECT_DIR$/litnify/vendor/doctrine/inflector" />
       <path value="$PROJECT_DIR$/litnify/vendor/doctrine/lexer" />
-      <path value="$PROJECT_DIR$/litnify/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/litnify/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/litnify/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/litnify/vendor/tijsverkoyen/css-to-inline-styles" />
@@ -62,7 +60,6 @@
       <path value="$PROJECT_DIR$/litnify/vendor/laravel/framework" />
       <path value="$PROJECT_DIR$/litnify/vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/litnify/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/litnify/vendor/scrivo/highlight.php" />
       <path value="$PROJECT_DIR$/litnify/vendor/fzaninotto/faker" />
       <path value="$PROJECT_DIR$/litnify/vendor/dnoegel/php-xdg-base-dir" />
       <path value="$PROJECT_DIR$/litnify/vendor/psy/psysh" />
@@ -126,6 +123,8 @@
       <path value="$PROJECT_DIR$/litnify/vendor/directorytree/ldaprecord" />
       <path value="$PROJECT_DIR$/litnify/vendor/directorytree/ldaprecord-laravel" />
       <path value="$PROJECT_DIR$/litnify/vendor/tightenco/collect" />
+      <path value="$PROJECT_DIR$/litnify/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/litnify/vendor/symfony/css-selector" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
