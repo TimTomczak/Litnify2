@@ -19,8 +19,6 @@
             <div class="row h-100 align-items-center">
                 <div class="col-lg-12 text-center text-wrap text-light">
 
-
-
                     <h1 class="brand">Litnify</h1>
                     <h2>Das Suchportal der Meteorologiebibliothek</h2>
                     <form action="suche" method="get">
@@ -28,14 +26,32 @@
                             <div class="col-12 col-md-9 mb-2 mb-md-0">
                                 <div class="input-group">
                                     <div class="input-group-append">
-                                        <button id="popover-info" class="btn btn-sm btn-primary fa fa-info-circle rounded-left" data-placement="right" type="button" data-toggle="popover" data-trigger="focus"></button>
+                                        <button class="btn btn-primary fa fa-search rounded-left"></button>
                                     </div>
-                                    <input type="text" name="q" class="form-control form-control-lg" placeholder="Titel, Autor, DOI, ISBN ..."/>
+                                    <input type="text" name="q" class="form-control form-control-lg" placeholder="Bitte Suchbegriff eingeben..." autofocus />
+
+                                    @php ($auswahl = array(
+                                        array('short' => 'all', 'full' => 'Alle Felder'),
+                                        array('short' => 'name', 'full' => 'Name (Autor, Hrsg.)'),
+                                        array('short' => 'titel', 'full' => 'Titel'),
+                                        array('short' => 'sign', 'full' => 'Signatur'),
+                                        array('short' => 'isbn', 'full' => 'ISBN'),
+                                        array('short' => 'issn', 'full' => 'ISSN'),
+                                        array('short' => 'ztitel', 'full' => 'Zeitschriftentitel'),
+                                        array('short' => 'invnr', 'full' => 'Inv.-Nr.'),
+                                    ));
+                                    <select name="filter">
+                                    @foreach ($auswahl as $item)
+                                            <option value="{{($item['short'])}}">{{($item['full'])}}</option>
+
+                                    @endforeach
+                                    </select>
+
                                 </div>
                                 <!-- <a href="suche?extend=true"><i class="fa fa-external-link-alt"></i> Erweiterte Suche</a> -->
                             </div>
                             <div class="col-12 col-md-3">
-                                <button class="btn btn-primary btn-block btn-lg" type="submit">Suchen!</button>
+                                <button class="btn btn-primary btn-block btn-lg" type="submit"> <i class="fa fa-search"></i> Suchen</button>
                             </div>
                         </div>
                     </form>
