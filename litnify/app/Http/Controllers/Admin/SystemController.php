@@ -48,7 +48,7 @@ class SystemController extends Controller
         if($selection != null){
             $content = Seiten::getByTitle($selection);
         }
-        $seiten = ['faq', 'kontakt', 'oeffnungszeiten','impressum'];
+        $seiten = ['FAQ', 'Kontakt', 'Oeffnungszeiten','Impressum'];
 
         return view('admin.systemverwaltung.contenteditor', compact(['seiten', 'content', 'selection']));
 
