@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div id="modalContent" class="modal-body">
-                Body
+
             </div>
             <div class="modal-footer">
                 <a id="showMediumBtn" class="btn btn-primary">Öffnen</a>
@@ -22,6 +22,9 @@
     <script>
         $(".render-medium-modal").click(function( event) {
             var $mediumId = $(this).data('id');
+            $('#modalContent').empty();
+            var spinnerDiv = "<div class='spinner-border' role='status'><span class='sr-only'>Loading...</span></div>"
+            $('#modalContent').append(spinnerDiv);
             $('#modalContent').load('/medium/'+$mediumId+' #medium');
             $('#showMediumBtn').attr('href','/medium/'+$mediumId)
             $('#mediumModal').modal('show');
