@@ -125,6 +125,8 @@
       <path value="$PROJECT_DIR$/litnify/vendor/tightenco/collect" />
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/litnify/vendor/scrivo/highlight.php" />
+      <path value="$PROJECT_DIR$/litnify/vendor/laravel-lang/lang" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

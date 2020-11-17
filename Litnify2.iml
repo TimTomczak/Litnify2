@@ -34,6 +34,7 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/guzzlehttp/promises" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/guzzlehttp/psr7" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/hamcrest/hamcrest-php" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/laravel-lang/lang" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/laravel/framework" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/laravel/tinker" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/league/commonmark" />
