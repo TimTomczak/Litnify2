@@ -11,15 +11,14 @@
 
 
     <form action="{{route('admin.systemverwaltung.contenteditor')}}">
-
         <div class="dropdown show">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Bitte Seite auswählen...
             </button>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 @foreach($seiten as $seite)
-                    <a class="dropdown-item" href="?seite={{$seite}}">{{ucfirst($seite)}}</a>
+                    <a class="dropdown-item" href="?seite={{mb_strtolower($seite)}}">{{($seite)}}</a>
                 @endforeach
             </div>
         </div>
@@ -29,7 +28,7 @@
 
     @if($selection)
         <div>
-            <h5>Seite: <b>{{ ucfirst($selection)}}</b></h5>
+            <h5>Sie bearbeiten folgende Seite: <b>{{ ucfirst($selection)}}</b></h5>
             <br>
 
             <form action="{{route('admin.systemverwaltung.contenteditor')}}" method="POST">
@@ -43,10 +42,7 @@
 
             </form>
         </div>
-    @else
-        <div>
-            <h3>Bitte zuerst eine Seite auswählen</h3>
-        </div>
+
     @endif
 
 

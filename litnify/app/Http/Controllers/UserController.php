@@ -101,7 +101,7 @@ class UserController extends Controller
     }
 
     public function showMerkliste(){
-        return view('user/merkliste', array('user' => Auth::user(), 'merkliste' => (Auth::user())->medium));
+        return view('user/merkliste', array('user' => Auth::user(), 'merkliste' => (Auth::user())->merkliste));
     }
 
     public function showAusleihen(){

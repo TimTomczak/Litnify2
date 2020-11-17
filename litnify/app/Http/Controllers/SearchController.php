@@ -10,7 +10,7 @@ class SearchController extends Controller
 
         //dd($request);
         $result = "leer";
-        return view('search/search', array('request' => $request, 'result'  => $result) );
+        return view('search/index', array('request' => $request, 'result'  => $result) );
 
     }
 }
