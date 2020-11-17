@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TableBuilder;
 use App\Models\Medium;
 use Illuminate\Http\Request;
 
@@ -17,10 +18,10 @@ class FreigabeController extends MediumController
             ->orderBy('id','DESC')
             ->where('released',0)
             ->where('deleted',0)
-            ->limit(100)->get();
-        $mappedMedien=$this->mapForeignKeyReferences2String($medien);
+            ->paginate(10);
         return view('Freigabe.index',[
-            'medien' => $mappedMedien
+            'medien' => $medien,
+            'tableBuilder' => TableBuilder::$medienverwaltungIndex,
         ]);
         //
     }

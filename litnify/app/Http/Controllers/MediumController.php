@@ -29,7 +29,6 @@ class MediumController extends Controller
             ->where('released',1)
             ->where('deleted',0)
             ->paginate(10);
-//        $mappedMedien=$this->mapForeignKeyReferences2String($medien);
         return view('Medienverwaltung.index',[
             'medien' => $medien,
             'tableBuilder' => TableBuilder::$medienverwaltungIndex,
@@ -91,7 +90,8 @@ class MediumController extends Controller
 
             return view('Medienverwaltung.show',[
                 'medium' => $medium,
-                'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar()
+                'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar(),
+                'tableBuilder' => TableBuilder::$mediumShow,
             ]);
         }
     }
@@ -144,6 +144,17 @@ class MediumController extends Controller
     {
         $medium->update(['deleted'=>1]);
         return redirect(route('medienverwaltung.index'));
+    }
+
+    public function showAutor($autor)
+    {
+        return view('Medienverwaltung.autor',[
+            'autor' => $autor,
+            'medien' => Medium::where('autoren','like','%'.$autor.'%')
+                ->with('literaturart','zeitschrift','raum','inventarliste')
+                ->paginate(10),
+            'tableBuilder' => TableBuilder::$medienverwaltungIndex,
+        ]);
     }
 
     protected function validateAttributes(){

@@ -49,6 +49,7 @@ Route::resource('medienverwaltung/medium', MediumController::class)->only([
     'edit', 'create', 'store', 'update', 'destroy'
 ])->where(array('medium' => '[0-9]+'));
 Route::get('medienverwaltung/medium/create/{literaturart}', [App\Http\Controllers\MediumController::class, 'create'])->name('medium.create');
+Route::get('autor/{autor}', [App\Http\Controllers\MediumController::class, 'showAutor'])->name('autor.show');
 
 /*  Freigabe    */
 Route::get('medienverwaltung/freigabe', [App\Http\Controllers\FreigabeController::class, 'index'])->name('freigabe.index');

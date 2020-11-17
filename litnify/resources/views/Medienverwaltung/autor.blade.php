@@ -1,9 +1,11 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
+        <div class="row">
+            <h4>Medien für Autor: {{$autor}}</h4>
+            <p></p>
+        </div>
         <table class="table table-responsive table-hover table-bordered table-striped text-nowrap">
-            <h4>Nicht freigegebene Medien:</h4>
             <thead>
             <tr>
                 @foreach($tableBuilder as $key=>$val)
@@ -15,7 +17,6 @@
             <tbody>
             @foreach($medien as $med)
                 <tr>
-
                     @foreach($tableBuilder as $key=>$val)
                         @switch($key)
                             @case('literaturart_id')
@@ -36,8 +37,13 @@
 
                             @case('autoren')
                             <td>
-                                @foreach(explode(';',$med->autoren) as $autor)
-                                    {{$autor}}<br>
+                                @foreach(explode(';',$med->autoren) as $aut)
+                                        @if(strpos($aut,$autor)!==false)
+                                            <mark><em>{{$aut}}</em></mark>
+                                        @else
+                                            <a href="{{route('autor.show',$aut)}}">{{$aut}}</a>
+                                        @endif
+                                    <br>
                                 @endforeach
                             </td>
                             @break
@@ -47,16 +53,10 @@
 
                         @endswitch
                     @endforeach
-                    <td>{{--Aktionen--}}
-                        <form action="{{route('freigabe.update',$med->id)}}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <button class="btn btn-success"><i class="fa fa-share"></i></button>
-                        </form>
-
-                    </td>
+                    <td>...{{--TODO Aktionen--}}</td>
                 </tr>
             @endforeach
+
             </tbody>
         </table>
         <div class="d-flex justify-content-between">

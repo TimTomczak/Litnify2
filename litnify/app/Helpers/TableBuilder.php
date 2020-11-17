@@ -17,6 +17,33 @@ class TableBuilder
         'id' => 'ID',
         'signatur' => 'Signatur',
         'hauptsachtitel' => 'Hauptsachtitel',
+        'autoren' => 'Autoren',
+        'jahr' => 'Jahr'
+    ];
+
+    public static $mediumShow=[
+        'id' => 'ID',
+        'literaturart_id' => 'Literaturart',
+        'signatur' => 'Signatur',
+        'autoren' => 'Autoren',
+        'hauptsachtitel' => 'Hauptsachtitel',
+        'untertitel' => 'Untertitel',
+        'enthalten_in' => 'Enthalten in',
+        'erscheinungsort' => 'Erscheinungsort',
+        'jahr' => 'Jahr',
+        'verlag' => 'Verlag',
+        'isbn' => 'ISBN',
+        'issn' => 'ISSN',
+        'doi' => 'DOI',
+        'auflage' => 'Auflage',
+        'herausgeber' => 'Herausgeber',
+        'schriftenreihe' => 'Schriftenreihe',
+        'zeitschrift_id' => 'Zeitschrift',
+        'band' => 'Band',
+        'seite' => 'Seite',
+        'institut' => 'Institut',
+        'raum_id' => 'Raum',
+        'bemerkungen' => 'Bemerkungen',
     ];
 
     public static $zeitschrifenverwaltungIndex=[

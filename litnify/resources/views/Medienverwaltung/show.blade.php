@@ -20,20 +20,19 @@
 
         <table id="medium" class="table table-striped table-bordered table-responsive-lg">
             <tbody>
-            @foreach($medium->attributestoArray() as $key=>$val)
+            @foreach($tableBuilder as $key=>$val)
             <tr>
+                <td><b>{{$val}}</b></td>
                 @switch($key)
                     @case('autoren')
-                    <td><b>{{$key}}</b></td>
                     <td>
-                        @foreach(explode(';',$val) as $autor)
-                            {{$autor}}<br>
+                        @foreach(explode(';',$medium->autoren) as $autor)
+                            <a href="{{route('autor.show',$autor)}}">{{$autor}}</a><br>
                         @endforeach
                     </td>
                     @break
 
                     @case('inventarnummer')
-                        <td><b>{{$key}}</b></td>
                         <td>
                             @if($medium->inventarliste->isNotEmpty())
                                 <table class="table">
@@ -57,8 +56,7 @@
                     @break
 
                     @default
-                    <td><b>{{$key}}</b></td>
-                    <td>{{$val}}</td>
+                    <td>{{$medium->attributesToArray()[$key]}}</td>
                 @endswitch
             </tr>
             @endforeach

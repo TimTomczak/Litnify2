@@ -38,7 +38,7 @@
 
                                 @case('autoren')
                                 <td>
-                                    @foreach(explode(';',$val) as $autor)
+                                    @foreach(explode(';',$med->autoren) as $autor)
                                         {{$autor}}<br>
                                     @endforeach
                                 </td>

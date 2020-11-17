@@ -21,7 +21,7 @@
                         @break
 
                         @case('user_id')
-                        <td><a href="{{route('ausleihe.show',$val)}}">{{$aus->attributesToArray()[$key]}}</a></td>
+                        <td><a href="{{route('ausleihe.show',$aus->user_id)}}">{{$aus->attributesToArray()[$key]}}</a></td>
                         @break
 
                         @default
@@ -56,7 +56,7 @@
                             @break
 
                             @case('user_id')
-                            <td><a href="{{route('ausleihe.show',$val)}}">{{$aus->attributesToArray()[$key]}}</a></td>
+                            <td><a href="{{route('ausleihe.show',$aus->user_id)}}">{{$aus->attributesToArray()[$key]}}</a></td>
                             @break
 
                             @default

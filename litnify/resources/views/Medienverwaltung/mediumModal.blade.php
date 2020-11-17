@@ -22,8 +22,8 @@
     <script>
         $(".render-medium-modal").click(function( event) {
             var $mediumId = $(this).data('id');
-            $('#modalContent').load('medium/'+$mediumId+' #medium');
-            $('#showMediumBtn').attr('href','medium/'+$mediumId)
+            $('#modalContent').load('/medium/'+$mediumId+' #medium');
+            $('#showMediumBtn').attr('href','/medium/'+$mediumId)
             $('#mediumModal').modal('show');
         })
     </script>
