@@ -34,6 +34,7 @@ class UpdateZeitschriftComponent extends Component
 
     public function submitForm(){
         $tmpName=$this->zeitschrift->name;
+
         $tmpShortcut=$this->zeitschrift->shortcut;
         $this->zeitschrift->update($this->validate());
         $this->message='';
@@ -46,7 +47,9 @@ class UpdateZeitschriftComponent extends Component
             $this->message.='Das Kürzel "'.$tmpShortcut.'" wurde erfolgreich in "'.$this->shortcut.'" geändert. ';
         }
         else{
-            $this->message='';
+            if ($tmpName===$this->name){
+                $this->message='';
+            }
         }
     }
 

@@ -15,7 +15,7 @@ class ZeitschriftController extends Controller
     public function index()
     {
         return view('Zeitschriftenverwaltung.index',[
-            'zeitschriften' => Zeitschrift::paginate(10),
+            'zeitschriften' => Zeitschrift::where('deleted',0)->paginate(10),
             'tableBuilder' => TableBuilder::$zeitschrifenverwaltungIndex,
         ]);
     }
@@ -82,12 +82,15 @@ class ZeitschriftController extends Controller
     public function destroy(Zeitschrift $zeitschrift)
     {
         $zeitschrift->update(['deleted'=>1]);
-        return redirect(route('zeitschriftenverwaltung.index',$zeitschrift->id));
+        return redirect(route('zeitschriften.index',$zeitschrift->id))->with([
+            'message' => 'Zeitschrift wurde gelöscht.',
+            'alertType'=> 'info'
+        ]);
     }
 
     public function validateAttributes(){
         $validatedAttributes = request()->validate([
-            'id' => 'required|integer',
+//            'id' => 'required|integer',
             'name' => 'required|string',
             'shortcut' => 'required|string'
         ]);

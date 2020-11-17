@@ -1,13 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Admin-Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{route('medienverwaltung.index')}}">Medienverwaltung</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Medium erstellen</li>
-            </ol>
-        </nav>
         <div class="card p-4 bg-light">
             @if($literaturart=='') {{-- Wenn noch keine Literaturart ausgewählt ist --}}
             <div class="form-group">
@@ -38,7 +31,7 @@
                     <div class="form-group">
                         <label for="id">ID</label>
                         <input type="text"
-                               class="form-control @error('id') border-danger @enderror" name="id" id="id"
+                               class="form-control @error('id') border-danger @enderror"
                                value="{{$nextMediumId}}"
                                readonly>
                         @error('id')

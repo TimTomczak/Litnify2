@@ -67,7 +67,10 @@ class MediumController extends Controller
 
         $med= Medium::create($validatedAttributes);
         $this->storeInventarnummer($request);
-        return redirect(route('medium.show',$med->id))->with('alert',['success','Medium "'.$med->hauptsachtitel.'" erfolgreich erstellt.']);
+        return redirect(route('medium.create',''))->with([
+            'message' => 'Medium "'.$med->hauptsachtitel.'" erfolgreich erstellt.',
+            'alertType'=> 'success'
+        ]);
     }
 
     /**
@@ -125,14 +128,12 @@ class MediumController extends Controller
         //
         $this->mapAuthorsFromRequest($request);
         $request=$this->stringToForeignId($request);
-//        $request->merge([
-//            'literaturart_id' => Literaturart::whereLiteraturart($request->get('literaturart_id'))->first()->id,
-//            'zeitschrift_id' => Zeitschrift::whereName($request->get('zeitschrift_id'))->first()->id,
-//            'raum_id' => Raum::whereRaum($request->get('raum_id'))->first()->id,
-//        ]);
         $validatedAttributes=$this->validateAttributes();
         $medium->update($validatedAttributes);
-        return redirect(route('medium.show',$medium->id));
+        return redirect(route('medium.show',$medium->id))->with([
+            'message' => 'Medium erfolgreich geändert.',
+            'alertType'=> 'success'
+        ]);
     }
 
     /**
@@ -143,7 +144,10 @@ class MediumController extends Controller
     public function destroy(Medium $medium)
     {
         $medium->update(['deleted'=>1]);
-        return redirect(route('medienverwaltung.index'));
+        return redirect(route('medienverwaltung.index'))->with([
+            'message' => 'Medium "'.$medium->hauptsachtitel.'" wurde gelöscht.',
+            'alertType'=> 'info'
+        ]);
     }
 
     public function showAutor($autor)
@@ -159,7 +163,7 @@ class MediumController extends Controller
 
     protected function validateAttributes(){
         $validatedAttributes = request()->validate([
-            'id' => 'required|integer',
+//            'id' => 'required|integer',
             'literaturart_id' => 'integer|min:1|max:5',
             'signatur' => 'nullable|string',
             'autoren' => 'nullable|string',

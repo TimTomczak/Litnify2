@@ -8,13 +8,13 @@ use Livewire\Component;
 
 class CreateZeitschriftComponent extends Component
 {
-    public $zeitschrift_id;
+//    public $zeitschrift_id;
     public $name;
     public $shortcut;
     public $message;
 
     protected $rules=[
-        'zeitschrift_id' => 'required|integer',
+//        'zeitschrift_id' => 'required|integer',
         'name' => 'required|string',
         'shortcut' => 'required|string'
     ];
@@ -37,14 +37,14 @@ class CreateZeitschriftComponent extends Component
     }
 
     private function resetForm(){
-        $this->zeitschrift_id=Controller::getNextAutoincrement('zeitschriften');
+//        $this->zeitschrift_id=Controller::getNextAutoincrement('zeitschriften');
         $this->name='';
         $this->shortcut='';
         $this->message='';
     }
 
     public function validateAttributes(){
-        $this->zeitschrift_id=Controller::getNextAutoincrement('zeitschriften');
+//        $this->zeitschrift_id=Controller::getNextAutoincrement('zeitschriften');
         $validatedAttributes = $this->validate();
         return $validatedAttributes;
     }
