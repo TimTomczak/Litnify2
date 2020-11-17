@@ -33,7 +33,14 @@
     margin-left: 0;
 }
 
+@media (min-width: 1025px) {
+    #sidebar-toggle{
+        display: none;
+    }
+}
+
 @media (min-width: 768px) {
+
     #sidebar-wrapper {
         margin-left: 0;
     }
@@ -46,4 +53,7 @@
     #wrapper.toggled #sidebar-wrapper {
         margin-left: -15rem;
     }
+
+
+
 }

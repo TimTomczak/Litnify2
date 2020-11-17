@@ -6,6 +6,8 @@
             <i class="fa fa-home"></i> Startseite</a>
         <a href="{{route('medienverwaltung.index')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('*/medienverwaltung') }}">
             <i class="fa fa-book"></i> Medienverwaltung</a>
+        <a href="{{route('freigabe.index')}}" class="list-group-item list-group-item-action indented {{ Helper::sidebar_active('*/medienverwaltung/freigabe') }}">
+            <i class="fa fa-share-square-o"></i> Freigabe</a>
         <a href="{{route('medium.create','')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('*/medienverwaltung/medium/create*')}} indented ">
             <i class="fa fa-plus"></i> Medium erstellen</a>
         <a href="{{route('zeitschriften.index')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('*/zeitschriftenverwaltung')}}">
@@ -35,3 +37,5 @@
 
     </div>
 </div>
+
+

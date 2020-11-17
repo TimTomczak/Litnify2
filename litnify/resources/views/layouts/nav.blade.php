@@ -1,15 +1,14 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-    @auth
-        @if ( auth()->user()->berechtigungsrolle_id > 1)
-            <button class="btn btn-light btn-lg border" id="sidebar-toggle" type="button">
-                ADMIN <i class="fa fa-bars"></i>
-            </button>
-        @endif
-    @endauth
-
     <div class="container">
+        @auth
+            @if ( auth()->user()->berechtigungsrolle_id > 1)
+                <button class="btn btn-light btn-lg border" id="sidebar-toggle" type="button"
+                >
+                    ADMIN <i class="fa fa-bars"></i>
+                </button>
+            @endif
+        @endauth
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{asset('storage/images/litnify.png')}}" alt="Logo" style="width:40px;">
             {{ config('app.name', 'Laravel') }}

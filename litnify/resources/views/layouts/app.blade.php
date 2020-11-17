@@ -36,16 +36,29 @@
     @livewireScripts
     <script>
         $( document ).on( "mousemove", function( event ) {
-            if (event.pageX<5){
-                if ($('#wrapper').hasClass('toggled')){
-                    $('#wrapper').removeClass('toggled')
+            if (screen.width>1025) {
+                if (event.pageX < 5) {
+                    if ($('#wrapper').hasClass('toggled')) {
+                        $('#wrapper').removeClass('toggled')
+                    }
+                }
+                if (!$('#wrapper').hasClass('toggled')) {
+                    if (event.pageX > 240) {
+                        $('#wrapper').addClass('toggled')
+                    }
                 }
             }
-            if (!$('#wrapper').hasClass('toggled')){
-                if (event.pageX>240){
-                    $('#wrapper').addClass('toggled')
-                }
+        });
+    </script>
+    <script>
+        $('#sidebar-toggle').click(function (){
+            if ($('#wrapper').hasClass('toggled')){
+                $('#wrapper').removeClass('toggled');
             }
+            else{
+                $('#wrapper').addClass('toggled');
+            }
+            // $('#wrapper').toggleClass('toggled');
         });
     </script>
     @yield('javascript.footer')
