@@ -41,6 +41,7 @@ class TableBuilder
         'erscheinungsort' => 'Erscheinungsort',
         'jahr' => 'Jahr',
         'verlag' => 'Verlag',
+        'inventarnummer' => 'Inventarnummern',
         'isbn' => 'ISBN',
         'issn' => 'ISSN',
         'doi' => 'DOI',

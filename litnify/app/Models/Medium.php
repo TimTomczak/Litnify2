@@ -90,32 +90,20 @@ class Medium extends Model
 
     public function getInventarnummernAusleihbar(){
 //        $inventarnummernAusleihbar = collect();
-//        $inventarliste = $this->inventarliste->where('ausleihbar',1)->all();
-//        foreach ($inventarliste as $mediumAufInventarliste){
-//            $mediumAusgeliehen = Ausleihe::whereMediumId($mediumAufInventarliste->medium_id)
-//                ->where('inventarnummer',$mediumAufInventarliste->inventarnummer)
-//                ->where('RueckgabeIst',null)->get();
-//            if ($mediumAusgeliehen->isEmpty()){
-//                $inventarnummernAusleihbar->push($mediumAufInventarliste->inventarnummer);
+//        $inventarnummernNichtZurueck = DB::table('ausleihen_offen')->where('medium_id',[$this->id])->pluck('inventarnummer');
+////        dd($this->with('inventarliste')->whereId($this->id)->get()->first()->inventarliste);
+//        $inventarnummernAusleiheMoeglich = $this->inventarliste->where('ausleihbar',1)->pluck('inventarnummer');
+//        foreach ($inventarnummernAusleiheMoeglich as $invMgl){
+//            if ($inventarnummernNichtZurueck->contains($invMgl)){
+//                continue;
 //            }
 //            else{
-//                continue;
+//                $inventarnummernAusleihbar->push($invMgl);
 //            }
 //        }
 //        return $inventarnummernAusleihbar;
-        $inventarnummernAusleihbar = collect();
-        $inventarnummernNichtZurueck = DB::table('ausleihen_offen')->where('medium_id',[$this->id])->pluck('inventarnummer');
-//        dd($this->with('inventarliste')->whereId($this->id)->get()->first()->inventarliste);
-        $inventarnummernAusleiheMoeglich = $this->inventarliste->where('ausleihbar',1)->pluck('inventarnummer');
-        foreach ($inventarnummernAusleiheMoeglich as $invMgl){
-            if ($inventarnummernNichtZurueck->contains($invMgl)){
-                continue;
-            }
-            else{
-                $inventarnummernAusleihbar->push($invMgl);
-            }
-        }
-        return $inventarnummernAusleihbar;
+
+        return $inventarnummernAusleihbar=DB::table('medien_ausleihbar')->where('medium_id',[$this->id])->pluck('inventarnummer');
 
     }
 }
