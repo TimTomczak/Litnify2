@@ -27,7 +27,7 @@
                             })->count()}}
                     </td>
                     <td>
-                        <a href="{{route('merklistenverleih.show',$merk->user_id)}}" class="btn btn-primary">zum Verleih</a>
+                        <a href="{{route('merklistenverleih.show',$merk->user_id)}}" class="btn btn-primary btn-sm">zum Verleih</a>
                     </td>
                 </tr>
             @endforeach

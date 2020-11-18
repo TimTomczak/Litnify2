@@ -28,7 +28,17 @@
                         <td>{{$aus->attributesToArray()[$key]}}</td>
                     @endswitch
                 @endforeach
-                <td>...</td>
+                <td>
+                    <div class="d-flex border-0 justify-content-around">
+                        <a href="{{route('ausleihe.show',$aus->user_id)}}"><button class="{{$aktionenStyles['show']['button-class']}}" title="Ausleihen des Nutzers ansehen"><i class="{{$aktionenStyles['show']['icon-class']}}"></i></button></a>
+                        <a href="{{route('ausleihe.edit',$aus->id)}}"><button class="{{$aktionenStyles['edit']['button-class']}}" title="Ausleihe bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></button></a>
+                        <form action="{{route('ausleihe.destroy',$aus->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Ausleihe löschen"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
+                        </form>
+                    </div>
+                </td>
             </tr>
             @endforeach
             </tbody>
@@ -43,6 +53,7 @@
                 @foreach($tableBuilderBeendet as $key=>$val)
                     <th>{{$val}}</th>
                 @endforeach
+                <th>Aktionen</th>
             </tr>
             </thead>
             <tbody>
@@ -64,6 +75,17 @@
                         @endswitch
 
                     @endforeach
+                    <td>
+                        <div class="d-flex border-0 justify-content-around">
+                            <a href="{{route('ausleihe.show',$aus->user_id)}}"><button class="{{$aktionenStyles['show']['button-class']}}" title="Ausleihen des Nutzers ansehen"><i class="{{$aktionenStyles['show']['icon-class']}}"></i></button></a>
+                            <a href="{{route('ausleihe.edit',$aus->id)}}"><button class="{{$aktionenStyles['edit']['button-class']}}" title="Ausleihe bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></button></a>
+                            <form action="{{route('ausleihe.destroy',$aus->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Ausleihe löschen"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

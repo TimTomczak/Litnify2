@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container">
-        <table class="table table-bordered table-responsive-lg table-striped">
+        <table class="{{$tableStyle}}">
             <thead>
             <tr>
                 @foreach($tableBuilder as $key=>$val)
@@ -20,13 +20,12 @@
                     <td>{{$zeitschrift->attributesToArray()[$key]}}</td>
                 @endforeach
                 <td>{{--Aktionen--}}
-                    <div class="d-flex justify-content-around">
-                        <a class="btn btn-primary btn-sm" href="{{route('zeitschrift.edit',$zeitschrift->id)}}"><i class="fa fa-edit"></i></a>
+                    <div class="d-flex border-0 justify-content-around">
+                        <a href="{{route('zeitschrift.edit',$zeitschrift->id)}}"><button class="{{$aktionenStyles['edit']['button-class']}}" title="Medium bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></button></a>
                         <form action="{{route('zeitschrift.destroy',$zeitschrift->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-
-                            <button type="submit" class="btn btn-sm btn-danger">Löschen</button>
+                            <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Medium löschen"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
                         </form>
                     </div>
                 </td>

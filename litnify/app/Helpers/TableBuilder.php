@@ -13,6 +13,15 @@ namespace App\Helpers;
  */
 class TableBuilder
 {
+    public static $tableStyle='table table-bordered table-responsive-lg table-striped text-nowrap';
+
+    public static $aktionenStyles=[
+        'show' => ['button-class'=>'btn btn-primary btn-sm','icon-class'=>'fa fa-search'],
+        'edit' => ['button-class'=>'btn btn-success btn-sm','icon-class'=>'fa fa-edit'],
+        'delete' => ['button-class'=>'btn btn-danger btn-sm','icon-class'=>'fa fa-minus-circle'],
+        'release' => ['button-class'=>'btn btn-warning btn-sm border-secondary','icon-class'=>'fa fa-share'],
+    ];
+
     public static $medienverwaltungIndex=[
         'id' => 'ID',
         'signatur' => 'Signatur',

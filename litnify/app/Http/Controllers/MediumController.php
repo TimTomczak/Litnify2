@@ -32,6 +32,8 @@ class MediumController extends Controller
         return view('Medienverwaltung.index',[
             'medien' => $medien,
             'tableBuilder' => TableBuilder::$medienverwaltungIndex,
+            'tableStyle' => TableBuilder::$tableStyle,
+            'aktionenStyles' => TableBuilder::$aktionenStyles,
         ]);
     }
 

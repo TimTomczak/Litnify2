@@ -22,6 +22,8 @@ class FreigabeController extends MediumController
         return view('Freigabe.index',[
             'medien' => $medien,
             'tableBuilder' => TableBuilder::$medienverwaltungIndex,
+            'tableStyle' => TableBuilder::$tableStyle,
+            'aktionenStyles' => TableBuilder::$aktionenStyles,
         ]);
         //
     }

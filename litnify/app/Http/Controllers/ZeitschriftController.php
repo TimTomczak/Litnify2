@@ -16,7 +16,9 @@ class ZeitschriftController extends Controller
     {
         return view('Zeitschriftenverwaltung.index',[
             'zeitschriften' => Zeitschrift::where('deleted',0)->paginate(10),
+            'tableStyle' => TableBuilder::$tableStyle,
             'tableBuilder' => TableBuilder::$zeitschrifenverwaltungIndex,
+            'aktionenStyles' => TableBuilder::$aktionenStyles,
         ]);
     }
 
