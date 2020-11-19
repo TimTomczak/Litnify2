@@ -8,14 +8,14 @@ use Livewire\Component;
 
 class AutorenComponent extends Component
 {
-    public Medium $medium;
+    public $medium;
     public $i=0;//Anzahl an Namen
     public $inputs=[];
     public $message;
     public $autoren;
     public $autorenOld; //wird bei edit übergeben, falls bei Validierung Fehler auftreten
     public $autorRemoved=false;
-    public bool $et_al=false;
+    public $et_al=false;
 
     protected $listeners = [
         'refresh' => '$refresh',
