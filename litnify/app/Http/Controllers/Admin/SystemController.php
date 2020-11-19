@@ -6,13 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Seiten;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
 class SystemController extends Controller
 {
     public function index(){
-        return view('admin.systemverwaltung.index');
+
+       $info = '';
+
+       return view('admin.systemverwaltung.index', compact(['info']));
     }
 
     public function auswertungen(){
@@ -36,7 +40,7 @@ class SystemController extends Controller
 
         }
 
-        return view('admin.systemverwaltung.logs', compact('date', 'data'));
+        return view('admin.systemverwaltung.logs', compact(['date', 'data']));
 
     }
 

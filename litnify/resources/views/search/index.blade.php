@@ -18,13 +18,17 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
+            <form method="" action="get">
             <div class="position-fixed">
 
                 <ul class="list-group">
-                    <li class="list-group-item text-muted"><b>Art der Literatur</b></li>
+                    <li class="list-group-item text-muted list-group-item-dark"><b>Art der Literatur</b></li>
+
                     <li class="list-group-item text-right">
-                        <span class="pull-left">Artikel</span>
-                        <span class="badge badge-pill badge-primary">1</span>
+                        <a href="#">
+                            <span class="pull-left">Artikel</span>
+                            <span class="badge badge-pill badge-primary">1</span>
+                        </a>
                     </li>
                     <li class="list-group-item text-right">
                         <span class="pull-left">graue Literatur</span>
@@ -47,7 +51,7 @@
                 <hr>
 
                 <ul class="list-group">
-                    <li class="list-group-item text-muted"><b>Erscheinungsjahr</b></li>
+                    <li class="list-group-item text-muted list-group-item-dark"><b>Erscheinungsjahr</b></li>
                     <li class="list-group-item">
                         <div class="form-inline">
                             <input class="form-control" style="width:33%;" placeholder="von" type="number" min="1900" max="2099">
@@ -65,10 +69,11 @@
                 <hr>
 
                 <ul class="list-group">
-                    <li class="list-group-item text-muted"><b>Suchergebnisse pro Seite</b></li>
+                    <li class="list-group-item text-muted list-group-item-dark"><b>Suchergebnisse pro Seite</b></li>
                     <li class="list-group-item">
                     <select class="form-control" style="width:100%;">
-                        <option>10</option>
+                        <option><a href="?&ppr=10">10</a></option>
+                        <option><a href="?&ppr=11">11</a></option>
                         <option>25</option>
                         <option>50</option>
                         <option>100</option>
@@ -76,12 +81,30 @@
                     </li>
                 </ul>
             </div>
+            </form>
         </div>
         <!--/col-3-->
         <div class="col-sm-9">
 
 
             <div class="tab-content">
+
+                <div class="d-flex align-items-end flex-column my-2">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> XLS</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-table" aria-hidden="true"></i> CSV</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-book" aria-hidden="true"></i>TEX</a>
+
+                        </div>
+                    </div>
+                </div>
+
                  <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>

@@ -23,6 +23,7 @@ class UserController extends Controller
     public function index()
     {
         $users = \App\Models\User::all();
+
         return view('admin.nutzerverwaltung.index', [
             'users' => $users,
             'tableBuilder' => TableBuilder::$nutzerverwaltungIndex,

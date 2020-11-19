@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Ldap\User;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use DebugBar\DebugBar;
+se Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use LdapRecord\Laravel\Auth\ListensForLdapBindFailure;
@@ -37,17 +38,20 @@ class LoginController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
-
-        //dd(User::get());
         $this->middleware('guest')->except('logout');
-
+        $this->listenForLdapBindFailure();
     }
 
     protected function credentials(Request $request)
     {
-           return [
+        (preg_match('/^(\S+)(?=@)/', $request->email, $matches, PREG_OFFSET_CAPTURE, 0));
+
+        return [
+
+            'uid' => $matches[0],
             'mail' => $request->email,
             'password' => $request->password,
             'fallback' => [
@@ -59,11 +63,12 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        #$credentials = $request->only('email', 'password');
+        $credentials = $request->only('uid', 'password');
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/');
         }
     }
 
