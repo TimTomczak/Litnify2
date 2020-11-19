@@ -9,8 +9,13 @@
                         @if($aut == 'et al.')
                             <div class="col">
                                 <label id="et_al_label" for="et_al">Et al.</label>
-                                <input type="text" wire:init="$set('et_al', true)"
-                                       class="form-control @error('et_al') border-danger @enderror" name="et_al" id="et_al" value="{{$aut}}" readonly>
+                                <div class="input-group">
+                                    <input type="text" wire:init="$set('et_al', true)"
+                                           class="form-control @error('et_al') border-danger @enderror" name="et_al" id="et_al" value="{{$aut}}" readonly>
+                                    <div class="input-group-append ml-3 rounded-left">
+                                        <button wire:click.prevent="$set('et_al', false)" class="btn btn-danger"><i class="fa fa-minus-square"></i></button>
+                                    </div>
+                                </div>
                             </div>
                         @else
                             <div class="col">
@@ -61,7 +66,12 @@
             <button type="button" wire:click.defer="$set('et_al', true)" class="btn btn-primary btn-sm">Et al. <i class="fa fa-plus-square"></i></button>
         @else
             <label id="et_al_label" for="et_al">Et al.</label>
-            <input class="form-control @error('et_al') border-danger @enderror" type="text" name="et_al" id="et_al" value="et al." readonly>
+            <div class="input-group">
+                <input class="form-control @error('et_al') border-danger @enderror" type="text" name="et_al" id="et_al" value="et al." readonly>
+                <div class="input-group-append ml-3 rounded-left">
+                    <button wire:click.prevent="$set('et_al', false)" class="btn btn-danger"><i class="fa fa-minus-square"></i></button>
+                </div>
+            </div>
         @endif
     </div>
 
