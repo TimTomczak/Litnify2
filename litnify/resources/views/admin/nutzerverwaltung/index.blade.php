@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <table class="table table-hover">
+                <table class="{{$tableStyle}}">
                     <thead>
 
                     <tr>
@@ -37,9 +37,9 @@
                                 @endswitch
                             @endforeach
                             <td>
-                                <button class="btn btn-primary btn-sm" title="VIEW"><i class="fa fa-search"></i></button>
-                                <button class="btn btn-success btn-sm" title="EDIT"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger btn-sm" title="DELETE"><i class="fa fa-minus-circle"></i></button>
+                                <button class="{{$aktionenStyles['show']['button-class']}}" title="VIEW"><i class="{{$aktionenStyles['show']['icon-class']}}"></i></button>
+                                <button class="{{$aktionenStyles['edit']['button-class']}}" title="EDIT"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></button>
+                                <button class="{{$aktionenStyles['delete']['button-class']}}" title="DELETE"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
                             </td>
 
                         </tr>

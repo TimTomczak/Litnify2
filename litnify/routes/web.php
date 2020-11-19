@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\MediumController;
-use App\Http\Controllers\ZeitschriftController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +25,7 @@ Route::get('/', function () {
 
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
 //Route::get('/login', [App\Http\Controllers\LoginController::class])->name('login');
-Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout');
+//Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout');
 
 // * M o d e l s * //
 /***********************************/
@@ -45,9 +43,10 @@ Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'show
 /***********************************/
 Route::get('medienverwaltung', [App\Http\Controllers\MediumController::class, 'index'])->name('medienverwaltung.index');
 Route::get('medium/{medium}', [App\Http\Controllers\MediumController::class, 'show'])->name('medium.show')->where(array('medium' => '[0-9]+'));;
-Route::resource('medienverwaltung/medium', MediumController::class)->only([
-    'edit', 'create', 'store', 'update', 'destroy'
+Route::resource('medienverwaltung/medium',  App\Http\Controllers\MediumController::class)->only([
+    'edit',  'store', 'update', 'destroy'
 ])->where(array('medium' => '[0-9]+'));
+Route::get('medienverwaltung/medium/create', [App\Http\Controllers\MediumController::class, 'create'])->name('medium.createEmpty');
 Route::get('medienverwaltung/medium/create/{literaturart}', [App\Http\Controllers\MediumController::class, 'create'])->name('medium.create');
 Route::get('autor/{autor}', [App\Http\Controllers\MediumController::class, 'showAutor'])->name('autor.show');
 
@@ -57,7 +56,7 @@ Route::put('medienverwaltung/{medium}/freigabe', [App\Http\Controllers\FreigabeC
 
 /*  Zeitschriftenverwaltung */
 Route::get('zeitschriftenverwaltung', [App\Http\Controllers\ZeitschriftController::class, 'index'])->name('zeitschriften.index');
-Route::resource('medienverwaltung/zeitschrift', ZeitschriftController::class)->only([
+Route::resource('medienverwaltung/zeitschrift', App\Http\Controllers\ZeitschriftController::class)->only([
     'edit', 'create', 'store', 'update', 'destroy'
 ])->where(array('zeitschrift' => '[0-9]+'));
 /*  Inventarliste   */
@@ -68,7 +67,10 @@ Route::resource('medienverwaltung/zeitschrift', ZeitschriftController::class)->o
 /***********************************/
 Route::get('ausleihverwaltung', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihverwaltung.index');
 Route::post('ausleihverwaltung/ausleihe/{user}/{medium}', [App\Http\Controllers\AusleiheController::class, 'store'])->where(array('user' => '[0-9]+', 'medium' => '[0-9]+'))->name('ausleihe.store');
-Route::get('ausleihverwaltung/ausleihen/{user}', [App\Http\Controllers\AusleiheController::class, 'show'])->where(array('user' => '[0-9]+'))->name('ausleihe.show');
+Route::get('ausleihverwaltung/ausleihen/{ausleihe}', [App\Http\Controllers\AusleiheController::class, 'show'])->where(array('user' => '[0-9]+'))->name('ausleihe.show');
+Route::resource('ausleihverwaltung/ausleihe', App\Http\Controllers\AusleiheController::class)->only([
+    'edit', 'update', 'destroy'
+])->where(array('ausleihe' => '[0-9]+'));
 
 /*  Direktverleih   */
 Route::get('ausleihverwaltung/direktverleih', [App\Http\Controllers\DirektverleihController::class, 'index'])->name('direktverleih.index');

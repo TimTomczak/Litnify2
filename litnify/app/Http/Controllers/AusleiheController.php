@@ -37,6 +37,8 @@ class AusleiheController extends Controller
             'ausleihenBeendet' => $ausleihenBeendet,
             'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
             'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
+            'tableStyle' => TableBuilder::$tableStyle,
+            'aktionenStyles' => TableBuilder::$aktionenStyles,
         ]);
     }
 
@@ -78,8 +80,9 @@ class AusleiheController extends Controller
      *
      * @param  \App\Models\Ausleihe  $ausleihe
      */
-    public function show(User $user)
+    public function show($user)
     {
+        $user=User::find($user);
         $ausleihenAktiv = Ausleihe::whereUserId($user->id)->whereNull('RueckgabeIst')->get();
         $ausleihenAktiv = $this->dbTimestampToGermanDate($ausleihenAktiv);
         $ausleihenBeendet = Ausleihe::whereUserId($user->id)->whereNotNull('RueckgabeIst')->get();
@@ -89,6 +92,11 @@ class AusleiheController extends Controller
             'ausleihenAktiv' => $ausleihenAktiv,
             'ausleihenBeendet' => $ausleihenBeendet,
             'user' => $user,
+            'tableStyle' => TableBuilder::$tableStyle,
+            'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
+            'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
+            'tableBuilder' => TableBuilder::$zeitschrifenverwaltungIndex,
+            'aktionenStyles' => TableBuilder::$aktionenStyles,
         ]);
     }
 
@@ -100,7 +108,7 @@ class AusleiheController extends Controller
      */
     public function edit(Ausleihe $ausleihe)
     {
-        //
+        return abort('403','Bearbeiten von Ausleihen ist derzeit nicht implementiert');
     }
 
     /**
@@ -112,7 +120,7 @@ class AusleiheController extends Controller
      */
     public function update(Request $request, Ausleihe $ausleihe)
     {
-        //
+        return abort('403','Ändern von Ausleihen ist derzeit nicht implementiert');
     }
 
     /**
@@ -123,7 +131,7 @@ class AusleiheController extends Controller
      */
     public function destroy(Ausleihe $ausleihe)
     {
-        //
+        return abort('403','Löschen von Ausleihen ist derzeit nicht implementiert');
     }
 
     private function validateAttributes(Request $request){

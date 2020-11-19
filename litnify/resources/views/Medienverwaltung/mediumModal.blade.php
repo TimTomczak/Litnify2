@@ -18,8 +18,8 @@
         </div>
     </div>
 </div>
-@section('javascript.footer')
-    <script>
+<script>
+    $( document ).ready(function() {
         $(".render-medium-modal").click(function( event) {
             var $mediumId = $(this).data('id');
             $('#modalContent').empty();
@@ -29,5 +29,5 @@
             $('#showMediumBtn').attr('href','/medium/'+$mediumId)
             $('#mediumModal').modal('show');
         })
-    </script>
-@endsection
+    });
+</script>

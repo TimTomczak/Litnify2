@@ -6,7 +6,7 @@
         @if($medien->count()==0)
             <div class="alert alert-info m-2">INFO: Derzeit sind keine Medien in der Datenbank vorhanden !</div>
         @else
-            <table class="table table-responsive table-hover table-bordered table-striped text-nowrap">
+            <table class="{{$tableStyle}}">
                 <thead>
                 <tr>
                     @foreach($tableBuilder as $key=>$val)
@@ -49,7 +49,17 @@
 
                             @endswitch
                         @endforeach
-                        <td>...{{--TODO Aktionen--}}</td>
+                        <td>
+                            <div class="d-flex border-0 justify-content-around">
+                                <a href="{{route('medium.show',$med->id)}}"><button class="{{$aktionenStyles['show']['button-class']}}" title="Medium ansehen"><i class="{{$aktionenStyles['show']['icon-class']}}"></i></button></a>
+                                <a href="{{route('medium.edit',$med->id)}}"><button class="{{$aktionenStyles['edit']['button-class']}}" title="Medium bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></button></a>
+                                <form action="{{route('medium.destroy',$med->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Medium löschen"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
 
@@ -57,7 +67,7 @@
             </table>
             <div class="d-flex justify-content-between">
                 {{ $medien->links() }}
-                <a href="{{route('medium.create','')}}"><button type="submit" class="btn btn-primary">Neues Medium erstellen</button></a>
+                <a href="{{route('medium.createEmpty','')}}"><button type="submit" class="btn btn-primary">Neues Medium erstellen</button></a>
             </div>
 {{--            <table class="table table-responsive table-hover table-bordered table-striped text-nowrap">--}}
 {{--                <thead>--}}

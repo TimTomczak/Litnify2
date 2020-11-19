@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class InventarnummernComponent extends Component
 {
-    public Medium $medium;
+    public $medium;
     public $i=0;//Anzahl an Namen
     public $inputs=[];
     public $message;

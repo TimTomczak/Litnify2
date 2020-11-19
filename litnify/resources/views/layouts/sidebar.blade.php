@@ -8,7 +8,7 @@
             <i class="fa fa-book"></i> Medienverwaltung</a>
         <a href="{{route('freigabe.index')}}" class="list-group-item list-group-item-action indented {{ Helper::sidebar_active('*/medienverwaltung/freigabe') }}">
             <i class="fa fa-share-square-o"></i> Freigabe</a>
-        <a href="{{route('medium.create','')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('*/medienverwaltung/medium/create*')}} indented ">
+        <a href="{{route('medium.createEmpty','')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('*/medienverwaltung/medium/create*')}} indented ">
             <i class="fa fa-plus"></i> Medium erstellen</a>
         <a href="{{route('zeitschriften.index')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('*/zeitschriftenverwaltung')}}">
             <i class="fa fa-leanpub"></i> Zeitschriftenverwaltung</a>

@@ -26,6 +26,8 @@ class UserController extends Controller
         return view('admin.nutzerverwaltung.index', [
             'users' => $users,
             'tableBuilder' => TableBuilder::$nutzerverwaltungIndex,
+            'tableStyle' => TableBuilder::$tableStyle,
+            'aktionenStyles' => TableBuilder::$aktionenStyles,
         ]);
     }
 

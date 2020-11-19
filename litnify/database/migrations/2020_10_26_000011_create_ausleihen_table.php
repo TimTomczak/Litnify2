@@ -22,6 +22,7 @@ class CreateAusleihenTable extends Migration
             $table->date('RueckgabeSoll');
             $table->date('RueckgabeIst')->nullable();
             $table->integer('Verlaengerungen')->default(0);
+            $table->tinyInteger('deleted')->default(0);
             $table->timestamps();
         });
     }

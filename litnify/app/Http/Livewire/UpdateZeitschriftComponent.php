@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class UpdateZeitschriftComponent extends Component
 {
-    public Zeitschrift $zeitschrift;
+    public $zeitschrift;
     public $zeitschrift_id;
     public $name;
     public $shortcut;

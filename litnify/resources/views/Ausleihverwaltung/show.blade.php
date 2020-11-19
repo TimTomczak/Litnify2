@@ -14,20 +14,31 @@
     <div class="container mt-3">
         <h5>Aktive Ausleihen</h5>
         @if($ausleihenAktiv->isNotEmpty())
-        <table class="table table-responsive-lg table-responsive table-hover table-bordered">
+        <table class="{{$tableStyle}}">
             <thead>
                 <tr>
-                    @foreach($ausleihenAktiv->first()->attributesToArray() as $key=>$val)
-                        <th>{{$key}}</th>
+                    @foreach($tableBuilderAktiv as $key=>$val)
+                        <th>{{$val}}</th>
                     @endforeach
+                    <th>Aktionen</th>
                 </tr>
             </thead>
             <tbody>
             @foreach($ausleihenAktiv as $aus)
                 <tr class="{{$aus->RueckgabeSoll<date('Y-m-d', time()) ? 'alert alert-danger' : ''}}">
-                    @foreach($aus->attributesToArray() as $key => $val)
-                        <td>{{$val}}</td>
+                    @foreach($tableBuilderAktiv as $key=>$val)
+                        <td>{{$aus->attributesToArray()[$key]}}</td>
                     @endforeach
+                    <td> {{--Aktionen--}}
+                        <div class="d-flex border-0 justify-content-around">
+                            <a href="{{route('ausleihe.edit',$aus->id)}}"><button class="{{$aktionenStyles['edit']['button-class']}}" title="Ausleihe bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></button></a>
+                            <form action="{{route('ausleihe.destroy',$aus->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Ausleihe löschen"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
@@ -41,20 +52,31 @@
 
         <h5>Beendete Ausleihen</h5>
         @if($ausleihenBeendet->isNotEmpty())
-            <table class="table table-responsive-lg table-responsive table-hover table-bordered">
+            <table class="{{$tableStyle}}">
             <thead>
                 <tr>
-                    @foreach($ausleihenBeendet->first()->attributesToArray() as $key=>$val)
-                        <th>{{$key}}</th>
+                    @foreach($tableBuilderBeendet as $key=>$val)
+                        <th>{{$val}}</th>
                     @endforeach
+                    <th>Aktionen</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($ausleihenBeendet as $aus)
                     <tr>
-                        @foreach($aus->attributesToArray() as $key => $val)
-                            <td>{{$val}}</td>
+                        @foreach($tableBuilderBeendet as $key=>$val)
+                            <td>{{$aus->attributesToArray()[$key]}}</td>
                         @endforeach
+                        <td> {{--Aktionen--}}
+                            <div class="d-flex border-0 justify-content-around">
+                                <a href="{{route('ausleihe.edit',$aus->id)}}"><button class="{{$aktionenStyles['edit']['button-class']}}" title="Ausleihe bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></button></a>
+                                <form action="{{route('ausleihe.destroy',$aus->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Ausleihe löschen"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
