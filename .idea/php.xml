@@ -127,8 +127,6 @@
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/css-selector" />
       <path value="$PROJECT_DIR$/litnify/vendor/scrivo/highlight.php" />
       <path value="$PROJECT_DIR$/litnify/vendor/laravel-lang/lang" />
-      <path value="$PROJECT_DIR$/litnify/vendor/teamtnt/laravel-scout-tntsearch-driver" />
-      <path value="$PROJECT_DIR$/litnify/vendor/teamtnt/tntsearch" />
       <path value="$PROJECT_DIR$/litnify/vendor/yab/laravel-scout-mysql-driver" />
       <path value="$PROJECT_DIR$/litnify/vendor/laravel/scout" />
     </include_path>

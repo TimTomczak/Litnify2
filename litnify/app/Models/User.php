@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Laravel\Scout\Searchable;
 use LdapRecord\Laravel\Auth\LdapAuthenticatable;
 use LdapRecord\Laravel\Auth\AuthenticatesWithLdap;
 use LdapRecord\Laravel\Auth\HasLdapUser;
@@ -14,7 +15,7 @@ use LdapRecord\Laravel\Auth\HasLdapUser;
 
 class User extends Authenticatable implements LdapAuthenticatable
 {
-    use HasFactory, Notifiable, AuthenticatesWithLdap, HasLdapUser, CanResetPassword;
+    use HasFactory, Notifiable, AuthenticatesWithLdap, HasLdapUser, CanResetPassword, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -52,6 +53,17 @@ class User extends Authenticatable implements LdapAuthenticatable
         'berechtigungsrolle_id' => '1',
 
     ];
+
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'uid' => $this->uid,
+            'vorname' => $this->vorname,
+            'nachname' => $this->nachname,
+            'email' => $this->email,
+        ];
+    }
 
     public function merkliste(){
         return $this->belongsToMany(Medium::class, 'merkliste')
