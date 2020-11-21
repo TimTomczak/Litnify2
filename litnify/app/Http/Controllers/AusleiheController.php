@@ -39,6 +39,7 @@ class AusleiheController extends Controller
             'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
+            'ausleihdauerDefault' => 28 /*TODO Ausleihdauer in Variable speichern*/
         ]);
     }
 
@@ -121,6 +122,27 @@ class AusleiheController extends Controller
     public function update(Request $request, Ausleihe $ausleihe)
     {
         return abort('403','Ändern von Ausleihen ist derzeit nicht implementiert');
+    }
+
+    public function updateVerlaegerungen(Request $request, Ausleihe $ausleihe)
+    {
+//        dd($request->all(), $ausleihe);
+
+        $request->validate([
+            'id' => 'required|integer',
+            'verlaengerung' => 'date|required'
+        ]);
+
+        $ausleihe->update([
+            'id' => $request->id,
+            'RueckgabeSoll' => date('Y-m-d',strtotime($request->verlaengerung)),
+            'Verlaengerungen' => $ausleihe->Verlaengerungen++
+        ]);
+
+        return back()->with([
+            'message'=>'Ausleihe erfolgreich verlängert',
+            'alertType' => 'success'
+        ]);
     }
 
     /**

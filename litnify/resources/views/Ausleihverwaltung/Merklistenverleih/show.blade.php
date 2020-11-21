@@ -28,8 +28,8 @@
                     <td>
                         @if($merk->isAusleihbar()==true)
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId{{$merk->id}}">
-                            <i class="fa fa-calendar-plus-o"></i> ausleihen
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId{{$merk->id}}" title="Ausleihe verlängern">
+                            <i class="fa fa-calendar-plus-o"></i>
                         </button>
 
                         <!-- Modal -->
