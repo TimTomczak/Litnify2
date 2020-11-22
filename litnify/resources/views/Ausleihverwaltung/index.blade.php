@@ -152,68 +152,10 @@
 
 @endsection
 @section('javascript.header')
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('storage/css/daterangepicker/daterangepicker.css')}}" />
 @endsection
 @section('javascript.footer')
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script>
-    $('.ausleiheVerlaengern').click(function (event){
-        var id =  $(this).data('id');
-        var rueckgabeSoll =  $(this).data('rueckgabesoll');
-        // $('#modalAusleiheVerlaengern').modal('show')
-
-        $(function() {
-            $('#verlaengerung_'+id).daterangepicker({
-
-                // timePicker: true,
-                // timePicker24Hour: true,
-                showDropdowns: true,
-                startDate: rueckgabeSoll,
-                // endDate: rueckgabeSoll,
-                minDate: rueckgabeSoll,
-                opens: "center",
-                drops: "auto",
-                singleDatePicker: true,
-                // applyButtonClasses: "btn-primary",
-                cancelClass: "btn-secondary",
-                locale: {
-                    format: 'DD.MM.YYYY',
-                    separator: " - ",
-                    applyLabel: "Anwenden",
-                    cancelLabel: "Abbrechen",
-                    fromLabel: "Von",
-                    toLabel: "Bis",
-                    customRangeLabel: "Custom",
-                    weekLabel: "W",
-                    daysOfWeek: [
-                        "So",
-                        "Mo",
-                        "Di",
-                        "Mi",
-                        "Do",
-                        "Fr",
-                        "Sa"
-                    ],
-                    monthNames: [
-                        "Januar",
-                        "Februar",
-                        "März",
-                        "April",
-                        "Mai",
-                        "Juni",
-                        "Juli",
-                        "August",
-                        "September",
-                        "October",
-                        "November",
-                        "Dezember"
-                    ],
-                }
-            });
-        });
-
-    });
-</script>
-
+    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/moment.js')}}"></script>
+    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/daterangepicker.js')}}"></script>
+    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/custom/verlaengerungDaterangepicker.js')}}"></script>
 @endsection

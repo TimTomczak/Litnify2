@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
    <div class="container">
-        <table class="table table-bordered table-hover table-responsive-lg">
+        <table class="{{$tableStyle}}">
             <thead>
             <tr>
                 <th>ID Nutzer</th>
@@ -20,7 +20,7 @@
                     <td>{{$merk->user->nachname}}, {{$merk->user->vorname}}</td>
                     <td>{{\App\Models\Merkliste::where('user_id',$merk->user_id)->count()}}</td>
                     <td>
-                        {{\App\Models\Merkliste::where('user_id',2)->get()->filter(function($med){
+                        {{\App\Models\Merkliste::where('user_id',$merk->user_id)->get()->filter(function($med){
                             if ($med->medium->isAusleihbar()){
                                 return $med->medium;
                             }

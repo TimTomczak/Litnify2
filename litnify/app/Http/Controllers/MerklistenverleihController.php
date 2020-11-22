@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TableBuilder;
 use App\Models\Merkliste;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class MerklistenverleihController extends Controller
         $merk = Merkliste::with('user', 'medium')->groupBy('user_id')->paginate(10);
         return view('Ausleihverwaltung/Merklistenverleih.index',[
             'merklisten' => $merk,
+            'tableStyle' => TableBuilder::$tableStyle,
         ]);
     }
 
@@ -29,6 +31,7 @@ class MerklistenverleihController extends Controller
         return view('Ausleihverwaltung/Merklistenverleih.show',[
             'merkliste' => $medienAufMerkliste,
             'user' => $user,
+            'tableStyle' => TableBuilder::$tableStyle,
             'ausleihdauerDefault' => 28 /*TODO Ausleihdauer aus parameter übergeben*/
         ]);
     }

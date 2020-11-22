@@ -8,7 +8,7 @@
                 <p class="card-text">{{$user->email}}</p>
             </div>
         </div>
-        <table class="table table-responsive-lg table-bordered table-hover">
+        <table class="{{$tableStyle}}">
             <thead>
             <tr>
                 <th>ID Medium</th>
@@ -22,7 +22,8 @@
             @foreach($merkliste as $merk)
                 <tr>
                     <td>{{$merk->id}}</td>
-                    <td>{{$merk->hauptsachtitel}}</td>
+{{--                    <td>{{$merk->hauptsachtitel}}</td>--}}
+                    <td class="text-wrap"><a href="#" class="render-medium-modal" data-id="{{$merk->id}}">{{$merk->hauptsachtitel}}</a></td>
                     <td>{{$merk->pivot->created_at==null ? '-' : $merk->pivot->created_at->format("d.m.Y")}}</td>
                     <td>{{$merk->isAusleihbar()==true ? 'Ja' : 'Nein'}}</td>
                     <td>
@@ -92,6 +93,7 @@
             {{ $merkliste->links() }}
         </div>
     </div>
+    @include('Medienverwaltung.mediumModal')
 @endsection
 
 @include('Ausleihverwaltung.dateTimePicker')
