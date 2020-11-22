@@ -37,9 +37,12 @@
                             @method('DELETE')
                             <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Ausleihe löschen"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
                         </form>
-                        <!-- Button trigger modal -->
+                        <!-- Button trigger modal Verlängerung -->
                         <button class="btn btn-secondary btn-sm ausleiheVerlaengern" data-toggle="modal" data-target="#modalAusleiheVerlaengern_{{$aus->id}}" data-id="{{$aus->id}}" data-ausleihdatum="{{$aus->Ausleihdatum}}" data-rueckgabesoll="{{$aus->RueckgabeSoll}}" title="Ausleihe verlängern"><i class="fa fa-clock-o" ></i></button>
-                        <!-- Modal -->
+                        <!-- Button trigger modal Rückgabe -->
+                        <button class="btn btn-info btn-sm ausleiheRueckgabe" data-toggle="modal" data-target="#modalRueckgabe_{{$aus->id}}" data-id="{{$aus->id}}" data-ausleihdatum="{{$aus->Ausleihdatum}}" data-rueckgabesoll="{{$aus->RueckgabeSoll}}" title="Rückgabe verbuchen"><i class="fa fa-undo" ></i></button>
+
+                        <!-- Modal Verlängerung -->
                         <div class="modal fade modalAusleiheVerlaengern"  id="modalAusleiheVerlaengern_{{$aus->id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
                              aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -75,11 +78,43 @@
                                 </div>
                             </div>
                         </div>
-                        {{--<form action="{{route('ausleihe.extend',$aus->id)}}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <button class="btn btn-secondary btn-sm" title="Ausleihe verlängern"><i class="fa fa-clock-o" ></i></button>
-                        </form>--}}
+
+                        <!-- Modal Verlängerung -->
+                        <div class="modal fade modalAusleiheRueckgabe"  id="modalRueckgabe_{{$aus->id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Rückgabe durchführen</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="{{route('ausleihe.return',$aus->id)}}" method="POST">
+                                        <div class="modal-body">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <input type="text" style="display: none"
+                                                           class="form-control" name="id" id="id" aria-describedby="helpId" value="{{$aus->id}}" readonly>
+                                                </div>
+                                                <p class="card-text">Bisheriger Ausleihzeitraum: {{$aus->Ausleihdatum}} - {{$aus->RueckgabeSoll}} ({{(strtotime($aus->RueckgabeSoll)-strtotime($aus->Ausleihdatum))/ 86400}} Tage)</p>
+                                                <p class="card-text">Bisherigerige Verlängerungen: {{$aus->Verlaengerungen}}</p>
+                                                <input type="text"
+                                                       class="form-control" name="rueckgabe" id="rueckgabe_{{$aus->id}}" aria-describedby="helpId">
+                                                <small id="helpId" class="form-text text-muted">Wählen Sie ein Datum für die Rückgabe</small>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                                            <button type="submit" class="btn btn-primary">Speichern</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -158,4 +193,5 @@
     <script type="text/javascript" src="{{asset('storage/js/daterangepicker/moment.js')}}"></script>
     <script type="text/javascript" src="{{asset('storage/js/daterangepicker/daterangepicker.js')}}"></script>
     <script type="text/javascript" src="{{asset('storage/js/daterangepicker/custom/verlaengerungDaterangepicker.js')}}"></script>
+    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/custom/rueckgabeDaterangepicker.js')}}"></script>
 @endsection

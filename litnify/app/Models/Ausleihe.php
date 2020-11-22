@@ -14,7 +14,9 @@ class Ausleihe extends Model
         'user_id' ,
         'inventarnummer',
         'Ausleihdatum' ,
-        'RueckgabeSoll'
+        'Verlaengerungen',
+        'RueckgabeSoll',
+        'RueckgabeIst'
     ];
 
     public function medium(){

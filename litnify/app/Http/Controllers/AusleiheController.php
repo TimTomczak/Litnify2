@@ -136,11 +136,30 @@ class AusleiheController extends Controller
         $ausleihe->update([
             'id' => $request->id,
             'RueckgabeSoll' => date('Y-m-d',strtotime($request->verlaengerung)),
-            'Verlaengerungen' => $ausleihe->Verlaengerungen++
+            'Verlaengerungen' => $ausleihe->Verlaengerungen+1
         ]);
 
         return back()->with([
             'message'=>'Ausleihe erfolgreich verlängert',
+            'alertType' => 'success'
+        ]);
+    }
+
+    public function updateRueckgabe(Request $request, Ausleihe $ausleihe)
+    {
+//        dd($request->all(), $ausleihe);
+
+        $request->validate([
+            'id' => 'required|integer',
+            'rueckgabe' => 'date|required'
+        ]);
+        $ausleihe->update([
+            'id' => $request->id,
+            'RueckgabeIst' => date('Y-m-d',strtotime($request->rueckgabe)),
+        ]);
+
+        return back()->with([
+            'message'=>'Rückgabe erfolgreich verbucht.',
             'alertType' => 'success'
         ]);
     }

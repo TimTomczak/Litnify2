@@ -72,6 +72,7 @@ Route::resource('ausleihverwaltung/ausleihe', App\Http\Controllers\AusleiheContr
     'edit', 'update', 'destroy'
 ])->where(array('ausleihe' => '[0-9]+'));
 Route::put('ausleihverwaltung/ausleihe/{ausleihe}/verlaengern', [App\Http\Controllers\AusleiheController::class, 'updateVerlaegerungen'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.extend');
+Route::put('ausleihverwaltung/ausleihe/{ausleihe}/rueckgabe', [App\Http\Controllers\AusleiheController::class, 'updateRueckgabe'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.return');
 
 /*  Direktverleih   */
 Route::get('ausleihverwaltung/direktverleih', [App\Http\Controllers\DirektverleihController::class, 'index'])->name('direktverleih.index');
