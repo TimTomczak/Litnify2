@@ -47,6 +47,16 @@
                         </td>
                     @break
 
+                    @case('doi')
+                    <td>
+                        @if(filter_var($medium->doi, FILTER_VALIDATE_URL))
+                            <a href="{{$medium->doi}}">{{$medium->doi}}</a>
+                        @else
+                            {{$medium->doi}}
+                        @endif
+                    </td>
+                    @break
+
                     @default
                     <td>{{$medium->attributesToArray()[$key]}}</td>
                 @endswitch
