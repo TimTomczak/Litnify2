@@ -88,6 +88,9 @@
             @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-between">
+            {{ $merkliste->links() }}
+        </div>
     </div>
 @endsection
 

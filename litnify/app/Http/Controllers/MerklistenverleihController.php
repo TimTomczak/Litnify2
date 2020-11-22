@@ -14,7 +14,7 @@ class MerklistenverleihController extends Controller
      */
     public function index()
     {
-        $merk = Merkliste::with('user', 'medium')->groupBy('user_id')->get();
+        $merk = Merkliste::with('user', 'medium')->groupBy('user_id')->paginate(10);
         return view('Ausleihverwaltung/Merklistenverleih.index',[
             'merklisten' => $merk,
         ]);
@@ -25,7 +25,7 @@ class MerklistenverleihController extends Controller
      */
     public function show(User $user)
     {
-        $medienAufMerkliste = $user->merkliste;
+        $medienAufMerkliste = $user->merkliste->paginate(10);
         return view('Ausleihverwaltung/Merklistenverleih.show',[
             'merkliste' => $medienAufMerkliste,
             'user' => $user,

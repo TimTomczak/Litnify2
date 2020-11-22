@@ -28,9 +28,9 @@ class AusleiheController extends Controller
      */
     public function index()
     {
-        $ausleihenAktiv = Ausleihe::with('medium','user')->where('RueckgabeIst',null)->get();
+        $ausleihenAktiv = Ausleihe::with('medium','user')->where('RueckgabeIst',null)->paginate(10);
         $ausleihenAktiv = $this->dbTimestampToGermanDate($ausleihenAktiv);
-        $ausleihenBeendet = Ausleihe::with('medium','user')->whereNotNull('RueckgabeIst')->get();
+        $ausleihenBeendet = Ausleihe::with('medium','user')->whereNotNull('RueckgabeIst')->paginate(10);
         $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
         return view('Ausleihverwaltung.index',[
             'ausleihenAktiv' => $ausleihenAktiv,
@@ -90,8 +90,8 @@ class AusleiheController extends Controller
         $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
 
         return view('Ausleihverwaltung.show',[
-            'ausleihenAktiv' => $ausleihenAktiv,
-            'ausleihenBeendet' => $ausleihenBeendet,
+            'ausleihenAktiv' => $ausleihenAktiv->paginate(10),
+            'ausleihenBeendet' => $ausleihenBeendet->paginate(10),
             'user' => $user,
             'tableStyle' => TableBuilder::$tableStyle,
             'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,

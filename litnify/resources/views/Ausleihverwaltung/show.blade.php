@@ -25,7 +25,7 @@
             </thead>
             <tbody>
             @foreach($ausleihenAktiv as $aus)
-                <tr class="{{$aus->RueckgabeSoll<date('Y-m-d', time()) ? 'alert alert-danger' : ''}}">
+                <tr  {{$aus->RueckgabeSoll<date('d.m.Y', time())&&$aus->RueckgabeIst==null ? 'style=background-color:#f9d6d5' : ''}}>
                     @foreach($tableBuilderAktiv as $key=>$val)
                         <td>{{$aus->attributesToArray()[$key]}}</td>
                     @endforeach
@@ -80,16 +80,25 @@
             @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-between">
+            {{ $ausleihenAktiv->links() }}
+        </div>
         @else
             <p>Keine aktiven Ausleihen vorhanden.</p>
         @endif
     </div>
     <div class="container">
         <hr>
-
-        <h5>Beendete Ausleihen</h5>
+        <div class="d-flex justify-content-start">
+        <h5 class="mr-3">Beendete Ausleihen</h5>
+        <button type="button" onclick="$('#ausleihenBeendetTable').toggle(); $('#tableShown').toggle(); $('#tableHidden').toggle()"
+                class="btn btn-primary btn-sm">
+            <i id="tableShown" class="fa fa-caret-down" style="display: none"></i>
+            <i id="tableHidden" class="fa fa-caret-up"></i>
+        </button>
+        </div>
         @if($ausleihenBeendet->isNotEmpty())
-            <table class="{{$tableStyle}}">
+            <table id="ausleihenBeendetTable" class="{{$tableStyle}}" style="display: none;">
             <thead>
                 <tr>
                     @foreach($tableBuilderBeendet as $key=>$val)
@@ -100,7 +109,7 @@
                 </thead>
                 <tbody>
                 @foreach($ausleihenBeendet as $aus)
-                    <tr>
+                    <tr {{$aus->RueckgabeSoll<$aus->RueckgabeIst ? 'style=background-color:#f9d6d5' : ''}}>
                         @foreach($tableBuilderBeendet as $key=>$val)
                             <td>{{$aus->attributesToArray()[$key]}}</td>
                         @endforeach
@@ -118,6 +127,9 @@
                 @endforeach
                 </tbody>
             </table>
+            <div class="d-flex justify-content-between">
+                {{ $ausleihenBeendet->links() }}
+            </div>
         @else
             <p>Keine beendeten Ausleihen vorhanden.</p>
         @endif
@@ -141,7 +153,7 @@
                     // timePicker: true,
                     // timePicker24Hour: true,
                     showDropdowns: true,
-                    // startDate: ausleihdatum,
+                    startDate: rueckgabeSoll,
                     // endDate: rueckgabeSoll,
                     minDate: rueckgabeSoll,
                     opens: "center",

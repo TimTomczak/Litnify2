@@ -13,7 +13,7 @@
             </thead>
             <tbody>
             @foreach($ausleihenAktiv as $aus)
-            <tr>
+            <tr {{$aus->RueckgabeSoll<date('d.m.Y', time())&&$aus->RueckgabeIst==null ? 'style=background-color:#f9d6d5' : ''}}>
                 @foreach($tableBuilderAktiv as $key=>$val)
                     @switch($key)
                         @case('medium_id')
@@ -86,11 +86,22 @@
             @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-between">
+            {{ $ausleihenAktiv->links() }}
+        </div>
     </div>
-
     <div class="container">
-        <h4>Beendete Ausliehen</h4>
-        <table class="table table-responsive-lg table-hover table-bordered">
+        <hr>
+
+        <div class="d-flex justify-content-start">
+            <h4 class="mr-3">Beendete Ausliehen</h4>
+            <button type="button" onclick="$('#ausleihenBeendetTable').toggle(); $('#tableShown').toggle(); $('#tableHidden').toggle()"
+                    class="btn btn-primary btn-sm">
+                <i id="tableShown" class="fa fa-caret-down" style="display: none"></i>
+                <i id="tableHidden" class="fa fa-caret-up"></i>
+            </button>
+        </div>
+        <table id="ausleihenBeendetTable" class="table table-responsive-lg table-hover table-bordered" style="display: none;">
             <thead>
             <tr>
                 @foreach($tableBuilderBeendet as $key=>$val)
@@ -101,7 +112,7 @@
             </thead>
             <tbody>
             @foreach($ausleihenBeendet as $aus)
-                <tr>
+                <tr {{$aus->RueckgabeSoll<$aus->RueckgabeIst ? 'style=background-color:#f9d6d5' : ''}}>
                     @foreach($tableBuilderBeendet as $key=>$val)
                         @switch($key)
                             @case('medium_id')
@@ -133,6 +144,9 @@
             @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-between">
+            {{ $ausleihenBeendet->links() }}
+        </div>
     </div>
     @include('Medienverwaltung.mediumModal')
 
@@ -155,7 +169,7 @@
                 // timePicker: true,
                 // timePicker24Hour: true,
                 showDropdowns: true,
-                // startDate: ausleihdatum,
+                startDate: rueckgabeSoll,
                 // endDate: rueckgabeSoll,
                 minDate: rueckgabeSoll,
                 opens: "center",
