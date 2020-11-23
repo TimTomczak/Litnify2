@@ -26,7 +26,7 @@ class DirektverleihController extends Controller
      * Show the form for creating a new resource.
      *
      */
-    public function create(Request $request)
+    public function create(User $user)
     {
         $medien=DB::table('medien_ausleihbar')->get()->toArray();
 
@@ -34,11 +34,11 @@ class DirektverleihController extends Controller
             if ($medium->isAusleihbar()){
                 return $medium;
             }
-        });
+        })->paginate(10);
 
-        $user_id=$request->validate(['user_id' => 'required|integer']);
+//        $user_id=$request->validate(['user_id' => 'required|integer']);
         return view('Ausleihverwaltung/Direktverleih.create',[
-            'user' => User::findOrFail($user_id)->first(),
+            'user' => $user,
             'medien' => $medien,
             'ausleihdauerDefault' => 28 /*TODO ausleihDauer aus parameter übergeben */
         ]);

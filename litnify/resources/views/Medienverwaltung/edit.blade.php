@@ -1,14 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Admin-Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{route('medienverwaltung.index')}}">Medienverwaltung</a></li>
-                <li class="breadcrumb-item"><a href="{{route('medium.show', $medium->id)}}">Medium anzeigen</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Medium bearbeiten</li>
-            </ol>
-        </nav>
         <div class="card p-4 bg-light">
             <form action="{{route('medium.update',$medium->id)}}" method="POST" id="form">
                 @method('PUT')
@@ -144,7 +136,7 @@
                         <input type="text"
                                class="form-control @error('doi') border-danger @enderror" name="doi" id="doi"
                                placeholder=""
-                               value="{{$medium->issn}}"
+                               value="{{$medium->doi}}"
                         >
                         @error('doi')
                             <div class="invalid-feedback d-block">{{$message}}</div>

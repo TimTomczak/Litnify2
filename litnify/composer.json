@@ -8,16 +8,18 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3.12",
+        "php": "^7.3.24",
         "directorytree/ldaprecord-laravel": "^1.7",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel-lang/lang": "~7.0",
         "laravel/framework": "^8.0",
+        "laravel/scout": "^8.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "livewire/livewire": "^2.3"
+        "livewire/livewire": "^2.3",
+        "yab/laravel-scout-mysql-driver": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

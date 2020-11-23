@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Laravel\Scout\Searchable;
 
 class Medium extends Model
 {
+    use Searchable;
+
     protected $fillable = [
         'id',
         'literaturart_id' ,
@@ -37,6 +40,46 @@ class Medium extends Model
     ];
 
     protected $table='medien';
+
+
+
+    public function toSearchableArray()
+    {
+
+        $array= [
+//        'id' => $this->id,
+        'signatur' => $this->signatur ,
+        'autoren' =>$this->autoren,
+        'hauptsachtitel' =>$this->hauptsachtitel,
+        'untertitel' =>$this->untertitel,
+        'enthalten_in' =>$this->enthalten_in,
+        'erscheinungsort' =>$this->erscheinungsort,
+//        'literaturart' => $this->literaturart->literaturart,
+        'jahr' => $this->jahr ,
+        'verlag' =>$this->verlag,
+        'isbn' => $this->isbn,
+        'issn' => $this->signatur,
+        'doi' => $this->signatur,
+        'auflage' => $this->auflage ,
+        'herausgeber' => $this->herausgeber ,
+        'schriftenreihe' => $this->schriftenreihe,
+        'band' => $this->band,
+//        'seite' => $this->seite,
+        'institut' => $this->institut,
+//        'bemerkungen' => $this->bemerkungen,
+    ];
+//        $array = $this->transform($array);
+//        $array['literaturart'] = $this->literaturart->literaturart;
+//        $array['inventarnummer'] = $this->inventarliste->inventarnummer;
+//        $array['raum'] = $this->raum->raum;
+//        $array['zeitschrift'] = $this->zeitschrift->name;
+
+        // Applies Scout Extended default transformations:
+
+        // Add an extra attribute:
+
+        return $array;
+    }
 
     public function merkliste(){
         return $this->belongsToMany(User::class, 'merkliste')

@@ -8,7 +8,7 @@
                 <p class="card-text">{{$user->email}}</p>
             </div>
         </div>
-        <table class="table table-responsive-lg table-bordered table-hover">
+        <table class="{{$tableStyle}}">
             <thead>
             <tr>
                 <th>ID Medium</th>
@@ -22,14 +22,15 @@
             @foreach($merkliste as $merk)
                 <tr>
                     <td>{{$merk->id}}</td>
-                    <td>{{$merk->hauptsachtitel}}</td>
+{{--                    <td>{{$merk->hauptsachtitel}}</td>--}}
+                    <td class="text-wrap"><a href="#" class="render-medium-modal" data-id="{{$merk->id}}">{{$merk->hauptsachtitel}}</a></td>
                     <td>{{$merk->pivot->created_at==null ? '-' : $merk->pivot->created_at->format("d.m.Y")}}</td>
                     <td>{{$merk->isAusleihbar()==true ? 'Ja' : 'Nein'}}</td>
                     <td>
                         @if($merk->isAusleihbar()==true)
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId{{$merk->id}}">
-                            <i class="fa fa-calendar-plus-o"></i> ausleihen
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId{{$merk->id}}" title="Ausleihe verlängern">
+                            <i class="fa fa-calendar-plus-o"></i>
                         </button>
 
                         <!-- Modal -->
@@ -88,7 +89,11 @@
             @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-between">
+            {{ $merkliste->links() }}
+        </div>
     </div>
+    @include('Medienverwaltung.mediumModal')
 @endsection
 
 @include('Ausleihverwaltung.dateTimePicker')

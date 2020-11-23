@@ -28,9 +28,9 @@ class AusleiheController extends Controller
      */
     public function index()
     {
-        $ausleihenAktiv = Ausleihe::with('medium','user')->where('RueckgabeIst',null)->get();
+        $ausleihenAktiv = Ausleihe::with('medium','user')->where('RueckgabeIst',null)->paginate(10);
         $ausleihenAktiv = $this->dbTimestampToGermanDate($ausleihenAktiv);
-        $ausleihenBeendet = Ausleihe::with('medium','user')->whereNotNull('RueckgabeIst')->get();
+        $ausleihenBeendet = Ausleihe::with('medium','user')->whereNotNull('RueckgabeIst')->paginate(10);
         $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
         return view('Ausleihverwaltung.index',[
             'ausleihenAktiv' => $ausleihenAktiv,
@@ -39,6 +39,7 @@ class AusleiheController extends Controller
             'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
+            'ausleihdauerDefault' => 28 /*TODO Ausleihdauer in Variable speichern*/
         ]);
     }
 
@@ -89,8 +90,8 @@ class AusleiheController extends Controller
         $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
 
         return view('Ausleihverwaltung.show',[
-            'ausleihenAktiv' => $ausleihenAktiv,
-            'ausleihenBeendet' => $ausleihenBeendet,
+            'ausleihenAktiv' => $ausleihenAktiv->paginate(10),
+            'ausleihenBeendet' => $ausleihenBeendet->paginate(10),
             'user' => $user,
             'tableStyle' => TableBuilder::$tableStyle,
             'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
@@ -121,6 +122,46 @@ class AusleiheController extends Controller
     public function update(Request $request, Ausleihe $ausleihe)
     {
         return abort('403','Ändern von Ausleihen ist derzeit nicht implementiert');
+    }
+
+    public function updateVerlaegerungen(Request $request, Ausleihe $ausleihe)
+    {
+//        dd($request->all(), $ausleihe);
+
+        $request->validate([
+            'id' => 'required|integer',
+            'verlaengerung' => 'date|required'
+        ]);
+
+        $ausleihe->update([
+            'id' => $request->id,
+            'RueckgabeSoll' => date('Y-m-d',strtotime($request->verlaengerung)),
+            'Verlaengerungen' => $ausleihe->Verlaengerungen+1
+        ]);
+
+        return back()->with([
+            'message'=>'Ausleihe erfolgreich verlängert',
+            'alertType' => 'success'
+        ]);
+    }
+
+    public function updateRueckgabe(Request $request, Ausleihe $ausleihe)
+    {
+//        dd($request->all(), $ausleihe);
+
+        $request->validate([
+            'id' => 'required|integer',
+            'rueckgabe' => 'date|required'
+        ]);
+        $ausleihe->update([
+            'id' => $request->id,
+            'RueckgabeIst' => date('Y-m-d',strtotime($request->rueckgabe)),
+        ]);
+
+        return back()->with([
+            'message'=>'Rückgabe erfolgreich verbucht.',
+            'alertType' => 'success'
+        ]);
     }
 
     /**

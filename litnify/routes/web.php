@@ -70,10 +70,12 @@ Route::get('ausleihverwaltung/ausleihen/{ausleihe}', [App\Http\Controllers\Ausle
 Route::resource('ausleihverwaltung/ausleihe', App\Http\Controllers\AusleiheController::class)->only([
     'edit', 'update', 'destroy'
 ])->where(array('ausleihe' => '[0-9]+'));
+Route::put('ausleihverwaltung/ausleihe/{ausleihe}/verlaengern', [App\Http\Controllers\AusleiheController::class, 'updateVerlaegerungen'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.extend');
+Route::put('ausleihverwaltung/ausleihe/{ausleihe}/rueckgabe', [App\Http\Controllers\AusleiheController::class, 'updateRueckgabe'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.return');
 
 /*  Direktverleih   */
 Route::get('ausleihverwaltung/direktverleih', [App\Http\Controllers\DirektverleihController::class, 'index'])->name('direktverleih.index');
-Route::get('ausleihverwaltung/direktverleih/create', [App\Http\Controllers\DirektverleihController::class, 'create'])->name('direktverleih.create');
+Route::get('ausleihverwaltung/direktverleih/create/{user}', [App\Http\Controllers\DirektverleihController::class, 'create'])->name('direktverleih.create');
 
 /*  Merklistenverleih   */
 Route::get('ausleihverwaltung/merklistenverleih', [App\Http\Controllers\MerklistenverleihController::class, 'index'])->name('merklistenverleih.index');
