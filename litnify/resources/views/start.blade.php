@@ -26,7 +26,7 @@
                             <div class="col-12 col-md-9 mb-2 mb-md-0">
                                 <div class="input-group">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary fa fa-search rounded-left"></button>
+                                        <button class="btn btn-primary fa fa-search rounded-left" type="button"></button>
                                     </div>
                                     <input type="text" name="q" class="form-control form-control-lg" placeholder="Bitte Suchbegriff eingeben..." autofocus />
 

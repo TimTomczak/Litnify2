@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MediumController;
+use App\Http\Controllers\ZeitschriftController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,13 +21,9 @@ Auth::routes([
     'verify' => true, // Email Verification Routes...
 ]);
 
-Route::get('/', function () {
-    return view('start');
-})->name('start');
-
+Route::get('/', function () {return view('start');})->name('start');
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
-//Route::get('/login', [App\Http\Controllers\LoginController::class])->name('login');
-//Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout');
+Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout');
 
 // * M o d e l s * //
 /***********************************/
@@ -43,6 +41,7 @@ Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'show
 /***********************************/
 Route::get('medienverwaltung', [App\Http\Controllers\MediumController::class, 'index'])->name('medienverwaltung.index');
 Route::get('medium/{medium}', [App\Http\Controllers\MediumController::class, 'show'])->name('medium.show')->where(array('medium' => '[0-9]+'));;
+Route::resource('medienverwaltung/medium', MediumController::class)->only(['edit', 'store', 'update', 'destroy'])->where(array('medium' => '[0-9]+'));
 Route::resource('medienverwaltung/medium',  App\Http\Controllers\MediumController::class)->only([
     'edit',  'store', 'update', 'destroy'
 ])->where(array('medium' => '[0-9]+'));
@@ -84,14 +83,13 @@ Route::get('ausleihverwaltung/merklistenverleih/{user}', [App\Http\Controllers\M
 
 // * A d m i n P a g e  s * //
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
-
     Route::get('nutzerverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.nutzerverwaltung');
     Route::get('ausleihverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.ausleihverwaltung');
-    Route::get('systemverwaltung', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung');
-    Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\Admin\SystemController::class, 'auswertungen'])->name('admin.systemverwaltung.auswertungen');
-    Route::get('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditor'])->name('admin.systemverwaltung.contenteditor');
-    Route::post('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditorUpdate']);
-    Route::get('systemverwaltung/logs', [App\Http\Controllers\Admin\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs');
+    Route::get('systemverwaltung', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung')->middleware('auth', 'role:4');
+    Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\Admin\SystemController::class, 'auswertungen'])->name('admin.systemverwaltung.auswertungen')->middleware('auth', 'role:4');
+    Route::get('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditor'])->name('admin.systemverwaltung.contenteditor')->middleware('auth', 'role:4');
+    Route::post('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditorUpdate'])->middleware('auth', 'role:4');
+    Route::get('systemverwaltung/logs', [App\Http\Controllers\Admin\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs')->middleware('auth', 'role:4');
 
     //Route::get('users', 'App\Http\Controllers\Admin\UserController');
     //Route::get('medium', 'App\Http\Controllers\Admin\MediumController');
@@ -101,6 +99,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 
 
 // * S t a t i c P a g e  s * //

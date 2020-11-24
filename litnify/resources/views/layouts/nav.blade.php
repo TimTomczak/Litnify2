@@ -1,8 +1,8 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 
     @auth
-        @if ( auth()->user()->berechtigungsrolle_id > 999)
+        @if ( auth()->user()->berechtigungsrolle_id > 1)
             <button class="btn btn-light btn-lg border" id="sidebar-toggle" type="button">
                 ADMIN <i class="fa fa-bars"></i>
             </button>

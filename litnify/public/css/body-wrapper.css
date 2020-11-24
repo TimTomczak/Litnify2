@@ -33,11 +33,6 @@
     margin-left: 0;
 }
 
-@media (min-width: 1025px) {
-    #sidebar-toggle{
-        display: none;
-    }
-}
 
 @media (min-width: 768px) {
 

@@ -20,7 +20,7 @@
                                     <a href="{{url('/user/ausleihen')}}">Ausgeliehene Werke: <h1 class="display-4">{{ count($user->ausleihe) }}</h1></a>
                                 </p>
                                 <p class="text-secondary mb-1">
-                                    <a href="{{url('/user/merkliste')}}">Merkliste: <h1 class="display-4">{{ count($user->medium) }}</h1></a>
+                                    <a href="{{url('/user/merkliste')}}">Merkliste: <h1 class="display-4">{{ count($user->merkliste) }}</h1></a>
                                 </p>
 
                             </div>

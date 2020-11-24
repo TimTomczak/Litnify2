@@ -14,7 +14,7 @@
         @endauth
         <div id="content-wrapper">
             @include('layouts.nav')
-            <main class="" style="/*margin-top:66px; */background-color: #ffffff; min-height: 80vh;">
+            <main class="" style="margin-top:66px; background-color: #ffffff; min-height: 80vh;">
                 {{--Benachrichtigung--}}
                 <div class="container-fluid">
                     @if(!(request()->is('/')))
@@ -34,22 +34,7 @@
     </div>
 
     @livewireScripts
-    <script>
-        $( document ).on( "mousemove", function( event ) {
-            if (screen.width>1025) {
-                if (event.pageX < 5) {
-                    if ($('#wrapper').hasClass('toggled')) {
-                        $('#wrapper').removeClass('toggled')
-                    }
-                }
-                if (!$('#wrapper').hasClass('toggled')) {
-                    if (event.pageX > 240) {
-                        $('#wrapper').addClass('toggled')
-                    }
-                }
-            }
-        });
-    </script>
+
     <script>
         $('#sidebar-toggle').click(function (){
             if ($('#wrapper').hasClass('toggled')){

@@ -72,7 +72,7 @@ return [
             'model' => LdapRecord\Models\OpenLDAP\User::class,
             'database' => [
                 'model' => App\Models\User::class,
-                'sync_passwords' => false,
+                'sync_passwords' => true,
                 'sync_attributes' => \App\Ldap\LdapAttributeHandler::class,
             ],
         ],
@@ -80,7 +80,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
-         ],
+        ],
     ],
 
     /*
