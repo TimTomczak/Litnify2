@@ -99,6 +99,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test');
 
 
 // * S t a t i c P a g e  s * //

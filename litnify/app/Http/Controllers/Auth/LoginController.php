@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Ldap\User;
 use App\Providers\RouteServiceProvider;
 use DebugBar\DebugBar;
-se Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use LdapRecord\Laravel\Auth\ListensForLdapBindFailure;

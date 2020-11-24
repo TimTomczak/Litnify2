@@ -3,47 +3,37 @@
 @section('javascript.header')
     <script src="{{asset('storage/js/tinymce/tinymce.min.js')}}"></script>
     <script>tinymce.init({
-            selector:'#content'
+            selector: 'textarea',
+            language: 'de',
+            height : "480"
     });</script>
 @endsection
 
 @section('content')
 
-
-    <form action="{{route('admin.systemverwaltung.contenteditor')}}">
-        <div class="dropdown show">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Bitte Seite auswählen...
-            </button>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                @foreach($seiten as $seite)
-                    <a class="dropdown-item" href="?seite={{mb_strtolower($seite)}}">{{($seite)}}</a>
-                @endforeach
-            </div>
-        </div>
+    <form action="{{route('admin.systemverwaltung.contenteditor')}}" method="get">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link {{ Helper::tab_active('faq') }}" href="?seite=faq">FAQ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Helper::tab_active('oeffnungszeiten') }}" href="?seite=oeffnungszeiten">Öffnungszeiten</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Helper::tab_active('kontakt') }}" href="?seite=kontakt">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Helper::tab_active('impressum') }}" href="?seite=impressum">Impressum</a>
+            </li>
+        </ul>
     </form>
 
-    <hr>
 
-    @if($selection)
-        <div>
-            <h5>Sie bearbeiten folgende Seite: <b>{{ ucfirst($selection)}}</b></h5>
-            <br>
 
-            <form action="{{route('admin.systemverwaltung.contenteditor')}}" method="POST">
-                @csrf
-                <input type="hidden" name="title" value="{{$selection}}">
-                <textarea cols="100" rows="20" name="content" id="content">
-                {{($content)}}
-                </textarea>
+    <textarea class="content" rows="6">
 
-                <button class="btn btn-primary" type="submit">Speichern</button>
 
-            </form>
-        </div>
 
-    @endif
-
+    </textarea>
 
 @endsection

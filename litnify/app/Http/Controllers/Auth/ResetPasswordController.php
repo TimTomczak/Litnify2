@@ -24,22 +24,6 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
-    /*
-    protected function credentials(\Illuminate\Http\Request $request)
-    {
-        $db_user = (User::where('email',$request->email)->first()->guid == null) ? true : false;
-        if(true){
-            $response = 'Passwörter für LDAP Accounts können nicht über diese Funktion zurückgesetzt werden.';
-
-            return redirect()->back()
-                ->withInput($request->only('email'))
-                ->withErrors(['email' => $response]);
-        }
-        return $request->only('email');
-    }
-    */
-
-
     /**
      * Where to redirect users after resetting their password.
      *

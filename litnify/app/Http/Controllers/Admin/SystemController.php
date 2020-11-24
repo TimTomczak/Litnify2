@@ -46,16 +46,12 @@ class SystemController extends Controller
 
 
     public function contentEditor(Request $request){
-
         $selection = $request->seite;
-        $content = false;
-        if($selection != null){
-            $content = Seiten::getByTitle($selection);
+        if($selection == '') {
+            redirect()->route('admin.systemverwaltung.contenteditor', ['seite' => 'faq']);
         }
-        $seiten = ['FAQ', 'Kontakt', 'Oeffnungszeiten','Impressum'];
-
-        return view('admin.systemverwaltung.contenteditor', compact(['seiten', 'content', 'selection']));
-
+        $content = Seiten::getByTitle($selection);
+        return view('admin.systemverwaltung.contenteditor', compact(['content', 'selection']));
     }
 
     public function contentEditorUpdate(Request $request){

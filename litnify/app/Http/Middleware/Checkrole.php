@@ -17,7 +17,7 @@ class Checkrole
     public function handle(Request $request, Closure $next, $permission_id)
     {
         if($request->user()->berechtigungsrolle_id < $permission_id){
-            abort('403', 'Zugriff verweigert');
+            abort('401', 'Zugriff verweigert');
         }
         return $next($request);
     }

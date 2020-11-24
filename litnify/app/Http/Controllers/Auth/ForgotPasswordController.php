@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Redirect;
+use function PHPUnit\Framework\isEmpty;
 
 class ForgotPasswordController extends Controller
 {
@@ -23,6 +26,25 @@ class ForgotPasswordController extends Controller
 
     use SendsPasswordResetEmails;
 
+
+    public function sendResetLinkEmail(Request $request, $response)
+    {
+        $user = User::where('email', '=', $request->get('email'))->firstOrFail();
+
+        if ($user->guid != null ) {
+            return Redirect::back()->withErrors(['email' => 'Passwörter für LDAP-Accounts können nicht über diese Funktion zurückgesetzt werden']);
+        }
+
+        $this->validateEmail($request);
+
+        $response = $this->broker()->sendResetLink(
+            $request->only('email')
+        );
+
+        return $response == Password::RESET_LINK_SENT
+            ? $this->sendResetLinkResponse($request, $response)
+            : $this->sendResetLinkFailedResponse($request, $response);
+    }
 
 
 }
