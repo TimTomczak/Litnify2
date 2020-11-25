@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\MediumController;
-use App\Http\Controllers\ZeitschriftController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +21,8 @@ Auth::routes([
 
 Route::get('/', function () {return view('start');})->name('start');
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
+Route::post('/suche/export', [App\Http\Controllers\SearchController::class, 'export'])->name('suche.export');
+//Route::get('/login', [App\Http\Controllers\LoginController::class])->name('login');
 Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout');
 
 // * M o d e l s * //
@@ -83,6 +83,7 @@ Route::get('ausleihverwaltung/merklistenverleih/{user}', [App\Http\Controllers\M
 
 // * A d m i n P a g e  s * //
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
+
     Route::get('nutzerverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.nutzerverwaltung');
     Route::get('ausleihverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.ausleihverwaltung');
     Route::get('systemverwaltung', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung')->middleware('auth', 'role:4');
