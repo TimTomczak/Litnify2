@@ -13,7 +13,7 @@ namespace App\Helpers;
  */
 class TableBuilder
 {
-    public static $tableStyle='table table-bordered table-responsive-lg table-striped text-nowrap';
+    public static $tableStyle='table table-bordered table-hover table-responsive-lg table-striped text-nowrap';
 
     public static $aktionenStyles=[
         'show' => ['button-class'=>'btn btn-primary btn-sm','icon-class'=>'fa fa-search'],
@@ -24,6 +24,7 @@ class TableBuilder
 
     public static $medienverwaltungIndex=[
         'id' => 'ID',
+        'literaturart_id'=> 'Literaturart',
         'signatur' => 'Signatur',
         'hauptsachtitel' => 'Hauptsachtitel',
         'autoren' => 'Autoren',

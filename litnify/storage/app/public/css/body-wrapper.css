@@ -1,3 +1,8 @@
+.active-list-group-item {
+    background-color: rgba(52, 144, 220,0.15);
+    /*border-color: #3490dc;*/
+}
+
 #wrapper {
     overflow-x: hidden;
 }

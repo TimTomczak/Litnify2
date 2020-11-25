@@ -41,6 +41,8 @@ class Medium extends Model
 
     protected $table='medien';
 
+    protected $with='literaturart';
+
 
 
     public function toSearchableArray()
