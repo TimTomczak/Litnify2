@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\extendedFilterSearch;
 use App\Helpers\Helper;
 use App\Helpers\Suche;
 use App\Helpers\TableBuilder;
@@ -30,6 +31,7 @@ class SearchController extends Controller
             'unwerk' => $result->where('literaturart_id',4)->count(),
             'daten' => $result->where('literaturart_id',5)->count(),
         ];
+        $result=extendedFilterSearch::getInstance()->extendedFilterSearch($request, $result);
 
 //        $request->session()->flash('old_query',$request->query());
 
