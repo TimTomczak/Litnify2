@@ -5,7 +5,6 @@ namespace App\Helpers;
 
 
 use App\Models\Inventarliste;
-use App\Models\Literaturart;
 use App\Models\Medium;
 use App\Models\Zeitschrift;
 
@@ -56,18 +55,6 @@ class Suche
         'invnr',
     ];
 
-    private $extendedSearchFilters=[
-        'dateFrom',
-        'dateTo',
-        'type' => [
-            'artikel' => 1,
-            'buch' => 2,
-            'graulit' => 3,
-            'unwerk' => 4,
-            'daten' => 5,
-        ]
-    ];
-
 
     /**
      * Sucht anhand des übergebenen Arrays von Parametern entsprechend der Filter im Model Medium
@@ -82,8 +69,8 @@ class Suche
         else{                                                                                       // ... ,ansonsten
             if ($request->has('q')){                                                                // prüfen, ob ein Suchstring q übergeben wurde
                 if ($request->has('filter')){                                                       // Falls spezialisierte Suche nach Filter
-                    if (array_key_exists($request->filter, array_flip($this->searchFilters))){   // Wenn Filter nicht existiert -> überspringen
-                        $result=$this->filterSearch($request->query());                             // -> filterSearch aufrufen
+                    if (array_key_exists($request->filter, array_flip($this->searchFilters))){      // Wenn Filter nicht existiert -> überspringen
+                        $result=$this->filterSearch($request->query());                             // -> extendedFilterSearch aufrufen
                     }
                     else{
                         $result=collect();
@@ -98,24 +85,7 @@ class Suche
             }
         }
 
-        if (!empty($request->only($this->extendedSearchFilters))){
-            foreach ($request->only($this->extendedSearchFilters) as $extendedSearchFilter => $parameter){
-                $result=$this->extendedSearch($result,$extendedSearchFilter,$parameter);
-            }
-        }
 
-        /* Typsuche gesondert */
-        //  Array der IDs aller gesuchten Literaturarten erstellen, mit dem dann mittels whereIn gefiltert werden kann
-        $typeSearch=[];
-        foreach ($this->extendedSearchFilters['type'] as $type => $id) {
-            if (array_key_exists($type, $request->query())) {
-                array_push($typeSearch, $id);
-            }
-        }
-
-        if (!empty($typeSearch)){                                                   // prüfen, ob überhaupt ein Typ-Filter vorhanden ist
-            $result=$this->extendedSearch($result,'type',$typeSearch);
-        }
 
         return $result;
     }
@@ -126,7 +96,7 @@ class Suche
      * @param $searchString
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function initSearch($searchString){
+    protected function initSearch($searchString){
         return Medium::search($searchString)
             ->get()
             ->where('released',1)
@@ -139,7 +109,7 @@ class Suche
      * @param $searchQueryArray
      * @return Medium[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
      */
-    public function filterSearch($searchQueryArray){
+    protected function filterSearch($searchQueryArray){
         $searchQuery=$searchQueryArray['q'];
         switch ($searchQueryArray['filter']){
             case 'all':
@@ -179,7 +149,7 @@ class Suche
         return $result->where('released',1)->where('deleted',0)->sortByDesc('id');
     }
 
-    private function extendedSearch($result,$searchFilter,$parameter){
+    protected function extendedSearch($result,$searchFilter,$parameter){
         switch ($searchFilter){
             case 'dateFrom':
                 if ($parameter!=null){
