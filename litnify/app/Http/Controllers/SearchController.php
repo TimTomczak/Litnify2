@@ -13,6 +13,7 @@ use Illuminate\Validation\Rule;
 class SearchController extends Controller
 {
     public function index(Request $request){
+
         if ($request->has('ppr')){
             $request->validate([
                 'ppr' => Rule::in([10,11,25,50,100])

@@ -18,7 +18,9 @@
         "laravel/scout": "^8.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
+        "lasserafn/php-initial-avatar-generator": "^4.1",
         "livewire/livewire": "^2.3",
+        "maatwebsite/excel": "^3.1",
         "yab/laravel-scout-mysql-driver": "^3.0"
     },
     "require-dev": {

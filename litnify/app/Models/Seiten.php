@@ -14,9 +14,4 @@ class Seiten extends Model
         'title',
         'content'
     ];
-
-    public static function getByTitle($title){
-        return (DB::table('seiten')->where('title', $title)->latest('created_at')->value('content'));
-    }
-
 }

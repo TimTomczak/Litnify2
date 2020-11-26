@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 
 class UserController extends Controller
 {
@@ -23,7 +24,6 @@ class UserController extends Controller
     public function index()
     {
         $users = \App\Models\User::all();
-
         return view('admin.nutzerverwaltung.index', [
             'users' => $users,
             'tableBuilder' => TableBuilder::$nutzerverwaltungIndex,
@@ -99,7 +99,23 @@ class UserController extends Controller
         //
     }
 
+    public function createAvatar($name){
+        $avatar = new InitialAvatar();
+        return $avatar
+            ->name(str_replace('+', ' ', $name))
+            ->length(2)
+            ->fontSize(0.5)
+            ->size(150)
+            ->background('#0F539D')
+            ->color('#fff')
+            ->font('/fonts/OpenSans-Bold.ttf')
+            ->rounded()
+            ->generate()
+            ->stream('png', 100);
+    }
+
     public function showProfil(){
+
         return view('user/profil', array('user' => Auth::user()));
     }
 
