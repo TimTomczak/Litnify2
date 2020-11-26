@@ -55,7 +55,7 @@ class extendedFilterSearch extends Suche
     public function extendedFilterSearch($request, $result){
         if (!empty($request->only($this->extendedSearchFilters))){
             foreach ($request->only($this->extendedSearchFilters) as $extendedSearchFilter => $parameter){
-                $result=$this->extendedSearch($result,$extendedSearchFilter,$parameter);
+                $result=$this->extendedSearch($result,$extendedSearchFilter,$parameter,$request);
             }
         }
 
@@ -69,7 +69,7 @@ class extendedFilterSearch extends Suche
         }
 
         if (!empty($typeSearch)){                                                   // prüfen, ob überhaupt ein Typ-Filter vorhanden ist
-            $result=$this->extendedSearch($result,'type',$typeSearch);
+            $result=$this->extendedSearch($result,'type',$typeSearch,$request);
         }
 
         return $result;
