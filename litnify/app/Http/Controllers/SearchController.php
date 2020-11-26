@@ -24,14 +24,11 @@ class SearchController extends Controller
         }
 
         $result=Suche::getInstance()->search($request);
-        $literaturartenCounter=[
-            'artikel' => $result->where('literaturart_id',1)->count(),
-            'buch' => $result->where('literaturart_id',2)->count(),
-            'graulit' => $result->where('literaturart_id',3)->count(),
-            'unwerk' => $result->where('literaturart_id',4)->count(),
-            'daten' => $result->where('literaturart_id',5)->count(),
-        ];
+        $literaturartenCounter=Suche::getInstance()->countLiteraturarten($result);
         $result=extendedFilterSearch::getInstance()->extendedFilterSearch($request, $result);
+        if (!$request->has('q')){
+            $literaturartenCounter=Suche::getInstance()->countLiteraturarten($result);
+        }
 
 //        $request->session()->flash('old_query',$request->query());
 

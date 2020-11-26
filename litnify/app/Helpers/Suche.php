@@ -8,12 +8,20 @@ use App\Models\Inventarliste;
 use App\Models\Medium;
 use App\Models\Zeitschrift;
 
+/**
+ * Class Suche
+ * @package App\Helpers
+ */
 class Suche
 {
+    /**
+     * @var null
+     */
     private static $instance = null;
 
+
     /**
-     * gets the instance via lazy initialization (created on first usage)
+     * @return null
      */
     public static function getInstance()
     {
@@ -44,6 +52,9 @@ class Suche
     {
     }
 
+    /**
+     * @var string[]
+     */
     private $searchFilters=[
         'all',
         'name',
@@ -84,9 +95,6 @@ class Suche
                 $result=collect();                                                                  // Kein Suchbegriff eingegeben
             }
         }
-
-
-
         return $result;
     }
 
@@ -149,7 +157,14 @@ class Suche
         return $result->where('released',1)->where('deleted',0)->sortByDesc('id');
     }
 
-    protected function extendedSearch($result,$searchFilter,$parameter){
+    /**
+     * @param $result
+     * @param $searchFilter
+     * @param $parameter
+     * @param $request
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    protected function extendedSearch($result, $searchFilter, $parameter, $request){
         switch ($searchFilter){
             case 'dateFrom':
                 if ($parameter!=null){
@@ -169,12 +184,27 @@ class Suche
                 }
                 break;
 
-            case 'typeBuch'||'typeArtikel':
-                $result->isEmpty() ?
+            case 'type':
+                $result->isEmpty()&&!$request->has('q')?
                     $result=Medium::with('literaturart')->whereIn('literaturart_id',$parameter)->get() :
                     $result=$result->whereIn('literaturart_id',$parameter);
                 break;
         }
         return $result->where('released',1)->where('deleted',0);
+    }
+
+    /**
+     * @param $result
+     * @return array
+     */
+    public function countLiteraturarten($result)
+    {
+        return $literaturartenCounter = [
+            'artikel' => $result->where('literaturart_id', 1)->count(),
+            'buch' => $result->where('literaturart_id', 2)->count(),
+            'graulit' => $result->where('literaturart_id', 3)->count(),
+            'unwerk' => $result->where('literaturart_id', 4)->count(),
+            'daten' => $result->where('literaturart_id', 5)->count(),
+        ];
     }
 }
