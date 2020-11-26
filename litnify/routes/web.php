@@ -32,6 +32,7 @@ Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->
 //Route::resource('user', 'App\Http\Controllers\UserController');
 Route::permanentRedirect('/user', '/user/profil');
 Route::permanentRedirect('/password', '/user/profil');
+Route::get('/user/avatar/{name?}', [App\Http\Controllers\UserController::class, 'createAvatar'])->name('avatar')->middleware('auth');
 Route::get('/user/profil', [App\Http\Controllers\UserController::class, 'showProfil'])->name('profil')->middleware('auth');
 Route::get('/user/ausleihen', [App\Http\Controllers\UserController::class, 'showAusleihen'])->name('ausleihen')->middleware('auth');
 Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'showMerkliste'])->name('merkliste')->middleware('auth');
@@ -100,7 +101,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test');
+Route::get('/test', [App\Http\Controllers\Download::class, 'index']);
 
 
 // * S t a t i c P a g e  s * //

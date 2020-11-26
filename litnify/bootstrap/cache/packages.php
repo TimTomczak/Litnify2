@@ -1,104 +1,126 @@
 <?php return array (
-  'barryvdh/laravel-debugbar' => 
+  'barryvdh/laravel-debugbar' =>
   array (
-    'providers' => 
+    'providers' =>
     array (
       0 => 'Barryvdh\\Debugbar\\ServiceProvider',
     ),
-    'aliases' => 
+    'aliases' =>
     array (
       'Debugbar' => 'Barryvdh\\Debugbar\\Facade',
     ),
   ),
-  'barryvdh/laravel-ide-helper' => 
+  'barryvdh/laravel-ide-helper' =>
   array (
-    'providers' => 
+    'providers' =>
     array (
       0 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
     ),
   ),
-  'directorytree/ldaprecord-laravel' => 
+  'directorytree/ldaprecord-laravel' =>
   array (
-    'providers' => 
+    'providers' =>
     array (
       0 => 'LdapRecord\\Laravel\\LdapServiceProvider',
       1 => 'LdapRecord\\Laravel\\LdapAuthServiceProvider',
     ),
   ),
-  'facade/ignition' => 
+  'facade/ignition' =>
   array (
-    'providers' => 
+    'providers' =>
     array (
       0 => 'Facade\\Ignition\\IgnitionServiceProvider',
     ),
-    'aliases' => 
+    'aliases' =>
     array (
       'Flare' => 'Facade\\Ignition\\Facades\\Flare',
     ),
   ),
-  'fideloper/proxy' => 
+  'fideloper/proxy' =>
   array (
-    'providers' => 
+    'providers' =>
     array (
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
-  'fruitcake/laravel-cors' => 
+  'fruitcake/laravel-cors' =>
   array (
-    'providers' => 
+    'providers' =>
     array (
       0 => 'Fruitcake\\Cors\\CorsServiceProvider',
     ),
   ),
-  'laravel/scout' => 
+  'intervention/image' =>
   array (
-    'providers' => 
+    'providers' =>
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
+    ),
+    'aliases' =>
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
+    ),
+  ),
+  'laravel/scout' =>
+  array (
+    'providers' =>
     array (
       0 => 'Laravel\\Scout\\ScoutServiceProvider',
     ),
   ),
-  'laravel/tinker' => 
+  'laravel/tinker' =>
   array (
-    'providers' => 
+    'providers' =>
     array (
       0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
   ),
-  'laravel/ui' => 
+  'laravel/ui' =>
   array (
-    'providers' => 
+    'providers' =>
     array (
       0 => 'Laravel\\Ui\\UiServiceProvider',
     ),
   ),
-  'livewire/livewire' => 
+  'livewire/livewire' =>
   array (
-    'providers' => 
+    'providers' =>
     array (
       0 => 'Livewire\\LivewireServiceProvider',
     ),
-    'aliases' => 
+    'aliases' =>
     array (
       'Livewire' => 'Livewire\\Livewire',
     ),
   ),
-  'nesbot/carbon' => 
+  'maatwebsite/excel' =>
   array (
-    'providers' => 
+    'providers' =>
+    array (
+      0 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    ),
+    'aliases' =>
+    array (
+      'Excel' => 'Maatwebsite\\Excel\\Facades\\Excel',
+    ),
+  ),
+  'nesbot/carbon' =>
+  array (
+    'providers' =>
     array (
       0 => 'Carbon\\Laravel\\ServiceProvider',
     ),
   ),
-  'nunomaduro/collision' => 
+  'nunomaduro/collision' =>
   array (
-    'providers' => 
+    'providers' =>
     array (
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
-  'yab/laravel-scout-mysql-driver' => 
+  'yab/laravel-scout-mysql-driver' =>
   array (
-    'providers' => 
+    'providers' =>
     array (
       0 => 'Yab\\MySQLScout\\Providers\\MySQLScoutServiceProvider',
     ),

@@ -11,8 +11,7 @@ class SeitenController extends Controller
     public function __invoke()
     {
         $url = request()->segment(1);
-        $content = Seiten::getByTitle($url);
-
+        $content = Seiten::where('title', $url)->latest('created_at')->value('content');
         return view('layouts.staticpages', array('content' => $content));
     }
 

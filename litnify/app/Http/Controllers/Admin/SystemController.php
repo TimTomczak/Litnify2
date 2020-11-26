@@ -47,10 +47,14 @@ class SystemController extends Controller
 
     public function contentEditor(Request $request){
         $selection = $request->seite;
-        if($selection == '') {
-            redirect()->route('admin.systemverwaltung.contenteditor', ['seite' => 'faq']);
+        if(is_null($selection)) {
+            return redirect()->route('admin.systemverwaltung.contenteditor', ['seite' => 'faq']);
         }
-        $content = Seiten::getByTitle($selection);
+        $content = Seiten::where('title', $selection)->latest('created_at')->value('content');
+
+        if (is_null($content)){
+            abort('403', 'Seite existiert nicht');
+        }
         return view('admin.systemverwaltung.contenteditor', compact(['content', 'selection']));
     }
 
@@ -61,6 +65,7 @@ class SystemController extends Controller
             'content' => 'required',
             ]);
         Seiten::create($validatedAttributes);
+
 
         return redirect(route('admin.systemverwaltung.contenteditor'));
     }

@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="https://eu.ui-avatars.com/api/?name={{$user['vorname'] .'+'. $user['nachname']}}&background=0F539D&color=fff&bold=true&size=150" class="rounded-circle">
+                            <img src="{{url('/')}}/user/avatar/{{$user['vorname'] .'+'. $user['nachname']}}" alt="Avatar">
                             <div class="mt-3">
                                 <h4>{{ucfirst($user->vorname) ." ". ucfirst($user->nachname)}}</h4>
                                 <p class="text-secondary mb-1">

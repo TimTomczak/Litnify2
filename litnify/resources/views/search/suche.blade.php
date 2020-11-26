@@ -71,19 +71,19 @@
                         <ul class="list-group">
                             <li class="list-group-item text-muted list-group-item-dark"><b>Erscheinungsjahr</b></li>
                             <li class="list-group-item">
-                                <form action="{{request()->fullUrl()}}" method="GET">
                                     <div class="form-inline">
-                                        <input class="form-control" style="width:33%;" placeholder="von" type="number" min="1900" max="2099" name="dateFrom"
+                                        <input class="form-control" style="width:33%;" placeholder="von" type="number" min="1900" max="2099" name="dateFrom" id="dateFrom"
                                             {{request()->has('dateFrom') ? 'value='.request()->dateFrom : ''}}>
                                         &nbsp;&#45;&nbsp;
-                                        <input class="form-control" style="width:33%;" placeholder="bis" type="number" min="1900" max="2099" name="dateTo"
+                                        <input class="form-control" style="width:33%;" placeholder="bis" type="number" min="1900" max="2099" name="dateTo" id="dateTo"
                                             {{request()->has('dateTo') ? 'value='.request()->dateTo : ''}}>
                                         &nbsp;
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary" id="dateFilter">
                                             <i class="fa fa-arrow-circle-right"></i>
                                         </button>
+
+                                        <input type="hidden" id="currentUrl" value="{{request()->getRequestUri()}}">
                                     </div>
-                                </form>
                             </li>
 
                         </ul>
@@ -171,7 +171,9 @@
                         <table class="{{$tableStyle}}">
                             <thead>
                             <tr>
-                                <th></th>
+                                <th>
+                                    <input type="checkbox" name="check_all" id="selectAll">
+                                </th>
                                 @foreach($tableBuilder as $key=>$val)
                                     <th>{{$val}}</th>
                                 @endforeach
@@ -184,7 +186,7 @@
                                         <td>
                                             <div class="form-check form-check-inline">
                                                 <label class="form-check-label {{old('check_'.$res->id) ? 'active': ''}}">
-                                                    <input class="form-check-input" type="checkbox" name="check_{{$res->id}}"
+                                                    <input class="form-check-input checkbox" type="checkbox" name="check_{{$res->id}}"
                                                                value="{{$res->id}} {{old('check_'.$res->id) ? 'checked="checked"': ''}}">
                                                 </label>
                                             </div>
@@ -246,5 +248,60 @@
     </div>
     <!--/row-->
     @include('Medienverwaltung.mediumModal')
+@endsection
+
+@section('javascript.footer')
+    <script>
+        $(document).ready(function (){
+
+            //$(':input[type="number"]').keyup(function () {
+            $('#dateFilter').click(function (event) {
+                event.preventDefault();
+
+                var oldLink     = $('#currentUrl').val();
+                var dateFrom    = $('#dateFrom').val();
+                var dateTo      = $('#dateTo').val();
+
+                var paramsArray = '';
+                var newLink = '';
+
+                //dateFrom        = isNaN(dateFrom) || dateFrom <= 0 ? 1900 : dateFrom;
+                //dateTo          = isNaN(dateTo) || dateTo <= 0 ? 2099 : dateTo;
+
+                var params = (oldLink.split('?')[1]).split('&');
+                for (var i = 0; i < params.length; i++) {
+                    paramsArray = params[i].split('=');
+                    if (paramsArray[0] !== 'dateFrom') {
+                        if(paramsArray[0] !== 'dateTo'){
+                            newLink += paramsArray[0] + '=' + paramsArray[1] + '&';
+                        }
+                    }
+                }
+                window.location.href = (window.location.origin + '/suche?' + newLink + 'dateFrom=' + dateFrom + '&dateTo=' + dateTo);
+            });
+
+
+            $('#selectAll').click(function (event) {
+                if (this.checked) {
+                    $('.checkbox').each(function () {
+                        $(this).prop('checked', true);
+                    });
+                } else {
+                    $('.checkbox').each(function () {
+                        $(this).prop('checked', false);
+                    });
+                }
+            });
+
+
+
+        })
+
+
+
+
+
+
+    </script>
 @endsection
 
