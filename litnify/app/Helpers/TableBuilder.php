@@ -86,6 +86,15 @@ class TableBuilder
     // public static $merklistenverleihIndex; ->Manuell erstellte Tabelle
     // public static $merklistenverleiShow; ->Manuell erstellte Tabelle
 
+    public static $direktverleihIndex=[
+//        'id' => 'ID',
+//        'literaturart_id'=> 'Literaturart',
+        'signatur' => 'Signatur',
+        'hauptsachtitel' => 'Hauptsachtitel',
+        'autoren' => 'Autoren',
+        'jahr' => 'Jahr'
+    ];
+
     public static $nutzerverwaltungIndex=[
         'id' => 'ID',
         'nachname' => 'Nachname',
