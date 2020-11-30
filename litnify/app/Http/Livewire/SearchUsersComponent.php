@@ -15,20 +15,26 @@ class SearchUsersComponent extends Component
     {
 
         if ($this->hasSpecialChars($this->searchQuery)==1){
-            $users=User::where('email','like','%'.$this->searchQuery.'%')->paginate(10);
+            try {
+                $dbDate=date('Y-m-d',strtotime($this->searchQuery));
+                $users=User::where('created_at','like','%'.$dbDate.'%');
+            }
+            catch(\ErrorException $e){
+                $users=User::where('email','like','%'.$this->searchQuery.'%');
+            }
         }
         elseif(Berechtigungsrolle::where('berechtigungsrolle','like','%'.$this->searchQuery.'%')->get()->isNotEmpty()){
             $users=Berechtigungsrolle::where('berechtigungsrolle','like','%'.$this->searchQuery.'%')
                 ->get()
                 ->map(function ($rolle){
                     return $rolle->user;
-                })->flatten()->paginate(10);
+                })->flatten();
         }
         else {
-            $users = User::search($this->searchQuery)->paginate(10);
+            $users = User::search($this->searchQuery);
         }
         return view('livewire.search-users-component',[
-            'users' => $users,
+            'users' => $users->paginate(10),
             'tableBuilder' => TableBuilder::$nutzerverwaltungIndex,
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
@@ -37,9 +43,5 @@ class SearchUsersComponent extends Component
 
     private function hasSpecialChars($string){
         return preg_match('/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/', $string);//[@_!#$%^&*()<>?/|}{~:]
-    }
-
-    private function hasRolle($string){
-
     }
 }
