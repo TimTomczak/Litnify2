@@ -11,6 +11,7 @@ use App\Models\Zeitschrift;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -69,6 +70,11 @@ class MediumController extends Controller
 
         $med= Medium::create($validatedAttributes);
         $this->storeInventarnummer($request);
+
+        if (Auth::user()->berechtigungsrolle_id>3){
+            $med->update(['released'=>1]);
+        }
+
         return redirect(route('medium.create',''))->with([
             'message' => 'Medium "'.$med->hauptsachtitel.'" erfolgreich erstellt.',
             'alertType'=> 'success'
@@ -112,7 +118,6 @@ class MediumController extends Controller
 //        $medium->literaturart_id=$medium->literaturart->literaturart;
 //        $medium->zeitschrift_id=$medium->zeitschrift->name;
 //        $medium->raum_id=$medium->raum->raum;
-
         return view('Medienverwaltung.edit',[
             'medium' => $medium,
             'literaturart' => $medium->literaturart_id
