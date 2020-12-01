@@ -14,7 +14,7 @@
         @endauth
         <div id="content-wrapper">
             @include('layouts.nav')
-            <main class="" style="margin-top:66px; background-color: #ffffff; min-height: 80vh;">
+            <main class="border-bottom" style="margin-top:75px; background-color: #ffffff; min-height: 85vh;">
                 {{--Benachrichtigung--}}
                 <div class="container-fluid">
                     @if(!(request()->is('/')))

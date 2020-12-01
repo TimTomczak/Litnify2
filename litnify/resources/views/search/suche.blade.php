@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-sm-3">
 {{--                <form id="submitFilter" method="GET" action="{{route('suche')}}">--}}
-                    <div class="position-fixed">
+                    <div class="position-relative">
 
                         <ul class="list-group">
                             <li class="list-group-item text-muted list-group-item-dark"><b>Art der Literatur</b></li>
@@ -72,10 +72,10 @@
                             <li class="list-group-item text-muted list-group-item-dark"><b>Erscheinungsjahr</b></li>
                             <li class="list-group-item">
                                     <div class="form-inline">
-                                        <input class="form-control" style="width:33%;" placeholder="von" type="number" min="1900" max="2099" name="dateFrom" id="dateFrom"
+                                        <input class="form-control" style="width:33%;" placeholder="von" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateFrom" id="dateFrom"
                                             {{request()->has('dateFrom') ? 'value='.request()->dateFrom : ''}}>
                                         &nbsp;&#45;&nbsp;
-                                        <input class="form-control" style="width:33%;" placeholder="bis" type="number" min="1900" max="2099" name="dateTo" id="dateTo"
+                                        <input class="form-control" style="width:33%;" placeholder="bis" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateTo" id="dateTo"
                                             {{request()->has('dateTo') ? 'value='.request()->dateTo : ''}}>
                                         &nbsp;
                                         <button type="submit" class="btn btn-primary" id="dateFilter">
@@ -90,20 +90,8 @@
 
                         <hr>
 
-                        <!-- Example single danger button -->
-
-
                         <ul class="list-group">
                             <li class="list-group-item text-muted list-group-item-dark"><b>Suchergebnisse pro Seite</b></li>
-                            {{--<li class="list-group-item">
-                                <select class="form-control" style="width:100%;">
-                                    <option><a href="?&ppr=10">10</a></option>
-                                    <option><a href="?&ppr=11">11</a></option>
-                                    <option>25</option>
-                                    <option>50</option>
-                                    <option>100</option>
-                                </select>
-                            </li>--}}
                             <div class="btn-group">
                                 <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{request()->has('ppr') ? request()->ppr : 10}}
@@ -133,7 +121,37 @@
                             @enderror
                         </ul>
 
+                        <hr>
+
+                        <ul class="list-group">
+                            <li class="list-group-item text-muted list-group-item-dark"><b>Ergbnisse exportieren</b></li>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Exportformat
+                                </button>
+
+                                <div class="dropdown-menu">
+                                    <button type="submit" class="dropdown-item" name="export_type" value="pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF </button>
+                                    <button type="submit" class="dropdown-item" name="export_type" value="xls"><i class="fa fa-file-excel-o" aria-hidden="true"></i> XLS </button>
+                                    <button type="submit" class="dropdown-item" name="export_type" value="csv"><i class="fa fa-table" aria-hidden="true"></i> CSV </button>
+                                    <button type="submit" class="dropdown-item" name="export_type" value="tex"><i class="fa fa-book" aria-hidden="true"></i> BIB</button>
+                                </div>
+                            </div>
+                        </ul>
+
+                        <hr>
+
+
+                        <div class="d-flex align-items-end flex-column my-2">
+
+                        </div>
+
+
                     </div>
+
+
+
+
 {{--                </form>--}}
             </div>
             <!--/col-3-->
@@ -152,20 +170,6 @@
                 <div class="tab-content">
                     <form action="{{route('suche.export')}}" method="POST">
                         @csrf
-                        <div class="d-flex align-items-end flex-column my-2">
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
-
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                    <button type="submit" class="dropdown-item" name="export_type" value="pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</button>
-                                    <button type="submit" class="dropdown-item" name="export_type" value="xls"><i class="fa fa-file-excel-o" aria-hidden="true"></i> XLS</button>
-                                    <button type="submit" class="dropdown-item" name="export_type" value="csv"><i class="fa fa-table" aria-hidden="true"></i> CSV</button>
-                                    <button type="submit" class="dropdown-item" name="export_type" value="tex"><i class="fa fa-book" aria-hidden="true"></i>TEX</button>
-                                </div>
-                            </div>
-                        </div>
 
                         @if($result)
                         <table class="{{$tableStyle}}">
@@ -253,33 +257,30 @@
 @section('javascript.footer')
     <script>
         $(document).ready(function (){
-
-            //$(':input[type="number"]').keyup(function () {
             $('#dateFilter').click(function (event) {
                 event.preventDefault();
 
                 var oldLink     = $('#currentUrl').val();
                 var dateFrom    = $('#dateFrom').val();
                 var dateTo      = $('#dateTo').val();
-
                 var paramsArray = '';
-                var newLink = '';
+                var newParams = '';
 
-                //dateFrom        = isNaN(dateFrom) || dateFrom <= 0 ? 1900 : dateFrom;
-                //dateTo          = isNaN(dateTo) || dateTo <= 0 ? 2099 : dateTo;
 
-                var params = (oldLink.split('?')[1]).split('&');
-                for (var i = 0; i < params.length; i++) {
-                    paramsArray = params[i].split('=');
-                    if (paramsArray[0] !== 'dateFrom') {
-                        if(paramsArray[0] !== 'dateTo'){
-                            newLink += paramsArray[0] + '=' + paramsArray[1] + '&';
+                if (oldLink.indexOf('=') !== -1) {
+                    var params = (oldLink.split('?')[1]).split('&');
+
+                    for (var i = 0; i < params.length; i++) {
+                        paramsArray = params[i].split('=');
+                        if (paramsArray[0] !== 'dateFrom') {
+                            if(paramsArray[0] !== 'dateTo'){
+                                newParams += paramsArray[0] + '=' + paramsArray[1] + '&';
+                            }
                         }
                     }
                 }
-                window.location.href = (window.location.origin + '/suche?' + newLink + 'dateFrom=' + dateFrom + '&dateTo=' + dateTo);
+                window.location.href = (window.location.origin + '/suche?' + newParams + 'dateFrom=' + dateFrom + '&dateTo=' + dateTo);
             });
-
 
             $('#selectAll').click(function (event) {
                 if (this.checked) {
@@ -292,8 +293,6 @@
                     });
                 }
             });
-
-
 
         })
 

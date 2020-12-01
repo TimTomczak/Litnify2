@@ -2,8 +2,7 @@
 <div class="bg-light border-right" id="sidebar-wrapper">
     <div class="sidebar-heading">Admin-Panel</div>
     <div class="list-group " >
-        <a href="{{route('start')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('/') }}">
-            <i class="fa fa-home"></i> Startseite</a>
+
         <a href="{{route('medienverwaltung.index')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('*/medienverwaltung') }}">
             <i class="fa fa-book"></i> Medienverwaltung</a>
         <a href="{{route('freigabe.index')}}" class="list-group-item list-group-item-action indented {{ Helper::sidebar_active('*/medienverwaltung/freigabe') }}">
