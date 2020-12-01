@@ -1,4 +1,5 @@
 <?php return array (
+  'add-to-merkliste-component' => 'App\\Http\\Livewire\\AddToMerklisteComponent',
   'autoren-component' => 'App\\Http\\Livewire\\AutorenComponent',
   'create-zeitschrift-component' => 'App\\Http\\Livewire\\CreateZeitschriftComponent',
   'inventarnummern-component' => 'App\\Http\\Livewire\\InventarnummernComponent',

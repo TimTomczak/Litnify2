@@ -177,7 +177,9 @@
                                 @foreach($tableBuilder as $key=>$val)
                                     <th>{{$val}}</th>
                                 @endforeach
-                                <th>Ansehen</th>
+                                @auth
+                                    <th></th>
+                                @endauth
                             </tr>
                             </thead>
                                 <tbody>
@@ -222,7 +224,10 @@
 
                                             @endswitch
                                         @endforeach
-                                        <td><a href="{{route('medium.show',$res->id)}}"><button type="button" class="{{$aktionenStyles['show']['button-class']}}" title="Medium ansehen"><i class="{{$aktionenStyles['show']['icon-class']}}"></i></button></a></td>
+{{--                                        <td><a href="{{route('medium.show',$res->id)}}"><button type="button" class="{{$aktionenStyles['show']['button-class']}}" title="Medium ansehen"><i class="{{$aktionenStyles['show']['icon-class']}}"></i></button></a></td>--}}
+                                        @auth
+                                            <td>@livewire('add-to-merkliste-component',['medium'=>$res->id])</td>
+                                        @endauth
                                     </tr>
                                 @endforeach
 

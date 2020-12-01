@@ -21,9 +21,9 @@
 
         <a href="{{route('ausleihverwaltung.index')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('*/ausleihverwaltung') }}">
             <i class="fa fa-retweet"></i> Ausleihverwaltung</a>
-        <a href="{{route('merklistenverleih.index')}}" class="list-group-item list-group-item-action indented {{ Helper::sidebar_active('*/ausleihverwaltung/merklistenverleih') }}">
+        <a href="{{route('merklistenverleih.index')}}" class="list-group-item list-group-item-action indented {{ Helper::sidebar_active('*/ausleihverwaltung/merklistenverleih*') }}">
             <i class="fa fa-list-alt"></i> Merklistenverleih</a>
-        <a href="{{route('direktverleih.index')}}" class="list-group-item list-group-item-action indented {{ Helper::sidebar_active('*/ausleihverwaltung/direktverleih') }}">
+        <a href="{{route('direktverleih.index')}}" class="list-group-item list-group-item-action indented {{ Helper::sidebar_active('*/ausleihverwaltung/direktverleih*') }} ">
             <i class="fa fa-address-card-o"></i> Direktverleih</a>
 
         <a href="{{route('admin.systemverwaltung')}}" class="list-group-item list-group-item-action {{ Helper::sidebar_active('*/systemverwaltung') }}">

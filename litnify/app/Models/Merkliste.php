@@ -9,6 +9,8 @@ class Merkliste extends Model
 {
     protected $table='merkliste';
 
+    protected $fillable=['user_id', 'medium_id'];
+
     public function medium(){
         return $this->belongsTo(Medium::class);
     }
