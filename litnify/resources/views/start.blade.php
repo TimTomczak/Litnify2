@@ -31,14 +31,14 @@
                                     <input type="text" name="q" class="form-control form-control-lg" placeholder="Bitte Suchbegriff eingeben..." autofocus />
 
                                     @php ($auswahl = array(
-                                        array('short' => 'all', 'full' => 'Alle Felder'),
-                                        array('short' => 'name', 'full' => 'Name (Autor, Hrsg.)'),
-                                        array('short' => 'titel', 'full' => 'Titel'),
-                                        array('short' => 'sign', 'full' => 'Signatur'),
-                                        array('short' => 'isbn', 'full' => 'ISBN'),
-                                        array('short' => 'issn', 'full' => 'ISSN'),
-                                        array('short' => 'ztitel', 'full' => 'Zeitschriftentitel'),
-                                        array('short' => 'invnr', 'full' => 'Inv.-Nr.'),
+                                        array('short' => 'all',     'full' => 'Alle Felder'),
+                                        array('short' => 'name',    'full' => 'Name (Autor, Hrsg.)'),
+                                        array('short' => 'titel',   'full' => 'Titel'),
+                                        array('short' => 'sign',    'full' => 'Signatur'),
+                                        array('short' => 'isbn',    'full' => 'ISBN'),
+                                        array('short' => 'issn',    'full' => 'ISSN'),
+                                        array('short' => 'ztitel',  'full' => 'Zeitschriftentitel'),
+                                        array('short' => 'invnr',   'full' => 'Inventar-Nr.'),
                                     ));
                                     <select name="filter">
                                     @foreach ($auswahl as $item)

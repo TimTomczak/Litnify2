@@ -6,5 +6,6 @@
   'search-component' => 'App\\Http\\Livewire\\SearchComponent',
   'search-medien-ausleihbar-component' => 'App\\Http\\Livewire\\SearchMedienAusleihbarComponent',
   'search-users-component' => 'App\\Http\\Livewire\\SearchUsersComponent',
+  'search-users-component-full' => 'App\\Http\\Livewire\\SearchUsersComponentFull',
   'update-zeitschrift-component' => 'App\\Http\\Livewire\\UpdateZeitschriftComponent',
 );

@@ -19,6 +19,10 @@ Auth::routes([
     'verify' => true, // Email Verification Routes...
 ]);
 
+//Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register')->middleware('auth', 'role:4');
+
+
+
 Route::get('/', function () {return view('start');})->name('start');
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
 Route::post('/suche/export', [App\Http\Controllers\SearchController::class, 'export'])->name('suche.export');
@@ -85,13 +89,17 @@ Route::prefix('admin')->group(function() {
 
 // * A d m i n P a g e  s * //
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
+    Route::get('nutzerverwaltung', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.nutzerverwaltung');
+    Route::get('nutzerverwaltung/{user}/edit', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.nutzerverwaltung.edit');
+    Route::post('nutzerverwaltung/{user}/update', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.nutzerverwaltung.update');
+    Route::post('nutzerverwaltung/{user}/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.nutzerverwaltung.delete');
 
-    Route::get('nutzerverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.nutzerverwaltung');
     Route::get('systemverwaltung', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung')->middleware('auth', 'role:4');
     Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\Admin\SystemController::class, 'auswertungen'])->name('admin.systemverwaltung.auswertungen')->middleware('auth', 'role:4');
     Route::get('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditor'])->name('admin.systemverwaltung.contenteditor')->middleware('auth', 'role:4');
     Route::post('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditorUpdate'])->middleware('auth', 'role:4');
     Route::get('systemverwaltung/logs', [App\Http\Controllers\Admin\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs')->middleware('auth', 'role:4');
+
 
     //Route::get('users', 'App\Http\Controllers\Admin\UserController');
     //Route::get('medium', 'App\Http\Controllers\Admin\MediumController');
