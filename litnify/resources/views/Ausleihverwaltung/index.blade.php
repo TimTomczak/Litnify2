@@ -13,7 +13,7 @@
             </thead>
             <tbody>
             @foreach($ausleihenAktiv as $aus)
-            <tr {{$aus->RueckgabeSoll>date('d.m.Y', time())&&$aus->RueckgabeIst==null ? 'style=background-color:#f9d6d5' : ''}}>
+            <tr {{strtotime($aus->RueckgabeSoll)<time() ? 'style=background-color:#f9d6d5' : ''}}>
                 @foreach($tableBuilderAktiv as $key=>$val)
                     @switch($key)
                         @case('medium_id')
