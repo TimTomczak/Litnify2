@@ -53,6 +53,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         'berechtigungsrolle_id' => '1',
 
     ];
+//    protected $with='berechtigungsrolle';
 
     public function toSearchableArray()
     {
