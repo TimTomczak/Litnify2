@@ -162,7 +162,7 @@
                             <input class="form-control mr-3" name="q" id="q" value="{{$searchQuery}}"/>
                             @foreach(request()->query() as $key => $val)
                                 @if($key!=='q') {{-- Suchstring überspringen, damit dieser nicht mehrfach gesendet wird --}}
-                                    <input class="form-control mr-3" name="{{$key}}" id="all" value="{{$val}}" style="display: none"/>
+                                    <input class="form-control mr-3" name="{{$key}}" value="{{$val}}" style="display: none"/>
                                 @endif
                             @endforeach
                             <button type="submit" class="btn btn-primary">Suchen</button>

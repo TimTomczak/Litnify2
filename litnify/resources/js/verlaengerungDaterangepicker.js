@@ -1,13 +1,11 @@
 /* Modal mit Klasse 'modalAusleiheVerlaengern' */
 /* Input mit ID 'verlaengerung_*id*' */
-
 $('.ausleiheVerlaengern').click(function (event){
     var id =  $(this).data('id');
     var rueckgabeSoll =  $(this).data('rueckgabesoll');
-    // $('#modalAusleiheVerlaengern').modal('show')
 
     $(function() {
-        $('#verlaengerung_'+id).daterangepicker({
+        $('input[name="verlaengerung"]').daterangepicker({
 
             // timePicker: true,
             // timePicker24Hour: true,

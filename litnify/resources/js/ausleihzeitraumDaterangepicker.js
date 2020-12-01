@@ -1,3 +1,4 @@
+import moment from "moment";
 $(function() {
             var ausleihdauer=$('input[name="ausleihzeitraum"]').data('ausleihdauer')
             $('input[name="ausleihzeitraum"]').daterangepicker({

@@ -60,7 +60,7 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <input type="text" style="display: none"
-                                                           class="form-control" name="id" id="id" aria-describedby="helpId" value="{{$aus->id}}" readonly>
+                                                           class="form-control" name="id" aria-describedby="helpId" value="{{$aus->id}}" readonly>
                                                 </div>
                                                 <p class="card-text">Bisheriger Ausleihzeitraum: {{$aus->Ausleihdatum}} - {{$aus->RueckgabeSoll}} ({{(strtotime($aus->RueckgabeSoll)-strtotime($aus->Ausleihdatum))/ 86400}} Tage)</p>
                                                 <p class="card-text">Bisherigerige Verlängerungen: {{$aus->Verlaengerungen}}</p>
@@ -97,7 +97,7 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <input type="text" style="display: none"
-                                                           class="form-control" name="id" id="id" aria-describedby="helpId" value="{{$aus->id}}" readonly>
+                                                           class="form-control" name="id" aria-describedby="helpId" value="{{$aus->id}}" readonly>
                                                 </div>
                                                 <p class="card-text">Bisheriger Ausleihzeitraum: {{$aus->Ausleihdatum}} - {{$aus->RueckgabeSoll}} ({{(strtotime($aus->RueckgabeSoll)-strtotime($aus->Ausleihdatum))/ 86400}} Tage)</p>
                                                 <p class="card-text">Bisherigerige Verlängerungen: {{$aus->Verlaengerungen}}</p>
@@ -186,12 +186,12 @@
     @include('Medienverwaltung.mediumModal')
 
 @endsection
-@section('javascript.header')
-    <link rel="stylesheet" type="text/css" href="{{asset('storage/css/daterangepicker/daterangepicker.css')}}" />
-@endsection
-@section('javascript.footer')
-    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/moment.js')}}"></script>
-    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/daterangepicker.js')}}"></script>
-    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/custom/verlaengerungDaterangepicker.js')}}"></script>
-    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/custom/rueckgabeDaterangepicker.js')}}"></script>
-@endsection
+{{--@section('javascript.header')--}}
+{{--    <link rel="stylesheet" type="text/css" href="{{asset('storage/css/daterangepicker/daterangepicker.css')}}" />--}}
+{{--@endsection--}}
+{{--@section('javascript.footer')--}}
+{{--    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/moment.js')}}"></script>--}}
+{{--    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/daterangepicker.js')}}"></script>--}}
+{{--    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/custom/verlaengerungDaterangepicker.js')}}"></script>--}}
+{{--    <script type="text/javascript" src="{{asset('storage/js/daterangepicker/custom/rueckgabeDaterangepicker.js')}}"></script>--}}
+{{--@endsection--}}

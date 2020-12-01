@@ -123,4 +123,3 @@
     @include('Medienverwaltung.mediumModal')
 @endsection
 
-@include('Ausleihverwaltung.dateTimePicker')

@@ -29,7 +29,7 @@
 {{--                            @break--}}
 
                             @case('hauptsachtitel')
-                            <td class="text-wrap"><a class="render-medium-modal" data-id="{{$med->medium_id}}">{{$med->attributesToArray()[$key]}}</a></td>
+                            <td class="text-wrap"><a href="#" class="render-medium-modal" data-id="{{$med->id}}">{{$med->attributesToArray()[$key]}}</a></td>
                             @break
 
                             @case('autoren')
@@ -47,17 +47,9 @@
                     @endforeach
                     <td>
                         <div class="d-flex border-0 justify-content-around">
-                            <a href="{{route('medium.show',$med->id)}}"><button class="{{$aktionenStyles['show']['button-class']}}" title="Medium ansehen"><i class="{{$aktionenStyles['show']['icon-class']}}"></i></button></a>
-                            <a href="{{route('medium.edit',$med->id)}}"><button class="{{$aktionenStyles['edit']['button-class']}}" title="Medium bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></button></a>
-                            <form action="{{route('medium.destroy',$med->id)}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Medium löschen"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
-                            </form>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId{{$med->id}}">
-                                    <i class="fa fa-calendar-plus-o"></i> ausleihen
-                                </button>
-
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId{{$med->id}}">
+                                <i class="fa fa-calendar-plus-o"></i>
+                            </button>
                             <!-- Modal -->
                             <div class="modal fade" id="modelId{{$med->id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                 <div class="modal-dialog" role="document">

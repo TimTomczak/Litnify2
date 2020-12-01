@@ -12,6 +12,13 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .copy('node_modules/font-awesome/fonts', 'public/fonts');
+mix.js('resources/js/app_documentReady.js', 'public/js')
+
+mix.styles([
+    'node_modules/daterangepicker/daterangepicker.css',
+    'resources/css/body-wrapper.css',
+],'public/css/app_.css');
 
 
