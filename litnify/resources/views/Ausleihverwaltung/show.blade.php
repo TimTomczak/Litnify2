@@ -30,6 +30,7 @@
                         <td>{{$aus->attributesToArray()[$key]}}</td>
                     @endforeach
                     <td> {{--Aktionen--}}
+                        @role(3)
                         <div class="d-flex border-0 justify-content-around">
                             <a href="{{route('ausleihe.edit',$aus->id)}}"><button class="{{$aktionenStyles['edit']['button-class']}}" title="Ausleihe bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></button></a>
                             <form action="{{route('ausleihe.destroy',$aus->id)}}" method="POST">
@@ -75,6 +76,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endrole
                     </td>
                 </tr>
             @endforeach

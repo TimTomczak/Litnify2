@@ -3,8 +3,8 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <livewire:update-zeitschrift-component :zeitschrift="$zeitschrift"/>
-                {{--<form action="{{route('zeitschrift.update', $zeitschrift->id)}}" method="POST">
+{{--                <livewire:update-zeitschrift-component :zeitschrift="$zeitschrift"/>--}}
+                <form action="{{route('zeitschrift.update', $zeitschrift->id)}}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -32,9 +32,9 @@
                         @enderror
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Ändern</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Ändern</button>
                     </div>
-                </form>--}}
+                </form>
             </div>
         </div>
     </div>

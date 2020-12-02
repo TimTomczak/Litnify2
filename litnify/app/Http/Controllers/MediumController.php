@@ -86,10 +86,17 @@ class MediumController extends Controller
      */
     public function show(Medium $medium)
     {
-        /* //TODO Wenn nicht autorisiert: Nicht feiegebene Medien nicht anzeigen
+         //TODO Wenn nicht autorisiert: Nicht feiegebene Medien nicht anzeigen
         if ($medium->released != 1){
-            return abort(403, 'Das Medium ist nicht freigegeben.');
-        }*/
+            if (Auth::check()){
+                if (Auth::user()->berechtigungsrolle_id<2){
+                    return abort(403, 'Das Medium ist nicht freigegeben.');
+                }
+            }else{
+                return abort(403, 'Das Medium ist nicht freigegeben.');
+            }
+        }
+
         if ($medium->deleted==1){
             abort('403','Medium wurde gelöscht');
         }

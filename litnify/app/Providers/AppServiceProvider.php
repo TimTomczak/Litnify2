@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\Checkrole;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -50,5 +53,15 @@ class AppServiceProvider extends ServiceProvider
             );
         });
         Paginator::useBootstrap();
+
+        Blade::if('role', function ($role) {
+            $allowed = false;
+            if (\Auth::check()){
+                if (\Auth::user()->berechtigungsrolle_id>=$role){
+                    $allowed = true;
+                }
+            }
+            return $allowed;;
+        });
     }
 }

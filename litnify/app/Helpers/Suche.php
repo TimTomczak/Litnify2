@@ -240,4 +240,14 @@ class Suche
             }
         }
     }
+
+    /**
+     * @param $searchQuery
+     * @return Zeitschrift|\Illuminate\Database\Eloquent\Builder
+     */
+    public function searchZeitschriften($searchQuery){
+        return Zeitschrift::where('name','like','%'.$searchQuery.'%')
+            ->orWhere('shortcut','like','%'.$searchQuery.'%')
+            ->orWhere('id','like','%'.$searchQuery.'%');
+    }
 }

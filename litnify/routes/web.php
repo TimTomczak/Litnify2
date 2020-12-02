@@ -63,8 +63,8 @@ Route::prefix('admin')->group(function() {
     Route::get('zeitschriftenverwaltung/zeitschrift/{zeitschrift}/edit', [App\Http\Controllers\ZeitschriftController::class, 'edit'])->name('zeitschrift.edit')->middleware('auth', 'role:2');
     Route::get('zeitschriftenverwaltung/zeitschrift/create', [App\Http\Controllers\ZeitschriftController::class, 'create'])->name('zeitschrift.create')->middleware('auth', 'role:2');
     Route::post('zeitschriftenverwaltung/zeitschrift', [App\Http\Controllers\ZeitschriftController::class, 'store'])->name('zeitschrift.store')->middleware('auth', 'role:2');
-    Route::put('zeitschriftenverwaltung/zeitschrift/{zeitschrift}', [App\Http\Controllers\ZeitschriftController::class, 'update'])->name('zeitschrift.update')->middleware('auth', 'role:2');
-    Route::delete('zeitschriftenverwaltung/zeitschrift/{zeitschrift}', [App\Http\Controllers\ZeitschriftController::class, 'destroy'])->name('zeitschrift.destroy')->middleware('auth', 'role:2');
+    Route::put('zeitschriftenverwaltung/zeitschrift/{zeitschrift}', [App\Http\Controllers\ZeitschriftController::class, 'update'])->name('zeitschrift.update')->middleware('auth', 'role:3');
+    Route::delete('zeitschriftenverwaltung/zeitschrift/{zeitschrift}', [App\Http\Controllers\ZeitschriftController::class, 'destroy'])->name('zeitschrift.destroy')->middleware('auth', 'role:3');
     /*  Inventarliste   */
     /*   Inventarliste wird über die Lifewire Component verwaltet. Siehe: \App\Http\Livewire\InventarnummernComponent::class    */
 

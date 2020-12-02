@@ -40,10 +40,11 @@ class ZeitschriftController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $zeitschrift = Zeitschrift::create($this->validateAttributes());
-        $zeitschrift->save();
-        return redirect(route('zeitschriftenverwaltung.index'));
+        Zeitschrift::create($this->validateAttributes());
+        return redirect(route('zeitschriften.index'))->with([
+            'message' => 'Zeitschrift erfolgreich erstellt.',
+            'alertType'=> 'success'
+        ]);
     }
 
     /**
@@ -73,7 +74,10 @@ class ZeitschriftController extends Controller
     public function update(Request $request, Zeitschrift $zeitschrift)
     {
         $zeitschrift->update($this->validateAttributes());
-        return redirect(route('zeitschrift.edit',$zeitschrift->id));
+        return back()->with([
+            'message' => 'Zeitschrift wurde erfolgreich geändert.',
+            'alertType'=> 'success'
+        ]);
     }
 
     /**
@@ -91,11 +95,9 @@ class ZeitschriftController extends Controller
     }
 
     public function validateAttributes(){
-        $validatedAttributes = request()->validate([
-//            'id' => 'required|integer',
+        return $validatedAttributes = request()->validate([
             'name' => 'required|string',
             'shortcut' => 'required|string'
         ]);
-        return $validatedAttributes;
     }
 }

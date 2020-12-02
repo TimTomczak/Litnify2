@@ -1,15 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="row">
-            <a href="{{route('medium.edit',$medium->id)}}" class="btn btn-primary">Bearbeiten <i class="fa fa-edit"></i></a>
-            <form action="{{route('medium.destroy',$medium->id)}}" method="POST">
-                @csrf
-                @method('delete')
-                <button type="submit" class="btn btn-danger">Löschen <i class="fa fa-trash"></i></button>
-            </form>
-        </div>
-
         <table id="medium" class="table table-striped table-bordered table-responsive-lg">
             <tbody>
             @foreach($tableBuilder as $key=>$val)

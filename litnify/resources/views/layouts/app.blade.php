@@ -9,9 +9,10 @@
 
     <div class="d-flex" id="wrapper">
     {{-- <div class="d-flex toggled" id="wrapper"> --}}
-        @auth
+        @role('1')
             @include('layouts.sidebar')
-        @endauth
+        @endrole
+
         <div id="content-wrapper">
             @include('layouts.nav')
             <main class="border-bottom" style="margin-top:75px; background-color: #ffffff; min-height: 85vh;">
