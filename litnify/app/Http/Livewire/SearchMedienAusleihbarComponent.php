@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Helpers\TableBuilder;
-use App\Models\Literaturart;
 use App\Models\Medium;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;

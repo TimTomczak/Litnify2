@@ -4,8 +4,10 @@
 namespace App\Helpers;
 
 
+use App\Models\Berechtigungsrolle;
 use App\Models\Inventarliste;
 use App\Models\Medium;
+use App\Models\User;
 use App\Models\Zeitschrift;
 
 /**
@@ -21,7 +23,7 @@ class Suche
 
 
     /**
-     * @return null
+     * @return Suche
      */
     public static function getInstance()
     {
@@ -206,5 +208,36 @@ class Suche
             'unwerk' => $result->where('literaturart_id', 4)->count(),
             'daten' => $result->where('literaturart_id', 5)->count(),
         ];
+    }
+
+    /**
+     * @param $searchQuery
+     * @return Berechtigungsrolle[]|User|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
+     */
+    public function searchUsers($searchQuery){
+        if(Berechtigungsrolle::where('berechtigungsrolle','like','%'.$searchQuery.'%')->get()->isNotEmpty()){
+            return $result=Berechtigungsrolle::where('berechtigungsrolle','like','%'.$searchQuery.'%')
+                ->get()
+                ->map(function ($rolle){
+                    return $rolle->user;
+                })->flatten();
+        }
+        else {
+            try {
+                if (strtotime($searchQuery)) {
+                    $dbDate = date('Y-m-d', strtotime($searchQuery));
+                    return $result = User::where('created_at', 'like', '%' . $dbDate . '%');
+                }
+                else{
+                    throw new \ErrorException();
+                }
+            }
+            catch(\ErrorException $e){
+                return $result=User::where('email','like','%'.$searchQuery.'%')
+                    ->orWhere('nachname','like','%'.$searchQuery.'%')
+                    ->orWhere('vorname','like','%'.$searchQuery.'%')
+                    ->orWhere('uid','like','%'.$searchQuery.'%');
+            }
+        }
     }
 }

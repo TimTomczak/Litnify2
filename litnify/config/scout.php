@@ -12,7 +12,7 @@ return [
      *          (Index löschen:  php artisan scout:mysql-index App\\Post --drop)
      */
     'mysql' => [
-        'mode' => 'BOOLEAN',
+        'mode' => 'BOOLEAN', // LIKE_EXPANDED , LIKE , NATURAL_LANGUAGE , BOOLEAN
         'model_directories' => [app_path()],
         'min_search_length' => 0,
         'min_fulltext_search_length' => 4,
