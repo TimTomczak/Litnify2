@@ -72,10 +72,10 @@
                             <li class="list-group-item text-muted list-group-item-dark"><b>Erscheinungsjahr</b></li>
                             <li class="list-group-item">
                                     <div class="form-inline">
-                                        <input class="form-control" style="width:33%;" placeholder="von" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateFrom" id="dateFrom"
+                                        <input class="form-control date" style="width:33%;" placeholder="von" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateFrom" id="dateFrom"
                                             {{request()->has('dateFrom') ? 'value='.request()->dateFrom : ''}}>
                                         &nbsp;&#45;&nbsp;
-                                        <input class="form-control" style="width:33%;" placeholder="bis" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateTo" id="dateTo"
+                                        <input class="form-control date" style="width:33%;" placeholder="bis" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateTo" id="dateTo"
                                             {{request()->has('dateTo') ? 'value='.request()->dateTo : ''}}>
                                         &nbsp;
                                         <button type="submit" class="btn btn-primary" id="dateFilter">
@@ -267,6 +267,17 @@
 @section('javascript.footer')
     <script>
         $(document).ready(function (){
+
+            $('.date').keyup(function (){
+                var value = $(this).val();
+                if(value > 2100){
+                    alert('Fehlerhafte Eingabe: Datum ');
+                    $(this).val(value.slice(0,-1));
+                }
+
+            });
+
+
             $('#dateFilter').click(function (event) {
                 event.preventDefault();
 
