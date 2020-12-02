@@ -43,7 +43,7 @@ class DirektverleihController extends Controller
             'aktionenStyles' => TableBuilder::$aktionenStyles,
             'user' => $user,
             'medien' => $medien,
-            'ausleihdauerDefault' => 28 /*TODO ausleihDauer aus parameter übergeben */
+            'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28)
         ]);
     }
 }

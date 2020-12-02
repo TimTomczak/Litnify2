@@ -39,7 +39,7 @@ class AusleiheController extends Controller
             'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
-            'ausleihdauerDefault' => 28 /*TODO Ausleihdauer in Variable speichern*/
+            'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28)
         ]);
     }
 

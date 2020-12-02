@@ -36,7 +36,7 @@ class SearchMedienAusleihbarComponent extends Component
             'aktionenStyles' => TableBuilder::$aktionenStyles,
             'user' => $this->user,
             'medien' => Medium::whereIn('id',$medien->pluck('medium_id'))->paginate(10),
-            'ausleihdauerDefault' => 28 /*TODO ausleihDauer aus parameter übergeben */
+            'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28)
         ]);
     }
 

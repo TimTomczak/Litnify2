@@ -27,12 +27,14 @@ class MerklistenverleihController extends Controller
      */
     public function show(User $user)
     {
+//        dd(env('AUSLEIHDAUER',28));
+
         $medienAufMerkliste = $user->merkliste->paginate(10);
         return view('Ausleihverwaltung/Merklistenverleih.show',[
             'merkliste' => $medienAufMerkliste,
             'user' => $user,
             'tableStyle' => TableBuilder::$tableStyle,
-            'ausleihdauerDefault' => 28 /*TODO Ausleihdauer aus parameter übergeben*/
+            'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28)
         ]);
     }
 
