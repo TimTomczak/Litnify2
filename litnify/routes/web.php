@@ -48,7 +48,7 @@ Route::get('medium/{medium}', [App\Http\Controllers\MediumController::class, 'sh
 Route::get('autor/{autor}', [App\Http\Controllers\MediumController::class, 'showAutor'])->name('autor.show');
 
 Route::prefix('admin')->group(function() {
-    Route::get('medienverwaltung', [App\Http\Controllers\MediumController::class, 'index'])->name('medienverwaltung.index')>middleware('auth', 'role:2');;
+    Route::get('medienverwaltung', [App\Http\Controllers\MediumController::class, 'index'])->name('medienverwaltung.index')->middleware('auth', 'role:2');
     Route::get('medienverwaltung/medium/create', [App\Http\Controllers\MediumController::class, 'create'])->name('medium.createEmpty')->middleware('auth', 'role:2');
     Route::get('medienverwaltung/medium/create/{literaturart}', [App\Http\Controllers\MediumController::class, 'create'])->name('medium.create')->middleware('auth', 'role:2');
     Route::post('medienverwaltung/medium', [App\Http\Controllers\MediumController::class, 'store'])->name('medium.store')->where(array('medium' => '[0-9]+'))->middleware('auth', 'role:2');
