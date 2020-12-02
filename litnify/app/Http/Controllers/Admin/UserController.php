@@ -19,7 +19,6 @@ class UserController extends Controller
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
         ]);
-
     }
 
     public function edit(User $user)
@@ -29,13 +28,12 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        //dd($request);
-
+        $x = $request->berechtigungsrolle_id;
 
         $user->update($request->validate([
             'nachname' => 'string',
             'vorname' => 'string',
-
+            'berechtigungsrolle_id' => 'string'
         ]));
 
         return redirect(route('admin.nutzerverwaltung'))->with([
