@@ -44,11 +44,11 @@ Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'show
 /***********************************/
 /*        Medienverwaltung         */
 /***********************************/
-Route::get('medium/{medium}', [App\Http\Controllers\MediumController::class, 'show'])->name('medium.show')->where(array('medium' => '[0-9]+'))->middleware('auth', 'role:2');
+Route::get('medium/{medium}', [App\Http\Controllers\MediumController::class, 'show'])->name('medium.show')->where(array('medium' => '[0-9]+'));
 Route::get('autor/{autor}', [App\Http\Controllers\MediumController::class, 'showAutor'])->name('autor.show');
 
 Route::prefix('admin')->group(function() {
-    Route::get('medienverwaltung', [App\Http\Controllers\MediumController::class, 'index'])->name('medienverwaltung.index');
+    Route::get('medienverwaltung', [App\Http\Controllers\MediumController::class, 'index'])->name('medienverwaltung.index')>middleware('auth', 'role:2');;
     Route::get('medienverwaltung/medium/create', [App\Http\Controllers\MediumController::class, 'create'])->name('medium.createEmpty')->middleware('auth', 'role:2');
     Route::get('medienverwaltung/medium/create/{literaturart}', [App\Http\Controllers\MediumController::class, 'create'])->name('medium.create')->middleware('auth', 'role:2');
     Route::post('medienverwaltung/medium', [App\Http\Controllers\MediumController::class, 'store'])->name('medium.store')->where(array('medium' => '[0-9]+'))->middleware('auth', 'role:2');
@@ -89,10 +89,10 @@ Route::prefix('admin')->group(function() {
 
 // * A d m i n P a g e  s * //
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
-    Route::get('nutzerverwaltung', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.nutzerverwaltung');
-    Route::get('nutzerverwaltung/{user}/edit', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.nutzerverwaltung.edit');
-    Route::post('nutzerverwaltung/{user}/update', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.nutzerverwaltung.update');
-    Route::post('nutzerverwaltung/{user}/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.nutzerverwaltung.delete');
+    Route::get('nutzerverwaltung', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.nutzerverwaltung')->middleware('auth', 'role:4');
+    Route::get('nutzerverwaltung/{user}/edit', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.nutzerverwaltung.edit')->middleware('auth', 'role:4');
+    Route::post('nutzerverwaltung/{user}/update', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.nutzerverwaltung.update')->middleware('auth', 'role:4');
+    Route::post('nutzerverwaltung/{user}/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.nutzerverwaltung.delete')->middleware('auth', 'role:4');
 
     Route::get('systemverwaltung', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung')->middleware('auth', 'role:4');
     Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\Admin\SystemController::class, 'auswertungen'])->name('admin.systemverwaltung.auswertungen')->middleware('auth', 'role:4');
