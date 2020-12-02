@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes([
-    'register' => true, // Registration Routes...
+    'register' => false, // Registration Routes...
     'reset' => true, // Password Reset Routes...
     'verify' => true, // Email Verification Routes...
 ]);
@@ -90,9 +90,12 @@ Route::prefix('admin')->group(function() {
 // * A d m i n P a g e  s * //
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
     Route::get('nutzerverwaltung', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.nutzerverwaltung')->middleware('auth', 'role:4');
+    Route::get('nutzerverwaltung/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.nutzerverwaltung.create')->middleware('auth', 'role:4');
+    Route::post('nutzerverwaltung/createUser', [App\Http\Controllers\Admin\UserController::class, 'createUser'])->name('admin.nutzerverwaltung.createUser')->middleware('auth', 'role:4');
     Route::get('nutzerverwaltung/{user}/edit', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.nutzerverwaltung.edit')->middleware('auth', 'role:4');
     Route::post('nutzerverwaltung/{user}/update', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.nutzerverwaltung.update')->middleware('auth', 'role:4');
     Route::post('nutzerverwaltung/{user}/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.nutzerverwaltung.delete')->middleware('auth', 'role:4');
+    Route::post('nutzerverwaltung/{user}/wakeup', [App\Http\Controllers\Admin\UserController::class, 'wakeUp'])->name('admin.nutzerverwaltung.wakeup')->middleware('auth', 'role:4');
 
     Route::get('systemverwaltung', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung')->middleware('auth', 'role:4');
     Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\Admin\SystemController::class, 'auswertungen'])->name('admin.systemverwaltung.auswertungen')->middleware('auth', 'role:4');

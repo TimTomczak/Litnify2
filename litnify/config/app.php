@@ -14,6 +14,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'mailfrom' => env('MAIL_SALUTION', 'Laravel-Team'),
+
 
     /*
     |--------------------------------------------------------------------------

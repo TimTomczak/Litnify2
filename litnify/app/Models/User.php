@@ -27,7 +27,8 @@ class User extends Authenticatable implements LdapAuthenticatable
         'vorname',
         'email',
         'password',
-        'berechtigungsrolle_id'
+        'berechtigungsrolle_id',
+        'deleted'
     ];
 
     /**

@@ -110,14 +110,14 @@ class UserController extends Controller
 
     public function showProfil(){
 
-        return view('user/profil', array('user' => Auth::user()));
+        return view('user.profil', array('user' => Auth::user()));
     }
 
     public function showMerkliste(){
-        return view('user/merkliste', array('user' => Auth::user(), 'merkliste' => (Auth::user())->merkliste));
+        return view('user.merkliste', array('user' => Auth::user(), 'merkliste' => (Auth::user())->merkliste));
     }
 
     public function showAusleihen(){
-        return view('user/ausleihen', array('user' => Auth::user(), 'ausleihe' => Auth::user()->ausleihe));
+        return view('user.ausleihen', array('user' => Auth::user(), 'ausleihe' => Auth::user()->ausleihe));
     }
 }
