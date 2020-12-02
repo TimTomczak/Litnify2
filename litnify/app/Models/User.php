@@ -93,8 +93,6 @@ class User extends Authenticatable implements LdapAuthenticatable
         return 'guid';
     }
 
-
-
     public function getLdapDomain()
     {
         // TODO: Implement getLdapDomain() method.
@@ -104,8 +102,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     {
         // TODO: Implement setLdapDomain() method.
     }
-
-
 
     public function getLdapGuid()
     {

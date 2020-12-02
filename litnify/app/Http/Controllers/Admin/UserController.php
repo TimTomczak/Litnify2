@@ -24,18 +24,22 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-
         return view('admin.nutzerverwaltung.edit', ['user' => $user, 'rollen' => Berechtigungsrolle::all()]);
     }
 
     public function update(Request $request, User $user)
     {
+        //dd($request);
 
 
+        $user->update($request->validate([
+            'nachname' => 'string',
+            'vorname' => 'string',
 
-        $user->update($this->validateAttributes());
-        return redirect(route('nutzerverwaltung',$user->id))->with([
-            'message' => 'User wurde gelöscht.',
+        ]));
+
+        return redirect(route('admin.nutzerverwaltung'))->with([
+            'message' => 'Account wurde geändert.',
             'alertType'=> 'info'
         ]);
     }
