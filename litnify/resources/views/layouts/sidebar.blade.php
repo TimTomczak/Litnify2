@@ -23,6 +23,8 @@
 
         <a href="{{route('ausleihverwaltung.index')}}" class="list-group-item list-group-item-action {{Helper::sidebar_active('*/ausleihverwaltung')}}">
             <i class="fa fa-retweet"></i> Ausleihverwaltung</a>
+        <a href="{{route('ausleihenBeendet.index')}}" class="list-group-item list-group-item-action indented {{Helper::sidebar_active('*/ausleihverwaltung/ausleihen-beendet')}}">
+            <i class="fa fa-retweet"></i> Ausleihen beendet</a>
         @role('3')
         <a href="{{route('merklistenverleih.index')}}" class="list-group-item list-group-item-action indented {{Helper::sidebar_active('*/ausleihverwaltung/merklistenverleih*')}}">
             <i class="fa fa-list-alt"></i> Merklistenverleih</a>

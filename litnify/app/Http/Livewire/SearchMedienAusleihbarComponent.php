@@ -17,10 +17,13 @@ class SearchMedienAusleihbarComponent extends Component
     public $user;
     public $suche;
 
+    public function updatingSuche()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
-
-
         if ($this->suche!=null){
             $medien=$this->searchMedienAusleihbar($this->suche);
         }else{
