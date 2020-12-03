@@ -9,9 +9,9 @@
             plugins: [
                 "advlist autolink lists link image charmap print code preview anchor",
                 "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste"
+                "insertdatetime media table contextmenu paste hr"
             ],
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | accordion code"
+            //toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | accordion code"
     });</script>
 @endsection
 

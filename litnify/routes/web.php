@@ -37,9 +37,10 @@ Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->
 Route::permanentRedirect('/user', '/user/profil');
 Route::permanentRedirect('/password', '/user/profil');
 Route::get('/user/avatar/{name?}', [App\Http\Controllers\UserController::class, 'createAvatar'])->name('avatar')->middleware('auth');
-Route::get('/user/profil', [App\Http\Controllers\UserController::class, 'showProfil'])->name('profil')->middleware('auth');
-Route::get('/user/ausleihen', [App\Http\Controllers\UserController::class, 'showAusleihen'])->name('ausleihen')->middleware('auth');
-Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'showMerkliste'])->name('merkliste')->middleware('auth');
+Route::get('/user/profil', [App\Http\Controllers\UserController::class, 'showProfil'])->name('profil.show')->middleware('auth');
+Route::get('/user/ausleihen', [App\Http\Controllers\UserController::class, 'showAusleihen'])->name('ausleihen.show')->middleware('auth');
+Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'showMerkliste'])->name('merkliste.show')->middleware('auth');
+Route::post('/user/merkliste', [App\Http\Controllers\UserController::class, 'editMerkliste'])->name('merkliste.edit')->middleware('auth');
 
 /***********************************/
 /*        Medienverwaltung         */

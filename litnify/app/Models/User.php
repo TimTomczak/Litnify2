@@ -6,7 +6,6 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
 use Laravel\Scout\Searchable;
 use LdapRecord\Laravel\Auth\LdapAuthenticatable;
 use LdapRecord\Laravel\Auth\AuthenticatesWithLdap;
@@ -16,6 +15,11 @@ use LdapRecord\Laravel\Auth\HasLdapUser;
 class User extends Authenticatable implements LdapAuthenticatable
 {
     use HasFactory, Notifiable, AuthenticatesWithLdap, HasLdapUser, CanResetPassword, Searchable;
+
+    public $sortable = [
+        'id'
+
+    ];
 
     /**
      * The attributes that are mass assignable.

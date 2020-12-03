@@ -274,9 +274,7 @@
                     alert('Fehlerhafte Eingabe: Datum ');
                     $(this).val(value.slice(0,-1));
                 }
-
             });
-
 
             $('#dateFilter').click(function (event) {
                 event.preventDefault();

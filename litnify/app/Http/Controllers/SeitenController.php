@@ -12,13 +12,9 @@ class SeitenController extends Controller
     {
         $url = request()->segment(1);
         $content = Seiten::where('title', $url)->latest('created_at')->value('content');
-        return view('layouts.staticpages', array('content' => $content));
+        return view('layouts.staticpages', [
+            'content' => $content,
+            'title' => $url
+        ]);
     }
-
-
-
-
-
-
-
 }
