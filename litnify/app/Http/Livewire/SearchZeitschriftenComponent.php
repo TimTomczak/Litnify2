@@ -15,6 +15,11 @@ class SearchZeitschriftenComponent extends Component
 
     public $searchQuery;
 
+    public function updatingSearchQuery()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         $zeitschriften=Suche::getInstance()->searchZeitschriften($this->searchQuery)->get();

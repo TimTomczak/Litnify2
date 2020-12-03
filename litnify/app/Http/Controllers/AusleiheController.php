@@ -12,15 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class AusleiheController extends Controller
 {
-    private function dbTimestampToGermanDate($ausleihen)
-    {
-        foreach ($ausleihen as $ausleihe) {
-            $ausleihe->RueckgabeSoll = $ausleihe->RueckgabeSoll != null&& $ausleihe->RueckgabeSoll!='0000-00-00' ? date("d.m.Y", strtotime($ausleihe->RueckgabeSoll)) : $ausleihe->RueckgabeSoll;
-            $ausleihe->Ausleihdatum = $ausleihe->Ausleihdatum != null && $ausleihe->Ausleihdatum!='0000-00-00' ? date("d.m.Y", strtotime($ausleihe->Ausleihdatum)) : $ausleihe->Ausleihdatum;
-            $ausleihe->RueckgabeIst = $ausleihe->RueckgabeIst != null && $ausleihe->RueckgabeIst!='0000-00-00' ? date("d.m.Y", strtotime($ausleihe->RueckgabeIst)) : $ausleihe->RueckgabeIst;
-        }
-        return $ausleihen;
-    }
+
 
     /**
      * Display a listing of the resource.
@@ -28,13 +20,26 @@ class AusleiheController extends Controller
      */
     public function index()
     {
-        $ausleihenAktiv = Ausleihe::with('medium','user')->where('RueckgabeIst',null)->paginate(10);
-        $ausleihenAktiv = $this->dbTimestampToGermanDate($ausleihenAktiv);
-        $ausleihenBeendet = Ausleihe::with('medium','user')->whereNotNull('RueckgabeIst')->paginate(10);
-        $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
+//        $ausleihenAktiv = Ausleihe::with('medium','user')->where('RueckgabeIst',null)->paginate(10);
+//        $ausleihenAktiv = $this->dbTimestampToGermanDate($ausleihenAktiv);
         return view('Ausleihverwaltung.index',[
-            'ausleihenAktiv' => $ausleihenAktiv,
-            'ausleihenBeendet' => $ausleihenBeendet,
+//            'ausleihenAktiv' => $ausleihenAktiv,
+            'showAktiv'=>true,
+            'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
+            'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
+            'tableStyle' => TableBuilder::$tableStyle,
+            'aktionenStyles' => TableBuilder::$aktionenStyles,
+            'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28)
+        ]);
+    }
+
+    public function indexAusleihenBeendet()
+    {
+//        $ausleihenBeendet = Ausleihe::with('medium','user')->whereNotNull('RueckgabeIst')->paginate(10);
+//        $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
+        return view('Ausleihverwaltung.indexAusleihenBeendet',[
+//            'ausleihenBeendet' => $ausleihenBeendet,
+            'showAktiv'=>false,
             'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
             'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
             'tableStyle' => TableBuilder::$tableStyle,
@@ -126,12 +131,15 @@ class AusleiheController extends Controller
 
     public function updateVerlaegerungen(Request $request, Ausleihe $ausleihe)
     {
-//        dd($request->all(), $ausleihe);
-
         $request->validate([
             'id' => 'required|integer',
             'verlaengerung' => 'date|required'
         ]);
+
+        if ($ausleihe->RueckgabeIst!=null){
+            abort('403','Medium wurde bereits zurückgegeben');
+        }
+
 
         $ausleihe->update([
             'id' => $request->id,
@@ -147,12 +155,15 @@ class AusleiheController extends Controller
 
     public function updateRueckgabe(Request $request, Ausleihe $ausleihe)
     {
-//        dd($request->all(), $ausleihe);
-
         $request->validate([
             'id' => 'required|integer',
             'rueckgabe' => 'date|required'
         ]);
+
+        if ($ausleihe->RueckgabeIst!=null){
+            abort('403','Medium wurde bereits zurückgegeben');
+        }
+
         $ausleihe->update([
             'id' => $request->id,
             'RueckgabeIst' => date('Y-m-d',strtotime($request->rueckgabe)),
@@ -173,6 +184,16 @@ class AusleiheController extends Controller
     public function destroy(Ausleihe $ausleihe)
     {
         return abort('403','Löschen von Ausleihen ist derzeit nicht implementiert');
+    }
+
+    private function dbTimestampToGermanDate($ausleihen)
+    {
+        foreach ($ausleihen as $ausleihe) {
+            $ausleihe->RueckgabeSoll = $ausleihe->RueckgabeSoll != null ? date("d.m.Y", strtotime($ausleihe->RueckgabeSoll)) : $ausleihe->RueckgabeSoll;
+            $ausleihe->Ausleihdatum = $ausleihe->Ausleihdatum != null  ? date("d.m.Y", strtotime($ausleihe->Ausleihdatum)) : $ausleihe->Ausleihdatum;
+            $ausleihe->RueckgabeIst = $ausleihe->RueckgabeIst != null ? date("d.m.Y", strtotime($ausleihe->RueckgabeIst)) : $ausleihe->RueckgabeIst;
+        }
+        return $ausleihen;
     }
 
     private function validateAttributes(Request $request){

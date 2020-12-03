@@ -4,6 +4,7 @@
 namespace App\Helpers;
 
 
+use App\Models\Ausleihe;
 use App\Models\Berechtigungsrolle;
 use App\Models\Inventarliste;
 use App\Models\Literaturart;
@@ -281,5 +282,24 @@ class Suche
         return Zeitschrift::where('name','like','%'.$searchQuery.'%')
             ->orWhere('shortcut','like','%'.$searchQuery.'%')
             ->orWhere('id','like','%'.$searchQuery.'%');
+    }
+
+    public function searchAusleihen($searchQuery){
+        if (filter_var($searchQuery, FILTER_VALIDATE_INT)!==false){
+            return Ausleihe::where('id',$searchQuery)
+                ->orWhere('user_id',$searchQuery)
+                ->orWhere('medium_id',$searchQuery)
+                ->orWhere('Verlaengerungen',$searchQuery);
+        }
+        elseif (strtotime($searchQuery)){
+            $searchQuery=date('Y-m-d',strtotime($searchQuery));
+            return Ausleihe::where('Ausleihdatum','like','%'.$searchQuery.'%')
+                ->orWhere('RueckgabeSoll','like','%'.$searchQuery.'%')
+                ->orWhere('RueckgabeIst','like','%'.$searchQuery.'%');
+        }
+        else{
+
+            return Ausleihe::where('inventarnummer','like','%'.$searchQuery.'%');
+        }
     }
 }

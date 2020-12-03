@@ -15,6 +15,11 @@ class SearchUsersComponentFull extends Component
     protected $paginationTheme = 'bootstrap';
     public $searchQuery;
 
+    public function updatingSearchQuery()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         $users=Suche::getInstance()->searchUsers($this->searchQuery);

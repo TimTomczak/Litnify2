@@ -66,8 +66,9 @@ class TableBuilder
 
     public static $ausleihverwaltungIndex_AktiveAusleihen=[
         'id' => 'ID',
-        'medium_id' => 'ID Medium',
         'user_id' => 'ID Nutzer',
+        'medium_id' => 'ID Medium',
+        'inventarnummer' => 'Inventarnummer',
         'Ausleihdatum' => 'Ausleihdatum',
         'RueckgabeSoll' => 'Rueckgabe-Soll',
         'RueckgabeIst' => 'Rueckgabe-Ist',

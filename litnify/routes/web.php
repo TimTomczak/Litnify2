@@ -73,6 +73,7 @@ Route::prefix('admin')->group(function() {
     /*        Ausleihverwaltung        */
     /***********************************/
     Route::get('ausleihverwaltung', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihverwaltung.index')->middleware('auth', 'role:2');
+    Route::get('ausleihverwaltung/ausleihen-beendet', [App\Http\Controllers\AusleiheController::class, 'indexAusleihenBeendet'])->name('ausleihenBeendet.index')->middleware('auth', 'role:2');
     Route::post('ausleihverwaltung/ausleihe/{user}/{medium}', [App\Http\Controllers\AusleiheController::class, 'store'])->where(array('user' => '[0-9]+', 'medium' => '[0-9]+'))->name('ausleihe.store')->middleware('auth', 'role:3');
     Route::get('ausleihverwaltung/ausleihen/{ausleihe}', [App\Http\Controllers\AusleiheController::class, 'show'])->where(array('user' => '[0-9]+'))->name('ausleihe.show')->middleware('auth', 'role:2');
     Route::get('ausleihverwaltung/ausleihen/{ausleihe}/edit', [App\Http\Controllers\AusleiheController::class, 'edit'])->where(array('user' => '[0-9]+'))->name('ausleihe.edit')->middleware('auth', 'role:3');
