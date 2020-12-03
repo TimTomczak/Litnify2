@@ -11,7 +11,7 @@
                 <thead>
                 <tr>
                     @foreach($tableBuilder as $key=>$val)
-                        <th scope="col">{{$val}}</th>
+                        <th scope="col" wire:click="sortBy('{{$key}}')">{{$val}}  @if($sortBy===$key)<i class="fa {{$sortDirection==='desc' ? 'fa-sort-alpha-asc' : 'fa-sort-alpha-desc'}}"></i> @endif</th>
                     @endforeach
                     <th>Aktionen</th>
                 </tr>

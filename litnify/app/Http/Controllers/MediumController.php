@@ -25,16 +25,16 @@ class MediumController extends Controller
      */
     public function index()
     {
-        $medien=Medium::with('literaturart','zeitschrift','raum','inventarliste')
-            ->orderBy('id','DESC')
-            ->where('released',1)
-            ->where('deleted',0)
-            ->paginate(10);
+//        $medien=Medium::with('literaturart','zeitschrift','raum','inventarliste')
+//            ->orderBy('id','DESC')
+//            ->where('released',1)
+//            ->where('deleted',0)
+//            ->paginate(10);
         return view('Medienverwaltung.index',[
-            'medien' => $medien,
-            'tableBuilder' => TableBuilder::$medienverwaltungIndex,
-            'tableStyle' => TableBuilder::$tableStyle,
-            'aktionenStyles' => TableBuilder::$aktionenStyles,
+//            'medien' => $medien,
+//            'tableBuilder' => TableBuilder::$medienverwaltungIndex,
+//            'tableStyle' => TableBuilder::$tableStyle,
+//            'aktionenStyles' => TableBuilder::$aktionenStyles,
         ]);
     }
 

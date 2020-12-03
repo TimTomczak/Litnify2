@@ -6,6 +6,7 @@ namespace App\Helpers;
 
 use App\Models\Berechtigungsrolle;
 use App\Models\Inventarliste;
+use App\Models\Literaturart;
 use App\Models\Medium;
 use App\Models\User;
 use App\Models\Zeitschrift;
@@ -195,6 +196,7 @@ class Suche
         return $result->where('released',1)->where('deleted',0);
     }
 
+
     /**
      * @param $result
      * @return array
@@ -208,6 +210,36 @@ class Suche
             'unwerk' => $result->where('literaturart_id', 4)->count(),
             'daten' => $result->where('literaturart_id', 5)->count(),
         ];
+    }
+
+    public function searchMedien($searchQuery){
+
+        $literaturart=Literaturart::where('literaturart','like','%'.$searchQuery.'%')->get();
+        if ($literaturart->isNotEmpty()){
+            return Medium::whereIn('literaturart_id',$literaturart->pluck('id'))->where('deleted',0)->where('released',1);
+        }
+        else{
+            $medien=Medium::where('id','like','%'.$searchQuery.'%')
+                ->orWhere('signatur','like','%'.$searchQuery.'%')
+                ->orWhere('autoren','like','%'.$searchQuery.'%')
+                ->orWhere('hauptsachtitel','like','%'.$searchQuery.'%')
+                ->orWhere('untertitel','like','%'.$searchQuery.'%')
+                ->orWhere('enthalten_in','like','%'.$searchQuery.'%')
+                ->orWhere('erscheinungsort','like','%'.$searchQuery.'%')
+                ->orWhere('jahr','like','%'.$searchQuery.'%')
+                ->orWhere('verlag','like','%'.$searchQuery.'%')
+                ->orWhere('isbn','like','%'.$searchQuery.'%')
+                ->orWhere('issn','like','%'.$searchQuery.'%')
+                ->orWhere('doi','like','%'.$searchQuery.'%')
+                ->orWhere('auflage','like','%'.$searchQuery.'%')
+                ->orWhere('herausgeber','like','%'.$searchQuery.'%')
+                ->orWhere('schriftenreihe','like','%'.$searchQuery.'%')
+                ->orWhere('band','like','%'.$searchQuery.'%')
+                ->orWhere('institut','like','%'.$searchQuery.'%')
+                ->orWhere('bemerkungen','like','%'.$searchQuery.'%')
+                ->where('deleted',0)->where('released',1)->limit(50);
+            return $medien;
+        }
     }
 
     /**

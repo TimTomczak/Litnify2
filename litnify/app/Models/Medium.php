@@ -85,7 +85,7 @@ class Medium extends Model
 
     public function merkliste(){
         return $this->belongsToMany(User::class, 'merkliste')
-            ->withPivot('created_at');
+            ->withPivot('id','created_at');
     }
 
     public function ausleihe(){

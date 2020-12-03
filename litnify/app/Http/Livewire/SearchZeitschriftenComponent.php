@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 
 class SearchZeitschriftenComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, WithSorting;
 
     protected $paginationTheme = 'bootstrap';
 
@@ -17,8 +17,11 @@ class SearchZeitschriftenComponent extends Component
 
     public function render()
     {
+        $zeitschriften=Suche::getInstance()->searchZeitschriften($this->searchQuery)->get();
+        $zeitschriften= $this->sortDirection=='asc' ? $zeitschriften->sortByDesc($this->sortBy) : $zeitschriften->sortBy($this->sortBy);
+
         return view('livewire.search-zeitschriften-component',[
-            'zeitschriften' => Suche::getInstance()->searchZeitschriften($this->searchQuery)->paginate(10),
+            'zeitschriften' => $zeitschriften->paginate(10),
             'tableStyle' => TableBuilder::$tableStyle,
             'tableBuilder' => TableBuilder::$zeitschrifenverwaltungIndex,
             'aktionenStyles' => TableBuilder::$aktionenStyles,

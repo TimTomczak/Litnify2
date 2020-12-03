@@ -4,6 +4,7 @@
   'create-zeitschrift-component' => 'App\\Http\\Livewire\\CreateZeitschriftComponent',
   'inventarnummern-component' => 'App\\Http\\Livewire\\InventarnummernComponent',
   'search-medien-ausleihbar-component' => 'App\\Http\\Livewire\\SearchMedienAusleihbarComponent',
+  'search-medien-component' => 'App\\Http\\Livewire\\SearchMedienComponent',
   'search-users-component' => 'App\\Http\\Livewire\\SearchUsersComponent',
   'search-users-component-full' => 'App\\Http\\Livewire\\SearchUsersComponentFull',
   'search-zeitschriften-component' => 'App\\Http\\Livewire\\SearchZeitschriftenComponent',

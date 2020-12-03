@@ -70,7 +70,7 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     public function merkliste(){
         return $this->belongsToMany(Medium::class, 'merkliste')
-            ->withPivot('created_at');
+            ->withPivot('id','created_at');
     }
 
     public function berechtigungsrolle(){
