@@ -21,8 +21,6 @@ Auth::routes([
 
 //Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register')->middleware('auth', 'role:4');
 
-
-
 Route::get('/', function () {return view('start');})->name('start');
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
 Route::post('/suche/export', [App\Http\Controllers\SearchController::class, 'export'])->name('suche.export');
@@ -105,17 +103,13 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
     Route::post('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditorUpdate'])->middleware('auth', 'role:4');
     Route::get('systemverwaltung/logs', [App\Http\Controllers\Admin\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs')->middleware('auth', 'role:4');
 
-
     //Route::get('users', 'App\Http\Controllers\Admin\UserController');
     //Route::get('medium', 'App\Http\Controllers\Admin\MediumController');
     //Route::get('system', 'App\Http\Controllers\Admin\SystemController');
-
 });
 
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/test', [App\Http\Controllers\Download::class, 'index']);
-
+Route::get('/test', [App\Http\Controllers\DownloadController::class, 'index']);
 
 // * S t a t i c P a g e  s * //
 Route::get('/{page}', App\Http\Controllers\SeitenController::class)->name('page');

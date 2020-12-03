@@ -19,18 +19,11 @@
 
     <form action="{{route('admin.systemverwaltung.contenteditor')}}" method="get">
         <ul class="nav nav-tabs nav-justified" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link {{ Helper::tab_active('faq') }}" href="?seite=faq">FAQ</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Helper::tab_active('oeffnungszeiten') }}" href="?seite=oeffnungszeiten">Öffnungszeiten</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Helper::tab_active('kontakt') }}" href="?seite=kontakt">Kontakt</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Helper::tab_active('impressum') }}" href="?seite=impressum">Impressum</a>
-            </li>
+            @foreach($tabs as $tab)
+                <li class="nav-item">
+                    <a class="nav-link {{ Helper::tab_active($tab) }}" href="?seite={{$tab}}">{{strtoupper($tab)}}</a>
+                </li>
+            @endforeach
         </ul>
     </form>
 
