@@ -37,9 +37,36 @@
                                 <td>{{$user->attributesToArray()[$key]}}</td>
                             @endswitch
                         @endforeach
+                        @if($nutzerverwaltung==false)
                         <td>
                             <a href="{{route('direktverleih.create',$user->id)}}" class="{{$aktionenStyles['show']['button-class']}}" title="ausleihen"><i class="fa fa-share"></i></a>
                         </td>
+                        @else
+                                @if($user->deleted == 1)
+                                    <td>
+                                        <form action="{{route('admin.nutzerverwaltung.wakeup',$user->id)}}" method="post" style="display: inline;">
+                                            @csrf
+                                            <button type="submit" class="{{$aktionenStyles['reactivate']['button-class']}}" title="Aktivieren">
+                                                <i class="{{$aktionenStyles['reactivate']['icon-class']}}"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                @elseif($user->id == Auth::user()->id)
+                                    <td></td>
+                                @else
+                                    <td>
+                                        <a href="{{route('admin.nutzerverwaltung.edit',$user->id)}}" class="{{$aktionenStyles['edit']['button-class']}}" title="Bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></a>
+
+                                        <form action="{{route('admin.nutzerverwaltung.delete',$user->id)}}" method="post" style="display: inline;">
+                                            @csrf
+                                            <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Deaktivieren">
+                                                <i class="{{$aktionenStyles['delete']['icon-class']}}"></i>
+                                            </button>
+                                        </form>
+
+                                    </td>
+                                @endif
+                        @endif
 
                     </tr>
                 @endforeach

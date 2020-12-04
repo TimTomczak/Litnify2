@@ -14,7 +14,7 @@ use LdapRecord\Laravel\Auth\HasLdapUser;
 
 class User extends Authenticatable implements LdapAuthenticatable
 {
-    use HasFactory, Notifiable, AuthenticatesWithLdap, HasLdapUser, CanResetPassword, Searchable;
+    use HasFactory, Notifiable, AuthenticatesWithLdap, HasLdapUser, CanResetPassword;
 
     public $sortable = [
         'id'

@@ -259,7 +259,7 @@ class Suche
             try {
                 if (strtotime($searchQuery)) {
                     $dbDate = date('Y-m-d', strtotime($searchQuery));
-                    return $result = User::where('created_at', 'like', '%' . $dbDate . '%');
+                    return $result = User::where('created_at', 'like', '%' . $dbDate . '%')->get();
                 }
                 else{
                     throw new \ErrorException();
@@ -269,7 +269,7 @@ class Suche
                 return $result=User::where('email','like','%'.$searchQuery.'%')
                     ->orWhere('nachname','like','%'.$searchQuery.'%')
                     ->orWhere('vorname','like','%'.$searchQuery.'%')
-                    ->orWhere('uid','like','%'.$searchQuery.'%');
+                    ->orWhere('uid','like','%'.$searchQuery.'%')->get();
             }
         }
     }
