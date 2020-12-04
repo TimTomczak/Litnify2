@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel;
 
-class Download extends Controller{
+class DownloadController extends Controller{
 
 
     private $data;

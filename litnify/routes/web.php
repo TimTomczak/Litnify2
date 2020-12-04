@@ -21,8 +21,6 @@ Auth::routes([
 
 //Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register')->middleware('auth', 'role:4');
 
-
-
 Route::get('/', function () {return view('start');})->name('start');
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
 Route::post('/suche/export', [App\Http\Controllers\SearchController::class, 'export'])->name('suche.export');
@@ -37,9 +35,10 @@ Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->
 Route::permanentRedirect('/user', '/user/profil');
 Route::permanentRedirect('/password', '/user/profil');
 Route::get('/user/avatar/{name?}', [App\Http\Controllers\UserController::class, 'createAvatar'])->name('avatar')->middleware('auth');
-Route::get('/user/profil', [App\Http\Controllers\UserController::class, 'showProfil'])->name('profil')->middleware('auth');
-Route::get('/user/ausleihen', [App\Http\Controllers\UserController::class, 'showAusleihen'])->name('ausleihen')->middleware('auth');
-Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'showMerkliste'])->name('merkliste')->middleware('auth');
+Route::get('/user/profil', [App\Http\Controllers\UserController::class, 'showProfil'])->name('profil.show')->middleware('auth');
+Route::get('/user/ausleihen', [App\Http\Controllers\UserController::class, 'showAusleihen'])->name('ausleihen.show')->middleware('auth');
+Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'showMerkliste'])->name('merkliste.show')->middleware('auth');
+Route::post('/user/merkliste', [App\Http\Controllers\UserController::class, 'editMerkliste'])->name('merkliste.edit')->middleware('auth');
 
 /***********************************/
 /*        Medienverwaltung         */
@@ -114,17 +113,13 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
     Route::post('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditorUpdate'])->middleware('auth', 'role:4');
     Route::get('systemverwaltung/logs', [App\Http\Controllers\Admin\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs')->middleware('auth', 'role:4');
 
-
     //Route::get('users', 'App\Http\Controllers\Admin\UserController');
     //Route::get('medium', 'App\Http\Controllers\Admin\MediumController');
     //Route::get('system', 'App\Http\Controllers\Admin\SystemController');
-
 });
 
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/test', [App\Http\Controllers\Download::class, 'index']);
-
+Route::get('/test', [App\Http\Controllers\DownloadController::class, 'index']);
 
 // * S t a t i c P a g e  s * //
 Route::get('/{page}', App\Http\Controllers\SeitenController::class)->name('page');

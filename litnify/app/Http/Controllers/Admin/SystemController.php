@@ -50,24 +50,20 @@ class SystemController extends Controller
         if(is_null($selection)) {
             return redirect()->route('admin.systemverwaltung.contenteditor', ['seite' => 'faq']);
         }
+        $tabs = Seiten::all()->unique('title')->pluck('title');
         $content = Seiten::where('title', $selection)->latest('created_at')->value('content');
 
         if (is_null($content)){
             abort('403', 'Seite existiert nicht');
         }
-        return view('admin.systemverwaltung.contenteditor', compact(['content', 'selection']));
+        return view('admin.systemverwaltung.contenteditor', compact(['content', 'selection', 'tabs']));
     }
 
     public function contentEditorUpdate(Request $request){
-
-        $validatedAttributes = $request->validate([
+        Seiten::create($request->validate([
             'title' => 'required',
             'content' => 'required',
-            ]);
-        Seiten::create($validatedAttributes);
-
-
+        ]));
         return redirect(route('admin.systemverwaltung.contenteditor'));
     }
-
 }

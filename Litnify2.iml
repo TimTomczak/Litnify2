@@ -133,6 +133,7 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/kyslik/column-sortable" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="daterangepicker" level="application" />

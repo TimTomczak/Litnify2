@@ -7,6 +7,7 @@ use App\Helpers\TableBuilder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+
 class SearchUsersComponentFull extends Component
 {
     use WithPagination,WithSorting;

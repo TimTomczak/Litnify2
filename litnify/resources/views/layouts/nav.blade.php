@@ -48,13 +48,13 @@
                             </button>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('profil') }}">
+                            <a class="dropdown-item" href="{{ route('profil.show') }}">
                                 {{ __('Profil') }}
                             </a>
-                            <a class="dropdown-item" href="{{ route('merkliste') }}">
+                            <a class="dropdown-item" href="{{ route('merkliste.show') }}">
                                 Merkliste
                             </a>
-                            <a class="dropdown-item" href="{{ route('ausleihen') }}">
+                            <a class="dropdown-item" href="{{ route('ausleihen.show') }}">
                                 Ausleihen
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}">

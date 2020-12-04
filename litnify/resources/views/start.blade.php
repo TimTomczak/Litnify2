@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <style>
         header {
             height: 86vh;

@@ -12,8 +12,8 @@
 
             </div>
             <div class="modal-footer">
-                <a id="showMediumBtn" class="btn btn-primary">Öffnen</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a id="showMediumBtn" class="btn btn-primary">&Ouml;ffnen</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Schlie&szlig;en</button>
             </div>
         </div>
     </div>
