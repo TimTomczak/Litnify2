@@ -54,8 +54,10 @@ Route::prefix('admin')->group(function() {
     Route::post('medienverwaltung/medium', [App\Http\Controllers\MediumController::class, 'store'])->name('medium.store')->where(array('medium' => '[0-9]+'))->middleware('auth', 'role:2');
     Route::get('medienverwaltung/medium/{medium}/edit', [App\Http\Controllers\MediumController::class, 'edit'])->name('medium.edit')->where(array('medium' => '[0-9]+'))->middleware('auth', 'role:2');
     Route::put('medienverwaltung/medium/{medium}', [App\Http\Controllers\MediumController::class, 'update'])->name('medium.update')->where(array('medium' => '[0-9]+'))->middleware('auth', 'role:2');
+    Route::put('medienverwaltung/medium/{medium}/recover', [App\Http\Controllers\MediumController::class, 'recover'])->name('medium.recover')->where(array('medium' => '[0-9]+'))->middleware('auth', 'role:2');
     Route::delete('medienverwaltung/medium/{medium}', [App\Http\Controllers\MediumController::class, 'destroy'])->name('medium.destroy')->where(array('medium' => '[0-9]+'))->middleware('auth', 'role:3');
     /*  Freigabe    */
+    /*TODO Freigabe rückgängig machen ? */
     Route::get('medienverwaltung/freigabe', [App\Http\Controllers\FreigabeController::class, 'index'])->name('freigabe.index')->middleware('auth', 'role:2');
     Route::put('medienverwaltung/{medium}/freigabe', [App\Http\Controllers\FreigabeController::class, 'update'])->name('freigabe.update')->where(array('medium' => '[0-9]+'))->middleware('auth', 'role:3');
     /*  Zeitschriftenverwaltung */
@@ -64,6 +66,7 @@ Route::prefix('admin')->group(function() {
     Route::get('zeitschriftenverwaltung/zeitschrift/create', [App\Http\Controllers\ZeitschriftController::class, 'create'])->name('zeitschrift.create')->middleware('auth', 'role:2');
     Route::post('zeitschriftenverwaltung/zeitschrift', [App\Http\Controllers\ZeitschriftController::class, 'store'])->name('zeitschrift.store')->middleware('auth', 'role:2');
     Route::put('zeitschriftenverwaltung/zeitschrift/{zeitschrift}', [App\Http\Controllers\ZeitschriftController::class, 'update'])->name('zeitschrift.update')->middleware('auth', 'role:3');
+    Route::put('zeitschriftenverwaltung/zeitschrift/{zeitschrift}/recover', [App\Http\Controllers\ZeitschriftController::class, 'recover'])->name('zeitschrift.recover')->middleware('auth', 'role:3');
     Route::delete('zeitschriftenverwaltung/zeitschrift/{zeitschrift}', [App\Http\Controllers\ZeitschriftController::class, 'destroy'])->name('zeitschrift.destroy')->middleware('auth', 'role:3');
     /*  Inventarliste   */
     /*   Inventarliste wird über die Lifewire Component verwaltet. Siehe: \App\Http\Livewire\InventarnummernComponent::class    */
@@ -80,6 +83,7 @@ Route::prefix('admin')->group(function() {
     Route::delete('ausleihverwaltung/ausleihen/{ausleihe}', [App\Http\Controllers\AusleiheController::class, 'destroy'])->where(array('user' => '[0-9]+'))->name('ausleihe.destroy')->middleware('auth', 'role:3');
     Route::put('ausleihverwaltung/ausleihe/{ausleihe}/verlaengern', [App\Http\Controllers\AusleiheController::class, 'updateVerlaegerungen'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.extend')->middleware('auth', 'role:3');
     Route::put('ausleihverwaltung/ausleihe/{ausleihe}/rueckgabe', [App\Http\Controllers\AusleiheController::class, 'updateRueckgabe'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.return')->middleware('auth', 'role:3');
+    Route::put('ausleihverwaltung/ausleihe/{ausleihe}/recover', [App\Http\Controllers\AusleiheController::class, 'recover'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.recover')->middleware('auth', 'role:3');
     /*  Direktverleih   */
     Route::get('ausleihverwaltung/direktverleih', [App\Http\Controllers\DirektverleihController::class, 'index'])->name('direktverleih.index')->middleware('auth', 'role:3');
     Route::get('ausleihverwaltung/direktverleih/create/{user}', [App\Http\Controllers\DirektverleihController::class, 'create'])->name('direktverleih.create')->middleware('auth', 'role:3');
@@ -90,8 +94,7 @@ Route::prefix('admin')->group(function() {
     /***********************************/
     /*        Wiederherstellung        */
     /***********************************/
-    Route::get('wiederherstellung', [App\Http\Controllers\WiederherstellungController::class, 'index'])->name('wiederherstellung.index')->middleware('auth', 'role:3');
-    Route::get('wiederherstellung/{verwaltung}', [App\Http\Controllers\WiederherstellungController::class, 'show'])->name('wiederherstellung.index')->middleware('auth', 'role:3');
+    Route::get('wiederherstellung/{verwaltung}', [App\Http\Controllers\WiederherstellungController::class, 'show'])->name('wiederherstellung.show')->middleware('auth', 'role:3');
 
 });
 

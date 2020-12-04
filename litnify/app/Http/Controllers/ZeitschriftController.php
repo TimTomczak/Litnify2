@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Helpers\TableBuilder;
 use App\Models\Zeitschrift;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ZeitschriftController extends Controller
 {
@@ -40,7 +42,8 @@ class ZeitschriftController extends Controller
      */
     public function store(Request $request)
     {
-        Zeitschrift::create($this->validateAttributes());
+        $zeitschrift=Zeitschrift::create($this->validateAttributes());
+        Log::channel('actions')->info('[Zeitschrift] erstellt',['user'=>Auth::user(),'zeitschrift'=>$zeitschrift]);
         return redirect(route('zeitschriften.index'))->with([
             'message' => 'Zeitschrift erfolgreich erstellt.',
             'alertType'=> 'success'
@@ -54,15 +57,22 @@ class ZeitschriftController extends Controller
      */
     public function edit(Zeitschrift $zeitschrift)
     {
-        if ($zeitschrift->deleted==1){
-            abort('403','Zeitschrift wurde gelöscht');
-        }
-        else{
-            return view('Zeitschriftenverwaltung.edit',[
-                'zeitschrift' => $zeitschrift
-            ]);
-        }
 
+        if ($zeitschrift->deleted==1){
+            if (Auth::check()) {
+                if (Auth::user()->berechtigungsrolle_id < 3) {
+                    return abort('403', 'Zeitschrift wurde gelöscht');
+                }
+                else{
+                    return view('Zeitschriftenverwaltung.edit',[
+                        'zeitschrift' => $zeitschrift
+                    ]);
+                }
+            }
+            else{
+                return abort('403', 'Zeitschrift wurde gelöscht');
+            }
+        }
     }
 
     /**
@@ -74,8 +84,23 @@ class ZeitschriftController extends Controller
     public function update(Request $request, Zeitschrift $zeitschrift)
     {
         $zeitschrift->update($this->validateAttributes());
+        Log::channel('actions')->info('[Zeitschrift] bearbeitet',['user'=>Auth::user(),'zeitschrift'=>$zeitschrift]);
         return back()->with([
             'message' => 'Zeitschrift wurde erfolgreich geändert.',
+            'alertType'=> 'success'
+        ]);
+    }
+
+    /**
+     * Recover the specified resource in storage.
+     *
+     * @param  Zeitschrift $zeitschrift
+     */
+    public function recover(Zeitschrift $zeitschrift)
+    {
+        $zeitschrift->update(['deleted'=>0]);
+        return back()->with([
+            'message' => 'Zeitschrift "'.$zeitschrift->id.'" wurde wiederhergestellt.',
             'alertType'=> 'success'
         ]);
     }

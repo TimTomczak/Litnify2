@@ -29,12 +29,22 @@
                         <div class="d-flex border-0 justify-content-around">
                             @role(3)
                             <a href="{{route('zeitschrift.edit',$zeitschrift->id)}}"><button class="{{$aktionenStyles['edit']['button-class']}}" title="Medium bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></button></a>
-                            <form action="{{route('zeitschrift.destroy',$zeitschrift->id)}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Medium löschen"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
-                            </form>
                             @endrole
+                            @if($deleted==0)
+                                @role(3)
+                                    <form action="{{route('zeitschrift.destroy',$zeitschrift->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Medium löschen"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
+                                    </form>
+                                @endrole
+                            @else
+                                <form action="{{route('zeitschrift.recover',$zeitschrift->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" class="{{$aktionenStyles['reactivate']['button-class']}}" title="Medium löschen"><i class="{{$aktionenStyles['reactivate']['icon-class']}}"></i></button>
+                                </form>
+                            @endif
                         </div>
                     </td>
                 </tr>

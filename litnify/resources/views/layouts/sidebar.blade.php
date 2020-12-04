@@ -43,6 +43,21 @@
             <i class="fa fa-pencil-square-o"></i> Logfiles</a>
         @endrole
 
+        @role('4')
+        <div class=dropright>
+            <button class="dropdown-toggle list-group-item  list-group-item-action indented {{Helper::sidebar_active('*/wiederherstellung/*')}}" type="button" id="triggerId" data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"><i class="{{\App\Helpers\TableBuilder::$aktionenStyles['reactivate']['icon-class']}}"></i> Wiederherstellung</button>
+            <div class="dropdown-menu" aria-labelledby="triggerId">
+                <a href="{{route('wiederherstellung.show','medien')}}" class="dropdown-item">Medienverwaltung</a>
+                <div class="dropdown-divider"></div>
+{{--                <a href="{{route('wiederherstellung.show','ausleihen')}}" class="dropdown-item">Ausleihverwaltung</a> TODO: Wiederherstellung: Ausleihen --}}
+{{--                <div class="dropdown-divider"></div>--}}
+                <a href="{{route('wiederherstellung.show','zeitschriften')}}" class="dropdown-item">Zeitschriftenverwaltung</a>
+            </div>
+        </div>
+        @endrole
+
     </div>
 </div>
 

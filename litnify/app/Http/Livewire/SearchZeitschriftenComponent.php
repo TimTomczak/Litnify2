@@ -13,6 +13,7 @@ class SearchZeitschriftenComponent extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public $deleted=0;
     public $searchQuery;
 
     public function updatingSearchQuery()
@@ -22,7 +23,7 @@ class SearchZeitschriftenComponent extends Component
 
     public function render()
     {
-        $zeitschriften=Suche::getInstance()->searchZeitschriften($this->searchQuery)->get();
+        $zeitschriften=Suche::getInstance()->searchZeitschriften($this->searchQuery)->get()->where('deleted',$this->deleted);
         $zeitschriften= $this->sortDirection=='asc' ? $zeitschriften->sortByDesc($this->sortBy) : $zeitschriften->sortBy($this->sortBy);
 
         return view('livewire.search-zeitschriften-component',[

@@ -129,6 +129,20 @@ class AusleiheController extends Controller
         return abort('403','Ändern von Ausleihen ist derzeit nicht implementiert');
     }
 
+    /**
+     * Recover the specified resource in storage.
+     *
+     * @param  Ausleihe $ausleihe
+     */
+    public function recover(Ausleihe $ausleihe)
+    {
+        $ausleihe->update(['deleted'=>0]);
+        return back()->with([
+            'message' => 'Ausleihe "'.$ausleihe->id.'" wurde wiederhergestellt.',
+            'alertType'=> 'success'
+        ]);
+    }
+
     public function updateVerlaegerungen(Request $request, Ausleihe $ausleihe)
     {
         $request->validate([

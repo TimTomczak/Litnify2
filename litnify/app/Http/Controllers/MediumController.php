@@ -86,7 +86,6 @@ class MediumController extends Controller
      */
     public function show(Medium $medium)
     {
-         //TODO Wenn nicht autorisiert: Nicht feiegebene Medien nicht anzeigen
         if ($medium->released != 1){
             if (Auth::check()){
                 if (Auth::user()->berechtigungsrolle_id<2){
@@ -96,21 +95,22 @@ class MediumController extends Controller
                 return abort(403, 'Das Medium ist nicht freigegeben.');
             }
         }
-
         if ($medium->deleted==1){
-            abort('403','Medium wurde gelöscht');
-        }
-        else{
-            $medium = $this->foreignIdToString($medium);
-//            $medium->literaturart_id=$medium->literaturart->literaturart;
-//            $medium->zeitschrift_id=$medium->zeitschrift->name;
-//            $medium->raum_id=$medium->raum->raum;
-
-            return view('Medienverwaltung.show',[
-                'medium' => $medium,
-                'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar(),
-                'tableBuilder' => TableBuilder::$mediumShow,
-            ]);
+            if (Auth::check()){
+                if (Auth::user()->berechtigungsrolle_id<3){
+                    return abort('403','Medium wurde gelöscht');
+                }
+                else{
+                    $medium = $this->foreignIdToString($medium);
+                    return view('Medienverwaltung.show',[
+                        'medium' => $medium,
+                        'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar(),
+                        'tableBuilder' => TableBuilder::$mediumShow,
+                    ]);
+                }
+            }else{
+                return abort('403','Medium wurde gelöscht');
+            }
         }
     }
 
@@ -122,9 +122,6 @@ class MediumController extends Controller
     public function edit(Medium $medium)
     {
         $medium = $this->foreignIdToString($medium);
-//        $medium->literaturart_id=$medium->literaturart->literaturart;
-//        $medium->zeitschrift_id=$medium->zeitschrift->name;
-//        $medium->raum_id=$medium->raum->raum;
         return view('Medienverwaltung.edit',[
             'medium' => $medium,
             'literaturart' => $medium->literaturart_id
@@ -161,6 +158,21 @@ class MediumController extends Controller
         return redirect(route('medienverwaltung.index'))->with([
             'message' => 'Medium "'.$medium->hauptsachtitel.'" wurde gelöscht.',
             'alertType'=> 'info'
+        ]);
+    }
+
+    /**
+     * Recover the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  Medium $medium
+     */
+    public function recover(Medium $medium)
+    {
+        $medium->update(['deleted'=>0]);
+        return back()->with([
+            'message' => 'Medium "'.$medium->id.'" wurde wiederhergestellt.',
+            'alertType'=> 'success'
         ]);
     }
 

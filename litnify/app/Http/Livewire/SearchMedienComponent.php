@@ -13,7 +13,7 @@ class SearchMedienComponent extends Component
     use WithPagination, WithSorting;
     protected $paginationTheme = 'bootstrap';
 
-
+    public $deleted=0;
     public $searchQuery;
 
     public function updatingSearchQuery()
@@ -30,7 +30,9 @@ class SearchMedienComponent extends Component
     public function render()
     {
         if ($this->searchQuery==null){
-            $medien = Medium::orderBy('id','DESC')->where('deleted',0)->where('released',1);
+            $medien = $this->sortDirection=='asc' ?
+                Medium::orderBy($this->sortBy,'DESC')->where('deleted',$this->deleted)->where('released',1) :
+                Medium::orderBy($this->sortBy,'ASC')->where('deleted',$this->deleted)->where('released',1);
         }else{
             $medien=Suche::getInstance()->searchMedien($this->searchQuery)->get();
             $medien= $this->sortDirection=='asc' ? $medien->sortByDesc($this->sortBy) : $medien->sortBy($this->sortBy);
