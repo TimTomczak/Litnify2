@@ -86,6 +86,13 @@ Route::prefix('admin')->group(function() {
     /*  Merklistenverleih   */
     Route::get('ausleihverwaltung/merklistenverleih', [App\Http\Controllers\MerklistenverleihController::class, 'index'])->name('merklistenverleih.index')->middleware('auth', 'role:3');
     Route::get('ausleihverwaltung/merklistenverleih/{user}', [App\Http\Controllers\MerklistenverleihController::class, 'show'])->where(array('user' => '[0-9]+'))->name('merklistenverleih.show')->middleware('auth', 'role:3');
+
+    /***********************************/
+    /*        Wiederherstellung        */
+    /***********************************/
+    Route::get('wiederherstellung', [App\Http\Controllers\WiederherstellungController::class, 'index'])->name('wiederherstellung.index')->middleware('auth', 'role:3');
+    Route::get('wiederherstellung/{verwaltung}', [App\Http\Controllers\WiederherstellungController::class, 'show'])->name('wiederherstellung.index')->middleware('auth', 'role:3');
+
 });
 
 // * A d m i n P a g e  s * //
