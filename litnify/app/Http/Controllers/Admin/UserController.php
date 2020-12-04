@@ -41,6 +41,7 @@ class UserController extends Controller
             $request->only('email')
         );
         return redirect(route('admin.nutzerverwaltung'))->with([
+            'title' => 'Nutzerverwaltung',
             'message' => __($status),
             'alertType'=> 'info'
         ]);
@@ -57,6 +58,7 @@ class UserController extends Controller
     {
         if($user->id == Auth::user()->id){
             return redirect(route('admin.nutzerverwaltung'))->with([
+                'title' => 'Nutzerverwaltung',
                 'message' => 'Angemeldeter Account kann nicht verändert werden.',
                 'alertType'=> 'danger'
             ]);
@@ -75,6 +77,7 @@ class UserController extends Controller
             'berechtigungsrolle_id' => 'required|string'
         ]));
         return redirect(route('admin.nutzerverwaltung'))->with([
+            'title' => 'Nutzerverwaltung',
             'message' => 'Account wurde geändert.',
             'alertType'=> 'info'
         ]);
@@ -84,6 +87,7 @@ class UserController extends Controller
     {
         $user->update(['deleted'=> true]);
         return redirect(route('admin.nutzerverwaltung'))->with([
+            'title' => 'Nutzerverwaltung',
             'message' => 'Account wurde deaktiviert.',
             'alertType'=> 'info'
         ]);
@@ -93,6 +97,7 @@ class UserController extends Controller
     {
         $user->update(['deleted'=> false]);
         return redirect(route('admin.nutzerverwaltung'))->with([
+            'title' => 'Nutzerverwaltung',
             'message' => 'Account wurde reaktiviert.',
             'alertType'=> 'info'
         ]);

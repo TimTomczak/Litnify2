@@ -114,4 +114,5 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
+    @include('Medienverwaltung.mediumModal')
 </div>

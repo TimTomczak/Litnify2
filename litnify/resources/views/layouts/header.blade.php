@@ -16,7 +16,7 @@
 {{--    crossorigin="anonymous"></script>--}}
 
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/app_documentReady.js')}}" defer></script>
+<script src="{{ asset('js/app_documentReady.js') }}" defer></script>
 
 <!-- Fonts -->
 {{--<link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
@@ -25,7 +25,8 @@
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<link href="{{ asset('css/app_.css') }}" rel="stylesheet">
+<link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+<link href="{{ asset('css/toast-position.css') }}" rel="stylesheet">
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">

@@ -19,6 +19,7 @@ mix.js('resources/js/app_documentReady.js', 'public/js')
 mix.styles([
     'node_modules/daterangepicker/daterangepicker.css',
     'resources/css/body-wrapper.css',
-],'public/css/app_.css');
+    'resources/css/toast-position.css',
+],'public/css/custom.css');
 
 

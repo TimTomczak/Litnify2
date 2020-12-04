@@ -25,17 +25,7 @@ class MediumController extends Controller
      */
     public function index()
     {
-//        $medien=Medium::with('literaturart','zeitschrift','raum','inventarliste')
-//            ->orderBy('id','DESC')
-//            ->where('released',1)
-//            ->where('deleted',0)
-//            ->paginate(10);
-        return view('Medienverwaltung.index',[
-//            'medien' => $medien,
-//            'tableBuilder' => TableBuilder::$medienverwaltungIndex,
-//            'tableStyle' => TableBuilder::$tableStyle,
-//            'aktionenStyles' => TableBuilder::$aktionenStyles,
-        ]);
+        return view('Medienverwaltung.index');
     }
 
     /**
@@ -76,7 +66,8 @@ class MediumController extends Controller
         }
 
         return redirect(route('medium.create',''))->with([
-            'message' => 'Medium "'.$med->hauptsachtitel.'" erfolgreich erstellt.',
+            'title' => 'Medienverwaltung',
+            'message' => 'Medium erfolgreich erstellt.',
             'alertType'=> 'success'
         ]);
     }
@@ -91,6 +82,7 @@ class MediumController extends Controller
                 if (Auth::user()->berechtigungsrolle_id<2){
                     return abort(403, 'Das Medium ist nicht freigegeben.');
                 }
+
             }else{
                 return abort(403, 'Das Medium ist nicht freigegeben.');
             }
@@ -111,6 +103,14 @@ class MediumController extends Controller
             }else{
                 return abort('403','Medium wurde gelöscht');
             }
+        }
+        else{
+            $medium = $this->foreignIdToString($medium);
+            return view('Medienverwaltung.show',[
+                'medium' => $medium,
+                'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar(),
+                'tableBuilder' => TableBuilder::$mediumShow,
+            ]);
         }
     }
 
@@ -142,7 +142,8 @@ class MediumController extends Controller
         $validatedAttributes=$this->validateAttributes();
         $medium->update($validatedAttributes);
         return redirect(route('medium.show',$medium->id))->with([
-            'message' => 'Medium erfolgreich geändert.',
+            'title' => 'Medienverwaltung',
+            'message' => 'Medium geändert.',
             'alertType'=> 'success'
         ]);
     }
@@ -156,8 +157,9 @@ class MediumController extends Controller
     {
         $medium->update(['deleted'=>1]);
         return redirect(route('medienverwaltung.index'))->with([
-            'message' => 'Medium "'.$medium->hauptsachtitel.'" wurde gelöscht.',
-            'alertType'=> 'info'
+            'title' => 'Medienverwaltung',
+            'message' => 'Medium "'.$medium->id.'" wurde gelöscht.',
+            'alertType'=> 'danger'
         ]);
     }
 
@@ -171,6 +173,7 @@ class MediumController extends Controller
     {
         $medium->update(['deleted'=>0]);
         return back()->with([
+            'title' => 'Wiederherstellung',
             'message' => 'Medium "'.$medium->id.'" wurde wiederhergestellt.',
             'alertType'=> 'success'
         ]);

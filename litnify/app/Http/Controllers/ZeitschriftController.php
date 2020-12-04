@@ -45,6 +45,7 @@ class ZeitschriftController extends Controller
         $zeitschrift=Zeitschrift::create($this->validateAttributes());
         Log::channel('actions')->info('[Zeitschrift] erstellt',['user'=>Auth::user(),'zeitschrift'=>$zeitschrift]);
         return redirect(route('zeitschriften.index'))->with([
+            'title' => 'Zeitschriftenverwaltung',
             'message' => 'Zeitschrift erfolgreich erstellt.',
             'alertType'=> 'success'
         ]);
@@ -86,7 +87,8 @@ class ZeitschriftController extends Controller
         $zeitschrift->update($this->validateAttributes());
         Log::channel('actions')->info('[Zeitschrift] bearbeitet',['user'=>Auth::user(),'zeitschrift'=>$zeitschrift]);
         return back()->with([
-            'message' => 'Zeitschrift wurde erfolgreich geändert.',
+            'title' => 'Zeitschriftenverwaltung',
+            'message' => 'Zeitschrift wurde geändert.',
             'alertType'=> 'success'
         ]);
     }
@@ -100,6 +102,7 @@ class ZeitschriftController extends Controller
     {
         $zeitschrift->update(['deleted'=>0]);
         return back()->with([
+            'title' => 'Wiederherstellung',
             'message' => 'Zeitschrift "'.$zeitschrift->id.'" wurde wiederhergestellt.',
             'alertType'=> 'success'
         ]);
@@ -114,8 +117,9 @@ class ZeitschriftController extends Controller
     {
         $zeitschrift->update(['deleted'=>1]);
         return redirect(route('zeitschriften.index',$zeitschrift->id))->with([
+            'title' => 'Zeitschriftenverwaltung',
             'message' => 'Zeitschrift wurde gelöscht.',
-            'alertType'=> 'info'
+            'alertType'=> 'danger'
         ]);
     }
 

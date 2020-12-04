@@ -17,16 +17,12 @@
             @include('layouts.nav')
             <main class="border-bottom" style="margin-top:75px; background-color: #ffffff; min-height: 85vh;">
                 {{--Benachrichtigung--}}
+                @include('layouts.benachrichtigung')
                 <div class="container-fluid">
                     @if(!(request()->is('/')))
                         @include('layouts.breadcrumbs')
                     @endif
-                    @if($errors->any())
-                        <div class="alert alert-danger">FEHLER !</div>
-                    @enderror
-                    @if(session('message'))
-                        <div class="alert alert-{{session('alertType')}}">{{session('message')}}</div>
-                    @endif
+
                     @yield('content')
                 </div>
             </main>
@@ -34,6 +30,11 @@
         </div>
     </div>
 
+
+
+    <script>
+        $('.toast').toast('show')
+    </script>
     @livewireScripts
 
 

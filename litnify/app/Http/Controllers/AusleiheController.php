@@ -76,7 +76,8 @@ class AusleiheController extends Controller
         ]);
         Ausleihe::create($this->validateAttributes($request));
         return redirect(route('ausleihe.show',$user))->with([
-            'message'=>'Verleih des Mediums "'.$medium->hauptsachtitel.'" mit der Inventarnummer ['.$request->request->get('inventarnummer').'] erfolgreich.',
+            'title' => 'Ausleihverwaltung',
+            'message'=>'Verleih des Mediums "'.$medium->id.'" mit der Inventarnummer ['.$request->request->get('inventarnummer').'] erfolgreich.',
             'alertType' => 'success'
         ]);
     }
@@ -138,6 +139,7 @@ class AusleiheController extends Controller
     {
         $ausleihe->update(['deleted'=>0]);
         return back()->with([
+            'title' => 'Wiederherstellung',
             'message' => 'Ausleihe "'.$ausleihe->id.'" wurde wiederhergestellt.',
             'alertType'=> 'success'
         ]);
@@ -162,6 +164,7 @@ class AusleiheController extends Controller
         ]);
 
         return back()->with([
+            'title' => 'Ausleihverwaltung',
             'message'=>'Ausleihe erfolgreich verlängert',
             'alertType' => 'success'
         ]);
@@ -184,6 +187,7 @@ class AusleiheController extends Controller
         ]);
 
         return back()->with([
+            'title' => 'Ausleihverwaltung',
             'message'=>'Rückgabe erfolgreich verbucht.',
             'alertType' => 'success'
         ]);

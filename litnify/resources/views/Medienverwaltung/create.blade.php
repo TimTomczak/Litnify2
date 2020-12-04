@@ -20,7 +20,7 @@
                 /* Macht Erstellt einen Link für die Literaturart */
                 $('select').on('change', function(e){
                     $val= $(this).find("option:selected").val();
-                    $('#litart_link').attr('href','/medienverwaltung/medium/create/'+$val)
+                    $('#litart_link').attr('href','/admin/medienverwaltung/medium/create/'+$val)
                     $('#litart_link').show();
                 });
             </script>
