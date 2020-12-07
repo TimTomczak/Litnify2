@@ -43,7 +43,6 @@ class ZeitschriftController extends Controller
     public function store(Request $request)
     {
         $zeitschrift=Zeitschrift::create($this->validateAttributes());
-        Log::channel('actions')->info('[Zeitschrift] erstellt',['user'=>Auth::user(),'zeitschrift'=>$zeitschrift]);
         return redirect(route('zeitschriften.index'))->with([
             'title' => 'Zeitschriftenverwaltung',
             'message' => 'Zeitschrift erfolgreich erstellt.',
@@ -74,6 +73,11 @@ class ZeitschriftController extends Controller
                 return abort('403', 'Zeitschrift wurde gelöscht');
             }
         }
+        else{
+            return view('Zeitschriftenverwaltung.edit',[
+                'zeitschrift' => $zeitschrift
+            ]);
+        }
     }
 
     /**
@@ -85,7 +89,6 @@ class ZeitschriftController extends Controller
     public function update(Request $request, Zeitschrift $zeitschrift)
     {
         $zeitschrift->update($this->validateAttributes());
-        Log::channel('actions')->info('[Zeitschrift] bearbeitet',['user'=>Auth::user(),'zeitschrift'=>$zeitschrift]);
         return back()->with([
             'title' => 'Zeitschriftenverwaltung',
             'message' => 'Zeitschrift wurde geändert.',
