@@ -58,6 +58,22 @@ class TableBuilder
         'bemerkungen' => 'Bemerkungen',
     ];
 
+    public static $showAutor=[
+        'literaturart_id'=> 'Literaturart',
+        'signatur' => 'Signatur',
+        'hauptsachtitel' => 'Hauptsachtitel',
+        'autoren' => 'Autoren',
+        'jahr' => 'Jahr'
+    ];
+
+    public static $sucheIndex=[
+        'literaturart_id'=> 'Literaturart',
+        'signatur' => 'Signatur',
+        'hauptsachtitel' => 'Hauptsachtitel',
+        'autoren' => 'Autoren',
+        'jahr' => 'Jahr'
+    ];
+
     public static $zeitschrifenverwaltungIndex=[
         'id' => 'ID',
         'name' => 'Zeitschriftenname',

@@ -9,14 +9,9 @@ use App\Models\Medium;
 use App\Models\Raum;
 use App\Models\Zeitschrift;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Illuminate\View\View;
-use function React\Promise\reduce;
 
 class MediumController extends Controller
 {
@@ -185,8 +180,10 @@ class MediumController extends Controller
             'autor' => $autor,
             'medien' => Medium::where('autoren','like','%'.$autor.'%')
                 ->with('literaturart','zeitschrift','raum','inventarliste')
+                ->where('deleted',0)
+                ->where('released',1)
                 ->paginate(10),
-            'tableBuilder' => TableBuilder::$medienverwaltungIndex,
+            'tableBuilder' => TableBuilder::$showAutor,
         ]);
     }
 

@@ -11,7 +11,6 @@
                 @foreach($tableBuilder as $key=>$val)
                     <th>{{$val}}</th>
                 @endforeach
-                <th>Aktionen</th>
             </tr>
             </thead>
             <tbody>
@@ -32,7 +31,7 @@
                             @break
 
                             @case('hauptsachtitel')
-                            <td class="text-wrap"><a class="render-medium-modal" data-id="{{$med->id}}">{{$med->attributesToArray()[$key]}}</a></td>
+                            <td class="text-wrap"><a href="#" class="render-medium-modal" data-id="{{$med->id}}">{{$med->attributesToArray()[$key]}}</a></td>
                             @break
 
                             @case('autoren')
@@ -53,7 +52,6 @@
 
                         @endswitch
                     @endforeach
-                    <td>...{{--TODO Aktionen--}}</td>
                 </tr>
             @endforeach
 

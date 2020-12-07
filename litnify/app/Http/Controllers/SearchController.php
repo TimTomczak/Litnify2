@@ -38,7 +38,7 @@ class SearchController extends Controller
             'result' => $result->isEmpty() ? false : $result->paginate($ppr),
             'request' => $request->query(),
             'litTypeCounter' => $literaturartenCounter,
-            'tableBuilder' => TableBuilder::$medienverwaltungIndex,
+            'tableBuilder' => TableBuilder::$sucheIndex,
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles
         ]);
