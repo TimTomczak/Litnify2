@@ -46,7 +46,7 @@ Route::middleware('blocked')->group( function() {
 });
 
 // * A d m i n P a g e  s * //
-Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked']], function(){
+Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked','log']], function(){
 
     /***********************************/
     /*        Medienverwaltung         */

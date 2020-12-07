@@ -49,7 +49,7 @@ return [
 
         'actions' => [
             'driver' => 'single',
-            'path' => storage_path('logs/actions.log'),
+            'path' => storage_path('logs/aktionen/aktionen-'.date('Y-m-d',time()).'.log'),
             'level' => 'info',
         ],
 
