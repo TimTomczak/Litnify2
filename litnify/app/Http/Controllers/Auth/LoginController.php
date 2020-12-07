@@ -73,4 +73,14 @@ class LoginController extends Controller
     }
 
 
+    protected function validateLogin(Request $request)
+    {
+        // check if User is NOT disabled by admin panel -> admin/nutzerverwaltung
+
+        $this->validate($request, [
+            $this->username() => 'exists:users,' . $this->username() . ',deleted,0',
+            'password' => 'required|string',
+        ]);
+    }
+
 }

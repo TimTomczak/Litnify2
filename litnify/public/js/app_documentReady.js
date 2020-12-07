@@ -21890,7 +21890,7 @@ $('.ausleiheVerlaengern').click(function (event) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\1PROJECTS\Litnify2\litnify\resources\js\app_documentReady.js */"./resources/js/app_documentReady.js");
+module.exports = __webpack_require__(/*! C:\Users\timto\Desktop\MIUB2\Litnify2\litnify\resources\js\app_documentReady.js */"./resources/js/app_documentReady.js");
 
 
 /***/ })
