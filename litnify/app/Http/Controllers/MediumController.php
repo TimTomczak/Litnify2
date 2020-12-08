@@ -20,7 +20,7 @@ class MediumController extends Controller
      */
     public function index()
     {
-        return view('Medienverwaltung.index');
+        return view('admin.medienverwaltung.index');
     }
 
     /**
@@ -28,7 +28,7 @@ class MediumController extends Controller
      */
     public function create(Literaturart $literaturart)
     {
-        return view('medienverwaltung.create',[
+        return view('admin.medienverwaltung.create',[
             'literaturarten' => Literaturart::all()->pluck('literaturart'),
             'literaturart' => $literaturart->literaturart,
             'nextMediumId' => $this->getNextAutoincrement('medien')
@@ -101,7 +101,7 @@ class MediumController extends Controller
         }
         else{
             $medium = $this->foreignIdToString($medium);
-            return view('Medienverwaltung.show',[
+            return view('admin.medienverwaltung.show',[
                 'medium' => $medium,
                 'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar(),
                 'tableBuilder' => TableBuilder::$mediumShow,
@@ -117,7 +117,7 @@ class MediumController extends Controller
     public function edit(Medium $medium)
     {
         $medium = $this->foreignIdToString($medium);
-        return view('Medienverwaltung.edit',[
+        return view('admin.medienverwaltung.edit',[
             'medium' => $medium,
             'literaturart' => $medium->literaturart_id
         ]);
@@ -176,7 +176,7 @@ class MediumController extends Controller
 
     public function showAutor($autor)
     {
-        return view('Medienverwaltung.autor',[
+        return view('admin.medienverwaltung.autor',[
             'autor' => $autor,
             'medien' => Medium::where('autoren','like','%'.$autor.'%')
                 ->with('literaturart','zeitschrift','raum','inventarliste')

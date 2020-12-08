@@ -16,7 +16,7 @@ class ZeitschriftController extends Controller
      */
     public function index()
     {
-        return view('Zeitschriftenverwaltung.index',[
+        return view('admin.zeitschriftenverwaltung.index',[
             'zeitschriften' => Zeitschrift::where('deleted',0)->paginate(10),
             'tableStyle' => TableBuilder::$tableStyle,
             'tableBuilder' => TableBuilder::$zeitschrifenverwaltungIndex,
@@ -30,7 +30,7 @@ class ZeitschriftController extends Controller
      */
     public function create()
     {
-        return view('zeitschriftenverwaltung.create',[
+        return view('admin.zeitschriftenverwaltung.create',[
             'nextId' => $this->getNextAutoincrement('zeitschriften')
         ]);
     }
@@ -74,7 +74,7 @@ class ZeitschriftController extends Controller
             }
         }
         else{
-            return view('Zeitschriftenverwaltung.edit',[
+            return view('admin.zeitschriftenverwaltung.edit',[
                 'zeitschrift' => $zeitschrift
             ]);
         }

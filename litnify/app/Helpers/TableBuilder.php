@@ -19,7 +19,7 @@ class TableBuilder
         'show' => ['button-class'=>'btn btn-primary btn-sm','icon-class'=>'fa fa-search'],
         'edit' => ['button-class'=>'btn btn-success btn-sm','icon-class'=>'fa fa-edit'],
         'delete' => ['button-class'=>'btn btn-danger btn-sm','icon-class'=>'fa fa-minus-circle'],
-        'release' => ['button-class'=>'btn btn-warning btn-sm border-secondary','icon-class'=>'fa fa-share'],
+        'release' => ['button-class'=>'btn btn-info btn-sm','icon-class'=>'fa fa-share'],
         'reactivate' => ['button-class'=>'btn btn-secondary btn-sm border-secondary','icon-class'=>'fa fa-refresh'],
     ];
 

@@ -69,7 +69,7 @@
                                 <form action="{{route('medium.recover',$med->id)}}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <button type="submit" class="{{$aktionenStyles['reactivate']['button-class']}}" title="Medium löschen"><i class="{{$aktionenStyles['reactivate']['icon-class']}}"></i></button>
+                                    <button type="submit" class="{{$aktionenStyles['reactivate']['button-class']}}" title="Medium wiederherstellen"><i class="{{$aktionenStyles['reactivate']['icon-class']}}"></i></button>
                                 </form>
                             @endif
                         </div>
@@ -90,6 +90,6 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    @include('Medienverwaltung.mediumModal')
+    @include('admin.Medienverwaltung.mediumModal')
 
 </div>

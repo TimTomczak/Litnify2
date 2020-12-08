@@ -19,7 +19,7 @@ class FreigabeController extends MediumController
             ->where('released',0)
             ->where('deleted',0)
             ->paginate(10);
-        return view('Freigabe.index',[
+        return view('admin.medienverwaltung.freigabe.index',[
             'medien' => $medien,
             'tableBuilder' => TableBuilder::$medienverwaltungIndex,
             'tableStyle' => TableBuilder::$tableStyle,

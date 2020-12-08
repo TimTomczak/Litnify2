@@ -16,6 +16,12 @@ class SearchZeitschriftenComponent extends Component
     public $deleted=0;
     public $searchQuery;
 
+    public function mount()
+    {
+        $this->sortDirection='asc';
+        $this->sortBy('id');
+    }
+
     public function updatingSearchQuery()
     {
         $this->resetPage();

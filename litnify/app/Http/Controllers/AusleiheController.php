@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Helpers\TableBuilder;
 use App\Models\Ausleihe;
 use App\Models\Medium;
-use App\Models\Merkliste;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
+/**
+ * Class AusleiheController
+ * @package App\Http\Controllers
+ */
 class AusleiheController extends Controller
 {
 
@@ -20,26 +22,8 @@ class AusleiheController extends Controller
      */
     public function index()
     {
-//        $ausleihenAktiv = Ausleihe::with('medium','user')->where('RueckgabeIst',null)->paginate(10);
-//        $ausleihenAktiv = $this->dbTimestampToGermanDate($ausleihenAktiv);
-        return view('Ausleihverwaltung.index',[
-//            'ausleihenAktiv' => $ausleihenAktiv,
-            'showAktiv'=>true,
-            'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
-            'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
-            'tableStyle' => TableBuilder::$tableStyle,
-            'aktionenStyles' => TableBuilder::$aktionenStyles,
-            'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28)
-        ]);
-    }
-
-    public function indexAusleihenBeendet()
-    {
-//        $ausleihenBeendet = Ausleihe::with('medium','user')->whereNotNull('RueckgabeIst')->paginate(10);
-//        $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
-        return view('Ausleihverwaltung.indexAusleihenBeendet',[
-//            'ausleihenBeendet' => $ausleihenBeendet,
-            'showAktiv'=>false,
+        return view('admin.Ausleihverwaltung.index',[
+            'showAktiv'=>true,                                                                  //wird in der view an Livewire-Component übergeben. Diese lädt entsprechend true oder false die aktiven oder beendeten Ausleihen
             'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
             'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
             'tableStyle' => TableBuilder::$tableStyle,
@@ -49,17 +33,26 @@ class AusleiheController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function create()
+    public function indexAusleihenBeendet()
     {
-        //
+        return view('admin.Ausleihverwaltung.indexAusleihenBeendet',[
+            'showAktiv'=>false,                                                                 // s.o.
+            'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
+            'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
+            'tableStyle' => TableBuilder::$tableStyle,
+            'aktionenStyles' => TableBuilder::$aktionenStyles,
+            'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28)
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * Bekommt den Ausleihzeitraum, User und das auszuleihende Medium.
+     * Teilt den Ausleihzeitraum (z.B: "01.01.2020 - 29.01.2020") auf und speichert daraus das jeweilige Ausleihdatum
+     * und RueckgabeSoll
      *
      * @param  \Illuminate\Http\Request  $request
      */
@@ -83,7 +76,7 @@ class AusleiheController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Zeigt alle aktiven und beendeten Ausleihen eines Benutzers an
      *
      * @param  \App\Models\Ausleihe  $ausleihe
      */
@@ -91,11 +84,11 @@ class AusleiheController extends Controller
     {
         $user=User::find($user);
         $ausleihenAktiv = Ausleihe::whereUserId($user->id)->whereNull('RueckgabeIst')->get();
-        $ausleihenAktiv = $this->dbTimestampToGermanDate($ausleihenAktiv);
+        $ausleihenAktiv = $this->dbTimestampToGermanDate($ausleihenAktiv);                                  //Datenbank-Timestamp in deutsches Datum für die Anzteige umwandeln
         $ausleihenBeendet = Ausleihe::whereUserId($user->id)->whereNotNull('RueckgabeIst')->get();
         $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
 
-        return view('Ausleihverwaltung.show',[
+        return view('admin.Ausleihverwaltung.show',[
             'ausleihenAktiv' => $ausleihenAktiv->paginate(10),
             'ausleihenBeendet' => $ausleihenBeendet->paginate(10),
             'user' => $user,
@@ -145,6 +138,11 @@ class AusleiheController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Ausleihe $ausleihe
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateVerlaegerungen(Request $request, Ausleihe $ausleihe)
     {
         $request->validate([
@@ -170,6 +168,11 @@ class AusleiheController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Ausleihe $ausleihe
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateRueckgabe(Request $request, Ausleihe $ausleihe)
     {
         $request->validate([
@@ -204,6 +207,10 @@ class AusleiheController extends Controller
         return abort('403','Löschen von Ausleihen ist derzeit nicht implementiert');
     }
 
+    /**
+     * @param $ausleihen
+     * @return mixed
+     */
     private function dbTimestampToGermanDate($ausleihen)
     {
         foreach ($ausleihen as $ausleihe) {
@@ -214,8 +221,11 @@ class AusleiheController extends Controller
         return $ausleihen;
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     private function validateAttributes(Request $request){
-//        dd(request());
         return request()->validate([
             'medium_id' => 'required|integer',
             'user_id' => 'required|integer',

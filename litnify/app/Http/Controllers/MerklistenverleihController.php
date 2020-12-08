@@ -16,7 +16,7 @@ class MerklistenverleihController extends Controller
     public function index()
     {
         $merk = Merkliste::with('user', 'medium')->groupBy('user_id')->paginate(10);
-        return view('Ausleihverwaltung/Merklistenverleih.index',[
+        return view('admin.ausleihverwaltung.merklistenverleih.index',[
             'merklisten' => $merk,
             'tableStyle' => TableBuilder::$tableStyle,
         ]);
@@ -27,10 +27,8 @@ class MerklistenverleihController extends Controller
      */
     public function show(User $user)
     {
-//        dd(env('AUSLEIHDAUER',28));
-
         $medienAufMerkliste = $user->merkliste->paginate(10);
-        return view('Ausleihverwaltung/Merklistenverleih.show',[
+        return view('admin.ausleihverwaltung.merklistenverleih.show',[
             'merkliste' => $medienAufMerkliste,
             'user' => $user,
             'tableStyle' => TableBuilder::$tableStyle,
