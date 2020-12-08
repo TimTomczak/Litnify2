@@ -64,7 +64,7 @@ class ZeitschriftController extends Controller
                     return abort('403', 'Zeitschrift wurde gelöscht');
                 }
                 else{
-                    return view('Zeitschriftenverwaltung.edit',[
+                    return view('admin.Zeitschriftenverwaltung.edit',[
                         'zeitschrift' => $zeitschrift
                     ]);
                 }

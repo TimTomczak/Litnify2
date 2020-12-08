@@ -89,7 +89,7 @@ class MediumController extends Controller
                 }
                 else{
                     $medium = $this->foreignIdToString($medium);
-                    return view('Medienverwaltung.show',[
+                    return view('admin.Medienverwaltung.show',[
                         'medium' => $medium,
                         'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar(),
                         'tableBuilder' => TableBuilder::$mediumShow,
