@@ -32,7 +32,7 @@ class SearchMedienAusleihbarComponent extends Component
                 ->distinct()
                 ->get();
         }
-
+        $this->dispatchBrowserEvent('contentChanged');
         return view('livewire.search-medien-ausleihbar-component',[
             'tableBuilder' => TableBuilder::$direktverleihIndex,
             'tableStyle' => TableBuilder::$tableStyle,
