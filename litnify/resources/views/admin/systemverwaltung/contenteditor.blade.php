@@ -1,18 +1,21 @@
 @extends('layouts.app')
 
 @section('javascript.header')
-    <script src="{{asset('storage/js/tinymce/tinymce.min.js')}}"></script>
-    <script>tinymce.init({
-            selector: 'textarea',
-            language: 'de',
-            height : "480",
-            plugins: [
-                "advlist autolink lists link image charmap print code preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste hr"
-            ],
-            //toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | accordion code"
-    });</script>
+    <script>
+        $(document).ready(function(){
+            tinymce.init({
+                selector: 'textarea',
+                language: 'de',
+                height : "480",
+                plugins: [
+                    "advlist autolink lists link image charmap print code preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table contextmenu paste hr"
+                ],
+                //toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | accordion code"
+            });
+        })
+    </script>
 @endsection
 
 @section('content')

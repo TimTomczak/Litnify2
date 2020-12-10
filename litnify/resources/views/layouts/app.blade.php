@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    @yield('javascript.header')
     @include('layouts.header')
+    @include('layouts.fallback-js')
+    @yield('javascript.header')
     @livewireStyles
 </head>
 <body>
@@ -18,9 +19,12 @@
             <main class="border-bottom" style="margin-top:75px; background-color: #ffffff; min-height: 85vh;">
                 {{--Benachrichtigung--}}
                 @include('layouts.benachrichtigung')
-                <div class="container-fluid">
+
                     @if(!(request()->is('/')))
+                        <div class="container">
                         @include('layouts.breadcrumbs')
+                    @else
+                        <div class="container-fluid">
                     @endif
 
                     @yield('content')
@@ -30,14 +34,10 @@
         </div>
     </div>
 
-
-
     <script>
         $('.toast').toast('show')
     </script>
     @livewireScripts
-
-
 
     @yield('javascript.footer')
 </body>
