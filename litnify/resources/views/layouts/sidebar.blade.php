@@ -45,7 +45,7 @@
 
         @role('4')
         <div class=dropright>
-            <button class="dropdown-toggle list-group-item  list-group-item-action indented {{Helper::sidebar_active('*/wiederherstellung/*')}}" type="button" id="triggerId" data-toggle="dropdown"
+            <button class="dropdown-toggle list-group-item  list-group-item-action {{Helper::sidebar_active('*/wiederherstellung/*')}}" type="button" id="triggerId" data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"><i class="{{\App\Helpers\TableBuilder::$aktionenStyles['reactivate']['icon-class']}}"></i> Wiederherstellung</button>
             <div class="dropdown-menu" aria-labelledby="triggerId">
