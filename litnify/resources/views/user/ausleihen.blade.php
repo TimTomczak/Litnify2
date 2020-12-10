@@ -6,7 +6,7 @@
     @if($ausleihe->count()==0)
         <div class="alert alert-info m-2">INFO: Sie haben keine Medien ausgeliehen!</div>
     @else
-        <table class="{{$tableStyle}}">
+        <table class="{{$tableStyle}} table-responsive">
             <thead>
             <tr>
                 <th>Ausleihdatum</th>

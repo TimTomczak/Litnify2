@@ -13,7 +13,3 @@
 <!-- Fonts -->
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-<script src="{{ asset('/storage/js/tinymce/langs/de.js') }}'"></script>
-
-
