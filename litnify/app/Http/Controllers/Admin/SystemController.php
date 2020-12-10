@@ -5,17 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Seiten;
 use Carbon\Carbon;
+use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 
 class SystemController extends Controller
 {
     public function index(){
-
        $info = '';
-
        return view('admin.systemverwaltung.index', compact(['info']));
     }
 
@@ -23,27 +24,19 @@ class SystemController extends Controller
         return view('admin.systemverwaltung.auswertungen');
     }
 
-
     public function logs(Request $request){
-
         $date = new Carbon($request->get('date', today()));
-
         $filePath = storage_path("logs/laravel-{$date->format('Y-m-d')}.log");
         $data = [];
-
         if(File::exists($filePath)){
             $data = [
                 'lastModified' => new Carbon(File::lastModified($filePath)),
                 'size' => File::size($filePath),
                 'file' => File::get($filePath),
             ];
-
         }
-
         return view('admin.systemverwaltung.logs', compact(['date', 'data']));
-
     }
-
 
     public function contentEditor(Request $request){
         $selection = $request->seite;
@@ -65,5 +58,28 @@ class SystemController extends Controller
             'content' => 'required',
         ]));
         return redirect(route('admin.systemverwaltung.contenteditor'));
+    }
+
+    public function command(Request $request){
+        Artisan::command('cache:clear');
+    }
+
+    public function storeImage($name, $file){
+        $file->storeAs('public/images', $name);
+        return redirect(route('admin.systemverwaltung.contenteditor'));
+    }
+
+    public function updateLogo(Request $request){
+        if($request->has('logo')){
+            $this->storeImage('logo.png', $request->logo);
+        }
+        elseif($request->has('sublogo')){
+            $this->storeImage('sublogo.png', $request->sublogo);
+        }
+        else{
+            Redirect::back()->withErrors(
+                ['error' => 'Es wurde keine Datei übermittelt.']
+            );
+        };
     }
 }

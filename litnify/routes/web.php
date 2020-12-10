@@ -111,10 +111,15 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked','log']], f
     Route::post('nutzerverwaltung/{user}/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.nutzerverwaltung.delete')->middleware('role:4');
     Route::post('nutzerverwaltung/{user}/wakeup', [App\Http\Controllers\Admin\UserController::class, 'wakeUp'])->name('admin.nutzerverwaltung.wakeup')->middleware('role:4');
 
+
+    /***********************************/
+    /*        Systemverwaltung         */
+    /***********************************/
     Route::get('systemverwaltung', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung')->middleware('role:4');
     Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\Admin\SystemController::class, 'auswertungen'])->name('admin.systemverwaltung.auswertungen')->middleware('role:4');
     Route::get('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditor'])->name('admin.systemverwaltung.contenteditor')->middleware('role:4');
     Route::post('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditorUpdate'])->middleware('role:4');
+    Route::post('systemverwaltung/updateLogo', [App\Http\Controllers\Admin\SystemController::class, 'updateLogo'])->name('admin.systemverwaltung.updateLogo')->middleware('role:4');
     Route::get('systemverwaltung/logs', [App\Http\Controllers\Admin\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs')->middleware('role:4');
 
     //Route::get('users', 'App\Http\Controllers\Admin\UserController');

@@ -46,42 +46,35 @@
                         <tbody>
 
                             <tr>
-                                <form method="post" action="{{url('/books')}}" enctype="multipart/form-data">
+                                <form method="post" action="{{route('admin.systemverwaltung.updateLogo')}}" enctype="multipart/form-data">
                                     @csrf
                                     <td>
                                         <img src="{{asset('storage/images/logo.png')}}" height="50px">
                                     </td>
                                     <td>
-                                        <input type="file" class="form-control-file" name="upload-logo"/>
+                                        <input type="file" class="form-control-file" name="logo"/>
                                     </td>
                                     <td>
                                         <button type="submit" class="btn btn-primary">Hochladen</button>
                                     </td>
                                 </form>
                             </tr>
-
                             <tr>
-                                <form method="post" action="{{url('/books')}}" enctype="multipart/form-data">
+                                <form method="post" action="{{route('admin.systemverwaltung.updateLogo')}}" enctype="multipart/form-data">
                                     @csrf
                                     <td>
                                         <img src="{{asset('storage/images/sublogo.png')}}" height="50px">
                                     </td>
                                     <td>
-                                        <input type="file" class="form-control-file" name="upload-sublogo"/>
+                                        <input type="file" class="form-control-file" name="sublogo"/>
                                     </td>
                                     <td>
                                         <button type="submit" class="btn btn-primary">Hochladen</button>
                                     </td>
                                 </form>
                             </tr>
-
                         </tbody>
-
-
                         </table>
-
-
-
                     </p>
                 </div>
             </div>
