@@ -13,7 +13,7 @@ class AddDeletedColumnToUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('user', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->boolean('deleted');
         });
     }
@@ -25,7 +25,7 @@ class AddDeletedColumnToUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('user', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('deleted');
         });
     }

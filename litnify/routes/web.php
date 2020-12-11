@@ -125,6 +125,13 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked','log']], f
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/test', [App\Http\Controllers\DownloadController::class, 'index']);
 
+Route::get('/aaa', function (){
+    $file=storage_path("sql\medien.sql");
+//    $file=storage_path("sql\medien.sql");
+    $file=\App\Helpers\Helper::parseSqlAddPrefix($file);
+    \App\Helpers\Helper::chunkSql($file);
+});
+
 // * S t a t i c P a g e  s * //
 Route::get('/{page}', App\Http\Controllers\SeitenController::class)->name('page');
 

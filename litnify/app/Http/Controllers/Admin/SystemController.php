@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ausleihe;
+use App\Models\Auswertung;
+use App\Models\Auswertungen;
+use App\Models\Medium;
 use App\Models\Seiten;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
@@ -20,7 +25,11 @@ class SystemController extends Controller
     }
 
     public function auswertungen(){
-        return view('admin.systemverwaltung.auswertungen');
+
+        return view('admin.systemverwaltung.auswertungen',[
+            'top_ausleihen' => Auswertung::getTopAusleihen(),
+            'ausleihen_offen' => Auswertung::getAusleihenOffen(),
+        ]);
     }
 
 

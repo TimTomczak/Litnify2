@@ -45,4 +45,34 @@ class Helper
         return $query ? $url . '?' . http_build_query($query) : $url;
     }
 
+    public static function parseSqlAddPrefix($pathToFile){
+        $txt_file    = file_get_contents($pathToFile);
+        $rows        = explode("\n", $txt_file);
+        foreach($rows as $row => $data)
+        {
+            if (strpos($data,'INSERT INTO')!==false){
+                $data=substr_replace($data,env('DB_TABLE_PREFIX', 'laravel'),strpos($data,"`")+1,0);
+                $rows[$row]=$data;
+            }
+        }
+        return implode("\n",$rows);
+    }
+
+    /**
+     * Bekommt die File Contents einer großen SQL-Datei und gibt ein array der INSERTS wieder
+     *
+     * @param $file_content
+     * @return false|string[]
+     */
+    public static function chunkSql($file_content){
+        $chunks = explode("INSERT", $file_content);
+        array_shift($chunks);
+        foreach($chunks as $chunk => $chunk_data)
+        {
+            $data = substr_replace($chunk_data,'INSERT',0,0);
+            $chunks[$chunk]=$data;
+        }
+        return $chunks;
+    }
+
 }
