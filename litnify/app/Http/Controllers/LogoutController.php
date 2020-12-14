@@ -9,12 +9,9 @@ use Illuminate\Support\Facades\Route;
 
 class LogoutController extends Controller
 {
-    public function index(){
-
+    public function index()
+    {
         Auth::logout();
         return redirect(RouteServiceProvider::HOME);
-
     }
-
-
 }
