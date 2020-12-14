@@ -124,7 +124,7 @@
                         <hr>
 
                         <ul class="list-group">
-                            <li class="list-group-item text-muted list-group-item-dark"><b>Ergbnisse exportieren</b></li>
+                            <li class="list-group-item text-muted list-group-item-dark"><b>Ergebnisse exportieren</b></li>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Exportformat
@@ -187,7 +187,7 @@
                                     <th>{{$val}}</th>
                                 @endforeach
                                 @auth
-                                    <th></th>
+                                    <th><a tabindex="0"  id="addToMerklisteInfoButton" type="button" class="btn btn-link btn-sm" ><i class="fa fa-info-circle"></i></a></th>
                                 @endauth
                             </tr>
                             </thead>
@@ -314,11 +314,6 @@
             });
 
         })
-
-
-
-
-
 
     </script>
 @endsection

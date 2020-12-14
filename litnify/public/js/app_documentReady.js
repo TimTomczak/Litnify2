@@ -21707,6 +21707,8 @@ __webpack_require__(/*! ./rueckgabeDaterangepicker */ "./resources/js/rueckgabeD
 
 __webpack_require__(/*! ./verlaengerungDaterangepicker */ "./resources/js/verlaengerungDaterangepicker.js");
 
+__webpack_require__(/*! ./sucheMerklisteInfoPopover */ "./resources/js/sucheMerklisteInfoPopover.js");
+
 /***/ }),
 
 /***/ "./resources/js/ausleihzeitraumDaterangepicker.js":
@@ -21839,6 +21841,26 @@ $('#sidebar-toggle').click(function () {
 
 /***/ }),
 
+/***/ "./resources/js/sucheMerklisteInfoPopover.js":
+/*!***************************************************!*\
+  !*** ./resources/js/sucheMerklisteInfoPopover.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#addToMerklisteInfoButton').click(function (event) {
+  $(this).popover({
+    html: true,
+    trigger: 'focus',
+    placement: 'bottom',
+    title: 'Zur Merkliste hinzufügen',
+    content: '<p class="mb-1">Medien können zur Merkliste hinzugefügt werden.</p>' + '<p class="mb-1"><span class="btn btn-primary btn-sm"><i class="fa fa-star-o"></i></span>&ensp;Medium nicht ausleihbar</p>' + '<p><span class="btn btn-success btn-sm"><i class="fa fa-star"></i></span>&ensp;Medium ausleihbar</p>'
+  });
+  $(this).popover('show');
+});
+
+/***/ }),
+
 /***/ "./resources/js/verlaengerungDaterangepicker.js":
 /*!******************************************************!*\
   !*** ./resources/js/verlaengerungDaterangepicker.js ***!
@@ -21890,7 +21912,7 @@ $('.ausleiheVerlaengern').click(function (event) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\timto\Desktop\MIUB2\Litnify2\litnify\resources\js\app_documentReady.js */"./resources/js/app_documentReady.js");
+module.exports = __webpack_require__(/*! C:\1PROJECTS\Litnify2\litnify\resources\js\app_documentReady.js */"./resources/js/app_documentReady.js");
 
 
 /***/ })

@@ -11,13 +11,17 @@ class AddToMerklisteComponent extends Component
 {
     public $medium;
     public $aufMerkliste=false;
+    public $isAusleihbar=false;
 
     public function render()
     {
         if (Auth::check()) {
-            if ($this->isMediumAufMerkliste() == true) {
+            if ($this->isMediumAufMerkliste()) {
                 $this->aufMerkliste = true;
+            }else{
+                $this->isAusleihbar();
             }
+
         }
         return view('livewire.add-to-merkliste-component');
     }
@@ -39,6 +43,12 @@ class AddToMerklisteComponent extends Component
         return Merkliste::where('user_id',Auth::user()->id)->where('medium_id',$this->medium)
             ->get()
             ->isEmpty() ? false : true;
-
     }
+
+    private function isAusleihbar(){
+        if (Medium::findOrFail($this->medium)->isAusleihbar()){
+            $this->isAusleihbar=true;
+        }
+    }
+
 }

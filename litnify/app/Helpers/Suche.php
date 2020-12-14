@@ -152,7 +152,7 @@ class Suche
                 $result=Medium::with('literaturart')->whereIn('zeitschrift_id',$zeit->pluck('id')->all())->get();
                 break;
             case 'invnr':
-                $inv=Inventarliste::whereInventarnummer($searchQuery)->with(['medium' => function ($query) {
+                $inv=Inventarliste::where('inventarnummer','like','%'.$searchQuery.'%')->with(['medium' => function ($query) {
                     $query->where('released',1)->where('deleted',0);
                 }]);
                 $result=Medium::with('literaturart')->whereIn('id',$inv->pluck('medium_id')->all())->get();
