@@ -16,15 +16,20 @@ class BlockedUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->deleted==1){
-            \Auth::logout();
-            return redirect('login')->with([
-                'title' => 'Deaktivert ',
-                'message' => 'Ihr Account wurde deaktiviert. Sie wurden automatisch ausgeloggt!',
-                'alertType'=> 'danger',
-                'duration' => 10000
-            ]);
-        }else{
+        if (\Auth::check()) {
+            if ($request->user()->deleted == 1) {
+                \Auth::logout();
+                return redirect('login')->with([
+                    'title' => 'Deaktivert ',
+                    'message' => 'Ihr Account wurde deaktiviert. Sie wurden automatisch ausgeloggt!',
+                    'alertType' => 'danger',
+                    'duration' => 10000
+                ]);
+            } else {
+                return $next($request);
+            }
+        }
+        else {
             return $next($request);
         }
     }
