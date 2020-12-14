@@ -9,7 +9,7 @@
 
     <div class="d-flex" id="wrapper">
     {{-- <div class="d-flex toggled" id="wrapper"> --}}
-        @role('1')
+        @role(2)
             @include('layouts.sidebar')
         @endrole
 
