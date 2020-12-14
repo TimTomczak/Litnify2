@@ -9,6 +9,7 @@ use DebugBar\DebugBar;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use LdapRecord\Laravel\Auth\ListensForLdapBindFailure;
 
 class LoginController extends Controller
@@ -72,15 +73,21 @@ class LoginController extends Controller
         }
     }
 
-
     protected function validateLogin(Request $request)
     {
         // check if User is NOT disabled by admin panel -> admin/nutzerverwaltung
-
+        /*
         $this->validate($request, [
             $this->username() => 'exists:users,' . $this->username() . ',deleted,0',
             'password' => 'required|string',
-        ]);
+            ]);
+        */
+        $this->validate($request, [
+            $this->username() => Rule::exists('users')->where(function ($query) {
+                $query->where('deleted', 0);
+            }),
+            'password' => 'required|string'
+        ],
+        [$this->username() . '.exists' => 'Ihr Account ist ungültig oder wurde deaktiviert.']);
     }
-
 }

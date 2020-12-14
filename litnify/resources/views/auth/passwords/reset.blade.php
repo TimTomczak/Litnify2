@@ -4,6 +4,21 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Passwortrichtlinien</h4>
+                <p>Ihr Passwort muss folgende Voraussetzungen erfüllen:</p>
+                <ul>
+                    <li>Mindestens 8 Zeichen</li>
+                    <li><b>Zwei</b> der folgenden Merkmale</li>
+                        <ul>
+                            <li>Großbuchstaben</li>
+                            <li>Kleinbuchstaben</li>
+                            <li>Zahlen oder Sonderzeichen (!@#$§?%^&)</li>
+                        </ul>
+                </ul>
+            </div>
+
             <div class="card">
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
@@ -32,6 +47,7 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">

@@ -1,8 +1,8 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top border-bottom">
-
     @auth
-        @if ( auth()->user()->berechtigungsrolle_id > 1)
+        {{-- @todo --}}
+        @if ( Auth::user()->berechtigungsrolle_id > 1)
             <button class="btn btn-light btn-lg border" id="sidebar-toggle" type="button">
                 ADMIN <i class="fa fa-bars"></i>
             </button>
@@ -48,18 +48,10 @@
                             </button>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('profil.show') }}">
-                                {{ __('Profil') }}
-                            </a>
-                            <a class="dropdown-item" href="{{ route('merkliste.show') }}">
-                                Merkliste
-                            </a>
-                            <a class="dropdown-item" href="{{ route('ausleihen.show') }}">
-                                Ausleihen
-                            </a>
-                            <a class="dropdown-item" href="{{ route('logout') }}">
-                                {{ __('Logout') }}
-                            </a>
+                            <a class="dropdown-item" href="{{ route('profil.show') }}">Profil</a>
+                            <a class="dropdown-item" href="{{ route('merkliste.show') }}">Merkliste</a>
+                            <a class="dropdown-item" href="{{ route('ausleihen.show') }}">Ausleihen</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}">Ausloggen</a>
                         </div>
                     </li>
                     @endguest

@@ -18,7 +18,11 @@
                 </thead>
                 <tbody>
                 @foreach ($users as $user)
-                    <tr>
+                    @if($user->deleted == 1)
+                        <tr style="background: repeating-linear-gradient(135deg,#ff0025,#ff0027 10px,#FFFFFF 10px,#FFFFFF 20px);">
+                    @else
+                        <tr>
+                    @endif
                         @foreach($tableBuilder as $key=>$val)
                             @switch($key)
                                 @case('id')
@@ -42,30 +46,31 @@
                             <a href="{{route('direktverleih.create',$user->id)}}" class="{{$aktionenStyles['show']['button-class']}}" title="ausleihen"><i class="fa fa-share"></i></a>
                         </td>
                         @else
-                                @if($user->deleted == 1)
-                                    <td>
-                                        <form action="{{route('admin.nutzerverwaltung.wakeup',$user->id)}}" method="post" style="display: inline;">
-                                            @csrf
-                                            <button type="submit" class="{{$aktionenStyles['reactivate']['button-class']}}" title="Aktivieren">
-                                                <i class="{{$aktionenStyles['reactivate']['icon-class']}}"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                @elseif($user->id == Auth::user()->id)
-                                    <td></td>
-                                @else
-                                    <td>
-                                        <a href="{{route('admin.nutzerverwaltung.edit',$user->id)}}" class="{{$aktionenStyles['edit']['button-class']}}" title="Bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></a>
+                            @if($user->deleted == 1)
+                                <td>
+                                    <form action="{{route('admin.nutzerverwaltung.wakeup',$user->id)}}" method="post" style="display: inline;">
+                                        @csrf
+                                        <button type="submit" class="{{$aktionenStyles['reactivate']['button-class']}}" title="Aktivieren">
+                                            <i class="{{$aktionenStyles['reactivate']['icon-class']}}"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            @elseif($user->id == Auth::user()->id)
+                                <td style="background: repeating-linear-gradient(135deg,#cccccc,#cccccc 10px,#FFFFFF 10px,#FFFFFF 20px);"></td>
+                            @else
+                                <td>
+                                    <a href="{{route('admin.nutzerverwaltung.edit',$user->id)}}" class="{{$aktionenStyles['edit']['button-class']}}" title="Nutzer bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></a>
+                                    <a href="{{route('ausleihe.show',$user->id)}}"><button class="{{$aktionenStyles['show']['button-class']}}" title="Ausleihen des Nutzers ansehen"><i class="fa fa-list"></i>
+                                        </button></a>
+                                    <form action="{{route('admin.nutzerverwaltung.delete',$user->id)}}" method="post" style="display: inline;">
+                                        @csrf
+                                        <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Nutzer deaktivieren">
+                                            <i class="{{$aktionenStyles['delete']['icon-class']}}"></i>
+                                        </button>
+                                    </form>
 
-                                        <form action="{{route('admin.nutzerverwaltung.delete',$user->id)}}" method="post" style="display: inline;">
-                                            @csrf
-                                            <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Deaktivieren">
-                                                <i class="{{$aktionenStyles['delete']['icon-class']}}"></i>
-                                            </button>
-                                        </form>
-
-                                    </td>
-                                @endif
+                                </td>
+                            @endif
                         @endif
 
                     </tr>

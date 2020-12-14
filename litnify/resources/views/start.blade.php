@@ -24,7 +24,7 @@
                         <div class="form-row">
                             <div class="col-12 col-md-9 mb-2 mb-md-0">
                                 <div class="input-group">
-                                    <div class="input-group-prepend">
+                                    <div class="input-group-append">
                                         <button class="btn btn-primary fa fa-search rounded-left" type="button"></button>
                                     </div>
 
@@ -38,7 +38,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <!-- <a href="suche?extend=true"><i class="fa fa-external-link-alt"></i> Erweiterte Suche</a> -->
                             </div>
                             <div class="col-12 col-md-3">
                                 <button class="btn btn-primary btn-block btn-lg" type="submit"> <i class="fa fa-search"></i> Suchen</button>
