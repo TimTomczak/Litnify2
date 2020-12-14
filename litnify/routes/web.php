@@ -21,7 +21,7 @@ Auth::routes([
 
 //Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register')->middleware('role:4');
 
-Route::get('/', function () {return view('start');})->name('start');
+Route::get('/', function () {return view('start',['auswahl'=>App\Helpers\Helper::$suchFilter]);})->name('start');
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
 Route::post('/suche/export', [App\Http\Controllers\SearchController::class, 'export'])->name('suche.export');
 //Route::get('/login', [App\Http\Controllers\LoginController::class])->name('login');

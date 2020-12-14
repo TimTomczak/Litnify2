@@ -49,7 +49,8 @@ class extendedFilterSearch extends Suche
             'graulit' => 3,
             'unwerk' => 4,
             'daten' => 5,
-        ]
+        ],
+        'onlyBorrowable'
     ];
 
     public function extendedFilterSearch($request, $result){

@@ -11,6 +11,7 @@ use App\Models\Literaturart;
 use App\Models\Medium;
 use App\Models\User;
 use App\Models\Zeitschrift;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Suche
@@ -192,6 +193,13 @@ class Suche
                 $result->isEmpty()&&!$request->has('q')?
                     $result=Medium::with('literaturart')->whereIn('literaturart_id',$parameter)->get() :
                     $result=$result->whereIn('literaturart_id',$parameter);
+                break;
+
+            case 'onlyBorrowable':
+                $mediumIdsAusleihbar=DB::table('medien_ausleihbar')->distinct('medium_id')->pluck('medium_id');
+                $result->isEmpty() ?
+                    $result=Medium::whereIn('id',$mediumIdsAusleihbar)->get() :
+                    $result=$result->whereIn('id',$mediumIdsAusleihbar);
                 break;
         }
         return $result->where('released',1)->where('deleted',0);

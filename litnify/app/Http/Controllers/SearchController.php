@@ -13,6 +13,7 @@ use Illuminate\Validation\Rule;
 class SearchController extends Controller
 {
     public function index(Request $request){
+        Helper::getSuchFilterValue('a');
 
         if ($request->has('ppr')){
             $request->validate([
@@ -35,6 +36,7 @@ class SearchController extends Controller
 
         return view('search.suche', [
             'searchQuery' => $request->q,
+            'auswahl' => Helper::$suchFilter,
             'result' => $result->isEmpty() ? false : $result->paginate($ppr),
             'request' => $request->query(),
             'litTypeCounter' => $literaturartenCounter,

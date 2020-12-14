@@ -91,6 +91,17 @@
                         <hr>
 
                         <ul class="list-group">
+                            <li class="list-group-item text-muted list-group-item-dark"><b>Ausleihbare Medien</b></li>
+                            <a class="btn {{request()->has('onlyBorrowable') ? 'btn-primary' : 'btn-outline-primary'}}"
+                                href="{{request()->has('onlyBorrowable') ?
+                                Helper::removeQueryStringParameters(['onlyBorrowable']) :
+                                Helper::addQueryStringParameters(['onlyBorrowable'=>'_'])}}">Nur ausleihbare Medien anzeigen
+                            </a>
+                        </ul>
+
+                        <hr>
+
+                        <ul class="list-group">
                             <li class="list-group-item text-muted list-group-item-dark"><b>Suchergebnisse pro Seite</b></li>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -156,21 +167,54 @@
             </div>
             <!--/col-3-->
             <div class="col-sm-9">
-                <form action="{{route('suche')}}" method="GET">
-                    <div class="form-group">
-                        <div class="d-flex justify-content-around">
-                            <input class="form-control mr-3" name="q" id="q" value="{{$searchQuery}}"/>
-                            @foreach(request()->query() as $key => $val)
-                                @if($key!=='q') {{-- Suchstring überspringen, damit dieser nicht mehrfach gesendet wird --}}
-                                    <input class="form-control mr-3" name="{{$key}}" value="{{$val}}" style="display: none"/>
-                                @endif
-                            @endforeach
-                            <button type="submit" class="btn btn-primary">Suchen</button>
-                        </div>
-                    </div>
-                </form>
+                <div class="row">
+                    <div class="col-sm-10">
+                        <form action="{{route('suche')}}" method="GET">
+                            <div class="form-group">
+                                    <div class="input-group">
+                                        <input class="form-control" name="q" id="q" value="{{$searchQuery}}"/>
+                                        @foreach(request()->query() as $key => $val)
+                                            @if($key!=='q') {{-- Suchstring überspringen, damit dieser nicht mehrfach gesendet wird --}}
+                                            <input class="form-control" name="{{$key}}" value="{{$val}}" style="display: none"/>
+                                            @endif
+                                        @endforeach
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-primary">Suchen</button>
+                                        </div>
+                                    </div>
 
-{{--                @livewire('search-component',['searchQueryArray' => $request->all()])--}}
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="triggerId"
+                                    data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">{{request()->has('filter') ? Helper::getSuchFilterValue(request()->query('filter')) : 'Suche filtern'}}</button>
+                            <div class="dropdown-menu" aria-labelledby="triggerId">
+                                @foreach(App\Helpers\Helper::$suchFilter as $filterItem)
+                                    @if(request()->has('filter'))
+                                        @if($filterItem['short'] != request()->query('filter'))
+                                            <a class="dropdown-item" href="{{Helper::updateQueryStringParameters(['filter'=>$filterItem['short']])}}">{{$filterItem['full']}}</a>
+                                        @endif
+                                    @else
+                                        <a class="dropdown-item" href="{{Helper::addQueryStringParameters(['filter'=>$filterItem['short']])}}">{{$filterItem['full']}}</a>
+                                    @endif
+                                @endforeach
+                                @if(request()->has('filter'))
+                                    <div class="dropdown-divider"></div>
+                                        <a href="{{\App\Helpers\Helper::removeQueryStringParameters(['filter'])}}" class="dropdown-item"><strong>Filter entfernen</strong></a>
+                                @endif
+                            </div>
+                        </div>
+                        {{--                            <select class="custom-select rounded-0" name="filter">--}}
+{{--                                @foreach ($auswahl as $item)--}}
+{{--                                    <option value="{{($item['short'])}}">{{($item['full'])}}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+                    </div>
+                </div>
+                {{--                @livewire('search-component',['searchQueryArray' => $request->all()])--}}
 
                 <div class="tab-content">
                     <form action="{{route('suche.export')}}" method="POST">

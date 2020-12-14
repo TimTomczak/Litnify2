@@ -6,12 +6,37 @@ use Illuminate\Support\Facades\Request;
 
 class Helper
 {
+    public static $suchFilter=[
+        array('short' => 'all',     'full' => 'Alle Felder'),
+        array('short' => 'name',    'full' => 'Name (Autor, Hrsg.)'),
+        array('short' => 'titel',   'full' => 'Titel'),
+        array('short' => 'sign',    'full' => 'Signatur'),
+        array('short' => 'isbn',    'full' => 'ISBN'),
+        array('short' => 'issn',    'full' => 'ISSN'),
+        array('short' => 'ztitel',  'full' => 'Zeitschriftentitel'),
+        array('short' => 'invnr',   'full' => 'Inventar-Nr.'),
+    ];
+
+    static function getSuchFilterValue($key){
+       foreach (self::$suchFilter as $filter){
+           if ($filter['short'] == $key){
+               return $filter['full'];
+           }
+       }
+       return false;
+    }
+
     static function sidebar_active($path) {
         return call_user_func_array('Request::is', (array)$path) ? 'active' : 'bg-light';
     }
 
     static function tab_active($tab) {
         return (Request::query('seite') == $tab) ? 'active' : 'false' ;
+    }
+
+    static function getQueryStringParameters($parameter)
+    {
+        return request()->has('filter') ? request()->query('filter') : '';
     }
 
     static function addQueryStringParameters(array $parameters = [])

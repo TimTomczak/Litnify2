@@ -24,28 +24,19 @@
                         <div class="form-row">
                             <div class="col-12 col-md-9 mb-2 mb-md-0">
                                 <div class="input-group">
-                                    <div class="input-group-append">
+                                    <div class="input-group-prepend">
                                         <button class="btn btn-primary fa fa-search rounded-left" type="button"></button>
                                     </div>
+
                                     <input type="text" name="q" class="form-control form-control-lg" placeholder="Bitte Suchbegriff eingeben..." autofocus />
 
-                                    @php ($auswahl = array(
-                                        array('short' => 'all',     'full' => 'Alle Felder'),
-                                        array('short' => 'name',    'full' => 'Name (Autor, Hrsg.)'),
-                                        array('short' => 'titel',   'full' => 'Titel'),
-                                        array('short' => 'sign',    'full' => 'Signatur'),
-                                        array('short' => 'isbn',    'full' => 'ISBN'),
-                                        array('short' => 'issn',    'full' => 'ISSN'),
-                                        array('short' => 'ztitel',  'full' => 'Zeitschriftentitel'),
-                                        array('short' => 'invnr',   'full' => 'Inventar-Nr.'),
-                                    ));
-                                    <select name="filter">
-                                    @foreach ($auswahl as $item)
-                                            <option value="{{($item['short'])}}">{{($item['full'])}}</option>
-
-                                    @endforeach
-                                    </select>
-
+                                    <div class="input-group-append">
+                                        <select class="custom-select custom-select-lg rounded-0" name="filter">
+                                            @foreach ($auswahl as $item)
+                                                <option value="{{($item['short'])}}">{{($item['full'])}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 <!-- <a href="suche?extend=true"><i class="fa fa-external-link-alt"></i> Erweiterte Suche</a> -->
                             </div>
