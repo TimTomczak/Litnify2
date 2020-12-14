@@ -93,6 +93,7 @@ class MediumController extends Controller
                         'medium' => $medium,
                         'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar(),
                         'tableBuilder' => TableBuilder::$mediumShow,
+                        'aktionenStyles' => TableBuilder::$aktionenStyles,
                     ]);
                 }
             }else{
@@ -105,6 +106,7 @@ class MediumController extends Controller
                 'medium' => $medium,
                 'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar(),
                 'tableBuilder' => TableBuilder::$mediumShow,
+                'aktionenStyles' => TableBuilder::$aktionenStyles,
             ]);
         }
     }
