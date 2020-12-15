@@ -145,6 +145,7 @@
       <path value="$PROJECT_DIR$/litnify/vendor/overtrue/pinyin" />
       <path value="$PROJECT_DIR$/litnify/vendor/lasserafn/php-initials" />
       <path value="$PROJECT_DIR$/litnify/vendor/kyslik/column-sortable" />
+      <path value="$PROJECT_DIR$/litnify/vendor/spatie/laravel-cookie-consent" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

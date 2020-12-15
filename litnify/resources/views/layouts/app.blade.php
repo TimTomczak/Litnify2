@@ -7,7 +7,7 @@
     @livewireStyles
 </head>
 <body>
-
+    @include('cookieConsent::index')
     <div class="d-flex" id="wrapper">
     {{-- <div class="d-flex toggled" id="wrapper"> --}}
         @role(2)
@@ -28,7 +28,7 @@
                     @endif
 
                     @yield('content')
-                </div>
+
             </main>
             @include('layouts.footer2')
         </div>
