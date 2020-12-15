@@ -3,7 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
-.env.backup
+.env
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -13,6 +13,3 @@ yarn-error.log
 .idea/php.xml
 /_ide_helper.php
 /bootstrap/cache/
-/bootstrap/cache/
-/bootstrap/cache/packages.php
-/bootstrap/cache/services.php
