@@ -15,7 +15,7 @@ class DirektverleihController extends Controller
      */
     public function index()
     {
-        return view('admin.Ausleihverwaltung.Direktverleih.index',[
+        return view('admin.ausleihverwaltung.direktverleih.index',[
             'users' => User::all(),
         ]);
     }
@@ -29,7 +29,7 @@ class DirektverleihController extends Controller
         $medien=DB::table('medien_ausleihbar')->get()->toArray();
         $medien=Medium::hydrate($medien)->map(function($medium){ return $medium; });
 
-        return view('admin.Ausleihverwaltung.Direktverleih.create',[
+        return view('admin.ausleihverwaltung.direktverleih.create',[
             'tableBuilder' => TableBuilder::$medienverwaltungIndex,
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,

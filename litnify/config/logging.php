@@ -48,22 +48,6 @@ return [
         ],
 
         'actions' => [
-            'driver' => 'stack',
-            'channels' => ['actionsSlack','actionsLog'],
-            'ignore_exceptions' => false,
-//            'driver' => 'daily',
-//            'path' => storage_path('logs/aktionen/aktionen.log'),
-//            'level' => 'info',
-//            'days' => 30,
-        ],
-        'actionsSlack' => [
-            'url' => 'https://hooks.slack.com/services/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',
-//            'username' => 'log',
-//            'emoji' => ':boom:',
-            'level' => 'debug',
-        ],
-
-        'actionsLog' => [
             'driver' => 'daily',
             'path' => storage_path('logs/aktionen/aktionen.log'),
             'level' => 'info',

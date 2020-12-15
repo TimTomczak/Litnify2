@@ -96,6 +96,13 @@
       0 => 'Spatie\\CookieConsent\\CookieConsentServiceProvider',
     ),
   ),
+  'spatie/laravel-cookie-consent' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\CookieConsent\\CookieConsentServiceProvider',
+    ),
+  ),
   'yab/laravel-scout-mysql-driver' => 
   array (
     'providers' => 

@@ -22,7 +22,7 @@ class AusleiheController extends Controller
      */
     public function index()
     {
-        return view('admin.Ausleihverwaltung.index',[
+        return view('admin.ausleihverwaltung.index',[
             'showAktiv'=>true,                                                                  //wird in der view an Livewire-Component übergeben. Diese lädt entsprechend true oder false die aktiven oder beendeten Ausleihen
             'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
             'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
@@ -37,7 +37,7 @@ class AusleiheController extends Controller
      */
     public function indexAusleihenBeendet()
     {
-        return view('admin.Ausleihverwaltung.indexAusleihenBeendet',[
+        return view('admin.ausleihverwaltung.indexAusleihenBeendet',[
             'showAktiv'=>false,                                                                 // s.o.
             'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
             'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
@@ -88,7 +88,7 @@ class AusleiheController extends Controller
         $ausleihenBeendet = Ausleihe::whereUserId($user->id)->whereNotNull('RueckgabeIst')->get();
         $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
 
-        return view('admin.Ausleihverwaltung.show',[
+        return view('admin.ausleihverwaltung.show',[
             'ausleihenAktiv' => $ausleihenAktiv->paginate(10),
             'ausleihenBeendet' => $ausleihenBeendet->paginate(10),
             'user' => $user,

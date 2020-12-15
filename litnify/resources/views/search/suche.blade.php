@@ -305,7 +305,7 @@
         <!--/col-9-->
     </div>
     <!--/row-->
-    @include('admin.Medienverwaltung.mediumModal')
+    @include('admin.medienverwaltung.mediumModal')
 @endsection
 
 @section('javascript.footer')

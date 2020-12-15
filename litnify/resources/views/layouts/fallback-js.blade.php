@@ -52,3 +52,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/tinymce/5.5.1/tinymce.min.js"></script>
 <script src="{{ asset('/storage/js/tinymce/langs/de.js') }}"></script>
 
+<link href="{{asset('css/app.css')}}" rel="stylesheet">
+<link href="{{asset('css/custom.css')}}" rel="stylesheet">
+
+
