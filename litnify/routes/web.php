@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SeitenController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -138,6 +139,6 @@ Route::get('/aaa', function (){
 });
 
 // * S t a t i c P a g e  s * //
-Route::get('/{page}', App\Http\Controllers\SeitenController::class)->name('page');
+Route::get('/{page}', SeitenController::class)->name('page');
 
 
