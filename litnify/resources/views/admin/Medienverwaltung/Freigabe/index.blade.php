@@ -73,5 +73,5 @@
             {{ $medien->links() }}
         </div>
     </div>
-    @include('admin.medienverwaltung.mediumModal')
+    @include('admin.medienverwaltung.freigabe.resources.views.admin.medienverwaltung.freigabe.resources.views.admin.medienverwaltung.freigabee.resources.views.admin.medienverwaltung.freigabe.resources.views.admin.meedienverwaltung.mediumModal')
 @endsection
