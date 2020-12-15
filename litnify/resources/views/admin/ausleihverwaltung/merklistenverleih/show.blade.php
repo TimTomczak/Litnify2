@@ -93,5 +93,6 @@
             {{ $merkliste->links() }}
         </div>
     </div>
-    @include('admin.ausleihverwaltung.merklistenverleih.resources.views.admin.meedienverwaltung.mediumModal')
+    @include('admin.medienverwaltung.mediumModal')
+
 @endsection

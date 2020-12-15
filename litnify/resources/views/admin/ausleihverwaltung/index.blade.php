@@ -5,5 +5,5 @@
         @livewire('search-ausleihen-component',['showAktiv'=>$showAktiv])
     </div>
 
-    @include('admin.ausleihverwaltung.resources.views.admin.meedienverwaltung.mediumModal')
+    @include('admin.medienverwaltung.mediumModal')
 @endsection

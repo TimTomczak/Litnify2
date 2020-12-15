@@ -120,6 +120,6 @@
 {{--            {{ $medien->links() }}--}}
 {{--        </div>--}}
     </div>
-    @include('admin.ausleihverwaltung.direktverleih.resources.views.admin.meedienverwaltung.mediumModal')
+    @include('admin.medienverwaltung.mediumModal')
 
 @endsection
