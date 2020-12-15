@@ -88,6 +88,8 @@ class LoginController extends Controller
             }),
             'password' => 'required|string'
         ],
-        [$this->username() . '.exists' => 'Ihr Account ist ungültig oder wurde deaktiviert.']);
+        [
+            $this->username() . '.exists' => 'Ihr Account ist ungültig oder wurde deaktiviert.'
+        ]);
     }
 }
