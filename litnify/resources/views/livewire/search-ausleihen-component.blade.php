@@ -134,5 +134,5 @@
     <div class="d-flex justify-content-between">
         {{ $ausleihen->links() }}
     </div>
-    @include('admin.Medienverwaltung.mediumModal')
+    @include('admin.medienverwaltung.mediumModal')
 </div>

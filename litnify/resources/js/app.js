@@ -1,6 +1,6 @@
 require('./bootstrap');
 
 // Daterangepicker
-require('moment/min/moment.min')
-require('daterangepicker/daterangepicker')
+require('./moment.min')
+require('./daterangepicker')
 
