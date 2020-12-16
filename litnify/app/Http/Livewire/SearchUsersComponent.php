@@ -24,6 +24,11 @@ class SearchUsersComponent extends Component
     {
         $users=Suche::getInstance()->searchUsers($this->searchQuery);
 
+        /*Deaktivierte Nutzer in Direktverleih ausblenden*/
+        if ($this->nutzerverwaltung==false){
+            $users=$users->where('deleted',0);
+        }
+
         $users= $this->sortDirection=='asc' ? $users->sortByDesc($this->sortBy) : $users->sortBy($this->sortBy);
 
         return view('livewire.search-users-component',[
