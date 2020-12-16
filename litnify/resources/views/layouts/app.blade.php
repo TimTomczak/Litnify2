@@ -2,7 +2,6 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @include('layouts.header')
-    @include('layouts.fallback-js')
     @yield('javascript.header')
     @livewireStyles
 </head>
@@ -35,7 +34,7 @@
     </div>
 
     <script>
-        $('.toast').toast('show')
+        $('.toast').toast('show');
     </script>
     @livewireScripts
 

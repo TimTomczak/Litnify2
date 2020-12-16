@@ -74,11 +74,20 @@ class SystemController extends Controller
     }
 
     public function storeImage($name, $file){
-        $file->storeAs('public/images', $name);
+
+        /* @todo validation
+        $this->validate($file, [
+            'mimeType' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        dd($file);
+        */
+        $file->storeAs('storage/images', $name);
         return redirect(route('admin.systemverwaltung.contenteditor'));
     }
 
     public function updateLogo(Request $request){
+
         if($request->has('logo')){
             $this->storeImage('logo.png', $request->logo);
         }
