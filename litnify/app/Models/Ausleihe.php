@@ -16,7 +16,8 @@ class Ausleihe extends Model
         'Ausleihdatum' ,
         'Verlaengerungen',
         'RueckgabeSoll',
-        'RueckgabeIst'
+        'RueckgabeIst',
+        'deleted'
     ];
 
     public function medium(){

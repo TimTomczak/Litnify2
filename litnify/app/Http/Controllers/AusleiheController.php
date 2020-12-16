@@ -7,6 +7,7 @@ use App\Models\Ausleihe;
 use App\Models\Medium;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 /**
  * Class AusleiheController
@@ -104,11 +105,15 @@ class AusleiheController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Ausleihe  $ausleihe
-     * @return \Illuminate\Http\Response
      */
     public function edit(Ausleihe $ausleihe)
     {
-        return abort('403','Bearbeiten von Ausleihen ist derzeit nicht implementiert');
+        $ausleihe=$this->dbTimestampToGermanDate([$ausleihe])[0];
+        return view('admin.ausleihverwaltung.edit',[
+            'ausleihe'=>$ausleihe,
+            'user'=>User::findOrFail($ausleihe->user_id),
+            'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28)
+        ]);
     }
 
     /**
@@ -116,11 +121,29 @@ class AusleiheController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Ausleihe  $ausleihe
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Ausleihe $ausleihe)
     {
-        return abort('403','Ändern von Ausleihen ist derzeit nicht implementiert');
+        $request->validate([
+            'id' => ['required','numeric',Rule::in([$ausleihe->id])],
+            'inventarnummer' => 'required|string',
+            'ausleihzeitraumEdit' => 'required'
+        ]);
+
+        $ausleihzeitraum = $request->get('ausleihzeitraumEdit');
+        $ausleihzeitraumSplit = explode(' - ',$ausleihzeitraum);
+
+        $ausleihe->update([
+            'id' => $request->id,
+            'inventarnummer' => $request->inventarnummer,
+            'Ausleihdatum' => date("Y-m-d",strtotime($ausleihzeitraumSplit[0])),
+            'RueckgabeSoll' => date("Y-m-d",strtotime($ausleihzeitraumSplit[1]))
+        ]);
+        return back()->with([
+            'title' => 'Ausleihverwaltung',
+            'message'=>'Ausleihe wurde geändert.',
+            'alertType' => 'success'
+        ]);
     }
 
     /**
@@ -200,11 +223,15 @@ class AusleiheController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Ausleihe  $ausleihe
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Ausleihe $ausleihe)
     {
-        return abort('403','Löschen von Ausleihen ist derzeit nicht implementiert');
+        $ausleihe->update(['deleted'=>1]);
+        return back()->with([
+            'title' => 'Ausleihverwaltung',
+            'message'=>'Ausleihe gelöscht.',
+            'alertType' => 'danger'
+        ]);
     }
 
     /**
