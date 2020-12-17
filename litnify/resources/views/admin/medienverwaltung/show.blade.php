@@ -35,7 +35,11 @@
                     @case('autoren')
                     <td>
                         @foreach(explode(';',$medium->autoren) as $autor)
-                            <a href="{{route('autor.show',$autor)}}">{{$autor}}</a><br>
+                            @if(strpos($autor,'et al')!==false)
+                                {{$autor}}<br>
+                            @else
+                                <a href="{{route('autor.show',$autor)}}">{{$autor}}</a><br>
+                            @endif
                         @endforeach
                     </td>
                     @break
