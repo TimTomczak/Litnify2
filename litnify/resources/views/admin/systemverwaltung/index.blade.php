@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-8">
+        <div class="col-7">
 
             <div class="card">
                 <div class="card-body">
@@ -101,7 +101,7 @@
 
 
 
-        <div class="col-4">
+        <div class="col-5">
 
 
             <div class="card">
@@ -112,7 +112,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">Timestamp</th>
+                                <th scope="col">Time</th>
                                 <th scope="col">WER</th>
                                 <th scope="col">WAS</th>
                                 <th scope="col">AKTION</th>
@@ -120,15 +120,32 @@
                             </thead>
                             <tbody>
                             @for($i=0; $i < 100; $i++)
-
-
-
                             <tr>
                                 <th scope="row">{{$i}}</th>
-                                <td>A</td>
-                                <td>B</td>
-                                <td>C</td>
+                                <td>hallas</td>
+                                <td>medium 91234</td>
+                                <td><i class="fa fa-trash-o"></i></td>
                             </tr>
+                            @php
+                                $i++;
+                            @endphp
+                            <tr>
+                                <th scope="row">{{$i}}</th>
+                                <td>hense</td>
+                                <td>User "muster"</td>
+                                <td><i class="fa fa-plus"></i></td>
+                            </tr>
+                            @php
+                                $i++;
+                            @endphp
+                            <tr>
+                                <th scope="row">{{$i}}</th>
+                                <td>hense</td>
+                                <td>Medium 87651</td>
+                                <td><i class="fa fa-pencil"></i></td>
+                            </tr>
+
+
 
                             @endfor
 
