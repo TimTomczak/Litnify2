@@ -43,16 +43,6 @@
 
 
 
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-<!-- Scripts -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/app_documentReady.js') }}" defer></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/tinymce/5.5.1/tinymce.min.js"></script>
-<script src="{{ asset('/storage/js/tinymce/langs/de.js') }}"></script>
-
-<link href="{{asset('css/app.css')}}" rel="stylesheet">
-<link href="{{asset('css/custom.css')}}" rel="stylesheet">
 
 

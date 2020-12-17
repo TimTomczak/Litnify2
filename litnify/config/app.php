@@ -138,10 +138,7 @@ return [
     */
 
     'providers' => [
-
-        Barryvdh\Debugbar\ServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        /*
+         /*
          * Laravel Framework Service Providers...
          */
         Illuminate\Auth\AuthServiceProvider::class,
@@ -233,10 +230,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Helper' => \App\Helpers\Helper::class,
-
-        'DebugBar' => Barryvdh\Debugbar\Facade::class,
-
-
     ],
 
 ];

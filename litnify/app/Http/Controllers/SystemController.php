@@ -1,15 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Ausleihe;
 use App\Models\Auswertung;
-use App\Models\Auswertungen;
-use App\Models\Medium;
 use App\Models\Seiten;
 use Carbon\Carbon;
-use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -71,14 +66,26 @@ class SystemController extends Controller
 
     public function command(Request $request){
         Artisan::command('cache:clear');
+        Artisan::command('view:clear');
+        Artisan::command('routes:clear');
+        Artisan::command('config:clear');
     }
 
     public function storeImage($name, $file){
-        $file->storeAs('public/images', $name);
+
+        /* @todo validation
+        $this->validate($file, [
+            'mimeType' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        dd($file);
+        */
+        $file->storeAs('storage/images', $name);
         return redirect(route('admin.systemverwaltung.contenteditor'));
     }
 
     public function updateLogo(Request $request){
+
         if($request->has('logo')){
             $this->storeImage('logo.png', $request->logo);
         }

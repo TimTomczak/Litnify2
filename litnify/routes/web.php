@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SeitenController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -103,28 +104,25 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked','log']], f
     /***********************************/
     /*        Nutzerverwaltung         */
     /***********************************/
-    Route::get('nutzerverwaltung', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.nutzerverwaltung')->middleware('role:4');
-    Route::get('nutzerverwaltung/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.nutzerverwaltung.create')->middleware('role:4');
-    Route::post('nutzerverwaltung/createUser', [App\Http\Controllers\Admin\UserController::class, 'createUser'])->name('admin.nutzerverwaltung.createUser')->middleware('role:4');
-    Route::get('nutzerverwaltung/{user}/edit', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.nutzerverwaltung.edit')->middleware('role:4');
-    Route::post('nutzerverwaltung/{user}/update', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.nutzerverwaltung.update')->middleware('role:4');
-    Route::post('nutzerverwaltung/{user}/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.nutzerverwaltung.delete')->middleware('role:4');
-    Route::post('nutzerverwaltung/{user}/wakeup', [App\Http\Controllers\Admin\UserController::class, 'wakeUp'])->name('admin.nutzerverwaltung.wakeup')->middleware('role:4');
+    Route::get('nutzerverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.nutzerverwaltung')->middleware('role:4');
+    Route::get('nutzerverwaltung/create', [App\Http\Controllers\UserController::class, 'create'])->name('admin.nutzerverwaltung.create')->middleware('role:4');
+    Route::post('nutzerverwaltung/createUser', [App\Http\Controllers\UserController::class, 'createUser'])->name('admin.nutzerverwaltung.createUser')->middleware('role:4');
+    Route::get('nutzerverwaltung/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('admin.nutzerverwaltung.edit')->middleware('role:4');
+    Route::post('nutzerverwaltung/{user}/update', [App\Http\Controllers\UserController::class, 'update'])->name('admin.nutzerverwaltung.update')->middleware('role:4');
+    Route::post('nutzerverwaltung/{user}/delete', [App\Http\Controllers\UserController::class, 'destroy'])->name('admin.nutzerverwaltung.delete')->middleware('role:4');
+    Route::post('nutzerverwaltung/{user}/wakeup', [App\Http\Controllers\UserController::class, 'wakeUp'])->name('admin.nutzerverwaltung.wakeup')->middleware('role:4');
 
 
     /***********************************/
     /*        Systemverwaltung         */
     /***********************************/
-    Route::get('systemverwaltung', [App\Http\Controllers\Admin\SystemController::class, 'index'])->name('admin.systemverwaltung')->middleware('role:4');
-    Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\Admin\SystemController::class, 'auswertungen'])->name('admin.systemverwaltung.auswertungen')->middleware('role:4');
-    Route::get('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditor'])->name('admin.systemverwaltung.contenteditor')->middleware('role:4');
-    Route::post('systemverwaltung/contenteditor', [App\Http\Controllers\Admin\SystemController::class, 'contentEditorUpdate'])->middleware('role:4');
-    Route::post('systemverwaltung/updateLogo', [App\Http\Controllers\Admin\SystemController::class, 'updateLogo'])->name('admin.systemverwaltung.updateLogo')->middleware('role:4');
-    Route::get('systemverwaltung/logs', [App\Http\Controllers\Admin\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs')->middleware('role:4');
+    Route::get('systemverwaltung', [App\Http\Controllers\SystemController::class, 'index'])->name('admin.systemverwaltung')->middleware('role:4');
+    Route::get('systemverwaltung/auswertungen', [App\Http\Controllers\SystemController::class, 'auswertungen'])->name('admin.systemverwaltung.auswertungen')->middleware('role:4');
+    Route::get('systemverwaltung/contenteditor', [App\Http\Controllers\SystemController::class, 'contentEditor'])->name('admin.systemverwaltung.contenteditor')->middleware('role:4');
+    Route::post('systemverwaltung/contenteditor', [App\Http\Controllers\SystemController::class, 'contentEditorUpdate'])->middleware('role:4');
+    Route::post('systemverwaltung/updateLogo', [App\Http\Controllers\SystemController::class, 'updateLogo'])->name('admin.systemverwaltung.updateLogo')->middleware('role:4');
+    Route::get('systemverwaltung/logs', [App\Http\Controllers\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs')->middleware('role:4');
 
-    //Route::get('users', 'App\Http\Controllers\Admin\UserController');
-    //Route::get('medium', 'App\Http\Controllers\Admin\MediumController');
-    //Route::get('system', 'App\Http\Controllers\Admin\SystemController');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -138,6 +136,6 @@ Route::get('/aaa', function (){
 });
 
 // * S t a t i c P a g e  s * //
-Route::get('/{page}', App\Http\Controllers\SeitenController::class)->name('page');
+Route::get('/{page}', SeitenController::class)->name('page');
 
 

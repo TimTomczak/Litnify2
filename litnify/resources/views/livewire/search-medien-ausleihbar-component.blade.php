@@ -114,5 +114,5 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    @include('admin.medienverwaltung.mediumModal')
+    @include('admin.medienverwaltung.mediummodal')
 </div>
