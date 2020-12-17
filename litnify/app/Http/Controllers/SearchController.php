@@ -33,8 +33,9 @@ class SearchController extends Controller
         }
 
         /* Redirect ohne &page , wenn die Seitenzahl höher wäre, als die Anzahl der eigentlichen Suchtreffer*/
+
         if ($request->has('page')){
-            if ($request->query('page')*10 > $result->count()){ // bspw. Paginator Seite 7 (Ergebnisse 61-70), aber nur 50 Ergebnisse
+            if ($request->query('page')*10-10 > $result->count()){ // bspw. Paginator Seite 7 (Ergebnisse 61-70), aber nur 50 Ergebnisse
                 return redirect(Helper::removeQueryStringParameters(['page'])); // Ergebnis ab Seite 1
             }
         }
