@@ -93,8 +93,6 @@
       <path value="$PROJECT_DIR$/litnify/vendor/lasserafn/php-initials" />
       <path value="$PROJECT_DIR$/litnify/vendor/kyslik/column-sortable" />
       <path value="$PROJECT_DIR$/litnify/vendor/spatie/laravel-cookie-consent" />
-      <path value="$PROJECT_DIR$/litnify/vendor/seld/phar-utils" />
-      <path value="$PROJECT_DIR$/litnify/vendor/facade/ignition" />
       <path value="$PROJECT_DIR$/litnify/vendor/psr/http-client" />
       <path value="$PROJECT_DIR$/litnify/vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/litnify/vendor/laravel-lang/lang" />
