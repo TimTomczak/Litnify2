@@ -27,7 +27,13 @@
             @foreach($ausleihenAktiv as $aus)
                 <tr {{strtotime($aus->RueckgabeSoll)<time() ? 'style=background-color:#f9d6d5' : ''}}>
                     @foreach($tableBuilderAktiv as $key=>$val)
-                        <td>{{$aus->attributesToArray()[$key]}}</td>
+                        @switch($key)
+                            @case('medium_id')
+                                <td><a href="#" class="render-medium-modal" data-id="{{$aus->attributesToArray()[$key]}}">{{$aus->attributesToArray()[$key]}}</a></td>
+                            @break
+                            @default
+                                <td>{{$aus->attributesToArray()[$key]}}</td>
+                        @endswitch
                     @endforeach
                     <td> {{--Aktionen--}}
                         @role(3)
@@ -113,7 +119,13 @@
                 @foreach($ausleihenBeendet as $aus)
                     <tr {{$aus->RueckgabeSoll<$aus->RueckgabeIst ? 'style=background-color:#f9d6d5' : ''}}>
                         @foreach($tableBuilderBeendet as $key=>$val)
-                            <td>{{$aus->attributesToArray()[$key]}}</td>
+                            @switch($key)
+                                @case('medium_id')
+                                <td><a href="#" class="render-medium-modal" data-id="{{$aus->attributesToArray()[$key]}}">{{$aus->attributesToArray()[$key]}}</a></td>
+                                @break
+                                @default
+                                <td>{{$aus->attributesToArray()[$key]}}</td>
+                            @endswitch
                         @endforeach
                         <td> {{--Aktionen--}}
                             <div class="d-flex border-0 justify-content-around">
@@ -136,6 +148,8 @@
             <p>Keine beendeten Ausleihen vorhanden.</p>
         @endif
     </div>
+    @include('admin.medienverwaltung.mediumModal')
+
 @endsection
 @section('javascript.header')
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
