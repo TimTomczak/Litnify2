@@ -14,6 +14,7 @@ class SearchAusleihenComponent extends Component
     protected $paginationTheme = 'bootstrap';
     public $showAktiv;
     public $searchQuery;
+    public $deleted=0;
 
     public function updatingSearchQuery()
     {
@@ -28,6 +29,12 @@ class SearchAusleihenComponent extends Component
         }
         else{
             $ausleihen=$ausleihen->whereNotNull('Rueckgabeist');
+        }
+
+        if ($this->deleted==1){
+            $ausleihen=$ausleihen->where('deleted',1);
+        }else{
+            $ausleihen=$ausleihen->where('deleted',0);
         }
 
         return view('livewire.search-ausleihen-component',[

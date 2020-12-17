@@ -51,8 +51,8 @@
             <div class="dropdown-menu" aria-labelledby="triggerId">
                 <a href="{{route('wiederherstellung.show','medien')}}" class="dropdown-item">Medienverwaltung</a>
                 <div class="dropdown-divider"></div>
-{{--                <a href="{{route('wiederherstellung.show','ausleihen')}}" class="dropdown-item">Ausleihverwaltung</a> TODO: Wiederherstellung: Ausleihen --}}
-{{--                <div class="dropdown-divider"></div>--}}
+                <a href="{{route('wiederherstellung.show','ausleihen')}}" class="dropdown-item">Ausleihverwaltung</a>
+                <div class="dropdown-divider"></div>
                 <a href="{{route('wiederherstellung.show','zeitschriften')}}" class="dropdown-item">Zeitschriftenverwaltung</a>
             </div>
         </div>

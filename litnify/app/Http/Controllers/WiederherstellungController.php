@@ -61,7 +61,6 @@ class WiederherstellungController extends Controller
                 $tableBuilder = TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen;
                 break;
 
-
             case 'Zeitschriften':
                 $deletedItems = Zeitschrift::whereDeleted(1);
                 $tableBuilder = TableBuilder::$zeitschrifenverwaltungIndex;

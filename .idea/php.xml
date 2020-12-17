@@ -74,7 +74,6 @@
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/litnify/vendor/symfony/css-selector" />
       <path value="$PROJECT_DIR$/litnify/vendor/scrivo/highlight.php" />
-      <path value="$PROJECT_DIR$/litnify/vendor/laravel-lang/lang" />
       <path value="$PROJECT_DIR$/litnify/vendor/yab/laravel-scout-mysql-driver" />
       <path value="$PROJECT_DIR$/litnify/vendor/laravel/scout" />
       <path value="$PROJECT_DIR$/litnify/vendor/teamtnt/laravel-scout-tntsearch-driver" />
@@ -94,6 +93,11 @@
       <path value="$PROJECT_DIR$/litnify/vendor/lasserafn/php-initials" />
       <path value="$PROJECT_DIR$/litnify/vendor/kyslik/column-sortable" />
       <path value="$PROJECT_DIR$/litnify/vendor/spatie/laravel-cookie-consent" />
+      <path value="$PROJECT_DIR$/litnify/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/litnify/vendor/facade/ignition" />
+      <path value="$PROJECT_DIR$/litnify/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/litnify/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/litnify/vendor/laravel-lang/lang" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
