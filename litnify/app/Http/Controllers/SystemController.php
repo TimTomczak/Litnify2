@@ -65,10 +65,8 @@ class SystemController extends Controller
     }
 
     public function command(Request $request){
-        Artisan::command('cache:clear');
-        Artisan::command('view:clear');
-        Artisan::command('routes:clear');
-        Artisan::command('config:clear');
+        Artisan::command('optimize:clear');
+
     }
 
     public function storeImage($name, $file){
@@ -77,20 +75,19 @@ class SystemController extends Controller
         $this->validate($file, [
             'mimeType' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-
-        dd($file);
         */
-        $file->storeAs('storage/images', $name);
-        return redirect(route('admin.systemverwaltung.contenteditor'));
+        $file->storeAs('public/images', $name);
     }
 
     public function updateLogo(Request $request){
 
         if($request->has('logo')){
             $this->storeImage('logo.png', $request->logo);
+            return redirect()->route('admin.systemverwaltung');
         }
         elseif($request->has('sublogo')){
             $this->storeImage('sublogo.png', $request->sublogo);
+            return redirect()->route('admin.systemverwaltung');
         }
         else{
             Redirect::back()->withErrors(
