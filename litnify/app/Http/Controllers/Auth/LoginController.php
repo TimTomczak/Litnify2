@@ -37,7 +37,6 @@ class LoginController extends Controller
      *
      * @return void
      */
-
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -46,9 +45,7 @@ class LoginController extends Controller
 
     protected function credentials(Request $request)
     {
-
         $fieldType = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'mail' : 'uid';
-
         return [
             $fieldType => $request->login,
             'password' => $request->password,
@@ -61,7 +58,6 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
-        #$credentials = $request->only('email', 'password');
         $credentials = $request->only('uid', 'password');
 
         if (Auth::attempt($credentials)) {

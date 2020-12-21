@@ -18,7 +18,6 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     public $sortable = [
         'id'
-
     ];
 
     /**
@@ -57,7 +56,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     protected $attributes = [
         // Standardberechtigung für alle neuen User
         'berechtigungsrolle_id' => '1',
-
     ];
 //    protected $with='berechtigungsrolle';
 

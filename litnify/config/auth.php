@@ -70,6 +70,9 @@ return [
         'ldap' => [
             'driver' => 'ldap',
             'model' => LdapRecord\Models\OpenLDAP\User::class,
+            'rules' => [
+                App\Ldap\Rules\HasEmailProperty::class,
+            ],
             'database' => [
                 'model' => App\Models\User::class,
                 'sync_passwords' => true,
