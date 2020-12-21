@@ -15,10 +15,7 @@ class LdapAttributeHandler
 
         $database->vorname = $vorname;
         $database->nachname = $nachname;
-
-
+        $database->uid = $ldap->getFirstAttribute('uid');
         $database->email = $ldap->getFirstAttribute('mail');
-
-
     }
 }

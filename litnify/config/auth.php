@@ -1,5 +1,7 @@
 <?php
 
+use App\Ldap\LdapAttributeHandler;
+
 return [
 
     /*
@@ -76,7 +78,7 @@ return [
             'database' => [
                 'model' => App\Models\User::class,
                 'sync_passwords' => true,
-                'sync_attributes' => \App\Ldap\LdapAttributeHandler::class,
+                'sync_attributes' => LdapAttributeHandler::class,
             ],
         ],
 

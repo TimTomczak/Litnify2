@@ -45,7 +45,7 @@ class LoginController extends Controller
 
     protected function credentials(Request $request)
     {
-        $fieldType = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'mail' : 'uid';
+        $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'mail' : 'uid';
         return [
             $fieldType => $request->login,
             'password' => $request->password,
@@ -80,9 +80,6 @@ class LoginController extends Controller
                 $query->where('deleted', 0);
             }),
             'password' => 'required|string'
-        ],
-            [
-                $this->username() . '.exists' => 'Ihr Account ist ungültig oder wurde deaktiviert.'
-            ]);
+        ]);
     }
 }

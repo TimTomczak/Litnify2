@@ -19,7 +19,8 @@ class User extends Model
         'nachname',
         'vorname',
         'email',
-        'password'
+        'password',
+        'deleted'
     ];
 
 }
