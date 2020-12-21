@@ -93,7 +93,8 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        $user->update(['deleted'=> true]);
+        $user->deleted = true;
+        $user->save();
         return redirect(route('admin.nutzerverwaltung'))->with([
             'title' => 'Nutzerverwaltung',
             'message' => 'Account wurde deaktiviert.',
@@ -103,7 +104,8 @@ class UserController extends Controller
 
     public function wakeUp(User $user)
     {
-        $user->update(['deleted'=> false]);
+        $user->deleted = false;
+        $user->save();
         return redirect(route('admin.nutzerverwaltung'))->with([
             'title' => 'Nutzerverwaltung',
             'message' => 'Account wurde reaktiviert.',
