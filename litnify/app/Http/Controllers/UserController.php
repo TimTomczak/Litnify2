@@ -113,20 +113,6 @@ class UserController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function createAvatar($name){
         $avatar = new InitialAvatar();
         return $avatar
@@ -142,8 +128,8 @@ class UserController extends Controller
             ->stream('png', 100);
     }
 
-    public function showProfil(){
-
+    public function showProfil()
+    {
         return view('user.profil', array('user' => Auth::user()));
     }
 
@@ -157,8 +143,8 @@ class UserController extends Controller
             ]);
     }
 
-    public function editMerkliste(Request $request){
-
+    public function editMerkliste(Request $request)
+    {
         Merkliste::query()
            ->where('medium_id',$request->id)
            ->where('user_id', Auth::user()->id)
