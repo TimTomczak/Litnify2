@@ -46,15 +46,14 @@ class LoginController extends Controller
 
     protected function credentials(Request $request)
     {
-        (preg_match('/^(\S+)(?=@)/', $request->email, $matches, PREG_OFFSET_CAPTURE, 0));
+
+        $fieldType = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'mail' : 'uid';
 
         return [
-
-            'uid' => $matches[0],
-            'mail' => $request->email,
+            $fieldType => $request->login,
             'password' => $request->password,
             'fallback' => [
-                'email' => $request->email,
+                'email' => $request->login,
                 'password' => $request->password,
             ],
         ];
@@ -86,8 +85,8 @@ class LoginController extends Controller
             }),
             'password' => 'required|string'
         ],
-        [
-            $this->username() . '.exists' => 'Ihr Account ist ungültig oder wurde deaktiviert.'
-        ]);
+            [
+                $this->username() . '.exists' => 'Ihr Account ist ungültig oder wurde deaktiviert.'
+            ]);
     }
 }
