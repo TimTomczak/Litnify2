@@ -83,6 +83,6 @@
         </div>
 
     @endif
-    @include('admin.medienverwaltung.mediumModal')
+    @include('admin.medienverwaltung.mediummodal')
 @endsection
 
