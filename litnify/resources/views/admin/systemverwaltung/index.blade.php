@@ -49,7 +49,11 @@
                                 <form method="post" action="{{route('admin.systemverwaltung.updateLogo')}}" enctype="multipart/form-data">
                                     @csrf
                                     <td>
-                                        <img src="{{asset('storage/images/logo.png')}}" height="50px">
+                                        <img src="{{asset('storage/images/logo.png?')}}
+                                        @php
+                                            microtime();
+                                        @endphp
+                                        " height="50px">
                                     </td>
                                     <td>
                                         <input type="file" class="form-control-file" name="logo"/>
@@ -63,7 +67,11 @@
                                 <form method="post" action="{{route('admin.systemverwaltung.updateLogo')}}" enctype="multipart/form-data">
                                     @csrf
                                     <td>
-                                        <img src="{{asset('storage/images/sublogo.png')}}" height="50px">
+                                        <img src="{{asset('storage/images/sublogo.png?')}}
+                                        @php
+                                            microtime();
+                                        @endphp
+                                            " height="50px">
                                     </td>
                                     <td>
                                         <input type="file" class="form-control-file" name="logo"/>
@@ -75,6 +83,11 @@
                             </tr>
                         </tbody>
                         </table>
+                    </p>
+                    <p>
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        Ein Ändern der Logos wird ggf. nicht sofort sichtbar, da die Logos sowohl im App-Cache des
+                        Servers als auch im Browser des Nutzers zwischengespeichert werden.
                     </p>
                 </div>
             </div>
