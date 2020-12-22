@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Ausleihe;
 use App\Models\Medium;
+use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class MediumExport implements FromCollection
@@ -13,6 +14,7 @@ class MediumExport implements FromCollection
     */
     public function collection()
     {
-        return Ausleihe::all();
+        return Cache::get(\Auth::user()->id.'-export');
+//        return Ausleihe::all();
     }
 }
