@@ -6,8 +6,16 @@
                 <div class="col-md-6 col-sm-12 d-flex">
                     <div class="footer-widget">
                         <div class="widget-about">
-                            <img src="{{asset('storage/images/logo.png')}}" height="60px">
-                            <img src="{{asset('storage/images/sublogo.png')}}" height="60px">
+                            <img src="{{asset('storage/images/logo.png?')}}
+                            @php
+                                microtime();
+                            @endphp
+                                " height="60px">
+                            <img src="{{asset('storage/images/sublogo.png?')}}
+                            @php
+                                microtime();
+                            @endphp
+                                " height="60px">
                         </div>
                     </div>
                 </div>
@@ -22,10 +30,12 @@
                             <li class="list-inline-item">
                                 <a href="{{url('/datenschutz')}}">Datenschutz</a>
                             </li>
+                            <li class="list-inline-item">
+                                <a href="{{url('/credits')}}">Credits</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
-
             </div>
             <!-- end /.row -->
         </div>

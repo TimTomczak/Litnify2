@@ -4,12 +4,5 @@
 
 {!! $content !!}
 
-    @if($title == 'impressum')
-        <hr>
-        @include('layouts.credits')
-    @endif
-
-
-
 @endsection
 

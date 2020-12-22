@@ -69,13 +69,7 @@ class SystemController extends Controller
 
     public function command(Request $request){
         Artisan::command('optimize:clear');
-
-    }
-
-    public function storeImage($name, $file){
-
-
-
+        return redirect()->route('admin.systemverwaltung');
     }
 
     public function updateLogo(Request $request){
@@ -94,7 +88,10 @@ class SystemController extends Controller
             $filename = $request->submit . '.png';
             $request->logo->storeAs('public/images', $filename);
 
-            return redirect()->route('admin.systemverwaltung');
+            return redirect()
+                ->route('admin.systemverwaltung')
+                ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0');
+
         }
 
     }

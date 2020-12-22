@@ -9,20 +9,22 @@
 
                 <div class="card-body">
 
-
-                    <div class="alert alert-danger">
-                        <strong>TESTBETRIEB</strong>
-                        <br>
-                        Momentan befindet sich die Plattform im Testbetrieb. Bitte nicht einloggen.
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Hinweis</strong>
+                        <hr>
+                        Um das Suchportal der Meteorologiebibliothek mit allen Funktionen nutzen zu können benötigen Sie Account.<br>
+                        Angehörige der Uni Bonn können sich direkt mit ihrer UNI-ID anmelden. Gäste und Interessierte von "außerhalb" wenden
+                        sich für einen Account bitte unter <a href="{{url('/kontakt')}}" class="alert-link" target="_blank">Kontakt</a> an die dort genannten Ansprechpartner.
                     </div>
-
-
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="login" class="col-md-4 col-form-label text-md-right">User-ID / E-Mail-Adresse</label>
+                            <label for="login" class="col-md-4 col-form-label text-md-right">UNI-ID / E-Mail-Adresse</label>
 
                             <div class="col-md-6">
                                 <input id="login" type="text"
