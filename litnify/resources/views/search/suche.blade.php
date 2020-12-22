@@ -114,9 +114,6 @@
                                         Helper::updateQueryStringParameters(['ppr'=>'10']) :
                                         Helper::addQueryStringParameters(['ppr'=>'10'])}}">10</a>
                                     <a class="dropdown-item" href="{{request()->has('ppr') ?
-                                       Helper::updateQueryStringParameters(['ppr'=>'11']) :
-                                        Helper::addQueryStringParameters(['ppr'=>'11'])}}">11</a>
-                                    <a class="dropdown-item" href="{{request()->has('ppr') ?
                                         Helper::updateQueryStringParameters(['ppr'=>'25']) :
                                         Helper::addQueryStringParameters(['ppr'=>'25'])}}">25</a>
                                     <a class="dropdown-item" href="{{request()->has('ppr') ?
@@ -136,18 +133,18 @@
 
                         <ul class="list-group">
                             <li class="list-group-item text-muted list-group-item-dark"><b>Ergebnisse exportieren</b></li>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Exportformat
-                                </button>
 
-                                <div class="dropdown-menu">
-                                    <button type="submit" class="dropdown-item" name="export_type" value="pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF </button>
-                                    <button type="submit" class="dropdown-item" name="export_type" value="xls"><i class="fa fa-file-excel-o" aria-hidden="true"></i> XLS </button>
-                                    <button type="submit" class="dropdown-item" name="export_type" value="csv"><i class="fa fa-table" aria-hidden="true"></i> CSV </button>
-                                    <button type="submit" class="dropdown-item" name="export_type" value="tex"><i class="fa fa-book" aria-hidden="true"></i> BIB</button>
-                                </div>
-                            </div>
+
+                                <form action="{{ route('download') }}" method="post">
+                                    @csrf
+                                    <div class="btn-group btn-group-md" role="group" aria-label="Export">
+                                        <button type="submit" class="btn btn-outline-primary export" name="export_type" value="pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF </button>
+                                        <button type="submit" class="btn btn-outline-primary export" name="export_type" value="xls"><i class="fa fa-file-excel-o" aria-hidden="true"></i> XLS </button>
+                                        <button type="submit" class="btn btn-outline-primary export" name="export_type" value="csv"><i class="fa fa-table" aria-hidden="true"></i> CSV </button>
+                                        <button type="submit" class="btn btn-outline-primary export" name="export_type" value="tex"><i class="fa fa-book" aria-hidden="true"></i> BIB</button>
+                                    </div>
+                                </form>
+
                         </ul>
 
                         <hr>
