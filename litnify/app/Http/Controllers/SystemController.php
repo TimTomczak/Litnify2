@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Validator;
 
 class SystemController extends Controller
 {
@@ -71,28 +74,28 @@ class SystemController extends Controller
 
     public function storeImage($name, $file){
 
-        /* @todo validation
-        $this->validate($file, [
-            'mimeType' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-        */
-        $file->storeAs('public/images', $name);
+
+
     }
 
     public function updateLogo(Request $request){
 
-        if($request->has('logo')){
-            $this->storeImage('logo.png', $request->logo);
-            return redirect()->route('admin.systemverwaltung');
-        }
-        elseif($request->has('sublogo')){
-            $this->storeImage('sublogo.png', $request->sublogo);
-            return redirect()->route('admin.systemverwaltung');
-        }
-        else{
+        if(sizeof($request->files) == 0){
             Redirect::back()->withErrors(
-                ['error' => 'Es wurde keine Datei übermittelt.']
+                ['error' => 'Es wurde keine Datei hochgeladen.']
             );
-        };
+        }
+
+        if($request->hasFile('logo')){
+            $request->validate([
+                'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $filename = $request->submit . '.png';
+            $request->logo->storeAs('public/images', $filename);
+
+            return redirect()->route('admin.systemverwaltung');
+        }
+
     }
 }

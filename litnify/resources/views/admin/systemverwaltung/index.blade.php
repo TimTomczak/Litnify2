@@ -55,7 +55,7 @@
                                         <input type="file" class="form-control-file" name="logo"/>
                                     </td>
                                     <td>
-                                        <button type="submit" class="btn btn-primary">Hochladen</button>
+                                        <button type="submit" name="submit" value="logo" class="btn btn-primary">Hochladen</button>
                                     </td>
                                 </form>
                             </tr>
@@ -66,10 +66,10 @@
                                         <img src="{{asset('storage/images/sublogo.png')}}" height="50px">
                                     </td>
                                     <td>
-                                        <input type="file" class="form-control-file" name="sublogo"/>
+                                        <input type="file" class="form-control-file" name="logo"/>
                                     </td>
                                     <td>
-                                        <button type="submit" class="btn btn-primary">Hochladen</button>
+                                        <button type="submit" name="submit" value="sublogo" class="btn btn-primary">Hochladen</button>
                                     </td>
                                 </form>
                             </tr>
