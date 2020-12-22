@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\TableBuilder;
+use App\Models\Medium;
 use App\Models\Merkliste;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,7 +11,8 @@ use Illuminate\Http\Request;
 class MerklistenverleihController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Ansicht aller Nutzer, die Medien auf ihrere Merklsite haben, deren Anzahl, sowie die Anzahl
+     * der davon ausleihbaren Medien
      *
      */
     public function index()
@@ -27,9 +29,16 @@ class MerklistenverleihController extends Controller
      */
     public function show(User $user)
     {
-        $medienAufMerkliste = $user->merkliste->paginate(10);
+        $medienAufMerkliste = $user->merkliste;
+        $medienAufMerklisteAusleihbar=$medienAufMerkliste->filter(function (Medium $medium){
+            if ($medium->isAusleihbar()){
+                return $medium;
+            }
+        });
+
         return view('admin.ausleihverwaltung.merklistenverleih.show',[
-            'merkliste' => $medienAufMerkliste,
+            'merkliste' => $medienAufMerkliste->paginate(10),
+            'merklisteAusleihbar' => $medienAufMerklisteAusleihbar->paginate(10),
             'user' => $user,
             'tableStyle' => TableBuilder::$tableStyle,
             'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28)
