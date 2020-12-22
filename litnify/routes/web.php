@@ -126,7 +126,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked','log']], f
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/test', [App\Http\Controllers\DownloadController::class, 'index']);
+Route::post('/download', [App\Http\Controllers\DownloadController::class, 'index'])->name('download');
 
 Route::get('/aaa', function (){
     $file=storage_path("sql\medien.sql");
@@ -136,6 +136,7 @@ Route::get('/aaa', function (){
 });
 
 // * S t a t i c P a g e  s * //
+Route::view('/credits', 'layouts.credits');
 Route::get('/{page}', SeitenController::class)->name('page');
 
 
