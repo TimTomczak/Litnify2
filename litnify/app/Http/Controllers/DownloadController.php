@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MediumExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel;
 
-class DownloadController extends Controller{
 
+class DownloadController extends Controller{
 
     private $data;
 
     public function index(Request $request){
 
-            $this->xlsExport($request);
+        //dd($request);
 
+        //$this->xlsExport($request);
+
+        return Excel::download(new MediumExport, 'medien.xlsx');
     }
 
     public function pdfExport(){
@@ -25,15 +29,20 @@ class DownloadController extends Controller{
     public function xlsExport($request){
 
 
+        return (new InvoicesExport)->download('export.xlsx', Excel::XLSX);
 
-       return $this->data->download($request->server, 'export.xls');
 
     }
     public function csvExport(){
 
 
+        return (new MediumExport)->download('export.csv', Excel::CSV, [
+            'Content-Type' => 'text/csv',
+        ]);
+
     }
     public function texExport(){
+
 
 
     }
