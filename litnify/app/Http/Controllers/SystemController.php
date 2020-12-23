@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TableBuilder;
 use App\Models\Auswertung;
+use App\Models\Medium;
 use App\Models\Seiten;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,6 +17,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
+use function React\Promise\map;
 
 class SystemController extends Controller
 {
@@ -24,11 +27,29 @@ class SystemController extends Controller
     }
 
     public function auswertungen(){
+        $viewReturn=[
+            'tabs' => Auswertung::$auswertungenTabs,
+            'tableStyle' => TableBuilder::$tableStyle,
+        ];
 
-        return view('admin.systemverwaltung.auswertungen',[
-            'top_ausleihen' => Auswertung::getTopAusleihen(),
-            'ausleihen_offen' => Auswertung::getAusleihenOffen(),
-        ]);
+        if (!isset(request()->query()['auswertung'])){
+            return redirect()->route('admin.systemverwaltung.auswertungen', ['auswertung' => 'Top Ausleihen']);
+        }
+
+        switch (request()->query()['auswertung']){
+            case 'Top Ausleihen':
+
+                $viewReturn['top_ausleihen']=Medium::hydrate(Auswertung::getTopAusleihen()->toArray())->paginate(10);
+                $viewReturn['tableBuilder']= TableBuilder::$medienverwaltungIndex;
+                break;
+
+            case 'Ueberfaellige Ausleihen':
+                $viewReturn['ausleihen_offen']=Auswertung::getAusleihenUeberfaellig()->paginate(10);
+                $viewReturn['tableBuilder'] = TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen;
+                break;
+        }
+
+        return view('admin.systemverwaltung.auswertungen',$viewReturn);
     }
 
     public function logs(Request $request){
