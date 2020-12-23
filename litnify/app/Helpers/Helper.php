@@ -17,6 +17,15 @@ class Helper
         array('short' => 'invnr',   'full' => 'Inventar-Nr.'),
     ];
 
+    public static $literaturartenIcons=[
+        'null' => '',
+        1 => 'fa fa-file-text-o',
+        2 => 'fa fa-book' ,
+        3 => 'fa fa-newspaper-o' ,
+        4 => 'fa fa-files-o' ,
+        5 => 'fa fa-floppy-o'
+    ];
+
     static function getSuchFilterValue($key){
        foreach (self::$suchFilter as $filter){
            if ($filter['short'] == $key){
@@ -98,6 +107,14 @@ class Helper
             $chunks[$chunk]=$data;
         }
         return $chunks;
+    }
+
+    public static function showCards(){
+        if (request()->session()->has('showCards')){
+            return request()->session()->get('showCards');
+        }else{
+            return 'true';
+        }
     }
 
 }

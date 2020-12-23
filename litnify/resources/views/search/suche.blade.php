@@ -204,90 +204,100 @@
                                 @endif
                             </div>
                         </div>
-                        {{--                            <select class="custom-select rounded-0" name="filter">--}}
-{{--                                @foreach ($auswahl as $item)--}}
-{{--                                    <option value="{{($item['short'])}}">{{($item['full'])}}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
                     </div>
                 </div>
-                {{--                @livewire('search-component',['searchQueryArray' => $request->all()])--}}
 
                 <div class="tab-content">
-                    <form action="{{route('suche.export')}}" method="POST">
-                        @csrf
-
-                        @if($result)
-                        <table class="{{$tableStyle}}">
-                            <thead>
-                            <tr>
-                                <th>
-                                    <input type="checkbox" name="check_all" id="selectAll">
-                                </th>
-                                @foreach($tableBuilder as $key=>$val)
-                                    <th>{{$val}}</th>
-                                @endforeach
-                                @auth
-                                    <th><a tabindex="0"  id="addToMerklisteInfoButton" type="button" class="btn btn-link btn-sm" ><i class="fa fa-info-circle"></i></a></th>
-                                @endauth
-                            </tr>
-                            </thead>
-                                <tbody>
+                    <x-switch-appearance/>
+{{--                    <form action="{{route('suche.export')}}" method="POST">--}}
+{{--                        @csrf--}}
+                    @if($result)
+                        @if(Helper::showCards()=='true')
+                            <ul class="list-group list-group-flush">
                                 @foreach($result as $res)
-                                    <tr>
-                                        <td>
-                                            <div class="form-check form-check-inline">
-                                                <label class="form-check-label {{old('check_'.$res->id) ? 'active': ''}}">
-                                                    <input class="form-check-input checkbox" type="checkbox" name="check_{{$res->id}}"
-                                                               value="{{$res->id}} {{old('check_'.$res->id) ? 'checked="checked"': ''}}">
-                                                </label>
-                                            </div>
-                                        </td>
-                                        @foreach($tableBuilder as $key=>$val)
-                                            @switch($key)
-                                                @case('literaturart_id')
-                                                <td>{{$res->literaturart->literaturart}}</td>
-                                                @break
-
-                                                @case('zeitschrift_id')
-                                                <td>{{$res->zeitschrift!=null ? $res->zeitschrift->name : ''}}</td>
-                                                @break
-
-                                                @case('raum_id')
-                                                <td>{{$res->raum!=null ? $res->raum->raum : ''}}</td>
-                                                @break
-
-                                                @case('hauptsachtitel')
-                                                <td class="text-wrap"><a href="#" class="render-medium-modal " data-id="{{$res->id}}">{{$res->attributesToArray()[$key]}}</a></td>
-                                                @break
-
-                                                @case('autoren')
-                                                <td>
-                                                    @foreach(explode(';',$res->autoren) as $autor)
-                                                        {{$autor}}<br>
-                                                    @endforeach
-                                                </td>
-                                                @break
-
-                                                @default
-                                                <td>{{$res->attributesToArray()[$key]}}</td>
-
-                                            @endswitch
-                                        @endforeach
-{{--                                        <td><a href="{{route('medium.show',$res->id)}}"><button type="button" class="{{$aktionenStyles['show']['button-class']}}" title="Medium ansehen"><i class="{{$aktionenStyles['show']['icon-class']}}"></i></button></a></td>--}}
+                                    <x-medium-card :medium="$res">
+                                         {{--Aktionen hier einfügen--}}
                                         @auth
-                                            <td>@livewire('add-to-merkliste-component',['medium'=>$res->id])</td>
+                                            @livewire('add-to-merkliste-component',['medium'=>$res->id])
                                         @endauth
-                                    </tr>
+                                         {{--Aktionen ENDE--}}
+
+                                        <x-slot name="ausleihenSlot"></x-slot>
+                                    </x-medium-card>
                                 @endforeach
+                            </ul>
+                        @elseif(Helper::showCards()=='false')
+                            <table class="{{$tableStyle}}">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" name="check_all" id="selectAll">
+                                    </th>
+                                    @foreach($tableBuilder as $key=>$val)
+                                        <th>{{$val}}</th>
+                                    @endforeach
+                                    @auth
+                                        <th><a tabindex="0"  id="addToMerklisteInfoButton" type="button" class="btn btn-link btn-sm" ><i class="fa fa-info-circle"></i></a></th>
+                                    @endauth
+                                </tr>
+                                </thead>
+                                    <tbody>
+                                    @foreach($result as $res)
+                                        <tr>
+                                            <td>
+                                                <div class="form-check form-check-inline">
+                                                    <label class="form-check-label {{old('check_'.$res->id) ? 'active': ''}}">
+                                                        <input class="form-check-input checkbox" type="checkbox" name="check_{{$res->id}}"
+                                                                   value="{{$res->id}} {{old('check_'.$res->id) ? 'checked="checked"': ''}}">
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            @foreach($tableBuilder as $key=>$val)
+                                                @switch($key)
+                                                    @case('literaturart_id')
+                                                    <td>{{$res->literaturart->literaturart}}</td>
+                                                    @break
 
-                                </tbody>
-                        </table>
-                    </form>
+                                                    @case('zeitschrift_id')
+                                                    <td>{{$res->zeitschrift!=null ? $res->zeitschrift->name : ''}}</td>
+                                                    @break
 
-                    <div class="d-flex justify-content-between">
-                        {{ $result->appends(request()->all())->links() }}
-                    </div>
+                                                    @case('raum_id')
+                                                    <td>{{$res->raum!=null ? $res->raum->raum : ''}}</td>
+                                                    @break
+
+                                                    @case('hauptsachtitel')
+                                                    <td class="text-wrap"><a href="#" class="render-medium-modal " data-id="{{$res->id}}">{{$res->attributesToArray()[$key]}}</a></td>
+                                                    @break
+
+                                                    @case('autoren')
+                                                    <td>
+                                                        @foreach(explode(';',$res->autoren) as $autor)
+                                                            {{$autor}}<br>
+                                                        @endforeach
+                                                    </td>
+                                                    @break
+
+                                                    @default
+                                                    <td>{{$res->attributesToArray()[$key]}}</td>
+
+                                                @endswitch
+                                            @endforeach
+{{--                                            <td><a href="{{route('medium.show',$res->id)}}"><button type="button" class="{{$aktionenStyles['show']['button-class']}}" title="Medium ansehen"><i class="{{$aktionenStyles['show']['icon-class']}}"></i></button></a></td>--}}
+                                            @auth
+                                                <td>@livewire('add-to-merkliste-component',['medium'=>$res->id])</td>
+                                            @endauth
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                            </table>
+                        @endif
+{{--                    </form>--}}
+
+                        <div class="d-flex justify-content-between mt-2">
+                            {{ $result->appends(request()->all())->links() }}
+                        </div>
                     @else
                         <div class="alert alert-info">Keine Ergebnisse gefunden.</div>
                     @endif

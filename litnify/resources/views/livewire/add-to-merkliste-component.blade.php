@@ -4,6 +4,8 @@
         <div wire:loading class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
         </div>
+    @else
+        <i class="fa fa-check" title="Medium befindet sich auf Merkliste"></i>
     @endif
 </div>
 

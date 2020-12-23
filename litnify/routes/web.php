@@ -44,6 +44,8 @@ Route::middleware('blocked')->group( function() {
 
     Route::get('medium/{medium}', [App\Http\Controllers\MediumController::class, 'show'])->name('medium.show')->where(array('medium' => '[0-9]+'));
     Route::get('autor/{autor}', [App\Http\Controllers\MediumController::class, 'showAutor'])->name('autor.show');
+
+    Route::put('/user/showCards',[App\Http\Controllers\UserController::class, 'setShowCards'])->name('user.setShowCards');
 });
 
 // * A d m i n P a g e  s * //

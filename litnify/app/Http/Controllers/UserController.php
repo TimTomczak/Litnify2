@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rule;
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 use Livewire\WithPagination;
 
@@ -167,5 +168,15 @@ class UserController extends Controller
             'aktionenStyles' => TableBuilder::$aktionenStyles,
             'now' => Carbon::now()
         ]);
+    }
+
+    public function setShowCards(Request $request){
+        if ($request->has('showCards')){
+            $request->validate(
+                ['showCards'=>Rule::in(['true','false'])]
+            );
+            session(['showCards' => $request->get('showCards')]);
+        }
+        return back();
     }
 }
