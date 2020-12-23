@@ -1,4 +1,5 @@
 <?php return array (
+  'add-systematikgruppe-component' => 'App\\Http\\Livewire\\AddSystematikgruppeComponent',
   'add-to-merkliste-component' => 'App\\Http\\Livewire\\AddToMerklisteComponent',
   'autoren-component' => 'App\\Http\\Livewire\\AutorenComponent',
   'create-zeitschrift-component' => 'App\\Http\\Livewire\\CreateZeitschriftComponent',

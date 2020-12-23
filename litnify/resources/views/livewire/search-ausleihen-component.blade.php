@@ -22,7 +22,7 @@
                 @foreach($tableBuilder as $key=>$val)
                     @switch($key)
                         @case('medium_id')
-                        <td><a class="render-medium-modal" data-id="{{$aus->medium_id}}">{{$aus->attributesToArray()[$key]}}</a></td>
+                        <td><a href="#" class="render-medium-modal" data-id="{{$aus->medium_id}}">{{$aus->attributesToArray()[$key]}}</a></td>
                         @break
 
                         @case('user_id')
