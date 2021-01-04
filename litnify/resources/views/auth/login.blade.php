@@ -15,9 +15,9 @@
                         </button>
                         <strong>Hinweis</strong>
                         <hr>
-                        Um das Suchportal der Meteorologiebibliothek mit allen Funktionen nutzen zu können benötigen Sie Account.<br>
-                        Angehörige der Uni Bonn können sich direkt mit ihrer UNI-ID anmelden. Gäste und Interessierte von "außerhalb" wenden
-                        sich für einen Account bitte unter <a href="{{url('/kontakt')}}" class="alert-link" target="_blank">Kontakt</a> an die dort genannten Ansprechpartner.
+                        Um das Suchportal der Meteorologiebibliothek mit allen Funktionen nutzen zu können benötigen Sie einen Benutzerkonto.<br>
+                        Angehörige der Uni Bonn können sich direkt mit ihrer UNI-ID anmelden. Gäste und Interessierte wenden
+                        sich für einen Benutzerkonto bitte an <a href="{{url('/kontakt')}}" class="alert-link" target="_blank">Kontakt</a>.
                     </div>
 
                     <form method="POST" action="{{ route('login') }}">
