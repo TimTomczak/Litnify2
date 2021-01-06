@@ -245,8 +245,7 @@ class Suche
                 ->orWhere('schriftenreihe','like','%'.$searchQuery.'%')
                 ->orWhere('band','like','%'.$searchQuery.'%')
                 ->orWhere('institut','like','%'.$searchQuery.'%')
-                ->orWhere('bemerkungen','like','%'.$searchQuery.'%')
-                ->where('deleted',0)->where('released',1)->limit(50);
+                ->orWhere('bemerkungen','like','%'.$searchQuery.'%');
             return $medien;
         }
     }

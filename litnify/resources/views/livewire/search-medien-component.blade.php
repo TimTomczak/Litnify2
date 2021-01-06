@@ -7,7 +7,7 @@
     </div>
 
     @if($medien->count()==0)
-        <div class="alert alert-info m-2">INFO: Derzeit sind keine Medien in der Datenbank vorhanden !</div>
+        <div class="alert alert-info m-2">Keine Medien gefunden</div>
     @else
         <div wire:loading.remove>
         <table class="{{$tableStyle}}">
