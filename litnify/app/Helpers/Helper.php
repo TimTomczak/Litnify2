@@ -6,6 +6,14 @@ use Illuminate\Support\Facades\Request;
 
 class Helper
 {
+    private static $literaturart_attribute=[
+        'Artikel' => ['literaturart_id','autoren','hauptsachtitel','untertitel','jahr','issn','doi','zeitschrift_id','band','seite','raum_id','bemerkungen'],
+        'Buch' => ['literaturart_id','signatur','autoren','hauptsachtitel','untertitel','erscheinungsort','jahr','verlag','isbn','issn','inventarnummern','auflage','herausgeber','schriftenreihe','band','seite','raum_id','bemerkungen'],
+        'Graue Literatur' => ['literaturart_id','signatur','autoren','hauptsachtitel','untertitel','erscheinungsort','jahr','verlag','isbn','issn','inventarnummern','auflage','herausgeber','schriftenreihe','band','seite','institut','raum_id','bemerkungen'],
+        'Unselbstständiges Werk' => ['literaturart_id','signatur','autoren','hauptsachtitel','untertitel','enthalten_in','erscheinungsort','jahr','verlag','isbn','issn','inventarnummern','auflage','herausgeber','schriftenreihe','band','seite','raum_id','bemerkungen'],
+        'Daten' => ['literaturart_id','autoren','hauptsachtitel','untertitel','erscheinungsort','jahr','verlag','issn','herausgeber','schriftenreihe','band','seite','institut','raum_id','bemerkungen'],
+    ];
+
     public static $suchFilter=[
         array('short' => 'all',     'full' => 'Alle Felder'),
         array('short' => 'name',    'full' => 'Name (Autor, Hrsg.)'),
@@ -115,6 +123,10 @@ class Helper
         }else{
             return 'true';
         }
+    }
+
+    public static function showField($attribute_name,$literaturart){
+        return in_array($attribute_name, self::$literaturart_attribute[$literaturart]);
     }
 
 }

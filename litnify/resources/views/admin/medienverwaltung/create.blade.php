@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="card p-4 bg-light">
-            @if($literaturart=='') {{-- Wenn noch keine Literaturart ausgewählt ist --}}
+            @if($literaturart=='')
             <div class="form-group">
                 <label for="literaturart_id">Literaturart</label>
                 <select  class="form-control" name="literaturart_id" id="literaturart_id">
@@ -43,7 +43,7 @@
                         <label for="literaturart_id">Literaturart</label>
                         {{--<select class="form-control" name="literaturart_id" id="literaturart_id" readonly>
                             @foreach(App\Models\Literaturart::all()->pluck('literaturart') as $litart)
-                                <option @if($literaturart==$litart) selected @endif>{{$litart}}</option>
+                    @if(Helper::showField('schriftenreihe',$literaturart))
                             @endforeach
                         </select>--}}
                         <input type="text"
@@ -57,7 +57,7 @@
                         @enderror
                     </div>
 
-                    @if($literaturart=='Buch'xor'Graue Literatur'xor'Unselbstständiges Werk')
+                    @if(Helper::showField('signatur',$literaturart))
                         <div class="form-group">
                             <label for="signatur">Signatur</label>
                             <input type="text"
@@ -95,7 +95,7 @@
                         @enderror
                     </div>
 
-                    @if($literaturart=='Unselbstständiges Werk')
+                    @if(Helper::showField('enthalten_in',$literaturart))
                         <div class="form-group">
                             <label for="enthalten_in">Enthalten in</label>
                             <input type="text"
@@ -108,8 +108,7 @@
                             @enderror
                         </div>
                     @endif
-
-                    @if($literaturart=='Buch'xor'Graue Literatur'xor'Unselbstständiges Werk'xor'Daten')
+                    @if(Helper::showField('erscheinungsort',$literaturart))
                         <div class="form-group">
                             <label for="erscheinungsort">Erscheinungsort</label>
                             <input type="text"
@@ -135,7 +134,7 @@
                         @enderror
                     </div>
 
-                    @if($literaturart=='Buch'xor'Graue Literatur'xor'Unselbstständiges Werk'xor'Daten')
+                    @if(Helper::showField('verlag',$literaturart))
                         <div class="form-group">
                             <label for="verlag">Verlag</label>
                             <input type="text"
@@ -149,7 +148,7 @@
                         </div>
                     @endif
 
-                    @if($literaturart=='Buch'xor'Graue Literatur'xor'Unselbstständiges Werk')
+                    @if(Helper::showField('isbn',$literaturart))
                         <div class="form-group">
                             <label for="isbn">ISBN</label>
                             <input type="text"
@@ -175,7 +174,7 @@
                         @enderror
                     </div>
 
-                    @if($literaturart=='Artikel')
+                    @if(Helper::showField('doi',$literaturart))
                         <div class="form-group">
                             <label for="doi">DOI</label>
                             <input type="text"
@@ -189,7 +188,7 @@
                         </div>
                     @endif
 
-                    @if($literaturart=='Buch'xor'Graue Literatur'xor'Unselbstständiges Werk')
+                    @if(Helper::showField('inventarnummern',$literaturart))
                         <label for="inventarnummern ">Inventarnummern</label>
                         <button id="inventarnummern" type="button" class="btn btn-outline-secondary btn-block mb-3" data-toggle="modal" data-target="#modelId">Inventarnummern</button>
 
@@ -219,7 +218,7 @@
                     @endif
 
 
-                    @if($literaturart=='Buch'xor'Graue Literatur'xor'Unselbstständiges Werk')
+                    @if(Helper::showField('auflage',$literaturart))
                         <div class="form-group">
                             <label for="auflage">Auflage</label>
                             <input type="text"
@@ -233,7 +232,7 @@
                         </div>
                     @endif
 
-                    @if($literaturart=='Buch'xor'Graue Literatur'xor'Unselbstständiges Werk'xor'Daten')
+                    @if(Helper::showField('herausgeber',$literaturart))
                         <div class="form-group">
                             <label for="herausgeber">Herausgeber</label>
                             <input type="text"
@@ -247,7 +246,7 @@
                         </div>
                     @endif
 
-                    @if($literaturart=='Artikel')
+                    @if(Helper::showField('zeitschrift_id',$literaturart))
                         <div class="form-group">
                             <label for="zeitschrift_id">Zeitschrift</label>
                             {{--TODO mit Datalist austauschen ??--}}
@@ -266,7 +265,7 @@
                         </div>
                     @endif
 
-                    @if($literaturart=='Buch'xor'Graue Literatur'xor'Unselbstständiges Werk'xor'Daten')
+                    @if(Helper::showField('schriftenreihe',$literaturart))
                         <div class="form-group">
                             <label for="schriftenreihe">Schriftenreihe</label>
                             <input type="text"
@@ -304,7 +303,7 @@
                         @enderror
                     </div>
 
-                    @if($literaturart=='Graue Literatur'xor'Unselbstständiges Werk'xor'Daten')
+                    @if(Helper::showField('institut',$literaturart))
                         <div class="form-group">
                             <label for="institut">Institut</label>
                             <input type="text"
