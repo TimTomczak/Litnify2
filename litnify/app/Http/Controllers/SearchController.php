@@ -17,7 +17,7 @@ class SearchController extends Controller
 
         if ($request->has('ppr')){
             $request->validate([
-                'ppr' => Rule::in([10,11,25,50,100])
+                'ppr' => Rule::in([10,25,50,100])
             ]);
             $ppr=$request->ppr;
         }
