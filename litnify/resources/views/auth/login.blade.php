@@ -16,7 +16,7 @@
                         <strong>Hinweis</strong>
                         <hr>
                         Um das Suchportal der Meteorologiebibliothek mit allen Funktionen nutzen zu können benötigen Sie einen Benutzerkonto.<br>
-                        Angehörige der Meteorologie können sich direkt mit ihrer (meteo-id) anmelden. Gäste und Interessierte wenden
+                        Angehörige der Meteorologie können sich direkt mit ihrer Meteo-ID anmelden. Gäste und Interessierte wenden
                         sich für einen Benutzerkonto bitte an <a href="{{url('/kontakt')}}" class="alert-link" target="_blank">Kontakt</a>.
                     </div>
 
