@@ -21,7 +21,6 @@
 
                     @if(!(request()->is('/')))
                         <div class="container">
-                        @include('layouts.breadcrumbs')
                     @else
                         <div class="container-fluid">
                     @endif
