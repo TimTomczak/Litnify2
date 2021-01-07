@@ -34,7 +34,7 @@ class SearchMedienComponent extends Component
                 Medium::orderBy($this->sortBy,'DESC')->where('deleted',$this->deleted)->where('released',1) :
                 Medium::orderBy($this->sortBy,'ASC')->where('deleted',$this->deleted)->where('released',1);
         }else{
-            $medien=Suche::getInstance()->searchMedien($this->searchQuery)->get();
+            $medien=Suche::getInstance()->searchMedien($this->searchQuery)->get()->where('deleted',$this->deleted);
             $medien= $this->sortDirection=='asc' ? $medien->sortByDesc($this->sortBy) : $medien->sortBy($this->sortBy);
         }
         return view('livewire.search-medien-component',[

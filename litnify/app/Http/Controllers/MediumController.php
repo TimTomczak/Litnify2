@@ -54,7 +54,7 @@ class MediumController extends Controller
         $validatedAttributes=$this->validateAttributes();
 
         $med= Medium::create($validatedAttributes);
-        $this->storeInventarnummer($request);
+        $this->storeInventarnummer($request,$med->id);
 
         if (Auth::user()->berechtigungsrolle_id>3){
             $med->update(['released'=>1]);
@@ -236,7 +236,7 @@ class MediumController extends Controller
         return $medium;
     }
 
-    private function storeInventarnummer(Request $request){
+    private function storeInventarnummer(Request $request, $medium_id){
         $inventarnummern=collect($request->toArray())->filter(function($value,$key){
             if (strpos($key,'inventarnummer_')!==false || strpos($key,'isb_')!==false || strpos($key,'ausleihbar_')!==false){
                 return [$key=>$value];
@@ -271,7 +271,7 @@ class MediumController extends Controller
                 $ausleihbar=1;
             }
             $attributes = [
-                'medium_id' => $medium_id=$request->get('id'),
+                'medium_id' => $medium_id=$medium_id,
                 'inventarnummer' => $inventarnummer,
                 'isb' => $isb,
                 'ausleihbar' => $ausleihbar,
