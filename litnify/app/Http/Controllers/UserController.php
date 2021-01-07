@@ -9,7 +9,7 @@ use App\Models\Merkliste;
 use Carbon\Carbon;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
