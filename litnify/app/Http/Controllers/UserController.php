@@ -85,7 +85,7 @@ class UserController extends Controller
             'vorname' => 'string',
             'berechtigungsrolle_id' => 'required|string'
         ]));
-        return redirect(route('admin.nutzerverwaltung'))->with([
+        return back()->with([
             'title' => 'Nutzerverwaltung',
             'message' => 'Account wurde geändert.',
             'alertType'=> 'info'
@@ -96,7 +96,7 @@ class UserController extends Controller
     {
         $user->deleted = true;
         $user->save();
-        return redirect(route('admin.nutzerverwaltung'))->with([
+        return back()->with([
             'title' => 'Nutzerverwaltung',
             'message' => 'Account wurde deaktiviert.',
             'alertType'=> 'info'
@@ -107,7 +107,7 @@ class UserController extends Controller
     {
         $user->deleted = false;
         $user->save();
-        return redirect(route('admin.nutzerverwaltung'))->with([
+        return back()->with([
             'title' => 'Nutzerverwaltung',
             'message' => 'Account wurde reaktiviert.',
             'alertType'=> 'info'

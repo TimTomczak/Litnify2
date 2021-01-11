@@ -53,6 +53,8 @@
                 <div class="dropdown-divider"></div>
                 <a href="{{route('wiederherstellung.show','ausleihen')}}" class="dropdown-item">Ausleihverwaltung</a>
                 <div class="dropdown-divider"></div>
+                <a href="{{route('wiederherstellung.show','nutzer')}}" class="dropdown-item">Nutzerverwaltung</a>
+                <div class="dropdown-divider"></div>
                 <a href="{{route('wiederherstellung.show','zeitschriften')}}" class="dropdown-item">Zeitschriftenverwaltung</a>
             </div>
         </div>

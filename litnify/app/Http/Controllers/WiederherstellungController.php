@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\TableBuilder;
 use App\Models\Ausleihe;
 use App\Models\Medium;
+use App\Models\User;
 use App\Models\Zeitschrift;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -45,6 +46,7 @@ class WiederherstellungController extends Controller
             'Medien',
             'Ausleihen',
             'Zeitschriften',
+            'Nutzer',
         ];
         if(in_array($verwaltung,$optionen)===false){
             abort('403','Keine gültige Wiederherstellungsoption');
@@ -63,6 +65,10 @@ class WiederherstellungController extends Controller
 
             case 'Zeitschriften':
                 $deletedItems = Zeitschrift::whereDeleted(1);
+                $tableBuilder = TableBuilder::$zeitschrifenverwaltungIndex;
+                break;
+            case 'Nutzer':
+                $deletedItems = User::whereDeleted(1);
                 $tableBuilder = TableBuilder::$zeitschrifenverwaltungIndex;
                 break;
         }

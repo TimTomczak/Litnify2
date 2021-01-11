@@ -19,7 +19,8 @@
                 <tbody>
                 @foreach ($users as $user)
                     @if($user->deleted == 1)
-                        <tr style="background: repeating-linear-gradient(135deg,#ff0025,#ff0027 10px,#FFFFFF 10px,#FFFFFF 20px);">
+{{--                        <tr style="background: repeating-linear-gradient(135deg,#ff0025,#ff0027 7px,#FFFFFF 7px,#FFFFFF 20px);">--}}
+                        <tr>
                     @else
                         <tr>
                     @endif

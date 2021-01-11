@@ -14,6 +14,7 @@ class SearchUsersComponent extends Component
     protected $paginationTheme = 'bootstrap';
     public $searchQuery;
     public $nutzerverwaltung=false;
+    public $deleted=0;
 
     public function updatingSearchQuery()
     {
@@ -27,6 +28,8 @@ class SearchUsersComponent extends Component
         /*Deaktivierte Nutzer in Direktverleih ausblenden*/
         if ($this->nutzerverwaltung==false){
             $users=$users->where('deleted',0);
+        }else{
+            $users=$users->where('deleted',$this->deleted);
         }
 
         $users= $this->sortDirection=='asc' ? $users->sortByDesc($this->sortBy) : $users->sortBy($this->sortBy);

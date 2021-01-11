@@ -3,6 +3,6 @@
 @section('content')
 
     <div class="container">
-        @livewire('search-users-component',['nutzerverwaltung'=>true])
+        @livewire('search-users-component',['nutzerverwaltung'=>true,'deleted'=>0])
     </div>
 @endsection
