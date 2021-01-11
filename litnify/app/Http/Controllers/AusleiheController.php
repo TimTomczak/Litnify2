@@ -62,12 +62,15 @@ class AusleiheController extends Controller
         $ausleihzeitraum = $request->get('ausleihzeitraum');
         $ausleihzeitraumSplit = explode(' - ',$ausleihzeitraum);
 
+
         $request->request->add([
             'medium_id' => $medium->id,
             'user_id' => $user->id,
             'Ausleihdatum' => date("Y-m-d",strtotime($ausleihzeitraumSplit[0])),
-            'RueckgabeSoll' => date("Y-m-d",strtotime($ausleihzeitraumSplit[1]))
+            'RueckgabeSoll' => date("Y-m-d",strtotime($ausleihzeitraumSplit[1])),
+            'deleted' => 0,
         ]);
+
         Ausleihe::create($this->validateAttributes($request));
         return back()->with([
             'title' => 'Ausleihverwaltung',
@@ -258,7 +261,8 @@ class AusleiheController extends Controller
             'user_id' => 'required|integer',
             'inventarnummer' => 'required|string',
             'Ausleihdatum' => 'required|date',
-            'RueckgabeSoll' => 'required|date'
+            'RueckgabeSoll' => 'required|date',
+            'deleted' => 'required|integer',
         ]);
     }
 }

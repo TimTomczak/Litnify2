@@ -25,10 +25,10 @@ class SearchAusleihenComponent extends Component
     {
         $ausleihen=Suche::getInstance()->searchAusleihen($this->searchQuery);
         if ($this->showAktiv){
-            $ausleihen=$ausleihen->whereNull('Rueckgabeist');
+            $ausleihen=$ausleihen->whereNull('RueckgabeIst');
         }
         else{
-            $ausleihen=$ausleihen->whereNotNull('Rueckgabeist');
+            $ausleihen=$ausleihen->whereNotNull('RueckgabeIst');
         }
 
         if ($this->deleted==1){
