@@ -1,4 +1,5 @@
 <?php return array (
+  'action-log-component' => 'App\\Http\\Livewire\\ActionLogComponent',
   'add-systematikgruppe-component' => 'App\\Http\\Livewire\\AddSystematikgruppeComponent',
   'add-to-merkliste-component' => 'App\\Http\\Livewire\\AddToMerklisteComponent',
   'autoren-component' => 'App\\Http\\Livewire\\AutorenComponent',

@@ -115,66 +115,7 @@
 
 
         <div class="col-5">
-
-
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Logging</h5>
-                    <p class="card-text">
-                    <div style="height: 50vh; overflow-y: auto;">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">Time</th>
-                                <th scope="col">WER</th>
-                                <th scope="col">WAS</th>
-                                <th scope="col">AKTION</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @for($i=0; $i < 100; $i++)
-                            <tr>
-                                <th scope="row">{{$i}}</th>
-                                <td>hallas</td>
-                                <td>medium 91234</td>
-                                <td><i class="fa fa-trash-o"></i></td>
-                            </tr>
-                            @php
-                                $i++;
-                            @endphp
-                            <tr>
-                                <th scope="row">{{$i}}</th>
-                                <td>hense</td>
-                                <td>User "muster"</td>
-                                <td><i class="fa fa-plus"></i></td>
-                            </tr>
-                            @php
-                                $i++;
-                            @endphp
-                            <tr>
-                                <th scope="row">{{$i}}</th>
-                                <td>hense</td>
-                                <td>Medium 87651</td>
-                                <td><i class="fa fa-pencil"></i></td>
-                            </tr>
-
-
-
-                            @endfor
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    </p>
-                </div>
-            </div>
-
-
-
-
-
-
+            @livewire('action-log-component')
         </div>
     </div>
 

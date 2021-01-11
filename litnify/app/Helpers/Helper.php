@@ -129,4 +129,35 @@ class Helper
         return in_array($attribute_name, self::$literaturart_attribute[$literaturart]);
     }
 
+    public static function parseActionLog($file_contents){
+        $action_data=[
+            'datetime'=>null,
+            'uid'=>null,
+            'object'=>null,
+            'object_id'=>null,
+            'aktion'=>null
+        ];
+        $parsed_log=collect();
+
+        $rows = explode("\n", $file_contents);
+        foreach($rows as $row => $row_data)
+        {
+            if ($row_data!='') {
+                $data = explode(' ', $row_data);
+
+                $datetime = $data[0] . ' ' . $data[1];
+                $datetime = str_replace('[', '', $datetime);
+                $action_data['datetime'] = str_replace(']', '', $datetime);
+                $action_data['uid'] = $data[3];
+                $action_data['object'] = $data[4];
+                $action_data['object_id'] = $data[5];
+                $action_data['aktion'] = $data[6];
+            }
+            $data=collect($action_data);
+            $parsed_log->add($data);
+        }
+        return $parsed_log;
+    }
+
+
 }

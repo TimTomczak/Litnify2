@@ -23,6 +23,15 @@ class TableBuilder
         'reactivate' => ['button-class'=>'btn btn-secondary btn-sm border-secondary','icon-class'=>'fa fa-refresh'],
     ];
 
+    public static $logAktionen=[
+        'recover' => 'fa fa-refresh',
+        'store' => 'fa fa-plus',
+        'wakeUp' => 'fa fa-refresh',
+        'destroy' => 'fa fa-trash-o',
+        'update' => 'fa fa-pencil',
+        'createUser' => 'fa fa-plus',
+    ];
+
     public static $medienverwaltungIndex=[
         'id' => 'ID',
         'literaturart_id'=> 'Literaturart',

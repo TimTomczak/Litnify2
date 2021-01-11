@@ -130,13 +130,6 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked','log']], f
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/download', [App\Http\Controllers\DownloadController::class, 'index'])->name('download');
 
-Route::get('/aaa', function (){
-    $file=storage_path("sql\medien.sql");
-//    $file=storage_path("sql\medien.sql");
-    $file=\App\Helpers\Helper::parseSqlAddPrefix($file);
-    \App\Helpers\Helper::chunkSql($file);
-});
-
 // * S t a t i c P a g e  s * //
 Route::view('/credits', 'layouts.credits');
 Route::get('/{page}', SeitenController::class)->name('page');
