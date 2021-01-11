@@ -10,6 +10,6 @@
         </div>
         @livewire('search-medien-ausleihbar-component',['medien'=>$medien,'user'=>$user])
     </div>
-    @include('admin.medienverwaltung.mediumModal')
+    @include('admin.medienverwaltung.mediummodal')
 
 @endsection

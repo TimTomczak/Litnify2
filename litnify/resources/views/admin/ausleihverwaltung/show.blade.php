@@ -148,7 +148,7 @@
             <p>Keine beendeten Ausleihen vorhanden.</p>
         @endif
     </div>
-    @include('admin.medienverwaltung.mediumModal')
+    @include('admin.medienverwaltung.mediummodal')
 
 @endsection
 @section('javascript.header')
