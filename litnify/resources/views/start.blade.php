@@ -3,12 +3,8 @@
 @section('content')
 
     <!-- Header -->
-    <header class="bg-dark py-5" style="height: 86vh;
-        min-height: 500px;
-        background-image: url('{{asset('storage/images/background.png')}}');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;">
+    <header class="bg-dark py-5" style="background-image: url('{{asset('storage/images/background.png')}}');height: 86vh;min-height: 500px;
+        background-size: cover;background-position: center;background-repeat: no-repeat;">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-lg-12 text-center text-wrap text-light">
@@ -20,13 +16,13 @@
                         <div class="form-row ">
                             <div class="col-md-9">
                                 <div class="row no-gutters">
-                                    <div class="col-md-7 input-group">
+                                    <div class="col-md-9 input-group">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary fa fa-search rounded-left" type="button"></button>
                                         </div>
                                         <input type="text" name="q" class="form-control form-control-lg rounded-0" placeholder="Bitte Suchbegriff eingeben..." autofocus />
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-3">
                                         <select class="custom-select custom-select-lg rounded-0" name="filter">
                                             @foreach ($auswahl as $item)
                                                 <option value="{{($item['short'])}}">{{($item['full'])}}</option>
