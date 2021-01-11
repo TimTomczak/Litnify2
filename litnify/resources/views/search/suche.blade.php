@@ -129,36 +129,9 @@
                             @enderror
                         </ul>
 
-                        <hr>
-
-                        <ul class="list-group">
-                            <li class="list-group-item text-muted list-group-item-dark"><b>Ergebnisse exportieren</b></li>
-
-
-                                <form action="{{ route('download') }}" method="post">
-                                    @csrf
-                                    <div class="btn-group btn-group-md" role="group" aria-label="Export">
-                                        <button type="submit" class="btn btn-outline-primary export" name="export_type" value="pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF </button>
-                                        <button type="submit" class="btn btn-outline-primary export" name="export_type" value="xls"><i class="fa fa-file-excel-o" aria-hidden="true"></i> XLS </button>
-                                        <button type="submit" class="btn btn-outline-primary export" name="export_type" value="csv"><i class="fa fa-table" aria-hidden="true"></i> CSV </button>
-                                        <button type="submit" class="btn btn-outline-primary export" name="export_type" value="tex"><i class="fa fa-book" aria-hidden="true"></i> BIB</button>
-                                    </div>
-                                </form>
-
-                        </ul>
-
-                        <hr>
-
-
                         <div class="d-flex align-items-end flex-column my-2">
-
                         </div>
-
-
                     </div>
-
-
-
 
 {{--                </form>--}}
             </div>
@@ -209,8 +182,6 @@
 
                 <div class="tab-content">
                     <x-switch-appearance/>
-{{--                    <form action="{{route('suche.export')}}" method="POST">--}}
-{{--                        @csrf--}}
                     @if($result)
                         @if(Helper::showCards()=='true')
                             <ul class="list-group list-group-flush">
@@ -230,9 +201,6 @@
                             <table class="{{$tableStyle}}">
                                 <thead>
                                 <tr>
-                                    <th>
-                                        <input type="checkbox" name="check_all" id="selectAll">
-                                    </th>
                                     @foreach($tableBuilder as $key=>$val)
                                         <th>{{$val}}</th>
                                     @endforeach
@@ -244,14 +212,6 @@
                                     <tbody>
                                     @foreach($result as $res)
                                         <tr>
-                                            <td>
-                                                <div class="form-check form-check-inline">
-                                                    <label class="form-check-label {{old('check_'.$res->id) ? 'active': ''}}">
-                                                        <input class="form-check-input checkbox" type="checkbox" name="check_{{$res->id}}"
-                                                                   value="{{$res->id}} {{old('check_'.$res->id) ? 'checked="checked"': ''}}">
-                                                    </label>
-                                                </div>
-                                            </td>
                                             @foreach($tableBuilder as $key=>$val)
                                                 @switch($key)
                                                     @case('literaturart_id')
@@ -351,19 +311,6 @@
                 }
                 window.location.href = (window.location.origin + '/suche?' + newParams + 'dateFrom=' + dateFrom + '&dateTo=' + dateTo);
             });
-
-            $('#selectAll').click(function (event) {
-                if (this.checked) {
-                    $('.checkbox').each(function () {
-                        $(this).prop('checked', true);
-                    });
-                } else {
-                    $('.checkbox').each(function () {
-                        $(this).prop('checked', false);
-                    });
-                }
-            });
-
         })
 
     </script>
