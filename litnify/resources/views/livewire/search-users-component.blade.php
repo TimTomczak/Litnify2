@@ -78,8 +78,14 @@
                 @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-between">
-                {{ $users->links() }}
+            {{-- Pagination --}}
+            <div class="d-flex">
+                <div class="mr-auto p-2">
+                    {{ $users->links() }}
+                </div>
+                <div class="p-2">
+                    <x-export-panel/>
+                </div>
             </div>
         </div>
         <div wire:loading>
