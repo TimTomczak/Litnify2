@@ -26,7 +26,7 @@
                         </tr>
                         <tr>
                             <th scope="row">E-Mail Adresse</th>
-                            <td><input type="text" id="email" name="email" value=""style="width:100%;"></td>
+                            <td><input type="email" id="email" name="email" value=""style="width:100%;"></td>
                         </tr>
                         <tr>
                             <th scope="row">Berechtigung</th>
