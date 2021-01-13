@@ -40,10 +40,6 @@ class SearchController extends Controller
             }
         }
 
-        if (\Auth::check()){
-            Cache::put(\Auth::user()->id.'-export',$result);
-        }
-
         return view('search.suche', [
             'searchQuery' => $request->q,
             'auswahl' => Helper::$suchFilter,
