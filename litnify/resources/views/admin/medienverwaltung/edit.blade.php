@@ -19,10 +19,11 @@
 
                 <div class="form-group">
                     <label for="literaturart_id">Literaturart</label>
-                    <input type="text"
-                           class="form-control @error('literaturart_id') border-danger @enderror" name="literaturart_id" id="literaturart_id"
-                           value="{{$medium->literaturart_id}}"
-                           readonly>
+                    <select class="custom-select" name="literaturart_id" id="literaturart_id">
+                        @foreach($literaturarten as $litart)
+                            <option @if($litart==$medium->literaturart_id) selected @endif value="{{$litart}}">{{$litart}}</option>
+                        @endforeach
+                    </select>
                     @error('literaturart_id')
                         <div class="invalid-feedback d-block">{{$message}}</div>
                     @enderror

@@ -121,7 +121,8 @@ class MediumController extends Controller
         $medium = $this->foreignIdToString($medium);
         return view('admin.medienverwaltung.edit',[
             'medium' => $medium,
-            'literaturart' => $medium->literaturart_id
+            'literaturart' => $medium->literaturart_id,
+            'literaturarten' => Literaturart::pluck('literaturart'),
         ]);
     }
 
