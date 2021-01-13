@@ -6,17 +6,19 @@
             @foreach($autoren as $aut)
                 @if(!empty($aut))
                     <div class="row ">
-                        @if($aut == 'et al.')
-                            <div class="col">
-                                <label id="et_al_label" for="et_al">Et al.</label>
-                                <div class="input-group">
-                                    <input type="text" wire:init="$set('et_al', true)"
-                                           class="form-control @error('et_al') border-danger @enderror" name="et_al" id="et_al" value="{{$aut}}" readonly>
-                                    <div class="input-group-append ml-3 rounded-left">
-                                        <button wire:click.prevent="$set('et_al', false)" class="btn btn-danger"><i class="fa fa-minus-square"></i></button>
-                                    </div>
-                                </div>
-                            </div>
+{{--                        @if($aut == 'et al.')--}}
+                        @if(strpos($aut,'et al')!==false)
+                            <div wire:init="$set('et_al', true)"></div>
+{{--                            <div class="col">--}}
+{{--                                <label id="et_al_label" for="et_al">Et al.</label>--}}
+{{--                                <div class="input-group">--}}
+{{--                                    <input type="text" wire:init="$set('et_al', true)"--}}
+{{--                                           class="form-control @error('et_al') border-danger @enderror" name="et_al" id="et_al" value="{{$aut}}" readonly>--}}
+{{--                                    <div class="input-group-append ml-3 rounded-left">--}}
+{{--                                        <button wire:click.prevent="$set('et_al', false)" class="btn btn-danger"><i class="fa fa-minus-square"></i></button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         @else
                             <div class="col">
                                 <label for="nachname{{$loop->index}}">Nachname</label>
@@ -61,7 +63,7 @@
             </div>
         @endforeach
 
-        @if(!$et_al)
+        @if($et_al==false)
             <br>
             <button type="button" wire:click.defer="$set('et_al', true)" class="btn btn-primary btn-sm">Et al. <i class="fa fa-plus-square"></i></button>
         @else
