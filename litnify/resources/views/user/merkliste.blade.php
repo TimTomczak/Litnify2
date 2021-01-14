@@ -83,8 +83,15 @@
                 </tbody>
             </table>
         @endif
-        <div class="d-flex justify-content-between">
-            {{ $merkliste->links() }}
+
+        {{-- Pagination --}}
+        <div class="d-flex">
+            <div class="mr-auto p-2">
+                {{ $merkliste->links() }}
+            </div>
+            <div class="p-2">
+                <x-export-panel/>
+            </div>
         </div>
 
     @endif

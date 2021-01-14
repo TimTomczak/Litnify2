@@ -9,7 +9,7 @@
     </div>
     @if($zeitschriften->isNotEmpty())
     <div wire:loading.remove>
-        <table  class="{{$tableStyle}}">
+        <table class="{{$tableStyle}}">
             <thead>
             <tr>
                 @foreach($tableBuilder as $key=>$val)
@@ -53,10 +53,18 @@
         </table>
 
         {{-- Pagination --}}
-        <div class="d-flex justify-content-between">
-            {{ $zeitschriften->links() }}
-            <a href="{{route('zeitschrift.create')}}"><button class="btn btn-primary">Neue Zeitschrift erstellen</button></a>
+        <div class="d-flex">
+            <div class="mr-auto p-2">
+                {{ $zeitschriften->links() }}
+            </div>
+            <div class="p-2">
+                <a href="{{route('zeitschrift.create')}}"><button class="btn btn-primary">Neue Zeitschrift erstellen</button></a>
+            </div>
+            <div class="p-2">
+                <x-export-panel/>
+            </div>
         </div>
+
     </div>
     @endif
     <div wire:loading>

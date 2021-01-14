@@ -40,11 +40,11 @@ class UserController extends Controller
 
     public function createUser(Request $request)
     {
-        User::create([
-            'nachname' => $request->nachname,
-            'vorname' => $request->vorname,
-            'email' => $request->email,
-        ]);
+        User::create($request->validate([
+            'nachname' => 'string',
+            'vorname' => 'string',
+            'email' => 'email',
+        ]));
 
         $status = Password::sendResetLink(
             $request->only('email')
