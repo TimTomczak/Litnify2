@@ -102,6 +102,35 @@
                         <hr>
 
                         <ul class="list-group">
+                            <li class="list-group-item text-muted list-group-item-dark"><b>Sortieren nach</b></li>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{request()->has('sort')&&array_key_exists(request()->sort,App\Helpers\TableBuilder::$sucheIndex) ? App\Helpers\TableBuilder::$sucheIndex[request()->sort]  : 'Relevanz'}}
+                                    @if(request()->has('sort')&&array_key_exists(request()->sort,App\Helpers\TableBuilder::$sucheIndex)&&request()->has('direction'))
+                                        @if(request()->get('direction')=='asc')
+                                            - aufsteigend
+                                        @elseif(request()->get('direction')=='desc')
+                                            - absteigend
+                                        @endif
+                                    @endif
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item"
+                                       href="{{Helper::addQueryStringParameters(['sort'=>'relevanz','direction'=>'_'])}}">Relevanz</a>
+                                    <a class="dropdown-item"
+                                       href="{{Helper::addQueryStringParameters(['sort'=>'jahr','direction'=>'asc'])}}">Jahr - aufsteigend</a>
+                                    <a class="dropdown-item"
+                                       href="{{Helper::addQueryStringParameters(['sort'=>'jahr','direction'=>'desc'])}}">Jahr - absteigend</a>
+                                </div>
+                            </div>
+                            @error('ppr')
+                            <small class="form-text text-muted alert alert-danger">{{$message}}</small>
+                            @enderror
+                        </ul>
+
+                        <hr>
+
+                        <ul class="list-group">
                             <li class="list-group-item text-muted list-group-item-dark"><b>Suchergebnisse pro Seite</b></li>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -173,7 +202,7 @@
                                 @endforeach
                                 @if(request()->has('filter'))
                                     <div class="dropdown-divider"></div>
-                                        <a href="{{\App\Helpers\Helper::removeQueryStringParameters(['filter'])}}" class="dropdown-item"><strong>Filter entfernen</strong></a>
+                                        <a href="{{Helper::removeQueryStringParameters(['filter'])}}" class="dropdown-item"><strong>Filter entfernen</strong></a>
                                 @endif
                             </div>
                         </div>
@@ -202,7 +231,9 @@
                                 <thead>
                                 <tr>
                                     @foreach($tableBuilder as $key=>$val)
-                                        <th>{{$val}}</th>
+                                        <th>
+                                            {{$val}} @if(Helper::getQueryStringParameters('sort')==$key) @if(Helper::getQueryStringParameters('direction')=='asc')<i class="fa fa-sort-alpha-asc"></i>@elseif(Helper::getQueryStringParameters('direction')=='desc')<i class="fa fa-sort-alpha-desc"></i>@endif @endif
+                                        </th>
                                     @endforeach
                                     @auth
                                         <th><a tabindex="0"  id="addToMerklisteInfoButton" type="button" class="btn btn-link btn-sm" ><i class="fa fa-info-circle"></i></a></th>

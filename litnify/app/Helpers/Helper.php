@@ -53,7 +53,7 @@ class Helper
 
     static function getQueryStringParameters($parameter)
     {
-        return request()->has('filter') ? request()->query('filter') : '';
+        return request()->has($parameter) ? request()->query($parameter) : '';
     }
 
     static function addQueryStringParameters(array $parameters = [])
