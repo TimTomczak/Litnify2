@@ -71,7 +71,6 @@
                 <div class="d-flex justify-content-between">
                     {{ $top_ausleihen->links() }}
                 </div>
-                @include('admin.medienverwaltung.mediummodal')
             @break
             {{-- / Top Ausleihen--}}
 
@@ -110,36 +109,21 @@
                 <div class="d-flex justify-content-between">
                     {{ $ausleihen_offen->links() }}
                 </div>
-                @include('admin.medienverwaltung.mediummodal')
             @break
             {{-- / Überfällige Ausleihen--}}
 
             {{-- Bestand nach Systematikgruppen --}}
             @case($tabs[2])
                 <h4>Bestand nach Systematikgruppen</h4>
-            <div class="alert alert-danger">Erster Entwurf -> noch nicht funktional </div>
 
-                <div class="row">
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <label for="literaturart_id">Literaturart</label>
-                            <select class="form-control" name="literaturart_id">
-                                <option value="2">Buch</option>
-                                <option value="3">Graue Literatur</option>
-                            </select>
-                        </div>
-                    </div>
+                @livewire('systematikgruppen-component')
 
-                    @livewire('add-systematikgruppe-component')
-                </div>
             @break
             {{-- /Bestand nach Systematikgruppen --}}
 
             {{-- Bestand nach Erscheinungsjahr --}}
             @case($tabs[3])
                 <h4>Bestand nach Erscheinungsjahr</h4>
-                <div class="alert alert-danger">Erster Entwurf -> noch nicht funktional </div>
-
                 <div class="row">
                     <div class="col-sm-2">
                         <div class="form-group">
@@ -164,4 +148,6 @@
             {{-- /Bestand nach Erscheinungsjahr --}}
         @endswitch
     </div>
+
+    @include('admin.medienverwaltung.mediummodal')
 @endsection

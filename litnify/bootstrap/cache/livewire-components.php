@@ -1,6 +1,5 @@
 <?php return array (
   'action-log-component' => 'App\\Http\\Livewire\\ActionLogComponent',
-  'add-systematikgruppe-component' => 'App\\Http\\Livewire\\AddSystematikgruppeComponent',
   'add-to-merkliste-component' => 'App\\Http\\Livewire\\AddToMerklisteComponent',
   'autoren-component' => 'App\\Http\\Livewire\\AutorenComponent',
   'create-zeitschrift-component' => 'App\\Http\\Livewire\\CreateZeitschriftComponent',
@@ -10,5 +9,6 @@
   'search-medien-component' => 'App\\Http\\Livewire\\SearchMedienComponent',
   'search-users-component' => 'App\\Http\\Livewire\\SearchUsersComponent',
   'search-zeitschriften-component' => 'App\\Http\\Livewire\\SearchZeitschriftenComponent',
+  'systematikgruppen-component' => 'App\\Http\\Livewire\\SystematikgruppenComponent',
   'update-zeitschrift-component' => 'App\\Http\\Livewire\\UpdateZeitschriftComponent',
 );
