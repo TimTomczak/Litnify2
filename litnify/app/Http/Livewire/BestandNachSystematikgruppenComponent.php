@@ -7,7 +7,7 @@ use App\Models\Medium;
 use Livewire\Component;
 use function GuzzleHttp\Psr7\str;
 
-class SystematikgruppenComponent extends Component
+class BestandNachSystematikgruppenComponent extends Component
 {
     public $i=0;//Anzahl an Namen
     public $inputs=[];
@@ -74,7 +74,7 @@ class SystematikgruppenComponent extends Component
 //        dd($this->sysgrp_inputs);
         $this->searchMediumBySystematikgruppen();
 //        dd($this->result);
-        return view('livewire.systematikgruppen-component',[
+        return view('livewire.bestand-nach-systematikgruppen-component',[
             'systematikgruppen'=>$this->systematikgruppen,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
         ]);
@@ -93,7 +93,7 @@ class SystematikgruppenComponent extends Component
             }
         }
 //        dd($result);
-        $this->result=$result;
+        $this->result=$result->sortBy('signatur');
     }
 
 

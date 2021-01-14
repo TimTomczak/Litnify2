@@ -116,7 +116,7 @@
             @case($tabs[2])
                 <h4>Bestand nach Systematikgruppen</h4>
 
-                @livewire('systematikgruppen-component')
+                @livewire('bestand-nach-systematikgruppen-component')
 
             @break
             {{-- /Bestand nach Systematikgruppen --}}
@@ -124,26 +124,8 @@
             {{-- Bestand nach Erscheinungsjahr --}}
             @case($tabs[3])
                 <h4>Bestand nach Erscheinungsjahr</h4>
-                <div class="row">
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <label for="literaturart_id">Literaturart</label>
-                            <select class="form-control" name="literaturart_id">
-                                <option></option>
-                                @foreach(\App\Models\Literaturart::all() as $litart)
-                                    <option value="{{$litart->id}}">{{$litart->literaturart}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                @livewire('bestand-nach-jahr-component')
 
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="jahr">Jahr</label>
-                            <input type="text" class="form-control" name="jahr" id="jahr" aria-describedby="helpId" placeholder="Jahr eingeben ...">
-                        </div>
-                    </div>
-                </div>
             @break
             {{-- /Bestand nach Erscheinungsjahr --}}
         @endswitch

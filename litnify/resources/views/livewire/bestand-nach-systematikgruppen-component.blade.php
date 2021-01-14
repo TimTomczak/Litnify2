@@ -40,7 +40,7 @@
                     @if($result->isNotEmpty())
                         <div class="card border-dark p-1">
                             <div class="overflow-auto" style="height: 50vh">
-                                <table class="table">
+                                <table class="table table-sm">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
