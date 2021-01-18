@@ -2,23 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AusleihenExport;
 use App\Exports\MediumExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MerklisteExport;
 
 
 class DownloadController extends Controller{
 
-    private $data;
-
     public function index(Request $request){
 
-        //dd($request);
+        $export = $request->export;
+        $file = $request->type;
 
-        //$this->xlsExport($request);
+        switch($export)
+        {
+            case ("merkliste"):
+                $exportObject = new MerklisteExport();
 
-        return Excel::download(new MediumExport, 'medien.xlsx');
+                return Excel::download(new MerklisteExport, 'merkliste.xlsx');
+
+                break;
+            case ("ausleihen"):
+                $exportObject = new AusleihenExport();
+                break;
+        }
+
+
+
+        /*
+         * Ausleihen
+         * Merkliste
+         * Nutzer
+         *
+         * */
+
+
+
+
+
+        //Redirect::back();
+        //return Excel::download(new MerklisteExport, 'merkliste.xlsx');
+
     }
 
     public function pdfExport(){

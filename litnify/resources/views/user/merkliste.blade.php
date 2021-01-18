@@ -90,7 +90,7 @@
                 {{ $merkliste->links() }}
             </div>
             <div class="p-2">
-                <x-export-panel/>
+                <x-export-panel-merkliste/>
             </div>
         </div>
 
