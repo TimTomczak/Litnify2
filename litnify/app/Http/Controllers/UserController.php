@@ -24,7 +24,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = \App\Models\User::all(); //@todo Pagination
+        $users = User::all(); //@todo Pagination
         return view('admin.nutzerverwaltung.index', [
             'users' => $users,
             'tableBuilder' => TableBuilder::$nutzerverwaltungIndex,
@@ -143,6 +143,7 @@ class UserController extends Controller
                 'tableBuilder' => TableBuilder::$medienverwaltungIndex,
                 'tableStyle' => TableBuilder::$tableStyle,
                 'aktionenStyles' => TableBuilder::$aktionenStyles,
+                'export' => 'merkliste'
             ]);
     }
 
@@ -166,7 +167,9 @@ class UserController extends Controller
             'tableBuilder' => TableBuilder::$medienverwaltungIndex,
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
-            'now' => Carbon::now()
+            'now' => Carbon::now(),
+            'export' => 'ausleihen'
+
         ]);
     }
 
