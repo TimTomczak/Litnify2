@@ -69,7 +69,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-between">
-                    {{ $top_ausleihen->links() }}
+                    {{ $top_ausleihen->appends(request()->all())->links() }}
                 </div>
             @break
             {{-- / Top Ausleihen--}}
@@ -107,7 +107,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-between">
-                    {{ $ausleihen_offen->links() }}
+                    {{ $ausleihen_offen->appends(request()->all())->links() }}
                 </div>
             @break
             {{-- / Überfällige Ausleihen--}}

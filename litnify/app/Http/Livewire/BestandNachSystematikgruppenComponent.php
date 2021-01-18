@@ -13,7 +13,7 @@ class BestandNachSystematikgruppenComponent extends Component
     public $inputs=[];
     public $sysgrp_inputs;
     public $systematikgruppen;
-    public $result;
+    protected $result;
     public $literaturart;
 
     protected $listeners = [
@@ -77,6 +77,7 @@ class BestandNachSystematikgruppenComponent extends Component
         return view('livewire.bestand-nach-systematikgruppen-component',[
             'systematikgruppen'=>$this->systematikgruppen,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
+            'result' => $this->result,
         ]);
     }
 
