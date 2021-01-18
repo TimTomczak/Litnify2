@@ -52,7 +52,7 @@
                                 <a href="{{request()->has('unwerk') ?
                                         Helper::removeQueryStringParameters(['unwerk']) :
                                         Helper::addQueryStringParameters(['unwerk'=>'_'])}}">
-                                    <span class="pull-left">Unselbständiges Werk</span>
+                                    <span class="pull-left">Unselbstständiges Werk</span>
                                     <span class="badge badge-pill badge-primary">{{$litTypeCounter['unwerk']}}</span>
                                 </a>
                             </li>
