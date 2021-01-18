@@ -6,7 +6,7 @@
                 @if($medium->literaturart!=null)
                     <p><i class="{{Helper::$literaturartenIcons[$medium->literaturart_id]}} fa-lg mr-2"></i> <strong>{{$medium->literaturart->literaturart}}</strong></p>
                 @endif
-                <p><strong><a href="{{request()->url().'?q='.$medium->signatur.'&filter=sign'}}" title="Signatur">{{$medium->signatur}}</a></strong></p>
+                <p><strong><a href="{{route('suche').'?q='.$medium->signatur.'&filter=sign'}}" title="Signatur">{{$medium->signatur}}</a></strong></p>
             </div>
         </div>
         <div class="card-body">
@@ -30,7 +30,7 @@
             <div class="d-flex justify-content-between mt-n2 mb-n4">
                 <p class="card-text">
                     @if($medium->zeitschrift_id!=null)
-                        <a href="{{request()->url().'?q='.$medium->zeitschrift->name.'&filter=ztitel'}}" title="Zeitschrift">{{$medium->zeitschrift->name}}</a>
+                        <a href="{{route('suche').'?q='.$medium->zeitschrift->name.'&filter=ztitel'}}" title="Zeitschrift">{{$medium->zeitschrift->name}}</a>
                         -
                     @endif {{$medium->jahr}}
                         <span class="card-text-right">
