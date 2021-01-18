@@ -26,7 +26,8 @@ Route::get('/', function () {return view('start',['auswahl'=>App\Helpers\Helper:
 Route::get('/suche/{query?}', [App\Http\Controllers\SearchController::class, 'index'])->name('suche');
 Route::post('/suche/export', [App\Http\Controllers\SearchController::class, 'export'])->name('suche.export');
 //Route::get('/login', [App\Http\Controllers\LoginController::class])->name('login');
-Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout');
+Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout2');
+Route::get('/download', [App\Http\Controllers\DownloadController::class, 'index'])->name('download');
 
 // * M o d e l s * //
 /***********************************/
@@ -41,10 +42,8 @@ Route::middleware('blocked')->group( function() {
     Route::get('/user/ausleihen', [App\Http\Controllers\UserController::class, 'showAusleihen'])->name('ausleihen.show')->middleware('auth');
     Route::get('/user/merkliste', [App\Http\Controllers\UserController::class, 'showMerkliste'])->name('merkliste.show')->middleware('auth');
     Route::post('/user/merkliste', [App\Http\Controllers\UserController::class, 'editMerkliste'])->name('merkliste.edit')->middleware('auth');
-
     Route::get('medium/{medium}', [App\Http\Controllers\MediumController::class, 'show'])->name('medium.show')->where(array('medium' => '[0-9]+'));
     Route::get('autor/{autor}', [App\Http\Controllers\MediumController::class, 'showAutor'])->name('autor.show');
-
     Route::put('/user/showCards',[App\Http\Controllers\UserController::class, 'setShowCards'])->name('user.setShowCards');
 });
 
@@ -126,9 +125,6 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked','log']], f
     Route::get('systemverwaltung/logs', [App\Http\Controllers\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs')->middleware('role:4');
 
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/download', [App\Http\Controllers\DownloadController::class, 'index'])->name('download');
 
 // * S t a t i c P a g e  s * //
 Route::view('/credits', 'layouts.credits');
