@@ -13,7 +13,7 @@
             @include('layouts.sidebar')
         @endrole
 
-        <div id="content-wrapper">
+        <div id="content-wrapper" class="">
             @include('layouts.nav')
             <main class="border-bottom" style="margin-top:75px; background-color: #ffffff; min-height: 85vh;">
                 {{--Benachrichtigung--}}
@@ -21,16 +21,19 @@
 
                     @if(!(request()->is('/')))
                         <div class="container">
+                            @include('layouts.breadcrumbs')
                     @else
                         <div class="container-fluid">
                     @endif
-
                     @yield('content')
 
             </main>
             @include('layouts.footer')
         </div>
     </div>
+    <button class="btn btn-primary btn-lg" onclick="goToTop()" id="scrollToTop" title="Go to top">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </button>
 
     <script>
         $('.toast').toast('show');
