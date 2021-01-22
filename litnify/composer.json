@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3.19",
         "directorytree/ldaprecord-laravel": "^1.7",
+        "dompdf/dompdf": "^1.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -22,6 +23,7 @@
         "lasserafn/php-initial-avatar-generator": "^4.1",
         "livewire/livewire": "^2.3",
         "maatwebsite/excel": "^3.1",
+        "phpoffice/phpspreadsheet": "^1.16",
         "spatie/laravel-cookie-consent": "^2.12",
         "yab/laravel-scout-mysql-driver": "^3.0"
     },
