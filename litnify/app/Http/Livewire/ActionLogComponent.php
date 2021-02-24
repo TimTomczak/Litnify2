@@ -17,7 +17,9 @@ class ActionLogComponent extends Component
     public function render()
     {
         if ($this->date==null){
-            $this->date=$this->getLogDates()[0]; //falls noch kein Daum ausgewählt, erstes vorhandenes Datum initital auswählen
+            if (!empty($this->getLogDates())){
+                $this->date=$this->getLogDates()[0]; //falls noch kein Daum ausgewählt, erstes vorhandenes Datum initital auswählen
+            }
         }
 
         return view('livewire.action-log-component',[
@@ -44,7 +46,8 @@ class ActionLogComponent extends Component
         try {
             $logfile = File::get(storage_path('logs\aktionen\aktionen-' . $date->format('Y-m-d') . '.log'));
         } catch (FileNotFoundException $e) {
-            return abort(403, 'Zu diesem Datum sind keine Logs verfügbar.');
+//            return abort(403, 'Zu diesem Datum sind keine Logs verfügbar.');
+            return [];
         }
         return Helper::parseActionLog($logfile);
     }
