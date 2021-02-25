@@ -89,9 +89,10 @@
             <div class="mr-auto p-2">
                 {{ $merkliste->links() }}
             </div>
-            <div class="p-2">
+           {{-- <div class="p-2">
                 <x-export-panel-merkliste/>
-            </div>
+            </div>--}}
+            @livewire('export-panel',['withBib'=>true,'exportData'=>$exportData,'downloadName'=>'Merkliste','cols'=>$tableBuilder])
         </div>
 
     @endif

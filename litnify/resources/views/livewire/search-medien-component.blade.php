@@ -81,7 +81,10 @@
         </table>
         <div class="d-flex justify-content-between">
             {{ $medien->links() }}
-            <a href="{{route('medium.createEmpty','')}}"><button type="submit" class="btn btn-primary">Neues Medium erstellen</button></a>
+            <div class="d-flex justify-content-end">
+                <a class="mr-2" href="{{route('medium.createEmpty','')}}"><button type="submit" class="btn btn-primary">Neues Medium erstellen</button></a>
+                @livewire('export-panel',['withBib'=>true,'exportData'=>$exportData,'downloadName'=>'Medienverwaltung','cols'=>$tableBuilder])
+            </div>
         </div>
         </div>
     @endif

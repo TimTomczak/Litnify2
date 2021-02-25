@@ -59,6 +59,9 @@
                         </table>
                     </div>
                 </div>
+                <div wire:loading.remove class="d-flex justify-content-end">
+                    @livewire('export-panel',['withBib'=>true,'exportData'=>$exportData,'downloadName'=>'Bestand_nach_Erscheinungsjahr','cols'=>$tableBuilder])
+                </div>
             @endif
         </div>
 

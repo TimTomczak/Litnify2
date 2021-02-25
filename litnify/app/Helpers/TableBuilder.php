@@ -130,4 +130,14 @@ class TableBuilder
         'berechtigungsrolle_id' => 'Rolle',
         'created_at' => 'erstellt',
     ];
+
+    public static $top_ausleihen=[
+        'anzahl' => 'Häufigkeit',
+        'id' => 'ID',
+        'literaturart_id'=> 'Literaturart',
+        'signatur' => 'Signatur',
+        'hauptsachtitel' => 'Hauptsachtitel',
+        'autoren' => 'Autoren',
+        'jahr' => 'Jahr',
+    ];
 }

@@ -36,13 +36,13 @@ class SearchAusleihenComponent extends Component
         }else{
             $ausleihen=$ausleihen->where('deleted',0);
         }
-
         return view('livewire.search-ausleihen-component',[
             'ausleihen' => $this->dbTimestampToGermanDate($ausleihen->get())->paginate(10),
             'tableBuilder' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
-            'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28)
+            'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28),
+            'exportData' => $this->dbTimestampToGermanDate($ausleihen->get())->paginate(10)->items(),
         ]);
     }
 

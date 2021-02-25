@@ -64,6 +64,9 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-end mt-1">
+                            @livewire('export-panel',['withBib'=>true,'exportData'=>$exportData,'downloadName'=>'Bestand_nach_Systematikgruppen','cols'=>$tableBuilder])
+                        </div>
 {{--                        <script>--}}
 {{--                            $(".render-medium-modal").click(function( event) {--}}
 {{--                                var $mediumId = $(this).data('id');--}}

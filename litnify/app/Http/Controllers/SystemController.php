@@ -31,14 +31,15 @@ class SystemController extends Controller
 
         switch (request()->query()['auswertung']){
             case 'Top Ausleihen':
-
                 $viewReturn['top_ausleihen']=Medium::hydrate(Auswertung::getTopAusleihen()->toArray())->paginate(10);
-                $viewReturn['tableBuilder']= TableBuilder::$medienverwaltungIndex;
+                $viewReturn['tableBuilder']= TableBuilder::$top_ausleihen;
+                $viewReturn['exportData'] = Auswertung::getTopAusleihen()->toArray();
                 break;
 
             case 'Ueberfaellige Ausleihen':
                 $viewReturn['ausleihen_offen']=Auswertung::getAusleihenUeberfaellig()->paginate(10);
                 $viewReturn['tableBuilder'] = TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen;
+                $viewReturn['exportData'] = Auswertung::getAusleihenUeberfaellig()->toArray();
                 break;
         }
 

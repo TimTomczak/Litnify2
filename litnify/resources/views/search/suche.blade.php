@@ -288,6 +288,7 @@
 
                         <div class="d-flex justify-content-between mt-2">
                             {{ $result->appends(request()->all())->links() }}
+                            @livewire('export-panel',['withBib'=>true,'exportData'=>$exportData,'downloadName'=>'Litnify_Suche','cols'=>$tableBuilder])
                         </div>
                     @else
                         <div class="alert alert-info">Keine Ergebnisse gefunden.</div>

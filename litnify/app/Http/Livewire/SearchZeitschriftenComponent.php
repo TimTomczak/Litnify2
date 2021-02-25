@@ -37,6 +37,7 @@ class SearchZeitschriftenComponent extends Component
             'tableStyle' => TableBuilder::$tableStyle,
             'tableBuilder' => TableBuilder::$zeitschrifenverwaltungIndex,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
+            'exportData' => $zeitschriften->toArray(),
         ]);
     }
 }

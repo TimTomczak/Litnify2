@@ -10,12 +10,17 @@ class BestandNachJahrComponent extends Component
 {
     public $literaturart;
     public $jahr;
-    public $result;
+    protected $result;
 
     public function render()
     {
         $this->searchMedienByJahr();
-        return view('livewire.bestand-nach-jahr-component',['aktionenStyles'=>TableBuilder::$aktionenStyles]);
+        return view('livewire.bestand-nach-jahr-component',[
+            'aktionenStyles'=>TableBuilder::$aktionenStyles,
+            'tableBuilder' => TableBuilder::$medienverwaltungIndex,
+            'exportData' => $this->result->toArray(),
+            'result' => $this->result,
+        ]);
     }
 
     private function searchMedienByJahr(){
@@ -24,5 +29,6 @@ class BestandNachJahrComponent extends Component
         }else{
             $this->result=collect();
         }
+        $this->emit('rerenderPanel',$this->result);
     }
 }

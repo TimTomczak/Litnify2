@@ -65,7 +65,8 @@ class SearchController extends Controller
             'litTypeCounter' => $literaturartenCounter,
             'tableBuilder' => TableBuilder::$sucheIndex,
             'tableStyle' => TableBuilder::$tableStyle,
-            'aktionenStyles' => TableBuilder::$aktionenStyles
+            'aktionenStyles' => TableBuilder::$aktionenStyles,
+            'exportData' => $result->isEmpty()  ? $result->toArray() : $result->paginate($ppr)->items(),
         ]);
 
     }

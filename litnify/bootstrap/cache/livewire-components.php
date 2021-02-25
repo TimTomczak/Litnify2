@@ -5,6 +5,7 @@
   'bestand-nach-jahr-component' => 'App\\Http\\Livewire\\BestandNachJahrComponent',
   'bestand-nach-systematikgruppen-component' => 'App\\Http\\Livewire\\BestandNachSystematikgruppenComponent',
   'create-zeitschrift-component' => 'App\\Http\\Livewire\\CreateZeitschriftComponent',
+  'export-panel' => 'App\\Http\\Livewire\\ExportPanel',
   'inventarnummern-component' => 'App\\Http\\Livewire\\InventarnummernComponent',
   'search-ausleihen-component' => 'App\\Http\\Livewire\\SearchAusleihenComponent',
   'search-medien-ausleihbar-component' => 'App\\Http\\Livewire\\SearchMedienAusleihbarComponent',

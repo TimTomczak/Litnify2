@@ -22,7 +22,7 @@
                 <table class="{{$tableStyle}}">
                     <thead>
                     <tr>
-                        <th>Häufigkeit</th>
+{{--                        <th>Häufigkeit</th>--}}
                         @foreach($tableBuilder as $key=>$val)
                             <th>{{$val}}</th>
                         @endforeach
@@ -31,7 +31,7 @@
                     <tbody>
                     @foreach($top_ausleihen as $aus)
                         <tr>
-                            <td>{{$aus->anzahl}}</td>
+{{--                            <td>{{$aus->anzahl}}</td>--}}
                             @foreach($tableBuilder as $key=>$val)
                                 @switch($key)
                                     @case('literaturart_id')
@@ -70,6 +70,7 @@
                 </table>
                 <div class="d-flex justify-content-between">
                     {{ $top_ausleihen->appends(request()->all())->links() }}
+                    @livewire('export-panel',['withBib'=>false,'exportData'=>$exportData,'downloadName'=>'Top_Ausleihen','cols'=>$tableBuilder])
                 </div>
             @break
             {{-- / Top Ausleihen--}}
@@ -108,6 +109,7 @@
                 </table>
                 <div class="d-flex justify-content-between">
                     {{ $ausleihen_offen->appends(request()->all())->links() }}
+                    @livewire('export-panel',['withBib'=>false,'exportData'=>$exportData,'downloadName'=>'Ueberfaellige_Ausleihen','cols'=>$tableBuilder])
                 </div>
             @break
             {{-- / Überfällige Ausleihen--}}

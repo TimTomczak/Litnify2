@@ -126,9 +126,6 @@
             <div class="mr-auto p-2">
                 {{ $ausleihe->links() }}
             </div>
-            <div class="p-2">
-                <x-export-panel-ausleihen/>
-            </div>
         </div>
 
     @endif

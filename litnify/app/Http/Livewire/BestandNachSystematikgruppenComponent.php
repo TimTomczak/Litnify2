@@ -74,10 +74,13 @@ class BestandNachSystematikgruppenComponent extends Component
 //        dd($this->sysgrp_inputs);
         $this->searchMediumBySystematikgruppen();
 //        dd($this->result);
+        $this->emit('rerenderPanel',$this->result);
         return view('livewire.bestand-nach-systematikgruppen-component',[
             'systematikgruppen'=>$this->systematikgruppen,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
             'result' => $this->result,
+            'exportData' => $this->result->toArray(),
+            'tableBuilder' => TableBuilder::$medienverwaltungIndex,
         ]);
     }
 

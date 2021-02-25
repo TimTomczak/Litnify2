@@ -83,9 +83,7 @@
                 <div class="mr-auto p-2">
                     {{ $users->links() }}
                 </div>
-                <div class="p-2">
-                    <x-export-panel/>
-                </div>
+                @livewire('export-panel',['withBib'=>false,'exportData'=>$exportData,'downloadName'=>'Nutzer','cols'=>$tableBuilder])
             </div>
         </div>
         <div wire:loading>

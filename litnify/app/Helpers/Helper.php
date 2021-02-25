@@ -144,7 +144,6 @@ class Helper
         {
             if ($row_data!='') {
                 $data = explode(' ', $row_data);
-
                 $datetime = $data[0] . ' ' . $data[1];
                 $datetime = str_replace('[', '', $datetime);
                 $action_data['datetime'] = str_replace(']', '', $datetime);

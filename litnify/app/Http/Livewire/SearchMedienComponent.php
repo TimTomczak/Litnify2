@@ -37,11 +37,13 @@ class SearchMedienComponent extends Component
             $medien=Suche::getInstance()->searchMedien($this->searchQuery)->get()->where('deleted',$this->deleted);
             $medien= $this->sortDirection=='asc' ? $medien->sortByDesc($this->sortBy) : $medien->sortBy($this->sortBy);
         }
+        $this->emit('rerenderPanel',$medien->paginate(10)->items());
         return view('livewire.search-medien-component',[
             'medien' => $medien->paginate(10),
             'tableBuilder' => TableBuilder::$medienverwaltungIndex,
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
+            'exportData' => $medien->paginate(10)->items(),
         ]);
     }
 }

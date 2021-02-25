@@ -61,7 +61,7 @@
                 <a href="{{route('zeitschrift.create')}}"><button class="btn btn-primary">Neue Zeitschrift erstellen</button></a>
             </div>
             <div class="p-2">
-                <x-export-panel/>
+                @livewire('export-panel',['withBib'=>false,'exportData'=>$exportData,'downloadName'=>'Zeitschriften','cols'=>$tableBuilder])
             </div>
         </div>
 
