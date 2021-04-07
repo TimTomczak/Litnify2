@@ -1,0 +1,17 @@
+{
+    "name": "Litnify2",
+    "short_name": "lit2",
+    "lang": "de",
+    "start_url": "/index.php",
+    "display": "standalone",
+    "theme_color": "#3490dc",
+    "background_color": "#f8fafc",
+    "icons": [
+        {
+            "src": "storage/images/litnify.png",
+            "sizes": "1200x1200",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

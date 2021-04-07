@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+const workboxPlugin = require('workbox-webpack-plugin');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -22,4 +22,19 @@ mix.styles([
     'resources/css/toast-position.css',
 ],'public/css/custom.css');
 
-
+mix.webpackConfig({
+    plugins: [
+        // new workboxPlugin.GenerateSW({
+        //     maximumFileSizeToCacheInBytes: '10000000'
+        // })
+        new workboxPlugin.InjectManifest({
+            swSrc: './resources/js/sw.js', // more control over the caching
+            swDest: 'service-worker.js',
+            maximumFileSizeToCacheInBytes: '10000000',
+            // importsDirectory: 'service-worker' // have a dedicated folder for sw files
+        })
+    ],
+    output: {
+        publicPath: ''
+    }
+})

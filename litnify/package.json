@@ -20,12 +20,20 @@
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
-        "vue-template-compiler": "^2.6.12"
+        "vue-template-compiler": "^2.6.12",
+        "workbox-cacheable-response": "^6.1.2",
+        "workbox-core": "^6.1.2",
+        "workbox-expiration": "^6.1.2",
+        "workbox-navigation-preload": "^6.1.2",
+        "workbox-precaching": "^6.1.2",
+        "workbox-strategies": "^6.1.2",
+        "workbox-webpack-plugin": "^6.1.2"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
         "daterangepicker": "^3.1.0",
         "font-awesome": "^4.7.0",
-        "moment": "^2.29.1"
+        "moment": "^2.29.1",
+        "workbox-routing": "^6.1.2"
     }
 }
