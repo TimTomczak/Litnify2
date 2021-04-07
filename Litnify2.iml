@@ -144,6 +144,11 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/sabberworm/php-css-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/dompdf/dompdf" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/ezyang/htmlpurifier" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/phenx/php-svg-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/phenx/php-font-lib" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="daterangepicker" level="application" />
