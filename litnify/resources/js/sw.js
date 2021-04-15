@@ -69,19 +69,21 @@ registerRoute(
     })
 );
 
-registerRoute(
-    ({url}) => url.origin === self.location.origin &&
-        url.pathname.includes('/impressum/'),
-    new StaleWhileRevalidate({
-        cacheName: 'static-pages',
-        plugins: [
-            new ExpirationPlugin({
-                maxEntries: 60,
-                maxAgeSeconds: 24 * 60 * 60, // 1 Day
-            }),
-        ],
-    })
-);
+
+
+// registerRoute(
+//     ({url}) => url.origin === self.location.origin &&
+//         url.pathname.includes('/impressum/'),
+//     new StaleWhileRevalidate({
+//         cacheName: 'static-pages',
+//         plugins: [
+//             new ExpirationPlugin({
+//                 maxEntries: 60,
+//                 maxAgeSeconds: 24 * 60 * 60, // 1 Day
+//             }),
+//         ],
+//     })
+// );
 
 registerRoute(
     new RegExp('(?:datenschutz|kontakt|oeffnungszeiten|faq|impressum|credits)'),
@@ -102,12 +104,15 @@ const CACHE_NAME = 'offline-html';
 // This assumes /offline.html is a URL for your self-contained
 // (no external images or styles) offline page.
 const FALLBACK_HTML_URL = '/offline.html';
+const FALLBACK_HTML_BACKGROUND = '/img/offline.svg'
 // Populate the cache with the offline HTML page when the
 // service worker is installed.
 self.addEventListener('install', async (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
-            .then((cache) => cache.add(FALLBACK_HTML_URL))
+            .then(
+                (cache) => cache.add(FALLBACK_HTML_URL),
+            )
     );
 });
 
