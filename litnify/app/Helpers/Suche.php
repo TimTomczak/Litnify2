@@ -84,6 +84,10 @@ class Suche
         }
         else{                                                                                       // ... ,ansonsten
             if ($request->has('q')){                                                                // prüfen, ob ein Suchstring q übergeben wurde
+                $request->validate(
+                    ['q' => 'required|string|min:3'],
+                    ['required'=>'Suche wurde nicht ausgefüllt','min' => 'Die Suche muss aus mindestens 3 Zeichen bestehen.']
+                );
                 if ($request->has('filter')){                                                       // Falls spezialisierte Suche nach Filter
                     if (array_key_exists($request->filter, array_flip($this->searchFilters))){      // Wenn Filter nicht existiert -> überspringen
                         $result=$this->filterSearch($request->query());                             // -> extendedFilterSearch aufrufen
