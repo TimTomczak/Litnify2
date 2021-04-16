@@ -87,9 +87,9 @@ class AusleiheController extends Controller
     public function show($user)
     {
         $user=User::find($user);
-        $ausleihenAktiv = Ausleihe::whereUserId($user->id)->whereNull('RueckgabeIst')->get();
+        $ausleihenAktiv = Ausleihe::whereUserId($user->id)->whereNull('RueckgabeIst')->where('deleted',0)->get();
         $ausleihenAktiv = $this->dbTimestampToGermanDate($ausleihenAktiv);                                  //Datenbank-Timestamp in deutsches Datum für die Anzteige umwandeln
-        $ausleihenBeendet = Ausleihe::whereUserId($user->id)->whereNotNull('RueckgabeIst')->get();
+        $ausleihenBeendet = Ausleihe::whereUserId($user->id)->whereNotNull('RueckgabeIst')->where('deleted',0)->get();
         $ausleihenBeendet = $this->dbTimestampToGermanDate($ausleihenBeendet);
 
         return view('admin.ausleihverwaltung.show',[
