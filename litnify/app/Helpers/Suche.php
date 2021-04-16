@@ -84,10 +84,7 @@ class Suche
         }
         else{                                                                                       // ... ,ansonsten
             if ($request->has('q')){                                                                // prüfen, ob ein Suchstring q übergeben wurde
-                $request->validate(
-                    ['q' => 'required|string|min:3'],
-                    ['required'=>'Suche wurde nicht ausgefüllt','min' => 'Die Suche muss aus mindestens 3 Zeichen bestehen.']
-                );
+
                 if ($request->has('filter')){                                                       // Falls spezialisierte Suche nach Filter
                     if (array_key_exists($request->filter, array_flip($this->searchFilters))){      // Wenn Filter nicht existiert -> überspringen
                         $result=$this->filterSearch($request->query());                             // -> extendedFilterSearch aufrufen
@@ -97,7 +94,16 @@ class Suche
                     }
                 }
                 else{
-                    $result=$this->initSearch($request->q);                                         // Ansonsten initSearch aufrufen
+                    if ($request->q===null){
+                        $result=collect();
+                    }
+                    else{
+                        $request->validate(
+                            ['q' => 'string|min:3'],
+                            ['min' => 'Die Suche muss aus mindestens 3 Zeichen bestehen.']
+                        );
+                        $result=$this->initSearch($request->q);                                         // Ansonsten initSearch aufrufen
+                    }
                 }
             }
             else{
@@ -229,7 +235,7 @@ class Suche
 
         $literaturart=Literaturart::where('literaturart','like','%'.$searchQuery.'%')->get();
         if ($literaturart->isNotEmpty()){
-            return Medium::whereIn('literaturart_id',$literaturart->pluck('id'))->where('deleted',0)->where('released',1);
+            return Medium::with('literaturart')->whereIn('literaturart_id',$literaturart->pluck('id'))->where('deleted',0)->where('released',1);
         }
         else{
             $medien=Medium::where('id','like','%'.$searchQuery.'%')
@@ -259,8 +265,8 @@ class Suche
      * @return Berechtigungsrolle[]|User|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
      */
     public function searchUsers($searchQuery){
-        if(Berechtigungsrolle::where('berechtigungsrolle','like','%'.$searchQuery.'%')->get()->isNotEmpty()){
-            return $result=Berechtigungsrolle::where('berechtigungsrolle','like','%'.$searchQuery.'%')
+        if(Berechtigungsrolle::with('user')->where('berechtigungsrolle','like','%'.$searchQuery.'%')->get()->isNotEmpty()){
+            return $result=Berechtigungsrolle::with('user')->where('berechtigungsrolle','like','%'.$searchQuery.'%')
                 ->get()
                 ->map(function ($rolle){
                     return $rolle->user;
@@ -270,7 +276,7 @@ class Suche
             try {
                 if (strtotime($searchQuery)) {
                     $dbDate = date('Y-m-d', strtotime($searchQuery));
-                    return $result = User::where('created_at', 'like', '%' . $dbDate . '%')->get();
+                    return $result = User::with('berechtigungsrolle')->where('created_at', 'like', '%' . $dbDate . '%')->get();
                 }
                 else{
                     throw new \ErrorException();
@@ -280,7 +286,7 @@ class Suche
                 return $result=User::where('email','like','%'.$searchQuery.'%')
                     ->orWhere('nachname','like','%'.$searchQuery.'%')
                     ->orWhere('vorname','like','%'.$searchQuery.'%')
-                    ->orWhere('uid','like','%'.$searchQuery.'%')->get();
+                    ->orWhere('uid','like','%'.$searchQuery.'%')->get()->load('berechtigungsrolle');
             }
         }
     }
