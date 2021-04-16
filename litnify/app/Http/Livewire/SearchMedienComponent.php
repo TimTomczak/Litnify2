@@ -31,10 +31,10 @@ class SearchMedienComponent extends Component
     {
         if ($this->searchQuery==null){
             $medien = $this->sortDirection=='asc' ?
-                Medium::orderBy($this->sortBy,'DESC')->where('deleted',$this->deleted)->where('released',1) :
-                Medium::orderBy($this->sortBy,'ASC')->where('deleted',$this->deleted)->where('released',1);
+                Medium::with('literaturart')->orderBy($this->sortBy,'DESC')->where('deleted',$this->deleted)->where('released',1) :
+                Medium::with('literaturart')->orderBy($this->sortBy,'ASC')->where('deleted',$this->deleted)->where('released',1);
         }else{
-            $medien=Suche::getInstance()->searchMedien($this->searchQuery)->get()->where('deleted',$this->deleted);
+            $medien=Suche::getInstance()->searchMedien($this->searchQuery)->get()->where('deleted',$this->deleted)->load('literaturart');
             $medien= $this->sortDirection=='asc' ? $medien->sortByDesc($this->sortBy) : $medien->sortBy($this->sortBy);
         }
         $this->emit('rerenderPanel',$medien->paginate(10)->items());

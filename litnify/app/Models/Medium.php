@@ -41,7 +41,7 @@ class Medium extends Model
 
     protected $table='medien';
 
-    protected $with='literaturart';
+//    protected $with=['literaturart','raum','zeitschrift'];
 
 
 
