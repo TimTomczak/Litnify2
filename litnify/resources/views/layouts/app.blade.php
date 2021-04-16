@@ -31,9 +31,6 @@
             @include('layouts.footer')
         </div>
     </div>
-    <button class="btn btn-primary btn-lg" onclick="goToTop()" id="scrollToTop" title="Go to top">
-        <i class="fa fa-arrow-up" aria-hidden="true"></i>
-    </button>
 
     <script>
         $('.toast').toast('show');
