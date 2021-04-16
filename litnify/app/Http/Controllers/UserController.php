@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\TableBuilder;
 use App\Models\Ausleihe;
 use App\Models\Berechtigungsrolle;
+use App\Models\Medium;
 use App\Models\Merkliste;
 use Carbon\Carbon;
 use Illuminate\Auth\EloquentUserProvider;
@@ -162,9 +163,21 @@ class UserController extends Controller
 
     public function showAusleihen()
     {
+//        dd(Ausleihe::whereUserId(Auth::user()->id)->where('deleted',0)->whereNull('RueckgabeIst')->get()->map(function ($ausleihe){
+//            return Medium::
+//        }));
+        $ausleihen=Ausleihe::whereUserId(Auth::user()->id)
+            ->where('deleted',0)
+            ->whereNull('RueckgabeIst')
+            ->get()
+            ->load('medium')
+            ->paginate(15);
+//        dd(Auth::user()->ausleihe->where('deleted',0));
+//        dd(Medium::whereIn('id',Ausleihe::whereUserId(Auth::user()->id)->where('deleted',0)->whereNull('RueckgabeIst')->get()->pluck('medium_id'))->get());
         return view('user.ausleihen', [
             'user' => Auth::user(),
-            'ausleihe' => Auth::user()->ausleihe->paginate(15),
+//            'ausleihe' => Auth::user()->ausleihe->paginate(15),
+            'ausleihe' => $ausleihen,
             'tableBuilder' => TableBuilder::$medienverwaltungIndex,
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,

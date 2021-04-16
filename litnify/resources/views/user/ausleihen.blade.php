@@ -10,13 +10,13 @@
 
         @if(Helper::showCards()=='true')
             @foreach($ausleihe as $item)
-                <x-medium-card :medium="$item">
+                <x-medium-card :medium="$item->medium">
                     <x-slot name="ausleihenSlot">
                         <hr>
                         <div class="d-flex justify-content-between">
                             <div >
                                 @php
-                                    $diff = (Carbon\Carbon::parse($now))->diffInDays($item->pivot->RueckgabeSoll, false);
+                                    $diff = (Carbon\Carbon::parse($now))->diffInDays($item->RueckgabeSoll, false);
 
                                     echo ($diff > 1 ? 'Verbleibende Ausleihdauer: ' : ' <b><i class="fa fa-exclamation-triangle"></i> Sie sind mit dem Medium im Verzug: </b>' );
                                     echo $diff . ($diff == 1 ? ' Tag' : ' Tage' );
@@ -27,15 +27,15 @@
                                     <tbody>
                                     <tr>
                                         <th scope="row">Ausleihdatum</th>
-                                        <td>{{(Carbon\Carbon::parse($item->pivot->Ausleihdatum))->formatLocalized('%d.%m.%Y') }}</td>
+                                        <td>{{(Carbon\Carbon::parse($item->Ausleihdatum))->formatLocalized('%d.%m.%Y') }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Rückgabedatum</th>
-                                        <td>{{(Carbon\Carbon::parse($item->pivot->RueckgabeSoll))->formatLocalized('%d.%m.%Y') }}</td>
+                                        <td>{{(Carbon\Carbon::parse($item->RueckgabeSoll))->formatLocalized('%d.%m.%Y') }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Verlängerungen</th>
-                                        <td>{{($item->pivot->Verlaengerungen)}}</td>
+                                        <td>{{($item->Verlaengerungen)}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -63,50 +63,50 @@
                 @foreach($ausleihe as $item)
                     <tr>
                         <td>
-                            {{(Carbon\Carbon::parse($item->pivot->Ausleihdatum))->formatLocalized('%d.%m.%Y') }}
+                            {{(Carbon\Carbon::parse($item->Ausleihdatum))->formatLocalized('%d.%m.%Y') }}
                         </td>
                         <td>
-                            {{(Carbon\Carbon::parse($item->pivot->RueckgabeSoll))->formatLocalized('%d.%m.%Y') }}
+                            {{(Carbon\Carbon::parse($item->RueckgabeSoll))->formatLocalized('%d.%m.%Y') }}
                         </td>
                         <td>
-                            {{($item->pivot->Verlaengerungen)}}
+                            {{($item->Verlaengerungen)}}
                         </td>
 
 
                         @foreach($tableBuilder as $key=>$val)
                             @switch($key)
                                 @case('literaturart_id')
-                                <td>{{$item->literaturart->literaturart}}</td>
+                                <td>{{$item->medium->literaturart->literaturart}}</td>
                                 @break
 
                                 @case('zeitschrift_id')
-                                <td>{{$item->zeitschrift!=null ? $item->zeitschrift->name : ''}}</td>
+                                <td>{{$item->medium->zeitschrift!=null ? $item->medium->zeitschrift->name : ''}}</td>
                                 @break
 
                                 @case('raum_id')
-                                <td>{{$item->raum!=null ? $item->raum->raum : ''}}</td>
+                                <td>{{$item->medium->raum!=null ? $item->medium->raum->raum : ''}}</td>
                                 @break
 
                                 @case('hauptsachtitel')
-                                <td class="text-wrap"><a href="#" class="render-medium-modal" data-id="{{$item->id}}">{{$item->attributesToArray()[$key]}}</a></td>
+                                <td class="text-wrap"><a href="#" class="render-medium-modal" data-id="{{$item->medium->id}}">{{$item->medium->attributesToArray()[$key]}}</a></td>
                                 @break
 
                                 @case('autoren')
                                 <td>
-                                    @foreach(explode(';',$item->autoren) as $autor)
+                                    @foreach(explode(';',$item->medium->autoren) as $autor)
                                         {{$autor}}<br>
                                     @endforeach
                                 </td>
                                 @break
 
                                 @default
-                                <td>{{$item->attributesToArray()[$key]}}</td>
+                                <td>{{$item->medium->attributesToArray()[$key]}}</td>
 
                             @endswitch
                         @endforeach
                         <td>
                             @php
-                                $diff = (Carbon\Carbon::parse($now))->diffInDays($item->pivot->RueckgabeSoll, false);
+                                $diff = (Carbon\Carbon::parse($now))->diffInDays($item->RueckgabeSoll, false);
 
                                 echo ($diff > 1 ? 'Verbleibende Ausleihdauer: ' : ' <b><i class="fa fa-exclamation-triangle"></i> Sie sind mit dem Medium im Verzug: </b>' );
                                 echo $diff . ($diff == 1 ? ' Tag' : ' Tage' );
