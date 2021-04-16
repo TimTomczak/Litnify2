@@ -14,7 +14,7 @@
             "short_name": "Meine Ausleihen",
             "description": "Sieh dir die Liste deiner aktuellen Ausleihen an.",
             "url": "/user/ausleihen",
-            "icons": [{ "src": "/storage/icons/download-book-ebook.ong", "sizes": "192x192" }]
+            "icons": [{ "src": "/storage/icons/download-book-ebook.png", "sizes": "192x192" }]
         },
         {
             "name": "Meine Merkliste ansehen",
@@ -35,22 +35,22 @@
     "screenshots" : [
         {
             "src": "/storage/screenshots/Landing.png",
-            "sizes": "1280x720",
+            "sizes": "720x1280",
             "type": "image/png"
         },
         {
             "src": "/storage/screenshots/Login.png",
-            "sizes": "1280x720",
+            "sizes": "720x1280",
             "type": "image/png"
         },
         {
             "src": "/storage/screenshots/Ausleihen.png",
-            "sizes": "1280x720",
+            "sizes": "720x1280",
             "type": "image/png"
         },
         {
             "src": "/storage/screenshots/Merkliste.png",
-            "sizes": "1280x720",
+            "sizes": "720x1280",
             "type": "image/png"
         }
     ]
