@@ -31,7 +31,7 @@ class ActionLogComponent extends Component
 
     private function getLogDates(){
         $log_dates=[];
-        $files = File::allFiles(storage_path('logs\aktionen'));
+        $files = File::allFiles(storage_path('logs\\aktionen'));
         foreach ($files as $file){
             $filename=$file->getFilename();
             $filename=str_replace('aktionen-','',$filename);
@@ -44,7 +44,7 @@ class ActionLogComponent extends Component
     private function parseActionLogs($date){
         $date = Carbon::create($date);
         try {
-            $logfile = File::get(storage_path('logs\aktionen\aktionen-' . $date->format('Y-m-d') . '.log'));
+            $logfile = File::get(storage_path('logs\\aktionen\\aktionen-' . $date->format('Y-m-d') . '.log'));
         } catch (FileNotFoundException $e) {
 //            return abort(403, 'Zu diesem Datum sind keine Logs verfügbar.');
             return [];
