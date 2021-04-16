@@ -3,15 +3,55 @@
     "short_name": "Litnify2",
     "lang": "de",
     "start_url": "/index.php",
+    "orientation": "any",
     "display": "standalone",
     "theme_color": "#3490dc",
     "background_color": "#f8fafc",
+    "categories": ["education", "business", "books"],
+    "shortcuts": [
+        {
+            "name": "Meine Ausleihen ansehen",
+            "short_name": "Meine Ausleihen",
+            "description": "Sieh dir die Liste deiner aktuellen Ausleihen an.",
+            "url": "/user/ausleihen",
+            "icons": [{ "src": "/storage/icons/download-book-ebook.ong", "sizes": "192x192" }]
+        },
+        {
+            "name": "Meine Merkliste ansehen",
+            "short_name": "Meine Merkliste",
+            "description": "Sieh dir die Liste deiner gemerkten Medien an.",
+            "url": "/user/merkliste",
+            "icons": [{ "src": "/storage/icons/syllabus.png", "sizes": "192x192" }]
+        }
+    ],
     "icons": [
         {
-            "src": "storage/images/litnify.png",
-            "sizes": "300x300",
+            "src": "storage/images/litnify_bigger.png",
+            "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
+        }
+    ],
+    "screenshots" : [
+        {
+            "src": "/storage/screenshots/Landing.png",
+            "sizes": "1280x720",
+            "type": "image/png"
+        },
+        {
+            "src": "/storage/screenshots/Login.png",
+            "sizes": "1280x720",
+            "type": "image/png"
+        },
+        {
+            "src": "/storage/screenshots/Ausleihen.png",
+            "sizes": "1280x720",
+            "type": "image/png"
+        },
+        {
+            "src": "/storage/screenshots/Merkliste.png",
+            "sizes": "1280x720",
+            "type": "image/png"
         }
     ]
 }
