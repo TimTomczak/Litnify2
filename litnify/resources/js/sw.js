@@ -87,12 +87,13 @@ registerRoute(
 
 registerRoute(
     new RegExp('(?:datenschutz|kontakt|oeffnungszeiten|faq|impressum|credits)'),
-    new StaleWhileRevalidate({
+    new CacheFirst({
         cacheName: 'static-pages',
         plugins: [
             new ExpirationPlugin({
                 maxEntries: 60,
-                maxAgeSeconds: 24 * 60 * 60, // 1 Day
+                // maxAgeSeconds: 24 * 60 * 60, // 1/2 Day
+                maxAgeSeconds: 60 * 60, // 1 hour
             }),
         ],
     })
