@@ -22,14 +22,22 @@ class SearchController extends Controller
         else{
             $ppr=10;
         }
-
-        $result=Suche::getInstance()->search($request);
-        $literaturartenCounter=Suche::getInstance()->countLiteraturarten($result);
-        $result=extendedFilterSearch::getInstance()->extendedFilterSearch($request, $result);
-        if (!$request->has('q')){
-            $literaturartenCounter=Suche::getInstance()->countLiteraturarten($result);
+        if (Cache::has($request->getRequestUri())){
+            $result=Cache::get($request->getRequestUri());
+            $literaturartenCounter=Cache::get($request->getRequestUri().'-litArtCounter');
         }
+        else {
+            $result = Suche::getInstance()->search($request);
+            $literaturartenCounter = Suche::getInstance()->countLiteraturarten($result);
+            $result = extendedFilterSearch::getInstance()->extendedFilterSearch($request, $result);
 
+            if (!$request->has('q')) {
+                $literaturartenCounter = Suche::getInstance()->countLiteraturarten($result);
+            }
+
+            Cache::put($request->getRequestUri(), $result, now()->addMinutes(30));
+            Cache::put($request->getRequestUri().'-litArtCounter', $literaturartenCounter, now()->addMinutes(30));
+        }
         /* Redirect ohne &page , wenn die Seitenzahl höher wäre, als die Anzahl der eigentlichen Suchtreffer*/
         if ($request->has('page')){
             if ($request->query('page')*10-10 > $result->count()){ // bspw. Paginator Seite 7 (Ergebnisse 61-70), aber nur 50 Ergebnisse
@@ -54,11 +62,11 @@ class SearchController extends Controller
                 $result = $result->sortByDesc($sort);
             }
         }
-
+//        dd($result->load('literaturart'));
         return view('search.suche', [
             'searchQuery' => $request->q,
             'auswahl' => Helper::$suchFilter,
-            'result' => $result->isEmpty()  ? false : $result->paginate($ppr),
+            'result' => $result->isEmpty()  ? false : $result->load('literaturart','raum','zeitschrift')->paginate($ppr),
             'request' => $request->query(),
             'litTypeCounter' => $literaturartenCounter,
             'tableBuilder' => TableBuilder::$sucheIndex,
