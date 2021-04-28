@@ -86,6 +86,15 @@ class Suche
             if ($request->has('q')){                                                                // prüfen, ob ein Suchstring q übergeben wurde
 
                 if ($request->has('filter')){                                                       // Falls spezialisierte Suche nach Filter
+                    if ($request->filter===null){
+                        unset($request['filter']);
+                        return $this->search($request);
+                    }
+
+                    $request->validate(
+                        ['q' => 'min:3'],
+                        ['min' => 'Die Suche muss aus mindestens 3 Zeichen bestehen.']
+                    );
                     if (array_key_exists($request->filter, array_flip($this->searchFilters))){      // Wenn Filter nicht existiert -> überspringen
                         $result=$this->filterSearch($request->query());                             // -> extendedFilterSearch aufrufen
                     }
@@ -99,7 +108,7 @@ class Suche
                     }
                     else{
                         $request->validate(
-                            ['q' => 'string|min:3'],
+                            ['q' => 'min:3'],
                             ['min' => 'Die Suche muss aus mindestens 3 Zeichen bestehen.']
                         );
                         $result=$this->initSearch($request->q);                                         // Ansonsten initSearch aufrufen
