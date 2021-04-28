@@ -23,7 +23,7 @@
                                         <input type="text" name="q" class="form-control form-control-lg rounded-0" placeholder="Bitte Suchbegriff eingeben..." autofocus />
                                     </div>
                                     <div class="col-md-3">
-                                        <select class="custom-select custom-select-lg rounded-0" name="filter">
+                                        <select class="custom-select custom-select-lg rounded-right" name="filter">
                                             @foreach ($auswahl as $item)
                                                 <option value="{{($item['short'])}}">{{($item['full'])}}</option>
                                             @endforeach

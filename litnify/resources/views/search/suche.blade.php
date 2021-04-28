@@ -17,13 +17,14 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
-{{--                <form id="submitFilter" method="GET" action="{{route('suche')}}">--}}
-                    <div class="position-relative">
+            <div class="col-lg-3 mb-2">
+                <div class="position-relative">
 
-                        <ul class="list-group">
-                            <li class="list-group-item text-muted list-group-item-dark"><b>Art der Literatur</b></li>
-
+                    <div class="accordion" id="accordionExample">
+                        <button class="btn btn-block border border-secondary text-muted list-group-item-dark dropdown-toggle" data-toggle="collapse" data-target="#collapseLiteraturart" aria-expanded="true" aria-controls="collapseLiteraturart">
+                            <b>Art der Literatur</b>
+                        </button>
+                        <ul class="list-group collapse show" id="collapseLiteraturart" aria-labelledby="Art der Literatur" data-parent="#accordionExample">
                             <li class="list-group-item text-right {{request()->has('artikel') ? 'active-list-group-item' : '' }}">
                                 <a href="{{request()->has('artikel') ?
                                         Helper::removeQueryStringParameters(['artikel']) :
@@ -66,45 +67,51 @@
                             </li>
                         </ul>
 
-                        <hr>
+                        <br>
 
-                        <ul class="list-group">
-                            <li class="list-group-item text-muted list-group-item-dark"><b>Erscheinungsjahr</b></li>
+                        <button class="btn btn-block border border-secondary text-muted list-group-item-dark dropdown-toggle" data-toggle="collapse" data-target="#collapseErscheinungsjahr" aria-expanded="true" aria-controls="collapseErscheinungsjahr">
+                            <b>Erscheinungsjahr</b>
+                        </button>
+                        <ul class="list-group collapse show" id="collapseErscheinungsjahr" aria-labelledby="Erscheinungsjahr" data-parent="#accordionExample">
                             <li class="list-group-item">
-                                    <div class="form-inline">
-                                        <input class="form-control form-control-sm date" style="width:33%;" placeholder="von" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateFrom" id="dateFrom"
-                                            {{request()->has('dateFrom') ? 'value='.request()->dateFrom : ''}}>
-                                        &nbsp;&#45;&nbsp;
-                                        <input class="form-control form-control-sm date" style="width:33%;" placeholder="bis" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateTo" id="dateTo"
-                                            {{request()->has('dateTo') ? 'value='.request()->dateTo : ''}}>
-                                        &nbsp;
-                                        <button type="submit" class="btn btn-primary" id="dateFilter">
-                                            <i class="fa fa-arrow-circle-right"></i>
-                                        </button>
+                                <div class="form-inline">
+                                    <input class="form-control form-control-sm date" style="width:33%;" placeholder="von" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateFrom" id="dateFrom"
+                                        {{request()->has('dateFrom') ? 'value='.request()->dateFrom : ''}}>
+                                    &nbsp;&#45;&nbsp;
+                                    <input class="form-control form-control-sm date" style="width:33%;" placeholder="bis" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateTo" id="dateTo"
+                                        {{request()->has('dateTo') ? 'value='.request()->dateTo : ''}}>
+                                    &nbsp;
+                                    <button type="submit" class="btn btn-primary" id="dateFilter">
+                                        <i class="fa fa-arrow-circle-right"></i>
+                                    </button>
 
-                                        <input type="hidden" id="currentUrl" value="{{request()->getRequestUri()}}">
-                                    </div>
+                                    <input type="hidden" id="currentUrl" value="{{request()->getRequestUri()}}">
+                                </div>
                             </li>
 
                         </ul>
 
-                        <hr>
+                        <br>
 
-                        <ul class="list-group">
-                            <li class="list-group-item text-muted list-group-item-dark"><b>Ausleihbare Medien</b></li>
+                        <button class="btn btn-block border border-secondary text-muted list-group-item-dark dropdown-toggle" data-toggle="collapse" data-target="#collapseAusleihbareMedien" aria-expanded="true" aria-controls="collapseAusleihbareMedien">
+                            <b>Ausleihbare Medien</b>
+                        </button>
+                        <ul class="list-group collapse show" id="collapseAusleihbareMedien" aria-labelledby="Ausleihbare Medien" data-parent="#accordionExample">
                             <a class="btn {{request()->has('onlyBorrowable') ? 'btn-primary' : 'btn-outline-primary'}}"
-                                href="{{request()->has('onlyBorrowable') ?
+                               href="{{request()->has('onlyBorrowable') ?
                                 Helper::removeQueryStringParameters(['onlyBorrowable']) :
                                 Helper::addQueryStringParameters(['onlyBorrowable'=>'_'])}}">Nur ausleihbare Medien anzeigen
                             </a>
                         </ul>
 
-                        <hr>
+                        <br>
 
-                        <ul class="list-group">
-                            <li class="list-group-item text-muted list-group-item-dark"><b>Sortieren nach</b></li>
+                        <button class="btn btn-block border border-secondary text-muted list-group-item-dark dropdown-toggle" data-toggle="collapse" data-target="#collapseSortierenNach" aria-expanded="true" aria-controls="collapseSortierenNach">
+                            <b>Sortieren nach</b>
+                        </button>
+                        <ul class="list-group collapse show" id="collapseSortierenNach" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     {{request()->has('sort')&&array_key_exists(request()->sort,App\Helpers\TableBuilder::$sucheIndex) ? App\Helpers\TableBuilder::$sucheIndex[request()->sort]  : 'Relevanz'}}
                                     @if(request()->has('sort')&&array_key_exists(request()->sort,App\Helpers\TableBuilder::$sucheIndex)&&request()->has('direction'))
                                         @if(request()->get('direction')=='asc')
@@ -128,10 +135,12 @@
                             @enderror
                         </ul>
 
-                        <hr>
+                        <br>
 
-                        <ul class="list-group">
-                            <li class="list-group-item text-muted list-group-item-dark"><b>Suchergebnisse pro Seite</b></li>
+                        <button class="btn btn-block border border-secondary text-muted list-group-item-dark dropdown-toggle" data-toggle="collapse" data-target="#collapseSuchergebnisseProSeite" aria-expanded="false" aria-controls="collapseSuchergebnisseProSeite">
+                            <b>Suchergebnisse pro Seite</b>
+                        </button>
+                        <ul class="list-group collapse show" id="collapseSuchergebnisseProSeite" aria-labelledby="Suchergebnisse pro Seite" data-parent="#accordionExample">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{request()->has('ppr') ? request()->ppr : 10}}
@@ -140,17 +149,17 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item"
                                        href="{{request()->has('ppr') ?
-                                        Helper::updateQueryStringParameters(['ppr'=>'10']) :
-                                        Helper::addQueryStringParameters(['ppr'=>'10'])}}">10</a>
+                                    Helper::updateQueryStringParameters(['ppr'=>'10']) :
+                                    Helper::addQueryStringParameters(['ppr'=>'10'])}}">10</a>
                                     <a class="dropdown-item" href="{{request()->has('ppr') ?
-                                        Helper::updateQueryStringParameters(['ppr'=>'25']) :
-                                        Helper::addQueryStringParameters(['ppr'=>'25'])}}">25</a>
+                                    Helper::updateQueryStringParameters(['ppr'=>'25']) :
+                                    Helper::addQueryStringParameters(['ppr'=>'25'])}}">25</a>
                                     <a class="dropdown-item" href="{{request()->has('ppr') ?
-                                        Helper::updateQueryStringParameters(['ppr'=>'50']) :
-                                        Helper::addQueryStringParameters(['ppr'=>'50'])}}">50</a>
+                                    Helper::updateQueryStringParameters(['ppr'=>'50']) :
+                                    Helper::addQueryStringParameters(['ppr'=>'50'])}}">50</a>
                                     <a class="dropdown-item" href="{{request()->has('ppr') ?
-                                        Helper::updateQueryStringParameters(['ppr'=>'100']) :
-                                        Helper::addQueryStringParameters(['ppr'=>'100'])}}">100</a>
+                                    Helper::updateQueryStringParameters(['ppr'=>'100']) :
+                                    Helper::addQueryStringParameters(['ppr'=>'100'])}}">100</a>
                                 </div>
                             </div>
                             @error('ppr')
@@ -158,30 +167,174 @@
                             @enderror
                         </ul>
 
-                        <div class="d-flex align-items-end flex-column my-2">
-                        </div>
                     </div>
 
-{{--                </form>--}}
+                </div>
             </div>
+{{--            <div class="col-lg-3">--}}
+{{--                <form id="submitFilter" method="GET" action="{{route('suche')}}">--}}
+{{--                    <div class="position-relative">--}}
+
+{{--                        <ul class="list-group">--}}
+{{--                            <li class="list-group-item text-muted list-group-item-dark"><b>Art der Literatur</b></li>--}}
+
+{{--                            <li class="list-group-item text-right {{request()->has('artikel') ? 'active-list-group-item' : '' }}">--}}
+{{--                                <a href="{{request()->has('artikel') ?--}}
+{{--                                        Helper::removeQueryStringParameters(['artikel']) :--}}
+{{--                                        Helper::addQueryStringParameters(['artikel'=>'_'])}}">--}}
+{{--                                    <span name="artikel" class="pull-left">Artikel</span>--}}
+{{--                                    <span class="badge badge-pill badge-primary">{{$litTypeCounter['artikel']}}</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="list-group-item text-right {{request()->has('graulit') ? 'active-list-group-item' : '' }}">--}}
+{{--                                <a href="{{request()->has('graulit') ?--}}
+{{--                                        Helper::removeQueryStringParameters(['graulit']) :--}}
+{{--                                        Helper::addQueryStringParameters(['graulit'=>'_'])}}">--}}
+{{--                                    <span name="graulit" class="pull-left">Graue Literatur</span>--}}
+{{--                                    <span class="badge badge-pill badge-primary">{{$litTypeCounter['graulit']}}</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="list-group-item text-right {{request()->has('buch') ? 'active-list-group-item' : '' }}">--}}
+{{--                                <a href="{{request()->has('buch') ?--}}
+{{--                                        Helper::removeQueryStringParameters(['buch']) :--}}
+{{--                                        Helper::addQueryStringParameters(['buch'=>'_'])}}">--}}
+{{--                                    <span class="pull-left">Buch</span>--}}
+{{--                                    <span class="badge badge-pill badge-primary">{{$litTypeCounter['buch']}}</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="list-group-item text-right {{request()->has('unwerk') ? 'active-list-group-item' : '' }}">--}}
+{{--                                <a href="{{request()->has('unwerk') ?--}}
+{{--                                        Helper::removeQueryStringParameters(['unwerk']) :--}}
+{{--                                        Helper::addQueryStringParameters(['unwerk'=>'_'])}}">--}}
+{{--                                    <span class="pull-left">Unselbstständiges Werk</span>--}}
+{{--                                    <span class="badge badge-pill badge-primary">{{$litTypeCounter['unwerk']}}</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="list-group-item text-right {{request()->has('daten') ? 'active-list-group-item' : '' }}">--}}
+{{--                                <a href="{{request()->has('daten') ?--}}
+{{--                                        Helper::removeQueryStringParameters(['daten']) :--}}
+{{--                                        Helper::addQueryStringParameters(['daten'=>'_'])}}">--}}
+{{--                                    <span class="pull-left">Daten</span>--}}
+{{--                                    <span class="badge badge-pill badge-primary">{{$litTypeCounter['daten']}}</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+
+{{--                        <hr>--}}
+
+{{--                        <ul class="list-group">--}}
+{{--                            <li class="list-group-item text-muted list-group-item-dark"><b>Erscheinungsjahr</b></li>--}}
+{{--                            <li class="list-group-item">--}}
+{{--                                    <div class="form-inline">--}}
+{{--                                        <input class="form-control form-control-sm date" style="width:33%;" placeholder="von" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateFrom" id="dateFrom"--}}
+{{--                                            {{request()->has('dateFrom') ? 'value='.request()->dateFrom : ''}}>--}}
+{{--                                        &nbsp;&#45;&nbsp;--}}
+{{--                                        <input class="form-control form-control-sm date" style="width:33%;" placeholder="bis" type="number" min="1900" max="2099" pattern="^[0-9]{4}$" name="dateTo" id="dateTo"--}}
+{{--                                            {{request()->has('dateTo') ? 'value='.request()->dateTo : ''}}>--}}
+{{--                                        &nbsp;--}}
+{{--                                        <button type="submit" class="btn btn-primary" id="dateFilter">--}}
+{{--                                            <i class="fa fa-arrow-circle-right"></i>--}}
+{{--                                        </button>--}}
+
+{{--                                        <input type="hidden" id="currentUrl" value="{{request()->getRequestUri()}}">--}}
+{{--                                    </div>--}}
+{{--                            </li>--}}
+
+{{--                        </ul>--}}
+
+{{--                        <hr>--}}
+
+{{--                        <ul class="list-group">--}}
+{{--                            <li class="list-group-item text-muted list-group-item-dark"><b>Ausleihbare Medien</b></li>--}}
+{{--                            <a class="btn {{request()->has('onlyBorrowable') ? 'btn-primary' : 'btn-outline-primary'}}"--}}
+{{--                                href="{{request()->has('onlyBorrowable') ?--}}
+{{--                                Helper::removeQueryStringParameters(['onlyBorrowable']) :--}}
+{{--                                Helper::addQueryStringParameters(['onlyBorrowable'=>'_'])}}">Nur ausleihbare Medien anzeigen--}}
+{{--                            </a>--}}
+{{--                        </ul>--}}
+
+{{--                        <hr>--}}
+
+{{--                        <ul class="list-group">--}}
+{{--                            <li class="list-group-item text-muted list-group-item-dark"><b>Sortieren nach</b></li>--}}
+{{--                            <div class="btn-group">--}}
+{{--                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                                    {{request()->has('sort')&&array_key_exists(request()->sort,App\Helpers\TableBuilder::$sucheIndex) ? App\Helpers\TableBuilder::$sucheIndex[request()->sort]  : 'Relevanz'}}--}}
+{{--                                    @if(request()->has('sort')&&array_key_exists(request()->sort,App\Helpers\TableBuilder::$sucheIndex)&&request()->has('direction'))--}}
+{{--                                        @if(request()->get('direction')=='asc')--}}
+{{--                                            - aufsteigend--}}
+{{--                                        @elseif(request()->get('direction')=='desc')--}}
+{{--                                            - absteigend--}}
+{{--                                        @endif--}}
+{{--                                    @endif--}}
+{{--                                </button>--}}
+{{--                                <div class="dropdown-menu">--}}
+{{--                                    <a class="dropdown-item"--}}
+{{--                                       href="{{Helper::addQueryStringParameters(['sort'=>'relevanz','direction'=>'_'])}}">Relevanz</a>--}}
+{{--                                    <a class="dropdown-item"--}}
+{{--                                       href="{{Helper::addQueryStringParameters(['sort'=>'jahr','direction'=>'asc'])}}">Jahr - aufsteigend</a>--}}
+{{--                                    <a class="dropdown-item"--}}
+{{--                                       href="{{Helper::addQueryStringParameters(['sort'=>'jahr','direction'=>'desc'])}}">Jahr - absteigend</a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            @error('ppr')--}}
+{{--                            <small class="form-text text-muted alert alert-danger">{{$message}}</small>--}}
+{{--                            @enderror--}}
+{{--                        </ul>--}}
+
+{{--                        <hr>--}}
+
+{{--                        <ul class="list-group">--}}
+{{--                            <li class="list-group-item text-muted list-group-item-dark"><b>Suchergebnisse pro Seite</b></li>--}}
+{{--                            <div class="btn-group">--}}
+{{--                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                                    {{request()->has('ppr') ? request()->ppr : 10}}--}}
+{{--                                </button>--}}
+
+{{--                                <div class="dropdown-menu">--}}
+{{--                                    <a class="dropdown-item"--}}
+{{--                                       href="{{request()->has('ppr') ?--}}
+{{--                                        Helper::updateQueryStringParameters(['ppr'=>'10']) :--}}
+{{--                                        Helper::addQueryStringParameters(['ppr'=>'10'])}}">10</a>--}}
+{{--                                    <a class="dropdown-item" href="{{request()->has('ppr') ?--}}
+{{--                                        Helper::updateQueryStringParameters(['ppr'=>'25']) :--}}
+{{--                                        Helper::addQueryStringParameters(['ppr'=>'25'])}}">25</a>--}}
+{{--                                    <a class="dropdown-item" href="{{request()->has('ppr') ?--}}
+{{--                                        Helper::updateQueryStringParameters(['ppr'=>'50']) :--}}
+{{--                                        Helper::addQueryStringParameters(['ppr'=>'50'])}}">50</a>--}}
+{{--                                    <a class="dropdown-item" href="{{request()->has('ppr') ?--}}
+{{--                                        Helper::updateQueryStringParameters(['ppr'=>'100']) :--}}
+{{--                                        Helper::addQueryStringParameters(['ppr'=>'100'])}}">100</a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            @error('ppr')--}}
+{{--                            <small class="form-text text-muted alert alert-danger">{{$message}}</small>--}}
+{{--                            @enderror--}}
+{{--                        </ul>--}}
+
+{{--                        <div class="d-flex align-items-end flex-column my-2">--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                </form>--}}
+{{--            </div>--}}
             <!--/col-3-->
-            <div class="col-sm-9">
+            <div class="col-lg-9">
                 <div class="row">
                     <div class="col-sm-10">
                         <form action="{{route('suche')}}" method="GET">
                             <div class="form-group">
-                                    <div class="input-group">
-                                        <input class="form-control" name="q" id="q" value="{{$searchQuery}}"/>
-                                        @foreach(request()->query() as $key => $val)
-                                            @if($key!=='q') {{-- Suchstring überspringen, damit dieser nicht mehrfach gesendet wird --}}
-                                            <input class="form-control" name="{{$key}}" value="{{$val}}" style="display: none"/>
-                                            @endif
-                                        @endforeach
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">Suchen</button>
-                                        </div>
+                                <div class="input-group">
+                                    <input class="form-control" name="q" id="q" value="{{$searchQuery}}"/>
+                                    @foreach(request()->query() as $key => $val)
+                                        @if($key!=='q') {{-- Suchstring überspringen, damit dieser nicht mehrfach gesendet wird --}}
+                                        <input class="form-control" name="{{$key}}" value="{{$val}}" style="display: none"/>
+                                        @endif
+                                    @endforeach
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary">Suchen</button>
                                     </div>
-
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -343,6 +496,14 @@
                 }
                 window.location.href = (window.location.origin + '/suche?' + newParams + 'dateFrom=' + dateFrom + '&dateTo=' + dateTo);
             });
+
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobi/i.test(navigator.userAgent) ) {
+                $('#collapseLiteraturart').collapse()
+                $('#collapseErscheinungsjahr').collapse()
+                $('#collapseAusleihbareMedien').collapse()
+                $('#collapseSortierenNach').collapse()
+                $('#collapseSuchergebnisseProSeite').collapse()
+            }
         })
 
     </script>

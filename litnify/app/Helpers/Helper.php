@@ -15,6 +15,7 @@ class Helper
     ];
 
     public static $suchFilter=[
+        array('short' => '',     'full' => 'Suchfilter auswählen'),
         array('short' => 'all',     'full' => 'Alle Felder'),
         array('short' => 'name',    'full' => 'Name (Autor, Hrsg.)'),
         array('short' => 'titel',   'full' => 'Titel'),
