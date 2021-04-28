@@ -40,7 +40,7 @@ class Kernel extends ConsoleKernel
                     (new AusleiheEndet($ausleihen_due_in_seven_days->where('user_id','=',$user->id),$user))
                 );
             }
-        })->daily();
+        })->dailyAt('07:00');
     }
 
     /**
