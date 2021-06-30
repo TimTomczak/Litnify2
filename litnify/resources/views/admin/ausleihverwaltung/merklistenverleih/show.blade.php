@@ -28,7 +28,7 @@
                     <td>{{$merk->pivot->created_at==null ? '-' : $merk->pivot->created_at->format("d.m.Y")}}</td>
                     <td>
                         <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId{{$merk->id}}" title="Ausleihe verlängern">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId{{$merk->id}}" title="Verleih durchführen">
                                 <i class="fa fa-calendar-plus-o"></i>
                             </button>
 
