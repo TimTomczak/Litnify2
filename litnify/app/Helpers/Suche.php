@@ -312,20 +312,20 @@ class Suche
 
     public function searchAusleihen($searchQuery){
         if (filter_var($searchQuery, FILTER_VALIDATE_INT)!==false){
-            return Ausleihe::where('id',$searchQuery)
+            return Ausleihe::with('user:id,vorname,nachname')->where('id',$searchQuery)
                 ->orWhere('user_id',$searchQuery)
                 ->orWhere('medium_id',$searchQuery)
                 ->orWhere('Verlaengerungen',$searchQuery);
         }
         elseif (strtotime($searchQuery)){
             $searchQuery=date('Y-m-d',strtotime($searchQuery));
-            return Ausleihe::where('Ausleihdatum','like','%'.$searchQuery.'%')
+            return Ausleihe::with('user:id,vorname,nachname')->where('Ausleihdatum','like','%'.$searchQuery.'%')
                 ->orWhere('RueckgabeSoll','like','%'.$searchQuery.'%')
                 ->orWhere('RueckgabeIst','like','%'.$searchQuery.'%');
         }
         else{
 
-            return Ausleihe::where('inventarnummer','like','%'.$searchQuery.'%');
+            return Ausleihe::with('user:id,vorname,nachname')->where('inventarnummer','like','%'.$searchQuery.'%');
         }
     }
 }

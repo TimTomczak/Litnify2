@@ -7,11 +7,11 @@
         <input wire:model.debounce.500ms="searchQuery" type="text" class="form-control" name="name" id="name" placeholder="" aria-label="">
     </div>
 
-    <table class="table table-responsive-lg table-hover table-bordered">
+    <table class="table table-responsive-xl table-hover table-bordered">
         <thead>
         <tr>
             @foreach($tableBuilder as $key=>$val)
-                <th>{{$val}}</th>
+                <th >{{$val}}</th>
             @endforeach
             <th>Aktionen</th>
         </tr>
@@ -27,6 +27,10 @@
 
                         @case('user_id')
                         <td><a href="{{route('ausleihe.show',$aus->user_id)}}">{{$aus->attributesToArray()[$key]}}</a></td>
+                        @break
+
+                        @case('name')
+                        <td>{{$aus->user->attributesToArray()['nachname']}}, {{$aus->user->attributesToArray()['vorname']}}</td>
                         @break
 
                         @default
