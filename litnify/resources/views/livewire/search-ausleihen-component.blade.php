@@ -11,7 +11,7 @@
         <thead>
         <tr>
             @foreach($tableBuilder as $key=>$val)
-                <th >{{$val}}</th>
+                <th scope="col" wire:click="sortBy('{{$key}}')">{{$val}}  @if($sortBy===$key)<i class="fa {{$sortDirection==='desc' ? 'fa-sort-alpha-asc' : 'fa-sort-alpha-desc'}}"></i> @endif</th>
             @endforeach
             <th>Aktionen</th>
         </tr>
@@ -44,13 +44,15 @@
                         @else
                             <a href="{{route('ausleihe.show',$aus->user_id)}}"><button class="{{$aktionenStyles['show']['button-class']}}" title="Ausleihen des Nutzers ansehen"><i class="{{$aktionenStyles['show']['icon-class']}}"></i></button></a>
 
-                            @role(3)
+                            @role(2)
                             <a href="{{route('ausleihe.edit',$aus->id)}}"><button class="{{$aktionenStyles['edit']['button-class']}}" title="Ausleihe bearbeiten"><i class="{{$aktionenStyles['edit']['icon-class']}}"></i></button></a>
+                            @role(3)
                             <form action="{{route('ausleihe.destroy',$aus->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="{{$aktionenStyles['delete']['button-class']}}" title="Ausleihe löschen"><i class="{{$aktionenStyles['delete']['icon-class']}}"></i></button>
                             </form>
+                        @endrole
                             @if($showAktiv)
                                 <!-- Button trigger modal Verlängerung -->
                                 <button class="btn btn-secondary btn-sm ausleiheVerlaengern" data-toggle="modal" data-target="#modalAusleiheVerlaengern_{{$aus->id}}" data-id="{{$aus->id}}" data-ausleihdatum="{{$aus->Ausleihdatum}}" data-rueckgabesoll="{{$aus->RueckgabeSoll}}" title="Ausleihe verlängern"><i class="fa fa-clock-o" ></i></button>

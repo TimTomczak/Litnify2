@@ -22,6 +22,12 @@ class SearchUsersComponent extends Component
         $this->resetPage();
     }
 
+    public function mount()
+    {
+        $this->sortDirection='asc';
+        $this->sortBy('nachname');
+    }
+
     public function render()
     {
         $users=Suche::getInstance()->searchUsers($this->searchQuery);

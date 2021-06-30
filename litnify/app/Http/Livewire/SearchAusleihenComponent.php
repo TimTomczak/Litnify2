@@ -21,6 +21,12 @@ class SearchAusleihenComponent extends Component
         $this->resetPage();
     }
 
+    public function mount()
+    {
+        $this->sortDirection='desc';
+        $this->sortBy('id');
+    }
+
     public function render()
     {
         $ausleihen=Suche::getInstance()->searchAusleihen($this->searchQuery)->get();
@@ -46,6 +52,7 @@ class SearchAusleihenComponent extends Component
             return Ausleihe::hydrate([$ausleihe])->first(); // neues Model mit Array (jetzt mit Nutzernamen hydrieren)
         });
 
+        $ausleihen= $this->sortDirection=='asc' ? $ausleihen->sortByDesc($this->sortBy, SORT_NATURAL|SORT_FLAG_CASE) : $ausleihen->sortBy($this->sortBy, SORT_NATURAL|SORT_FLAG_CASE);
         return view('livewire.search-ausleihen-component',[
             'ausleihen' => $this->dbTimestampToGermanDate($ausleihen)->paginate(10),
             'tableBuilder' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
