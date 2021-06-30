@@ -21,9 +21,12 @@ class ActionLogComponent extends Component
                 $this->date=$this->getLogDates()[0]; //falls noch kein Daum ausgewählt, erstes vorhandenes Datum initital auswählen
             }
         }
+        $logdates=$this->getLogDates();
+        rsort($logdates); //Daten in absteigender Reihenfolge sortieren
+        $this->date=$logdates[0]; //erstes Datum (Neustes) "auswählen"
 
         return view('livewire.action-log-component',[
-            'log_dates' =>  $this->getLogDates(),
+            'log_dates' =>  $logdates,
             'data' => $this->filterActions($this->parseActionLogs($this->date)),
             'log_aktionen' => TableBuilder::$logAktionen,
         ]);
