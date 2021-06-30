@@ -33,9 +33,15 @@ class Auswertung extends Model
 
     public static function getAusleihenUeberfaellig()
     {
-        return Ausleihe::whereNull('RueckgabeIst')
+        return Ausleihe::with('user:id,vorname,nachname')->whereNull('RueckgabeIst')
             ->where('RueckgabeSoll','<',date('Y-m-d',time()))
             ->where('deleted',0)
-            ->get();
+            ->get()
+            ->map(function ($aus){
+                $ausleihe=$aus->toArray();
+                $ausleihe+=['name'=>$ausleihe['user']['nachname'].', '.$ausleihe['user']['vorname']];
+                unset($ausleihe['user']);
+                return Ausleihe::hydrate([$ausleihe])->first();
+            });
     }
 }

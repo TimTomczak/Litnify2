@@ -37,6 +37,15 @@ class SearchAusleihenComponent extends Component
         }else{
             $ausleihen=$ausleihen->where('deleted',0);
         }
+
+        /* Ausleihen den Namen des Nutzers hinzufügen */
+        $ausleihen=$ausleihen->map(function ($aus){
+            $ausleihe=$aus->toArray(); //in Array umwandeln
+            $ausleihe+=['name'=>$ausleihe['user']['nachname'].', '.$ausleihe['user']['vorname']]; //Name aus "user" herausholen und zusammenfügen, als "name" ins Array einfügen
+            unset($ausleihe['user']); // "user aus Array entfernen"
+            return Ausleihe::hydrate([$ausleihe])->first(); // neues Model mit Array (jetzt mit Nutzernamen hydrieren)
+        });
+
         return view('livewire.search-ausleihen-component',[
             'ausleihen' => $this->dbTimestampToGermanDate($ausleihen)->paginate(10),
             'tableBuilder' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,

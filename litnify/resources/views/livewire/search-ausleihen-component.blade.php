@@ -29,10 +29,6 @@
                         <td><a href="{{route('ausleihe.show',$aus->user_id)}}">{{$aus->attributesToArray()[$key]}}</a></td>
                         @break
 
-                        @case('name')
-                        <td>{{$aus->user->attributesToArray()['nachname']}}, {{$aus->user->attributesToArray()['vorname']}}</td>
-                        @break
-
                         @default
                         <td>{{$aus->attributesToArray()[$key]}}</td>
                     @endswitch
