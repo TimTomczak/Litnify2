@@ -81,20 +81,20 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked','log']], f
     /***********************************/
     Route::get('ausleihverwaltung', [App\Http\Controllers\AusleiheController::class, 'index'])->name('ausleihverwaltung.index')->middleware('role:2');
     Route::get('ausleihverwaltung/ausleihen-beendet', [App\Http\Controllers\AusleiheController::class, 'indexAusleihenBeendet'])->name('ausleihenBeendet.index')->middleware('role:2');
-    Route::post('ausleihverwaltung/ausleihe/{user}/{medium}', [App\Http\Controllers\AusleiheController::class, 'store'])->where(array('user' => '[0-9]+', 'medium' => '[0-9]+'))->name('ausleihe.store')->middleware('role:3');
+    Route::post('ausleihverwaltung/ausleihe/{user}/{medium}', [App\Http\Controllers\AusleiheController::class, 'store'])->where(array('user' => '[0-9]+', 'medium' => '[0-9]+'))->name('ausleihe.store')->middleware('role:2');
     Route::get('ausleihverwaltung/ausleihen/{ausleihe}', [App\Http\Controllers\AusleiheController::class, 'show'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.show')->middleware('role:2');
-    Route::get('ausleihverwaltung/ausleihen/{ausleihe}/edit', [App\Http\Controllers\AusleiheController::class, 'edit'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.edit')->middleware('role:3');
-    Route::put('ausleihverwaltung/ausleihen/{ausleihe}', [App\Http\Controllers\AusleiheController::class, 'update'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.update')->middleware('role:3');
-    Route::delete('ausleihverwaltung/ausleihen/{ausleihe}', [App\Http\Controllers\AusleiheController::class, 'destroy'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.destroy')->middleware('role:3');
-    Route::put('ausleihverwaltung/ausleihe/{ausleihe}/verlaengern', [App\Http\Controllers\AusleiheController::class, 'updateVerlaegerungen'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.extend')->middleware('role:3');
-    Route::put('ausleihverwaltung/ausleihe/{ausleihe}/rueckgabe', [App\Http\Controllers\AusleiheController::class, 'updateRueckgabe'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.return')->middleware('role:3');
+    Route::get('ausleihverwaltung/ausleihen/{ausleihe}/edit', [App\Http\Controllers\AusleiheController::class, 'edit'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.edit')->middleware('role:2');
+    Route::put('ausleihverwaltung/ausleihen/{ausleihe}', [App\Http\Controllers\AusleiheController::class, 'update'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.update')->middleware('role:2');
+    Route::delete('ausleihverwaltung/ausleihen/{ausleihe}', [App\Http\Controllers\AusleiheController::class, 'destroy'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.destroy')->middleware('role:2');
+    Route::put('ausleihverwaltung/ausleihe/{ausleihe}/verlaengern', [App\Http\Controllers\AusleiheController::class, 'updateVerlaegerungen'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.extend')->middleware('role:2');
+    Route::put('ausleihverwaltung/ausleihe/{ausleihe}/rueckgabe', [App\Http\Controllers\AusleiheController::class, 'updateRueckgabe'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.return')->middleware('role:2');
     Route::put('ausleihverwaltung/ausleihe/{ausleihe}/recover', [App\Http\Controllers\AusleiheController::class, 'recover'])->where(array('ausleihe' => '[0-9]+'))->name('ausleihe.recover')->middleware('role:3');
     /*  Direktverleih   */
-    Route::get('ausleihverwaltung/direktverleih', [App\Http\Controllers\DirektverleihController::class, 'index'])->name('direktverleih.index')->middleware('role:3');
-    Route::get('ausleihverwaltung/direktverleih/create/{user}', [App\Http\Controllers\DirektverleihController::class, 'create'])->where(array('user' => '[0-9]+'))->name('direktverleih.create')->middleware('role:3');
+    Route::get('ausleihverwaltung/direktverleih', [App\Http\Controllers\DirektverleihController::class, 'index'])->name('direktverleih.index')->middleware('role:2');
+    Route::get('ausleihverwaltung/direktverleih/create/{user}', [App\Http\Controllers\DirektverleihController::class, 'create'])->where(array('user' => '[0-9]+'))->name('direktverleih.create')->middleware('role:2');
     /*  Merklistenverleih   */
-    Route::get('ausleihverwaltung/merklistenverleih', [App\Http\Controllers\MerklistenverleihController::class, 'index'])->name('merklistenverleih.index')->middleware('role:3');
-    Route::get('ausleihverwaltung/merklistenverleih/{user}', [App\Http\Controllers\MerklistenverleihController::class, 'show'])->where(array('user' => '[0-9]+'))->name('merklistenverleih.show')->middleware('role:3');
+    Route::get('ausleihverwaltung/merklistenverleih', [App\Http\Controllers\MerklistenverleihController::class, 'index'])->name('merklistenverleih.index')->middleware('role:2');
+    Route::get('ausleihverwaltung/merklistenverleih/{user}', [App\Http\Controllers\MerklistenverleihController::class, 'show'])->where(array('user' => '[0-9]+'))->name('merklistenverleih.show')->middleware('role:2');
 
     /***********************************/
     /*        Wiederherstellung        */
