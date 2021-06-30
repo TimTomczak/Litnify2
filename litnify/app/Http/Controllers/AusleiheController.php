@@ -97,7 +97,7 @@ class AusleiheController extends Controller
             'ausleihenBeendet' => $ausleihenBeendet->paginate(10),
             'user' => $user,
             'tableStyle' => TableBuilder::$tableStyle,
-            'tableBuilderAktiv' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
+            'tableBuilderAktiv' => TableBuilder::$ausleihverwaltung_Nutzeransicht,
             'tableBuilderBeendet' => TableBuilder::$ausleihverwaltungIndex_BeendeteAusleihen,
             'tableBuilder' => TableBuilder::$zeitschrifenverwaltungIndex,
             'aktionenStyles' => TableBuilder::$aktionenStyles,

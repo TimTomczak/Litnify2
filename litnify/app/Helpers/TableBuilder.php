@@ -101,6 +101,17 @@ class TableBuilder
         'Verlaengerungen' => 'Verlängerungen',
     ];
 
+    public static $ausleihverwaltung_Nutzeransicht=[
+        'id' => 'ID',
+        'user_id' => 'ID Nutzer',
+        'medium_id' => 'ID Medium',
+        'inventarnummer' => 'Inventarnummer',
+        'Ausleihdatum' => 'Ausleihdatum',
+        'RueckgabeSoll' => 'Rueckgabe-Soll',
+        'RueckgabeIst' => 'Rueckgabe-Ist',
+        'Verlaengerungen' => 'Verlängerungen',
+    ];
+
     public static $ausleihverwaltungIndex_BeendeteAusleihen=[
         'id' => 'ID',
         'medium_id' => 'ID Medium',
