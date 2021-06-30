@@ -23,7 +23,8 @@ class SearchAusleihenComponent extends Component
 
     public function render()
     {
-        $ausleihen=Suche::getInstance()->searchAusleihen($this->searchQuery);
+        $ausleihen=Suche::getInstance()->searchAusleihen($this->searchQuery)->get();
+
         if ($this->showAktiv){
             $ausleihen=$ausleihen->whereNull('RueckgabeIst');
         }
@@ -37,12 +38,12 @@ class SearchAusleihenComponent extends Component
             $ausleihen=$ausleihen->where('deleted',0);
         }
         return view('livewire.search-ausleihen-component',[
-            'ausleihen' => $this->dbTimestampToGermanDate($ausleihen->get())->paginate(10),
+            'ausleihen' => $this->dbTimestampToGermanDate($ausleihen)->paginate(10),
             'tableBuilder' => TableBuilder::$ausleihverwaltungIndex_AktiveAusleihen,
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
             'ausleihdauerDefault' => (int)env('AUSLEIHDAUER',28),
-            'exportData' => $this->dbTimestampToGermanDate($ausleihen->get())->paginate(10)->items(),
+            'exportData' => $this->dbTimestampToGermanDate($ausleihen)->paginate(10)->items(),
         ]);
     }
 
