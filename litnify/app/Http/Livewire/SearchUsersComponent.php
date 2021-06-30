@@ -33,7 +33,7 @@ class SearchUsersComponent extends Component
             $users=$users->where('deleted',$this->deleted);
         }
 
-        $users= $this->sortDirection=='asc' ? $users->sortByDesc($this->sortBy) : $users->sortBy($this->sortBy);
+        $users= $this->sortDirection=='asc' ? $users->sortByDesc($this->sortBy, SORT_NATURAL|SORT_FLAG_CASE) : $users->sortBy($this->sortBy, SORT_NATURAL|SORT_FLAG_CASE);
         return view('livewire.search-users-component',[
             'users' => $users->paginate(10),
             'tableBuilder' => TableBuilder::$nutzerverwaltungIndex,

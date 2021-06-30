@@ -35,7 +35,7 @@ class SearchMedienComponent extends Component
                 Medium::with('literaturart')->orderBy($this->sortBy,'ASC')->where('deleted',$this->deleted)->where('released',1);
         }else{
             $medien=Suche::getInstance()->searchMedien($this->searchQuery)->get()->where('deleted',$this->deleted)->load('literaturart');
-            $medien= $this->sortDirection=='asc' ? $medien->sortByDesc($this->sortBy) : $medien->sortBy($this->sortBy);
+            $medien= $this->sortDirection=='asc' ? $medien->sortByDesc($this->sortBy, SORT_NATURAL|SORT_FLAG_CASE) : $medien->sortBy($this->sortBy, SORT_NATURAL|SORT_FLAG_CASE);
         }
         $this->emit('rerenderPanel',$medien->paginate(10)->items());
         return view('livewire.search-medien-component',[

@@ -30,7 +30,7 @@ class SearchZeitschriftenComponent extends Component
     public function render()
     {
         $zeitschriften=Suche::getInstance()->searchZeitschriften($this->searchQuery)->get()->where('deleted',$this->deleted);
-        $zeitschriften= $this->sortDirection=='asc' ? $zeitschriften->sortByDesc($this->sortBy) : $zeitschriften->sortBy($this->sortBy);
+        $zeitschriften= $this->sortDirection=='asc' ? $zeitschriften->sortByDesc($this->sortBy, SORT_NATURAL|SORT_FLAG_CASE) : $zeitschriften->sortBy($this->sortBy, SORT_NATURAL|SORT_FLAG_CASE);
 
         return view('livewire.search-zeitschriften-component',[
             'zeitschriften' => $zeitschriften->paginate(10),
