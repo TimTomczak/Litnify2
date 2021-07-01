@@ -149,6 +149,9 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/ezyang/htmlpurifier" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/phenx/php-svg-lib" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/phenx/php-font-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/mpdf/mpdf" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/setasign/fpdi" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="daterangepicker" level="application" />
