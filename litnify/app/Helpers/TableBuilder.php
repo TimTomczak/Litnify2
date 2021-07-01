@@ -122,7 +122,13 @@ class TableBuilder
         'Verlaengerungen' => 'Verlängerungen',
     ];
 
-    // public static $merklistenverleihIndex; ->Manuell erstellte Tabelle
+    public static $merklistenverleihIndex=[
+        "user_id" => "ID Nutzer",
+        "email" => "E-Mail-Adresse",
+        "name" => "Name",
+        "anzahl_medien_auf_merkliste" => "Anzahl Medien auf Merkliste",
+        "davon_ausleihbar" => "davon ausleihbar",
+    ];
     // public static $merklistenverleiShow; ->Manuell erstellte Tabelle
 
     public static $direktverleihIndex=[

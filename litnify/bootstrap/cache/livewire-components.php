@@ -10,6 +10,7 @@
   'search-ausleihen-component' => 'App\\Http\\Livewire\\SearchAusleihenComponent',
   'search-medien-ausleihbar-component' => 'App\\Http\\Livewire\\SearchMedienAusleihbarComponent',
   'search-medien-component' => 'App\\Http\\Livewire\\SearchMedienComponent',
+  'search-merklistenverleih-component' => 'App\\Http\\Livewire\\SearchMerklistenverleihComponent',
   'search-users-component' => 'App\\Http\\Livewire\\SearchUsersComponent',
   'search-zeitschriften-component' => 'App\\Http\\Livewire\\SearchZeitschriftenComponent',
   'update-zeitschrift-component' => 'App\\Http\\Livewire\\UpdateZeitschriftComponent',
