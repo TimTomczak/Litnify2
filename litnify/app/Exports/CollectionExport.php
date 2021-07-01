@@ -10,9 +10,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Events\BeforeExport;
+use Maatwebsite\Excel\Events\BeforeWriting;
 
-class CollectionExport implements FromCollection,WithHeadings,ShouldQueue
+class CollectionExport implements FromCollection,WithHeadings,ShouldQueue,ShouldAutoSize, WithEvents
 {
     use Exportable;
 
@@ -105,5 +109,18 @@ class CollectionExport implements FromCollection,WithHeadings,ShouldQueue
         },$exportData);
 
         return $exportData;
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            BeforeWriting::class => function(BeforeWriting $event){
+                $event->writer->getDelegate()->getCellXfCollection()[0]->getAlignment()->setTextRotation(90);
+                $event->writer->getDelegate()->getCellXfCollection()[0]->getBorders()->getLeft()->setBorderStyle(true);
+                $event->writer->getDelegate()->getCellXfCollection()[0]->getBorders()->getRight()->setBorderStyle(true);
+                $event->writer->getDelegate()->getCellXfCollection()[0]->getBorders()->getTop()->setBorderStyle(true);
+                $event->writer->getDelegate()->getCellXfCollection()[0]->getBorders()->getBottom()->setBorderStyle(true);
+            }
+        ];
     }
 }

@@ -25,7 +25,7 @@ class ExportPanel extends Component
         return (new CollectionExport($this->exportData, $this->cols))
             ->download(
                 $this->downloadName.'.pdf',
-                \Maatwebsite\Excel\Excel::DOMPDF
+                \Maatwebsite\Excel\Excel::MPDF
             );
     }
 
