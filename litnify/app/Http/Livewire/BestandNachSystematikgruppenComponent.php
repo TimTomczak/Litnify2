@@ -75,12 +75,29 @@ class BestandNachSystematikgruppenComponent extends Component
         $this->searchMediumBySystematikgruppen();
 //        dd($this->result);
         $this->emit('rerenderPanel',$this->result);
+//        dd($this->result);
+//        dd($this->result->where('id',137214)->toArray());
+        if ($this->literaturart=="2"){
+            $exportData=$this->result->map(function($med){
+                $mediumInventarnummernAsArray=$med->inventarliste->pluck('inventarnummer')->toArray();
+                $med->inventarnummer = implode(', ',$mediumInventarnummernAsArray);
+                return $med;
+            });
+            $tableBuilder=TableBuilder::$bestandNachSystematikgruppenBuch;
+        }
+        else{
+            $exportData = $this->result;
+            $tableBuilder=TableBuilder::$bestandNachSystematikgruppenGraulit;
+        }
+
+
+
         return view('livewire.bestand-nach-systematikgruppen-component',[
             'systematikgruppen'=>$this->systematikgruppen,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
             'result' => $this->result,
-            'exportData' => $this->result->toArray(),
-            'tableBuilder' => TableBuilder::$medienverwaltungIndex,
+            'exportData' => $exportData->toArray(),
+            'tableBuilder' => $tableBuilder,
         ]);
     }
 
@@ -89,7 +106,7 @@ class BestandNachSystematikgruppenComponent extends Component
         $result=collect();
         if (empty($this->sysgrp_inputs)==false){
             foreach ($this->sysgrp_inputs as $sysgrp){
-                $res=Medium::where('literaturart_id',$this->literaturart)->where('signatur','like','%'.$sysgrp.'%')->get();
+                $res=Medium::with('inventarliste:inventarnummer')->where('literaturart_id',$this->literaturart)->where('signatur','like','%'.$sysgrp.'%')->get();
                 foreach ($res as $item){
                     $result->add($item);
                 }

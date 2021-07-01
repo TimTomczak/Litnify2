@@ -40,6 +40,26 @@ class TableBuilder
         'autoren' => 'Autoren',
         'jahr' => 'Jahr'
     ];
+    public static $bestandNachSystematikgruppenBuch=[
+        'id' => 'ID',
+        'literaturart_id'=> 'Literaturart',
+        'signatur' => 'Signatur',
+        'hauptsachtitel' => 'Hauptsachtitel',
+        'inventarnummer' => 'Inv.Nr.',
+        'autoren' => 'Autoren',
+        'jahr' => 'Jahr'
+    ];
+
+
+    //Graulit ohne Inventarnummer
+    public static $bestandNachSystematikgruppenGraulit=[
+        'id' => 'ID',
+        'literaturart_id'=> 'Literaturart',
+        'signatur' => 'Signatur',
+        'hauptsachtitel' => 'Hauptsachtitel',
+        'autoren' => 'Autoren',
+        'jahr' => 'Jahr'
+    ];
 
     public static $mediumShow=[
         'id' => 'ID',

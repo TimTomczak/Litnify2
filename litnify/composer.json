@@ -23,6 +23,7 @@
         "lasserafn/php-initial-avatar-generator": "^4.1",
         "livewire/livewire": "^2.3",
         "maatwebsite/excel": "^3.1",
+        "mpdf/mpdf": "^8.0",
         "phpoffice/phpspreadsheet": "^1.16",
         "spatie/laravel-cookie-consent": "^2.12",
         "yab/laravel-scout-mysql-driver": "^3.0"
