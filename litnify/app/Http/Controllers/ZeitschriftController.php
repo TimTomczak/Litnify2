@@ -89,7 +89,8 @@ class ZeitschriftController extends Controller
     public function update(Request $request, Zeitschrift $zeitschrift)
     {
         $zeitschrift->update($this->validateAttributes());
-        return back()->with([
+        return redirect(route('zeitschriften.index'))->with([
+
             'title' => 'Zeitschriftenverwaltung',
             'message' => 'Zeitschrift wurde geändert.',
             'alertType'=> 'success'
