@@ -86,7 +86,8 @@ class UserController extends Controller
             'vorname' => 'string',
             'berechtigungsrolle_id' => 'required|string'
         ]));
-        return back()->with([
+
+        return redirect(route('admin.nutzerverwaltung.index'))->with([
             'title' => 'Nutzerverwaltung',
             'message' => 'Account wurde geändert.',
             'alertType'=> 'info'
