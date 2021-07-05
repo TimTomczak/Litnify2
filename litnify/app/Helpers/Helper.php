@@ -6,6 +6,21 @@ use Illuminate\Support\Facades\Request;
 
 class Helper
 {
+    public static $breadcrumpLinks=[
+        'medienverwaltung'=>'medienverwaltung.index',
+        'freigabe'=>'freigabe.index',
+        'zeitschriftenverwaltung'=>'zeitschriften.index',
+        'ausleihverwaltung'=>'ausleihverwaltung.index',
+        'ausleihen-beendet'=>'ausleihenBeendet.index',
+        'direktverleih'=>'direktverleih.index',
+        'merklistenverleih'=>'merklistenverleih.index',
+        'nutzerverwaltung'=>'admin.nutzerverwaltung',
+        'systemverwaltung'=>'admin.systemverwaltung',
+        'auswertungen'=>'admin.systemverwaltung.auswertungen',
+        'logs'=>'admin.systemverwaltung.logs',
+
+    ];
+
     private static $literaturart_attribute=[
         'Artikel' => ['literaturart_id','autoren','hauptsachtitel','untertitel','jahr','issn','doi','zeitschrift_id','band','seite','raum_id','bemerkungen'],
         'Buch' => ['literaturart_id','signatur','autoren','hauptsachtitel','untertitel','erscheinungsort','jahr','verlag','isbn','issn','inventarnummern','auflage','herausgeber','schriftenreihe','band','seite','raum_id','bemerkungen'],

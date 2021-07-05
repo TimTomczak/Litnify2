@@ -12,9 +12,16 @@
         <li class="breadcrumb-item"><a href="{{url('/')}}">Start</a></li>
 
         @for($i = 1; $i <= count(Request::segments()); $i++)
+            @if(array_key_exists(Request::segment($i),Helper::$breadcrumpLinks))
+            <li class="breadcrumb-item">
+                <a href="{{route(Helper::$breadcrumpLinks[Request::segment($i)])}}">{{ucfirst(Request::segment($i))}}</a>
+            </li>
+            @else
             <li class="breadcrumb-item">
                 {{ucfirst(Request::segment($i))}}
             </li>
+            @endif
+
         @endfor
     </ol>
 </nav>
