@@ -40,6 +40,6 @@ class AusleiheEndet extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.ausleiheendet')->subject('Benachrichtigung von Ihrer Bibliothek');
+        return $this->markdown('emails.ausleiheendet')->subject('Benachrichtigung von Ihrer Meteorologiebibliothek');
     }
 }

@@ -10,7 +10,7 @@ dies ist eine Voraberinnerung, dass die Leihfrist @if($ausleihen->count()>1) der
 Wir bitten Sie daher um eine rechtzeitige Rückgabe oder Verlängerung der Leihfrist.
 <br>
 <br>
-<em>this is a reminder that the loan period of the following @if($ausleihen->count()>1) media @else medium @endif will end soon. We therefore ask you to return or extend the loan period in good time.</em>
+<em>This is a reminder that the loan period of the following @if($ausleihen->count()>1) media @else medium @endif will end soon. We therefore ask you to return or extend the loan period in good time.</em>
 
 @component('mail::panel')
 
