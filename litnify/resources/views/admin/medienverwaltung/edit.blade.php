@@ -151,27 +151,7 @@
 
                     <!-- Modal -->
 
-                    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-                         aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Inventarnummern</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="container-fluid">
-                                        <livewire:inventarnummern-component :medium="$medium" />
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fenster schließen</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 @endif
 
                 {{--<div class="form-group">
@@ -309,6 +289,29 @@
                     <button form="form" type="submit" class="btn btn-primary">Änderung bestätigen</button>
                 </div>
             </form>
+            @if(Helper::showField('inventarnummern',$literaturart))
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Inventarnummern</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <livewire:inventarnummern-component :medium="$medium" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fenster schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
