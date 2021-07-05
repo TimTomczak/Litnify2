@@ -146,7 +146,8 @@ class UserController extends Controller
                 'tableStyle' => TableBuilder::$tableStyle,
                 'aktionenStyles' => TableBuilder::$aktionenStyles,
                 'export' => 'merkliste',
-                'exportData'=>(Auth::user())->merkliste,
+                'exportData'=>(Auth::user())->merkliste->toArray(),
+                'exportAttributes'=>TableBuilder::$mediumShow
             ]);
     }
 

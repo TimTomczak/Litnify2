@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Exports\CollectionExport;
+use App\Exports\CollectionExportPdf;
 use App\Helpers\BibtexHelper;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
@@ -22,7 +23,7 @@ class ExportPanel extends Component
     }
 
     public function exportPdf(){
-        return (new CollectionExport($this->exportData, $this->cols))
+        return (new CollectionExportPdf($this->exportData, $this->cols))
             ->download(
                 $this->downloadName.'.pdf',
                 \Maatwebsite\Excel\Excel::MPDF

@@ -92,7 +92,7 @@
            {{-- <div class="p-2">
                 <x-export-panel-merkliste/>
             </div>--}}
-            @livewire('export-panel',['withBib'=>true,'exportData'=>$exportData,'downloadName'=>'Merkliste','cols'=>$tableBuilder])
+            @livewire('export-panel',['withBib'=>true,'exportData'=>$exportData,'downloadName'=>'Merkliste','cols'=>$exportAttributes])
         </div>
 
     @endif
