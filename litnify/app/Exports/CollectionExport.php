@@ -69,34 +69,22 @@ class CollectionExport implements FromCollection,WithHeadings,ShouldQueue,Should
             foreach ($exportData as $key=>$data){
                 $exportData[$key]['raum_id']=$literaturarten[$data['raum_id']-1]['raum'];
             }
-
-//            $exportData=array_map(function($item){
-//                $item['raum_id']=Raum::whereId($item['raum_id'])->firstOrFail()->raum;
-//                return $item;
-//            },$exportData);
         }
 
-        if (isset($exportData[0]['zeitschrift_id'])){                  // Wenn literaturart_id in Collection ...
+        if (isset($exportData[0]['zeitschrift_id'])){                  // Wenn zeitschrift_id in Collection ...
             $literaturarten=Zeitschrift::all()->toArray();
             foreach ($exportData as $key=>$data){
                 $exportData[$key]['zeitschrift_id']=$literaturarten[$data['zeitschrift_id']-1]['name'];
             }
-//            $exportData=array_map(function($item){
-//                $item['zeitschrift_id']=Zeitschrift::whereId($item['zeitschrift_id'])->firstOrFail()->name;
-//                return $item;
-//            },$exportData);
         }
 
-        if (isset($exportData[0]['berechtigungsrolle_id'])){                  // Wenn literaturart_id in Collection ...
-            $literaturarten=Berechtigungsrolle::all()->toArray();
-            foreach ($exportData as $key=>$data){
-                $exportData[$key]['berechtigungsrolle_id']=$literaturarten[$data['berechtigungsrolle_id']-1]['berechtigungsrolle'];
-            }
+        if (isset($exportData[0]['berechtigungsrolle_id'])){                  // Wenn berechtigungsrolle_id in Collection ...
 
-//            $exportData=array_map(function($item){
-//                $item['berechtigungsrolle_id']=Berechtigungsrolle::whereId($item['berechtigungsrolle_id'])->firstOrFail()->berechtigungsrolle;
-//                return $item;
-//            },$exportData);
+            $literaturarten=Berechtigungsrolle::all()->toArray();
+
+            foreach ($exportData as $key=>$data){
+                $exportData[$key]['berechtigungsrolle_id']=$literaturarten[$data['berechtigungsrolle_id']]['berechtigungsrolle'];
+            }
         }
 
         /* Array nach Spalten ordnen */
