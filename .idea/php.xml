@@ -156,6 +156,7 @@
       <path value="$PROJECT_DIR$/litnify/vendor/mpdf/mpdf" />
       <path value="$PROJECT_DIR$/litnify/vendor/paragonie/random_compat" />
       <path value="$PROJECT_DIR$/litnify/vendor/setasign/fpdi" />
+      <path value="$PROJECT_DIR$/litnify/vendor/doctrine/deprecations" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

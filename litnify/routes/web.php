@@ -29,6 +29,10 @@ Route::post('/suche/export', [App\Http\Controllers\SearchController::class, 'exp
 Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'index'])->name('logout2');
 Route::get('/download', [App\Http\Controllers\DownloadController::class, 'index'])->name('download');
 
+// * S t a t i c P a g e  s * //
+Route::view('/credits', 'layouts.credits')->name('credits');
+Route::get('/{page}', SeitenController::class)->name('page');
+
 // * M o d e l s * //
 /***********************************/
 /*           User-Backend          */
@@ -126,8 +130,6 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked','log']], f
 
 });
 
-// * S t a t i c P a g e  s * //
-Route::view('/credits', 'layouts.credits');
-Route::get('/{page}', SeitenController::class)->name('page');
+
 
 

@@ -31,12 +31,7 @@
                         <tr>
                             <th scope="row">Berechtigung</th>
                             <td>
-                                @foreach($rollen as $rolle)
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="berechtigungsrolle_{{$rolle->id}}" value="{{$rolle->id}}" name="berechtigungsrolle_id" class="custom-control-input">
-                                        <label class="custom-control-label" for="berechtigungsrolle_{{$rolle->id}}"> {{$rolle->berechtigungsrolle}}</label>
-                                    </div>
-                                @endforeach
+                                Standardberechtigung: Benutzer
                             </td>
                         </tr>
                         </tbody>

@@ -7,6 +7,8 @@
       <sourceFolder url="file://$MODULE_DIR$/litnify/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/litnify/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/litnify/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/asm89/stack-cors" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/composer" />
@@ -152,6 +154,7 @@
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/mpdf/mpdf" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/paragonie/random_compat" />
       <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/setasign/fpdi" />
+      <excludeFolder url="file://$MODULE_DIR$/litnify/vendor/doctrine/deprecations" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="daterangepicker" level="application" />
