@@ -71,7 +71,7 @@
                             @case('doi')
                             <td>
                                 @if(filter_var($medium->doi, FILTER_VALIDATE_URL))
-                                    <a href="{{$medium->doi}}">{{$medium->doi}}</a>
+                                    <a href="{{$medium->doi}}" target=”_blank”>{{$medium->doi}}</a>
                                 @else
                                     {{$medium->doi}}
                                 @endif
