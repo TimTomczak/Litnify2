@@ -43,7 +43,7 @@
             <i class="fa fa-pencil-square-o"></i> Logfiles</a>
         @endrole
 
-        @role('4')
+        @role('3')
         <div class=dropright>
             <button class="dropdown-toggle list-group-item  list-group-item-action {{Helper::sidebar_active('*/wiederherstellung/*')}}" type="button" id="triggerId" data-toggle="dropdown"
                     aria-haspopup="true"

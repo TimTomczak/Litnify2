@@ -109,13 +109,13 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked','log']], f
     /***********************************/
     /*        Nutzerverwaltung         */
     /***********************************/
-    Route::get('nutzerverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.nutzerverwaltung')->middleware('role:4');
-    Route::get('nutzerverwaltung/create', [App\Http\Controllers\UserController::class, 'create'])->name('admin.nutzerverwaltung.create')->middleware('role:4');
-    Route::post('nutzerverwaltung/createUser', [App\Http\Controllers\UserController::class, 'createUser'])->name('admin.nutzerverwaltung.createUser')->middleware('role:4');
-    Route::get('nutzerverwaltung/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('admin.nutzerverwaltung.edit')->middleware('role:4');
-    Route::post('nutzerverwaltung/{user}/update', [App\Http\Controllers\UserController::class, 'update'])->name('admin.nutzerverwaltung.update')->middleware('role:4');
-    Route::post('nutzerverwaltung/{user}/delete', [App\Http\Controllers\UserController::class, 'destroy'])->name('admin.nutzerverwaltung.delete')->middleware('role:4');
-    Route::post('nutzerverwaltung/{user}/wakeup', [App\Http\Controllers\UserController::class, 'wakeUp'])->name('admin.nutzerverwaltung.wakeup')->middleware('role:4');
+    Route::get('nutzerverwaltung', [App\Http\Controllers\UserController::class, 'index'])->name('admin.nutzerverwaltung')->middleware('role:3');
+    Route::get('nutzerverwaltung/create', [App\Http\Controllers\UserController::class, 'create'])->name('admin.nutzerverwaltung.create')->middleware('role:3');
+    Route::post('nutzerverwaltung/createUser', [App\Http\Controllers\UserController::class, 'createUser'])->name('admin.nutzerverwaltung.createUser')->middleware('role:3');
+    Route::get('nutzerverwaltung/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('admin.nutzerverwaltung.edit')->middleware('role:3');
+    Route::post('nutzerverwaltung/{user}/update', [App\Http\Controllers\UserController::class, 'update'])->name('admin.nutzerverwaltung.update')->middleware('role:3');
+    Route::post('nutzerverwaltung/{user}/delete', [App\Http\Controllers\UserController::class, 'destroy'])->name('admin.nutzerverwaltung.delete')->middleware('role:3');
+    Route::post('nutzerverwaltung/{user}/wakeup', [App\Http\Controllers\UserController::class, 'wakeUp'])->name('admin.nutzerverwaltung.wakeup')->middleware('role:3');
 
 
     /***********************************/
