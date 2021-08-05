@@ -274,8 +274,9 @@ class Suche
      * @return Berechtigungsrolle[]|User|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
      */
     public function searchUsers($searchQuery){
-        if(Berechtigungsrolle::with('user')->where('berechtigungsrolle','like','%'.$searchQuery.'%')->get()->isNotEmpty()){
-            return $result=Berechtigungsrolle::with('user')->where('berechtigungsrolle','like','%'.$searchQuery.'%')
+        $berechtigungsrolleSearch=Berechtigungsrolle::with('user')->where('berechtigungsrolle','like',ucfirst($searchQuery))->orWhere('berechtigungsrolle','like',lcfirst($searchQuery));
+        if($berechtigungsrolleSearch->get()->isNotEmpty()){
+            return $result=$berechtigungsrolleSearch
                 ->get()
                 ->map(function ($rolle){
                     return $rolle->user;
