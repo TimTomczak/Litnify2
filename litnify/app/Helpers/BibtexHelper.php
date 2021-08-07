@@ -126,7 +126,7 @@ class BibtexHelper
         }
     */
     private function addArtikel($data){
-        $citekey=explode(',',$data['autoren'])[0].'.'.$data['jahr'];
+        $citekey=$this->getCitekey($data);
         $artikel="@article{".$citekey.','."\n";
         foreach ($this->article as $key=>$val){
             if (isset($data[$key])){
@@ -136,67 +136,83 @@ class BibtexHelper
                 if ($key == 'zeitschrift'){
                     $artikel=$artikel."\t".$val."\t\t".'='."\t".'{'.$data[$key]["name"].'}'."\n";
                 }else{
-                    $artikel=$artikel."\t".$val."\t\t".'='."\t".'{'.$data[$key].'}'."\n";
+                    $artikel=$artikel."\t".$val."\t\t".'='."\t".'{'.$data[$key].'},'."\n";
                 }
             }
         }
+        $this->removeLastCommaAndAndEtAl($artikel);
         $this->add($artikel);
     }
 
     private function addBuch($data){
-        $citekey=explode(',',$data['autoren'])[0].'.'.$data['jahr'];
+        $citekey=$this->getCitekey($data);
         $buch="@book{".$citekey.','."\n";
         foreach ($this->book as $key=>$val){
             if (isset($data[$key])){
                 if ($key=='autoren'){
                     $data[$key]=str_replace(';',' and ', $data[$key]);
                 }
-                $buch=$buch."\t".$val."\t\t".'='."\t".'{'.$data[$key].'}'."\n";
+                $buch=$buch."\t".$val."\t\t".'='."\t".'{'.$data[$key].'},'."\n";
             }
         }
+        $this->removeLastCommaAndAndEtAl($buch);
         $this->add($buch);
     }
 
     private function addGraueLiteratur($data){
-        $citekey=explode(',',$data['autoren'])[0].'.'.$data['jahr'];
+        $citekey=$this->getCitekey($data);
         $graulit="@unpublished{".$citekey.','."\n";
         foreach ($this->unpublished as $key=>$val){
             if (isset($data[$key])){
                 if ($key=='autoren'){
                     $data[$key]=str_replace(';',' and ', $data[$key]);
                 }
-                $graulit=$graulit."\t".$val."\t\t".'='."\t".'{'.$data[$key].'}'."\n";
+                $graulit=$graulit."\t".$val."\t\t".'='."\t".'{'.$data[$key].'}´,'."\n";
             }
         }
+        $this->removeLastCommaAndAndEtAl($graulit);
         $this->add($graulit);
     }
 
     private function addUnselbststaendigesWerk($data){
-        $citekey=explode(',',$data['autoren'])[0].'.'.$data['jahr'];
+        $citekey=$this->getCitekey($data);
         $uwerk="@incollection{".$citekey.','."\n";
         foreach ($this->incollection as $key=>$val){
             if (isset($data[$key])){
                 if ($key=='autoren'){
                     $data[$key]=str_replace(';',' and ', $data[$key]);
                 }
-                $uwerk=$uwerk."\t".$val."\t\t".'='."\t".'{'.$data[$key].'}'."\n";
+                $uwerk=$uwerk."\t".$val."\t\t".'='."\t".'{'.$data[$key].'},'."\n";
             }
         }
+        $this->removeLastCommaAndAndEtAl($uwerk);
         $this->add($uwerk);
     }
 
     private function addDaten($data){
-        $citekey=explode(',',$data['autoren'])[0].'.'.$data['jahr'];
+        $citekey=$this->getCitekey($data);
         $daten="@misc{".$citekey.','."\n";
         foreach ($this->misc as $key=>$val){
             if (isset($data[$key])){
-                $daten=$daten."\t".$val."\t\t".'='."\t".'{'.$data[$key].'}'."\n";
+                $daten=$daten."\t".$val."\t\t".'='."\t".'{'.$data[$key].'},'."\n";
             }
         }
+        $this->removeLastCommaAndAndEtAl($daten);
         $this->add($daten);
     }
 
     private function add(String $str){
         $this->bibtex=$this->bibtex.$str;
+    }
+
+    private function getCitekey($data){
+        $citekey=explode(',',$data['autoren'])[0].'.'.$data['jahr'];
+        return str_replace(';et al.','',$citekey);
+    }
+
+    private function removeLastCommaAndAndEtAl(&$string){
+        $string=substr_replace($string,'',strrpos($string,','),1);
+        $string=str_replace('and et al.','',$string);
+//        return $string;
     }
 }

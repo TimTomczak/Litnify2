@@ -72,6 +72,7 @@ class MediumController extends Controller
      */
     public function show(Medium $medium)
     {
+        $exportData=[0=>clone $medium];
         if ($medium->released != 1){
             if (Auth::check()){
                 if (Auth::user()->berechtigungsrolle_id<2){
@@ -82,18 +83,21 @@ class MediumController extends Controller
                 return abort(403, 'Das Medium ist nicht freigegeben.');
             }
         }
+
         if ($medium->deleted==1){
             if (Auth::check()){
                 if (Auth::user()->berechtigungsrolle_id<3){
                     return abort('403','Medium wurde gelöscht');
                 }
                 else{
+
                     $medium = $this->foreignIdToString($medium);
                     return view('admin.medienverwaltung.show',[
                         'medium' => $medium,
                         'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar(),
                         'tableBuilder' => TableBuilder::$mediumShow,
                         'aktionenStyles' => TableBuilder::$aktionenStyles,
+                        'exportData' => $exportData,
                     ]);
                 }
             }else{
@@ -101,12 +105,14 @@ class MediumController extends Controller
             }
         }
         else{
+
             $medium = $this->foreignIdToString($medium);
             return view('admin.medienverwaltung.show',[
                 'medium' => $medium,
                 'inventarnummernAusleihbar' => $medium->getInventarnummernAusleihbar(),
                 'tableBuilder' => TableBuilder::$mediumShow,
                 'aktionenStyles' => TableBuilder::$aktionenStyles,
+                'exportData' => $exportData,
             ]);
         }
     }
@@ -142,7 +148,7 @@ class MediumController extends Controller
         return redirect(route('medium.show',$medium->id))->with([
             'title' => 'Medienverwaltung',
             'message' => 'Medium geändert.',
-            'alertType'=> 'success'
+            'alertType'=> 'success',
         ]);
     }
 

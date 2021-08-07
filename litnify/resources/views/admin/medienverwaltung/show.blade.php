@@ -86,6 +86,8 @@
             @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-end mb-1 mt-n2">@livewire('export-panel',['withBib'=>true,'exportData'=>$exportData,'downloadName'=>'Medium_'.$exportData[0]['id'],'cols'=>$tableBuilder])</div>
+
     </div>
 @endsection
 

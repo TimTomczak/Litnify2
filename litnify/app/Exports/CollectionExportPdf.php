@@ -57,7 +57,7 @@ class CollectionExportPdf implements FromCollection,WithHeadings,ShouldQueue,Sho
      * @return array
      */
     private function mapForeignKeys(array $exportData){
-        if (isset($exportData[0]['literaturart_id'])){                  // Wenn literaturart_id in Collection ...
+        if (isset($exportData[array_key_first($exportData)]['literaturart_id'])){                  // Wenn literaturart_id in Collection ...
             $literaturarten=Literaturart::all()->toArray();
             foreach ($exportData as $key=>$data){
                 $exportData[$key]['literaturart_id']=$literaturarten[$data['literaturart_id']-1]['literaturart'];
@@ -65,23 +65,23 @@ class CollectionExportPdf implements FromCollection,WithHeadings,ShouldQueue,Sho
         }
 
         if (isset($exportData[0]['raum_id'])){                          // Wenn raum_id in Collection ...
-            $literaturarten=Raum::all()->toArray();
+            $raeume=Raum::all()->toArray();
             foreach ($exportData as $key=>$data){
-                $exportData[$key]['raum_id']=$literaturarten[$data['raum_id']-1]['raum'];
+                $exportData[$key]['raum_id']=$raeume[$data['raum_id']-1]['raum'];
             }
         }
 
         if (isset($exportData[0]['zeitschrift_id'])){                  // Wenn literaturart_id in Collection ...
-            $literaturarten=Zeitschrift::all()->toArray();
+            $zeitschriften=Zeitschrift::all()->toArray();
             foreach ($exportData as $key=>$data){
-                $exportData[$key]['zeitschrift_id']=$literaturarten[$data['zeitschrift_id']-1]['name'];
+                $exportData[$key]['zeitschrift_id']=$zeitschriften[$data['zeitschrift_id']-1]['name'];
             }
         }
 
         if (isset($exportData[0]['berechtigungsrolle_id'])){                  // Wenn literaturart_id in Collection ...
-            $literaturarten=Berechtigungsrolle::all()->toArray();
+            $berechtigungsrollen=Berechtigungsrolle::all()->toArray();
             foreach ($exportData as $key=>$data){
-                $exportData[$key]['berechtigungsrolle_id']=$literaturarten[$data['berechtigungsrolle_id']]['berechtigungsrolle'];
+                $exportData[$key]['berechtigungsrolle_id']=$berechtigungsrollen[$data['berechtigungsrolle_id']]['berechtigungsrolle'];
             }
         }
 

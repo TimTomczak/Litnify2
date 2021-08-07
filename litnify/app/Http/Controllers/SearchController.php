@@ -73,6 +73,7 @@ class SearchController extends Controller
             'tableStyle' => TableBuilder::$tableStyle,
             'aktionenStyles' => TableBuilder::$aktionenStyles,
             'exportData' => $result->isEmpty()  ? $result->toArray() : $result->paginate($ppr)->items(),
+            'exportCols' => TableBuilder::$mediumShow,
         ]);
 
     }
