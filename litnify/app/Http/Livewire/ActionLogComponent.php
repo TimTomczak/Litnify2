@@ -23,7 +23,12 @@ class ActionLogComponent extends Component
         }
         $logdates=$this->getLogDates();
         rsort($logdates); //Daten in absteigender Reihenfolge sortieren
-        $this->date=$logdates[0]; //erstes Datum (Neustes) "auswählen"
+
+        $this->date=empty($logdates) ?
+            '' :
+            $this->date=$logdates[0]; //erstes Datum (Neustes) "auswählen";
+
+
 
         return view('livewire.action-log-component',[
             'log_dates' =>  $logdates,
