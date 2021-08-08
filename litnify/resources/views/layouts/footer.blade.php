@@ -10,12 +10,12 @@
                             @php
                                 microtime();
                             @endphp
-                                " height="60px">
+                                " height="60px" alt="Logo der Universität Bonn">
                             <img src="{{asset('storage/images/sublogo.png?')}}
                             @php
                                 microtime();
                             @endphp
-                                " height="60px">
+                                " height="60px" alt="Logo des Instituts für Geowissenschaften der Uni Bonn">
                         </div>
                     </div>
                 </div>

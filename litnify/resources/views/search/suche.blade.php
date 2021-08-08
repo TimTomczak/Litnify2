@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('metadescription')"Litnify2 Suche - Recherche und Suche von Literatur, Zeitschriften/Journalen und Autoren in der Bibliothek der meteorologischen Abteilung des Instituts für Geowissenschaften der Uni Bonn" @endsection
 
 @section('content')
     <style>

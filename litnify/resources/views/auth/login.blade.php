@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('metadescription')"Anmeldung/Login - Im Portal zur Literaturrecherche der Bibliothek der meteorologischen Abteilung des Instituts für Geowissenschaften der Universität Bonn anmelden | Uni Bonn | bib" @endsection
 
 @section('content')
 <div class="container">

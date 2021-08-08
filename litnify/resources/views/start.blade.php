@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('metadescription')"LitNify2 - Das Portal zur Literaturrecherche der Bibliothek der meteorologischen Abteilung des Instituts für Geowissenschaften der Universität Bonn | Uni Bonn | bib | Suche | Ausleihe | Merkliste | Reservieren" @endsection
 @section('content')
 
     <!-- Header -->
