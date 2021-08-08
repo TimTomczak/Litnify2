@@ -15,7 +15,7 @@
 
         <div id="content-wrapper" class="">
             @include('layouts.nav')
-            <main class="border-bottom" style="margin-top:75px; background-color: #ffffff; min-height: 85vh;">
+            <main class="border-bottom" style="margin-top:75px; background-color: #ffffff; min-height: 90vh;">
                 {{--Benachrichtigung--}}
                 @include('layouts.benachrichtigung')
 
@@ -26,8 +26,10 @@
                         <div class="container-fluid">
                     @endif
                     @yield('content')
-
+                        </div>
+                    <br><br>
             </main>
+
             @include('layouts.footer')
         </div>
     </div>
