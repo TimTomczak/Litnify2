@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SeitenController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -127,7 +128,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth','blocked','log']], f
     Route::post('systemverwaltung/contenteditor', [App\Http\Controllers\SystemController::class, 'contentEditorUpdate'])->middleware('role:4');
     Route::post('systemverwaltung/updateLogo', [App\Http\Controllers\SystemController::class, 'updateLogo'])->name('admin.systemverwaltung.updateLogo')->middleware('role:4');
     Route::get('systemverwaltung/logs', [App\Http\Controllers\SystemController::class, 'logs'])->name('admin.systemverwaltung.logs')->middleware('role:4');
-
+    Route::get('systemverwaltung/clear-cache', [\App\Http\Controllers\SystemController::class, 'clearcache'])->name('admin.systemverwaltung.clear-cache')->middleware('role:4');
 });
 
 

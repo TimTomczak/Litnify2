@@ -97,19 +97,14 @@
                 <div class="card-body">
                     <h5 class="card-title">Aktionen</h5>
                     <p class="card-text">
-
-                        <button type="button" class="btn btn-primary">
-                            App-Cache leeren
-                        </button>
-
-
+                        <a href="{{route('admin.systemverwaltung.clear-cache')}}">
+                            <button type="button" class="btn btn-primary">
+                                App-Cache leeren
+                            </button>
+                        </a>
                     </p>
                 </div>
             </div>
-
-
-
-
         </div>
 
 

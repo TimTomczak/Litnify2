@@ -108,6 +108,12 @@ class SystemController extends Controller
                 ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0');
 
         }
-
     }
+
+    public function clearcache(){
+        Artisan::call('cache:clear');
+        Redirect::back();
+    }
+
+
 }
