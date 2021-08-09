@@ -9,7 +9,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-lg-12 text-center text-wrap text-light">
 
-                    <h1 class="brand">Litnify</h1>
+                    <h1 class="brand">Litnify2</h1>
                     <h2>Das Suchportal der Meteorologiebibliothek</h2>
                     <form action="suche" method="get">
 
