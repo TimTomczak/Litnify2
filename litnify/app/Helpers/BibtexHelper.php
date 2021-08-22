@@ -4,6 +4,8 @@
 namespace App\Helpers;
 
 
+use App\Models\Zeitschrift;
+
 class BibtexHelper
 {
     private $bibtex;
@@ -18,7 +20,7 @@ class BibtexHelper
         //required
         'autoren' => 'author',
         'hauptsachtitel' => 'title',
-        'zeitschrift' => 'journal',
+        'zeitschrift_id' => 'journal',
         'jahr' => 'year',
         //optional
         'band' => 'volume',
@@ -84,6 +86,7 @@ class BibtexHelper
 
 
     public function getBibtex(){
+//        dd($this->data);
         foreach ($this->data as $key => $innerArray){
             switch ($innerArray['literaturart_id']){
                 case 1:
@@ -108,6 +111,7 @@ class BibtexHelper
             }
             $this->add('}'."\n\n");
         }
+//        dd($this->bibtex);
         return $this->bibtex;
     }
     /*  Artikel Format
@@ -128,13 +132,20 @@ class BibtexHelper
     private function addArtikel($data){
         $citekey=$this->getCitekey($data);
         $artikel="@article{".$citekey.','."\n";
+
+        if (strpos($data["bemerkungen"],"Zeitschrift: ")!==false){
+            $zeitschriftAusBemerkungen=substr($data["bemerkungen"],strpos($data["bemerkungen"],"Zeitschrift: ")+13); //Zeitschrift aus Bemerkungen herausfiltern
+            $zeitschriftAusBemerkungen = substr($zeitschriftAusBemerkungen,0,strpos($zeitschriftAusBemerkungen," ")); //eventuellen weiteren Text nach Zeiutschrift herausfiltern
+            $artikel=$artikel."\tjournal\t\t".'='."\t".'{'.$zeitschriftAusBemerkungen.'},'."\n";
+        }
         foreach ($this->article as $key=>$val){
+
             if (isset($data[$key])){
                 if ($key=='autoren'){
                     $data[$key]=str_replace(';',' and ', $data[$key]);
                 }
-                if ($key == 'zeitschrift'){
-                    $artikel=$artikel."\t".$val."\t\t".'='."\t".'{'.$data[$key]["name"].'}'."\n";
+                if ($key == 'zeitschrift_id'){
+                    $artikel=$artikel."\t".$val."\t\t".'='."\t".'{'.Zeitschrift::find($data[$key])->name.'}'."\n";
                 }else{
                     $artikel=$artikel."\t".$val."\t\t".'='."\t".'{'.$data[$key].'},'."\n";
                 }
@@ -167,7 +178,7 @@ class BibtexHelper
                 if ($key=='autoren'){
                     $data[$key]=str_replace(';',' and ', $data[$key]);
                 }
-                $graulit=$graulit."\t".$val."\t\t".'='."\t".'{'.$data[$key].'}´,'."\n";
+                $graulit=$graulit."\t".$val."\t\t".'='."\t".'{'.$data[$key].'},'."\n";
             }
         }
         $this->removeLastCommaAndAndEtAl($graulit);
