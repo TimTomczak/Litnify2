@@ -58,7 +58,7 @@ class CollectionExportHelper
                 if ($data['berechtigungsrolle_id']==null){
                     $exportData[$key]['berechtigungsrolle_id']="";
                 }else{
-                    $exportData[$key]['berechtigungsrolle_id']=$berechtigungsrollen[$data['berechtigungsrolle_id']]['berechtigungsrolle'];
+                    $exportData[$key]['berechtigungsrolle_id']=$berechtigungsrollen[$data['berechtigungsrolle_id']-1]['berechtigungsrolle'];
                 }
             }
         }
